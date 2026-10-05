@@ -205,3 +205,24 @@ test('editorial fragment digest understands HTML attribute quoting and character
  assert.notEqual(contentDigest(entry,{fragment:equivalent}),contentDigest(entry,{fragment:equivalent.replace("alt='Copper'","alt='Nickel'")}));
  assert.notEqual(contentDigest(entry,{fragment:equivalent}),contentDigest(entry,{fragment:equivalent.replace('example.org/source','example.org/other')}));
 });
+
+test('share controls follow the discovery they belong to, and the collection opens on its first discovery', async t => {
+  const directory = await mkdtemp(join(tmpdir(), 'weird-share-order-'));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const output = pathToFileURL(join(directory, 'out') + sep);
+  const { entries, html } = await build({ output });
+  const main = html.slice(html.indexOf('<main'));
+  assert(!html.includes('class="opening"'), 'no separate tagline strip above the first discovery');
+  assert(main.indexOf('data-share-url') > main.indexOf(`id="${entries[0].id}"`), 'nothing to share before the first discovery');
+  entries.forEach((entry, i) => {
+    const section = main.indexOf(`id="${entry.id}"`);
+    const share = main.indexOf(`data-share-url="https://weirdstats.dev/discoveries/${entry.id}/"`);
+    assert(section >= 0 && share > section, `${entry.id}: share control follows its discovery`);
+    if(entries[i + 1]) assert(share < main.indexOf(`id="${entries[i + 1].id}"`), `${entry.id}: share control precedes the next discovery`);
+  });
+  for(const entry of entries) {
+    const page = await readFile(new URL(`discoveries/${entry.id}/index.html`, output), 'utf8');
+    const pageMain = page.slice(page.indexOf('<main'));
+    assert(pageMain.indexOf('data-share-url') > pageMain.indexOf(`id="${entry.id}"`), `${entry.id} page: share control follows the discovery`);
+  }
+});

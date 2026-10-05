@@ -61,7 +61,8 @@ export async function renderEntry(entry,next,now=new Date(),context=createPageCo
   const graphic=await definition.render(entry,page);
   if(definition.custom) {
     const normalized=graphic.replace(/([\"' ,])assets\//g,(_,prefix)=>prefix+page.assetHref('assets/'));
-    return `<div class="discovery-frame">${shareControl(entry,page)}${normalized}</div>`;
+    // Sharing follows the discovery it belongs to, as in the reusable treatments, never above it.
+    return `<div class="discovery-frame">${normalized}${shareControl(entry,page)}</div>`;
   }
   const {id,evidence:e}=entry;
   const guess=entry.guess ? `<div class="data-controls discovery-guess" role="group" aria-label="Optional guess" hidden>${entry.guess.choices.map(c=>`<button type="button" data-guess="${esc(c.id)}" aria-pressed="false">${esc(c.label)}</button>`).join('')}</div><p class="guess-status" role="status"></p>` : '';
