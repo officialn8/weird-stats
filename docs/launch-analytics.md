@@ -77,7 +77,7 @@ They remain in PostHog and inflate the rolling seven-day readout until they age 
 For people and agents checking the site.
 
 - **Functional checks** (layout, interactions, keyboard, share controls) run on a local build, a preview, or an immutable deployment URL. Those origins never initialize analytics, and their in-site links stay on the same origin.
-- **Event checks** run on production. Start at `https://weirdstats.dev/?qa=1` or a discovery page with `?qa=1`, confirm the "QA test mode" strip and the "QA · " title prefix, and move only through the site's own links. Typed addresses, bookmarks, the 404 page and withdrawn pages drop the marker.
+- **Event checks** run on production. Start at `https://weirdstats.dev/?qa=1` or a discovery page with `?qa=1`, confirm the "QA test mode" strip and the "QA · " title prefix, and move only through the site's own links. If either cue is missing, stop, do not follow any link, and record the time. Typed addresses, bookmarks, the 404 page and withdrawn pages drop the marker.
 - **Record** the start and end time of each production check, so any unmarked leak can be dated and excluded.
 - **Never share a QA address.** A copied address keeps `?qa=1` and would mark every visit made from it. Post and share only the canonical URLs the share button provides.
 - **Do not open production unmarked** to confirm a fix, follow a deployment "Visit" link, or test a shared link. Use an unflagged browser on production only with `?qa=1`.

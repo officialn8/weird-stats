@@ -44,6 +44,19 @@ test('SDK sends only approved event properties and keeps no persistent identity'
   const event=filterEvent({event:'discovery_revealed',properties:{entry_id:'first',distinct_id:'temporary',token:'fixture','$current_url':'https://example.org/?email=private','$referrer':'private',email:'private','$set':{email:'private'}}});
   assert.deepEqual(event.properties,{entry_id:'first',distinct_id:'temporary',token:'fixture'});
 });
+// markQA (run from the analytics module's boot) must see permalinks already rewritten by share.js,
+// so share.js has to be a deferred classic script placed before the analytics module tag.
+function assertShareBeforeAnalytics(html,label){
+  const tags=src=>html.match(new RegExp(`<script\\b[^>]*\\bsrc="${src.replace('.','\\.')}"[^>]*>`,'g'))??[];
+  const [share,...extraShare]=tags('/share.js'),[analytics,...extraAnalytics]=tags('/analytics.js');
+  assert(share&&!extraShare.length,`${label}: exactly one share.js script tag`);
+  assert(analytics&&!extraAnalytics.length,`${label}: exactly one analytics.js script tag`);
+  assert(/\sdefer(?=[\s>=])/.test(share),`${label}: share.js is deferred`);
+  assert(!/\sasync(?=[\s>=])/.test(share),`${label}: share.js is not async`);
+  assert(!/\stype\s*=/.test(share),`${label}: share.js is a classic script, not a module`);
+  assert(/\stype="module"/.test(analytics),`${label}: analytics.js is a module`);
+  assert(html.indexOf(share)<html.indexOf(analytics),`${label}: share.js tag precedes the analytics.js module tag`);
+}
 test('tracking config is validated and public builds alone load the pinned SDK',async t=>{
   const entry=publishedFixture();
   assert.equal(analyticsHead(config,{drafts:true,entries:[entry],publicOrigin:config.publicOrigin}),'');
@@ -55,6 +68,8 @@ test('tracking config is validated and public builds alone load the pinned SDK',
   assert((await readFile(new URL('index.html',output),'utf8')).includes('id="analytics-config"'));
   assert((await readFile(new URL('discoveries/fixture-published/index.html',output),'utf8')).includes('id="analytics-config"'));
   assert(!(await readFile(new URL('404.html',output),'utf8')).includes('id="analytics-config"'));
+  assertShareBeforeAnalytics(await readFile(new URL('index.html',output),'utf8'),'collection index.html');
+  assertShareBeforeAnalytics(await readFile(new URL('discoveries/fixture-published/index.html',output),'utf8'),'discovery page');
   await access(new URL('vendor/posthog.mjs',output));
   await build({...args,drafts:true});
   assert(!(await readFile(new URL('index.html',output),'utf8')).includes('id="analytics-config"'));

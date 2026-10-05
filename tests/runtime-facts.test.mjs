@@ -241,6 +241,44 @@ test('mail visibility and motion resets stop a pressed run without writing to th
   }
 });
 
+test('a mail reset within 100 ms of a pressed run finishing drops the pending announcement', async () => {
+  for(const reset of ['hidden', 'motionchange', 'out-of-view']) {
+    const mail = await mountMail();
+    mail.autoplay();
+    mail.press();
+    mail.advance(650 * 6);
+    assert.equal(mail.status.textContent, mail.summary, 'the pressed run has finished');
+    assert.deepEqual(mail.announcer.writes, [''], 'the region is cleared and its refill is still pending');
+    mail.advance(50);
+    if(reset === 'hidden') {
+      mail.document.hidden = true;mail.document.dispatchEvent(new Event('visibilitychange'));
+      mail.document.hidden = false;mail.document.dispatchEvent(new Event('visibilitychange'));
+    } else if(reset === 'motionchange') {
+      mail.document.dispatchEvent(new Event('motionchange'));
+    } else {
+      mail.observers.at(-1)([{target:mail.score, isIntersecting:false, intersectionRatio:0}]);
+    }
+    mail.advance();
+    assert.deepEqual(mail.announcer.writes, [''], `${reset} within 100 ms writes no stale summary`);
+    assert.equal(mail.announcer.textContent, '');
+  }
+});
+
+test('a second mail press within 100 ms of a pressed run finishing announces once, at the end of the new run', async () => {
+  const mail = await mountMail();
+  mail.press();
+  mail.advance(650 * 6);
+  assert.deepEqual(mail.announcer.writes, ['']);
+  mail.advance(50);
+  mail.press();
+  mail.advance(650 * 6 - 1);
+  assert.notEqual(mail.status.textContent, mail.summary, 'the restarted run is still playing');
+  assert.deepEqual(mail.announcer.writes, [''], 'the first run’s pending summary is not written into the restarted run');
+  mail.advance();
+  assert.deepEqual(mail.announcer.writes, ['', '', mail.summary], 'exactly one summary write, at the end of the second run');
+  assert.equal(mail.announcer.textContent, mail.summary);
+});
+
 test('with reduced motion or Motion off a mail press applies the static summary and announces it once', async () => {
   for(const mode of ['reduced', 'motion-off']) {
     const mail = await mountMail({reduced:mode === 'reduced'});

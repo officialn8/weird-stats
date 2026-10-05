@@ -114,8 +114,11 @@ function stopJourney() {
   journeyTimers = [];
   score.classList.remove('playing');
 }
+// A pending announcement is dropped by resets and restarts, but not by stopJourney():
+// reduced-motion syncMail() calls it on observer callbacks and must not swallow a press.
 function resetJourney() {
   stopJourney();
+  clearTimeout(announceTimer);
   journeyStarted = false;
   bars.forEach(bar => bar.classList.remove('arrived'));
   journeyStatus.textContent = initialJourneyStatus;
@@ -125,6 +128,7 @@ function resetJourney() {
 // a press mid-play restarts, and only press-started runs are announced.
 function playJourney(pressed = false) {
   stopJourney();
+  clearTimeout(announceTimer);
   journeyStarted = true;
   bars.forEach(bar => bar.classList.remove('arrived'));
   if(reduced()) {
