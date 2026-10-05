@@ -4,9 +4,9 @@ Prepared October 4, 2026. Status: creator walkthrough complete for the four new 
 
 Moderator material. Sources, qualifications, and selection reasoning are in the [research notes](2026-10-04-editorial-reset.md). Do not send this entire document to a reader before testing: it contains the answers.
 
-## Run it
+## Run it — version 2
 
-Recruit 3–5 people who have not seen these candidates. The creator and anyone already shown the answers can still give useful feedback, but record their prior exposure separately. No invitations have been sent.
+Recruit 3–5 people who have not seen these candidates **and are not in the chip visual-check group**. Use version 2 below for new sessions. The creator and anyone already shown the answers can still give useful feedback, but record their prior exposure separately. No invitations have been sent.
 
 Say: “We're checking which discoveries are worth including. Skipping is useful feedback. You don't need to guess an answer or be polite about it.”
 
@@ -32,7 +32,51 @@ Rotate order using these suggested sequences. If using fewer than five readers, 
 | D | WS-18, WS-17, WS-15, WS-02, WS-16 |
 | E | WS-02, WS-15, WS-16, WS-17, WS-18 |
 
-## Exact copy — version 1
+## Exact copy — version 2 (active, untested)
+
+Revised after design review. Keep version 1 and all creator responses below unchanged. Do not pool responses across versions. These are plain-text reveals; the separate visual check uses the actual page.
+
+### WS-15 · Crunch
+
+**Opening:** Could your ears make a chip seem fresher?
+
+**Reveal:** Yes. Researchers changed the biting sounds people heard through headphones. With louder or enhanced high-frequency feedback, the chips seemed crisper and fresher. Your ears help decide how fresh a chip seems. This is a finding about perception from a small 2004 experiment, not a measure of actual food freshness.
+
+**Supporting detail, only if requested:** In informal questions afterward, 15 of 20 participants thought the chips came from different packages. They came from the same package. That count is not a population estimate. Record any request for this detail separately.
+
+### WS-16 · Selfie
+
+**Opening:** Why might your nose look different in a selfie than in a photo a friend takes?
+
+**Reveal:** Camera distance changes the proportions in the picture. A 2018 geometry model put apparent nose width relative to face width about 30% higher at 12 inches than in its undistorted reference view. At five feet, the modeled difference was negligible. Try a photo from five feet away before deciding a close-up is how you look. The number comes from a model, not a measurement of your face.
+
+There’s a real-world reason this matters: in AAFPRS’s 2016 member survey, 42% of responding surgeons reported patients seeking cosmetic procedures to look better in selfies or other social-media pictures. That’s a share of surgeons reporting a request—not a share of patients, and not proof that camera distortion caused those requests.
+
+**Moderator sources:** [Ward et al., model and five-foot result](https://www.ohadf.com/papers/WardWardFriedPaskhover_JAMA2018.pdf); [AAFPRS’s own January 2017 survey release](https://www.prnewswire.com/news-releases/aafprs-annual-survey-unveils-rising-trends-in-facial-plastic-surgery-300396391.html). The 30% baseline is an orthographic projection, not an exact twelve-inch versus five-foot difference.
+
+### WS-17 · Ice cream
+
+**Opening:** How much of a scoop of ice cream could be air?
+
+**Reveal:** As much as half its volume. Air is incorporated during churning and freezing and helps give ice cream its texture; the amount varies. Liquid cream is not mostly air, and ice cream is not simply cream frozen solid. In the U.S., the standard for ice cream even sets a minimum weight: 4.5 pounds per gallon. A gallon measures volume; the weight helps tell you how much material is in it. The rule does not mean every carton is half air.
+
+**Moderator source for the weight rule:** [21 CFR 135.110(a)(2)](https://www.ecfr.gov/current/title-21/section-135.110), the U.S. standard of identity for ice cream, not every product sold as a frozen dessert. Weight alone does not establish an exact air percentage because recipes differ.
+
+### WS-18 · Printed page
+
+**Opening:** Could a printed page reveal which printer made it—even without a name on it?
+
+**Reveal:** EFF decoded nearly invisible yellow dots on Xerox DocuColor printouts. A repeating 15-by-8 grid encodes a printer serial number and a date and time. Under blue light, the yellow dots appear dark; a magnifying glass can help you see the pattern. An ordinary-looking page can carry machine information you never meant to put in its text. This is a finding about those printers, not every printer; their clocks can be wrong, and the code does not identify the person who printed the page.
+
+**Moderator source:** [EFF’s original decoding guide and blue-light demonstration](https://w2.eff.org/Privacy/printers/docucolor/).
+
+### WS-02 · Copper baseline
+
+**Opening:** Which holds more copper: a modern U.S. penny or a nickel?
+
+**Reveal:** The nickel—about 60 times as much. This compares the standard copper-plated-zinc penny with the standard cupronickel nickel, using their specified weights and compositions.
+
+## Exact copy — version 1 (historical; do not use for new sessions)
 
 ### WS-15 · Crunch
 
@@ -148,6 +192,7 @@ Duplicate this block per reader. Leave unanswered fields “unknown.” Keep exa
 
 - Reader identifier / date:
 - Prior exposure to this project or these answers:
+- Cohort: fresh text / previously exposed follow-up (exclude follow-ups from novelty evidence)
 - Order and copy version:
 - Entry:
 - Opening choice: reveal / scroll / unknown

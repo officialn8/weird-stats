@@ -25,7 +25,7 @@ Changing status is an editorial action, not an automatic conclusion of validatio
 
 ## Treatments
 
-`reveal` uses native accessible disclosure. `bar` and `line` add chart views, optional measure buttons, an accessible numerical description, a full data table, and downloadable CSV. Each view declares `id`, `label`, `unit`, `baseline: 0`, positive `max`, explanatory `note`, and at least two values with a label and finite nonnegative value. Lines also require increasing numeric `x` coordinates. Example: use actual years for time rather than evenly spacing irregular observations.
+`reveal` uses native accessible disclosure. `bar` and `line` place all chart content inside the same initially closed native reveal: chart views, optional measure buttons, an accessible numerical description, a full data table, and downloadable CSV. Each view declares `id`, `label`, `unit`, `baseline: 0`, positive `max`, explanatory `note`, and at least two values with a label and finite nonnegative value. Lines also require increasing numeric `x` coordinates. Example: use actual years for time rather than evenly spacing irregular observations.
 
 The original chip, copper, mail, and painting experiences are separate `custom` templates in `src/exhibits/`, referenced by their content records. These bespoke templates currently retain their copy and source disclosures in HTML; JSON stores their catalog/evidence metadata. They are intentionally not flattened into a generic renderer. Adding a new bespoke mechanism still needs its own template and behavior. Reusable reveals and charts need only a record.
 
@@ -40,6 +40,9 @@ Selection happens at build time. A future publication timestamp alone does not t
 The dev server rebuilds when content, templates, or public files change; refresh the browser to see the update. It serves the published edition on port 63014 and editorial edition on 63214, bound to localhost. Override with `PORT` if occupied. Restart the dev process after changing generator code under `scripts/`. Python 3 serves files; Node 22 performs generation and change detection.
 
 ## Extending and testing
+
+Unit tests use fictional records from `tests/fixtures/entries.mjs`, never an editorial draft. The build accepts optional `records` and an `output` directory URL; every test build supplies both and writes to a temporary folder removed afterward. Tests never rebuild `dist/` or `review-dist/`. Rejecting or deleting a draft therefore cannot invalidate implementation tests. Live editorial records remain validated by `npm run check` and normal builds.
+
 
 `npm test` covers publication gating, draft leakage, source requirements, invalid chart domains, irregular time spacing, HTML escaping, CSV export, stale-review reporting, and reordered next links. `npm run check` validates content, assets, and local anchors. These are implementation checks, not factual verification. Source verification and editorial review remain separate work.
 

@@ -28,7 +28,11 @@ Separate the measured relationship from political interpretation. Do not imply c
 
 Bar and line renderers currently support nonnegative values with zero baselines. Every view names its unit and range; changing measures explicitly changes the labeled scale. Line x coordinates must increase and are spaced by their actual numerical distances. Always provide the underlying table and CSV. Negative values, confidence intervals, multiple series, maps, and live feeds need deliberate renderer extensions and tests before use.
 
+For reveal entries, the question must be answered directly by the reveal. Keep the chart, numerical labels, measure controls, table, and CSV link inside the closed reveal. Do not leak the payoff through introductory copy. Give a reason to care rather than instructions to operate the chart. A familiar underlying fact needs a stronger relationship, not just a new decimal.
+
 Use interaction to expose a relationship: toggle a denominator, compare two quantities, scrub a supported timeline, or reveal a mechanism. Keep optional guessing optional. The static reading path must make sense.
+
+Use the version 2 reader protocols linked in the brief. Visual and plain-text checks use separate, unexposed cohorts. Repeat visitors can assess usability but cannot supply independent first-surprise evidence. Preserve historical responses verbatim and label copy versions.
 
 ## Refresh and correction lane
 

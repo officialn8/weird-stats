@@ -1,10 +1,10 @@
 import { cp, mkdir, rm, readFile, writeFile } from 'node:fs/promises';
-import { root, loadEntries, selectEntries, renderEntry, csv } from './content.mjs';
-export async function build({drafts=false,now=new Date()}={}) {
-  const all=await loadEntries();
+import { root, loadEntries, selectEntries, renderEntry, csv, validate } from './content.mjs';
+export async function build({drafts=false,now=new Date(),records,output=new URL(drafts?'review-dist/':'dist/',root)}={}) {
+  // Inject records and a directory URL for isolated builds in tests.
+  const all=records === undefined ? await loadEntries() : records.map(validate);
   const entries=selectEntries(all,{drafts,now});
   if(!entries.length) throw new Error('No publishable entries');
-  const output=new URL(drafts?'review-dist/':'dist/',root);
   await rm(output,{recursive:true,force:true});
   await mkdir(output,{recursive:true});
   await cp(new URL('public/',root),output,{recursive:true,filter:source=>!source.endsWith('/index.html')});
@@ -18,7 +18,7 @@ export async function build({drafts=false,now=new Date()}={}) {
   await mkdir(new URL('data/',output),{recursive:true});
   for(const e of entries.filter(e=>['bar','line'].includes(e.treatment.kind))) await writeFile(new URL(`data/${e.id}.csv`,output),csv(e));
   await writeFile(new URL('feed.json',output),JSON.stringify({builtAt:now.toISOString(),entries:entries.map(e=>({id:e.id,title:e.title,topic:e.topic,publishedAt:e.publishedAt ?? null,dataAsOf:e.evidence.dataAsOf,checkedAt:e.evidence.checkedAt,reviewDue:e.evidence.reviewDue,url:'#'+e.id}))},null,2));
-  console.log(`Built ${entries.length} discoveries → ${drafts?'review-dist':'dist'}/`);
+  console.log(`Built ${entries.length} discoveries → ${output.pathname}`);
   return {entries,output,html};
 }
 if(process.argv[1] && new URL(process.argv[1],'file:').href===import.meta.url) await build({drafts:process.argv.includes('--drafts')});

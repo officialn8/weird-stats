@@ -7,3 +7,13 @@ dist/
 .DS_Store
 *.log
 review-dist/
+
+# Generated audits and visual QA (existing history remains intact).
+/reports/
+/artifacts/
+**/lighthouse*.json
+**/lighthouse*.html
+**/preview*.png
+**/preview*.jpg
+**/preview*.jpeg
+**/preview*.webp

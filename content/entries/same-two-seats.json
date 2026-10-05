@@ -1,32 +1,74 @@
 {
   "id": "same-two-seats",
-  "title": "Different populations. The same two Senate seats.",
+  "title": "One state. How many states’ worth of people?",
   "topic": "politics",
   "status": "review",
   "order": 15,
-  "question": "How many people share the same two seats?",
-  "answer": "About 68.5 times the population. Exactly the same number of Senate seats.",
-  "explanation": "California counted 39,538,223 residents in the 2020 Census; Wyoming counted 576,851. Each state has two U.S. Senate seats. Divide the two population counts and the ratio is about 68.5 to one.",
+  "question": "How many states combined have fewer people than California?",
+  "answer": "The 21 least-populous states, combined. They get 42 Senate seats. California gets 2.",
+  "explanation": "In the 2020 Census, California had 39,538,223 residents. The 21 least-populous states had 37,174,921 combined—about 2.36 million fewer. Those states are allocated 42 U.S. Senate seats; California is allocated two.",
   "qualification": "This compares resident populations and allocated Senate seats using a fixed 2020 snapshot. It is not a count of eligible voters, a current population estimate, or a measure of an individual vote’s power. House representation follows a different system.",
-  "whyCare": "Switch between people and seats. The numbers describe two different ways of representing the same country.",
+  "whyCare": "State borders shape representation in the Senate. Population alone doesn’t tell you how many seats a group of residents is represented by.",
   "evidence": {
     "kind": "calculation",
-    "scope": "California and Wyoming, the most and least populous states in the 2020 Census. Historical comparison, not a live political dashboard.",
+    "scope": "California versus the 21 least-populous U.S. states in the April 1, 2020 Census. Ranked among the 50 states; D.C. and Puerto Rico are excluded because this comparison concerns state Senate representation.",
     "dataAsOf": "April 1, 2020 Census",
     "checkedAt": "2026-10-04",
     "reviewDue": "2027-01-04",
-    "denominator": "Wyoming resident population for the population ratio. Each state’s allocated Senate seats are counted separately; this is not a voter denominator.",
-    "methodology": "39,538,223 ÷ 576,851 = 68.54148298…, rounded to 68.5. Resident population comes from Census Table E; equal two-seat representation is documented by the U.S. Senate. The two chart views have different units and explicitly labeled zero-based scales.",
+    "denominator": "Resident totals for California and the combined 21-state group, not eligible voters. Seat counts are allocated seats for each group: one state versus 21 states. No individual voting-power ratio is calculated.",
+    "methodology": "Rank the 50 states by 2020 resident population and sum ranks 50 through 30: Wyoming, Vermont, Alaska, North Dakota, South Dakota, Delaware, Montana, Rhode Island, Maine, New Hampshire, Hawaii, West Virginia, Idaho, Nebraska, New Mexico, Kansas, Mississippi, Arkansas, Nevada, Iowa, Utah. Their total is 37,174,921; California has 39,538,223. Adding Connecticut, the next state, brings the total to 40,780,865, exceeding California. Thus 21 is the largest group of least-populous states whose combined population is below California’s. Seat allocation: 21 × 2 = 42 versus 1 × 2 = 2. Each chart view uses a separately labeled zero-based scale.",
     "sources": [
-      {"label": "U.S. Census Bureau, 2020/2010 resident population, Table E", "url": "https://www2.census.gov/programs-surveys/decennial/2020/data/apportionment/apportionment-2020-tableE.pdf", "primary": true},
-      {"label": "U.S. Senate: equal state representation", "url": "https://www.senate.gov/about/origins-foundations/senate-and-constitution.htm", "primary": true}
+      {
+        "label": "U.S. Census Bureau, 2020/2010 resident population, Table E",
+        "url": "https://www2.census.gov/programs-surveys/decennial/2020/data/apportionment/apportionment-2020-tableE.pdf",
+        "primary": true
+      },
+      {
+        "label": "U.S. Senate: equal state representation",
+        "url": "https://www.senate.gov/about/origins-foundations/senate-and-constitution.htm",
+        "primary": true
+      }
     ]
   },
   "treatment": {
     "kind": "bar",
     "views": [
-      {"id": "people", "label": "People", "unit": "residents", "baseline": 0, "max": 40000000, "note": "2020 Census counts; both states use the same scale.", "values": [{"label": "California", "value": 39538223}, {"label": "Wyoming", "value": 576851}]},
-      {"id": "seats", "label": "Senate seats", "unit": "seats", "baseline": 0, "max": 2, "note": "Allocated seats per state, not the number of currently seated senators.", "values": [{"label": "California", "value": 2}, {"label": "Wyoming", "value": 2}]}
+      {
+        "id": "seats",
+        "label": "Senate seats",
+        "unit": "seats",
+        "baseline": 0,
+        "max": 50,
+        "note": "Allocated seats for each group, not current officeholders. The People view uses a separate resident scale.",
+        "values": [
+          {
+            "label": "California",
+            "value": 2
+          },
+          {
+            "label": "21 states combined",
+            "value": 42
+          }
+        ]
+      },
+      {
+        "id": "people",
+        "label": "People",
+        "unit": "residents",
+        "baseline": 0,
+        "max": 40000000,
+        "note": "April 1, 2020 resident counts. The second bar is the combined population of 21 states.",
+        "values": [
+          {
+            "label": "California",
+            "value": 39538223
+          },
+          {
+            "label": "21 states combined",
+            "value": 37174921
+          }
+        ]
+      }
     ]
   }
 }
