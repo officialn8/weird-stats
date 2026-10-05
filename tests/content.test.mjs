@@ -4,8 +4,9 @@ import { readFile, readdir, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { validate, selectEntries, renderEntry, reviewState, linePoints, csv, createPageContext } from '../scripts/content.mjs';
+import { validate, selectEntries, renderEntry, reviewState, linePoints, csv, createPageContext, esc } from '../scripts/content.mjs';
 import { build } from '../scripts/build.mjs';
+import { shareCopy } from '../scripts/share-copy.mjs';
 import { reviewFixture, publishedFixture } from './fixtures/entries.mjs';
 const now=new Date('2020-06-01T00:00:00Z');
 test('normal edition excludes review, retired, and future scheduled entries',()=>{
@@ -77,6 +78,22 @@ test('isolated builds exclude draft HTML, data and metadata; rejecting or removi
  for(const remaining of [[published,{...draft,status:'retired'}],[published]]) {
    const result=await build({now,records:remaining,drafts:true,output:output('rejected')});
    assert(!result.html.includes(draft.id));assert.deepEqual(result.entries.map(e=>e.id),[published.id]);
+ }
+});
+test('the collection head names no discovery, and only the private review build is noindex',async t=>{
+ const directory=await mkdtemp(join(tmpdir(),'weird-collection-head-'));
+ t.after(()=>rm(directory,{recursive:true,force:true}));
+ const published={...publishedFixture(),answer:'The published answer stays in the page body.'};
+ const draft={...reviewFixture(),question:'Which private draft sample is larger?',answer:'The private draft answer.'},records=[published,draft];
+ for(const drafts of [false,true]) {
+   const result=await build({now,records,drafts,output:pathToFileURL(join(directory,drafts?'review':'published')+sep)});
+   const head=result.html.split('</head>')[0],body=result.html.slice(head.length),label=drafts?'review':'public';
+   assert(body.includes(published.question)&&body.includes(published.answer));assert.equal(body.includes(draft.question),drafts);
+   for(const entry of records)for(const text of new Set([entry.id,entry.title,entry.question,shareCopy(entry).question,entry.answer].filter(Boolean)))
+     assert(!head.includes(text)&&!head.includes(esc(text)),`${label} collection head leaks ${text}`);
+   assert.equal((head.match(/name="robots"/g)||[]).length,drafts?1:0,`${label} robots tags`);
+   if(drafts)assert(head.includes('<meta name="robots" content="noindex,nofollow">'));
+   assert(head.includes('property="og:image"'),`${label} collection head has a link preview`);
  }
 });
 test('bespoke links resolve to the actual next entry when reordered',async()=>{

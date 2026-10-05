@@ -5,11 +5,20 @@ import {tmpdir} from 'node:os';
 import {join,sep} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {build} from '../scripts/build.mjs';
-import {validate,contentDigest,renderEntry,createPageContext} from '../scripts/content.mjs';
+import {validate,contentDigest,renderEntry,createPageContext,esc} from '../scripts/content.mjs';
+import {collectionCopy,collectionImagePath} from '../scripts/collection-copy.mjs';
+import {renderShareImage,renderCollectionShareImage} from '../scripts/share-images.mjs';
 import {publishedFixture,reviewFixture} from './fixtures/entries.mjs';
 const now=new Date('2020-06-01T00:00:00Z');
 async function output(t){const dir=await mkdtemp(join(tmpdir(),'weird-routes-'));t.after(()=>rm(dir,{recursive:true,force:true}));return pathToFileURL(dir+sep);}
 const page=(out,id)=>readFile(new URL(`discoveries/${id}/index.html`,out),'utf8');
+// The home tab title and search description predate the link preview and keep their exact text.
+const homeTitle='weird.stats | Wonderfully unnecessary',homeDescription='Unexpected discoveries, interactive comparisons, and sourced numbers about the world. A collection for the incurably curious.';
+const values=(head,pattern)=>[...head.matchAll(pattern)].map(m=>m[1]);
+function meta(head,attribute,key) {
+ const found=values(head,new RegExp(`<meta ${attribute}="${key}" content="([^"]*)">`,'g'));
+ assert.equal(found.length,1,`exactly one ${key}`);return found[0];
+}
 test('individual routes have question-only canonical metadata and distinct real PNGs',async t=>{
  const first=publishedFixture(),second={...publishedFixture(),id:'fixture-second',question:'Where did this sample go?',answer:'SPOILER PRIVATE ANSWER'};
  const out=await output(t);await build({now,records:[first,second],output:out,publicOrigin:'https://example.org'});
@@ -29,6 +38,45 @@ test('individual routes have question-only canonical metadata and distinct real 
  assert((await readFile(new URL('404.html',out),'utf8')).includes('Discovery not found'));
  assert(!(await readdir(new URL('discoveries/',out))).includes('unknown'));
 });
+test('the collection head carries the approved link preview in its initial HTML, with a versioned card outside share/',async t=>{
+ const first=publishedFixture(),second={...publishedFixture(),id:'fixture-second',question:'Where did this sample go?'};
+ const out=await output(t),result=await build({now,records:[first,second],output:out,publicOrigin:'https://example.org'});
+ const html=await readFile(new URL('index.html',out),'utf8'),head=html.split('</head>')[0];
+ assert.equal(html,result.html);
+ assert.equal((head.match(/<title\b/g)||[]).length,1);assert.deepEqual(values(head,/<title>([^<]*)<\/title>/g),[homeTitle]);
+ assert.equal((head.match(/name="description"/g)||[]).length,1);assert.equal(meta(head,'name','description'),esc(homeDescription));
+ assert.equal((head.match(/rel="canonical"/g)||[]).length,1);assert.deepEqual(values(head,/<link rel="canonical" href="([^"]*)">/g),['https://example.org/']);
+ const image=`https://example.org/${collectionImagePath()}`;
+ for(const [attribute,key,value] of [
+  ['property','og:type','website'],['property','og:site_name','weird.stats'],
+  ['property','og:title',collectionCopy.title],['property','og:description',collectionCopy.description],['property','og:url','https://example.org/'],
+  ['property','og:image',image],['property','og:image:type','image/png'],['property','og:image:width','1200'],['property','og:image:height','630'],['property','og:image:alt',collectionCopy.alt],
+  ['name','twitter:card','summary_large_image'],['name','twitter:image',image],['name','twitter:image:alt',collectionCopy.alt]
+ ])assert.equal(meta(head,attribute,key),esc(value),key);
+ assert(!head.includes('name="robots"'),'the public collection stays indexable, which also keeps analytics on');
+ const png=await readFile(new URL(collectionImagePath(),out));
+ assert.equal(png.toString('hex',0,8),'89504e470d0a1a0a');assert.equal(png.readUInt32BE(16),1200);assert.equal(png.readUInt32BE(20),630);
+ assert(png.equals(renderCollectionShareImage()),'the build writes the collection renderer output');
+ const cards=await readdir(new URL('share/',out));assert.deepEqual(cards,['fixture-published.png','fixture-second.png']);
+ for(const card of cards)assert(!png.equals(await readFile(new URL(`share/${card}`,out))),`${card} must differ from the collection card`);
+});
+// Production builds run no tests, so the build itself refuses link-preview copy that differs from the approval record.
+test('a build with unapproved home-preview copy throws before replacing prior output',async t=>{
+ const out=await output(t),options={now,records:[publishedFixture()],output:out,publicOrigin:'https://example.org'};
+ await build({...options,homeCopy:{...collectionCopy}});
+ const before=await readFile(new URL('index.html',out),'utf8'),files=await readdir(out,{recursive:true});
+ for(const [field,value] of [['title','weird.stats: wonderfully necessary discoveries'],['description','Sourced numbers about the world.'],['alt','weird.stats: A collection.'],['headline','Wonderfully unnecessary findings.'],['version',2]])
+  await assert.rejects(build({...options,homeCopy:{...collectionCopy,[field]:value}}),/home preview needs a new version and a new approval record/,field);
+ assert.equal(await readFile(new URL('index.html',out),'utf8'),before);assert.deepEqual(await readdir(out,{recursive:true}),files);
+});
+test('discovery previews keep their exact metadata and card bytes',async t=>{
+ const entry=publishedFixture(),out=await output(t);await build({now,records:[entry],output:out,publicOrigin:'https://example.org'});
+ const head=(await page(out,entry.id)).split('</head>')[0];
+ const question='Which sample is larger?',description='A small question. A surprising discovery. Take a look at weird.stats.',url='https://example.org/discoveries/fixture-published/',image='https://example.org/share/fixture-published.png';
+ assert(head.includes(`<meta name="viewport" content="width=device-width,initial-scale=1"><title>${question} | weird.stats</title><meta name="description" content="${description}"><link rel="canonical" href="${url}"><meta property="og:type" content="website"><meta property="og:site_name" content="weird.stats"><meta property="og:title" content="${question}"><meta property="og:description" content="${description}"><meta property="og:url" content="${url}"><meta property="og:image" content="${image}"><meta property="og:image:type" content="image/png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${question}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${image}"><meta name="twitter:image:alt" content="${question}"><link rel="icon"`));
+ assert.equal((head.match(/<title\b/g)||[]).length,1);assert(!head.includes('social/'));assert(!head.includes(collectionCopy.title));
+ assert((await readFile(new URL(`share/${entry.id}.png`,out))).equals(await renderShareImage(entry)));
+});
 test('route, PNG, data and metadata selection excludes private and future entries',async t=>{
  const draft={...reviewFixture(),assets:[{path:'assets/mule.webp'}]},future={...publishedFixture(),id:'future-entry',publishedAt:'2030-01-01T00:00:00Z'};
  const out=await output(t);await build({now,records:[publishedFixture(),draft,future],output:out});
@@ -44,6 +92,9 @@ test('withdrawn routes contain a safe notice but no withdrawn graphic, CSV or qu
  const manifest={version:1,releasedAt:'2020-06-01T00:00:00Z',authorizedBy:'Fixture editor',entries:[],withdrawals:[{id:entry.id,reason:'Withdrawn for review.',at:'2020-06-01',authorizedBy:'Fixture editor'}]};
  const out=await output(t);await build({now,records:[],manifest,revisions,output:out});
  const html=await page(out,entry.id);assert(html.includes('Discovery withdrawn'));assert(!html.includes(entry.question));assert(!html.includes(entry.answer));assert(!html.includes('og:image'));assert.deepEqual(await readdir(new URL('share/',out)),[]);assert.deepEqual(await readdir(new URL('data/',out)),[]);
+ const home=(await readFile(new URL('index.html',out),'utf8')).split('</head>')[0];
+ assert(meta(home,'property','og:image').endsWith(`/${collectionImagePath()}`));assert(!home.includes(entry.question));
+ assert((await readFile(new URL(collectionImagePath(),out))).equals(renderCollectionShareImage()),'a withdrawals-only collection still has its card');
 });
 test('all custom srcset candidates and nested assets are root relative',async()=>{
  const html=await renderEntry({...publishedFixture(),id:'crunch',treatment:{kind:'custom',template:'crunch'}},null,now,createPageContext({mode:'discovery'}));
