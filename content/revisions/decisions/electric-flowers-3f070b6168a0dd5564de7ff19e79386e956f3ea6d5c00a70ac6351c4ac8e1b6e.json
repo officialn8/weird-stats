@@ -1,0 +1,12 @@
+{
+  "id": "electric-flowers",
+  "packetId": "3f070b6168a0dd5564de7ff19e79386e956f3ea6d5c00a70ac6351c4ac8e1b6e",
+  "digest": "dbae87f19788927ae984cacbba622bf7f2dff7c100a885a8ad0638b93eb58205",
+  "decision": "reject",
+  "human": {
+    "by": "Nate",
+    "at": "2026-10-05T14:47:06.307Z",
+    "inputReference": "docs/editorial/batches/2026-10-05.md#creator-decision",
+    "note": "Nate explicitly said “keep run-way north, reject bees” in this chat. Bee concept rejected; no additional reason supplied."
+  }
+}

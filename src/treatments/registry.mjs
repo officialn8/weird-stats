@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { bearingShift } from './bearing-shift.mjs';
 import { pairedComparison } from './paired-comparison.mjs';
 import { readFile } from 'node:fs/promises';
 const root = new URL('../../', import.meta.url);
@@ -72,3 +73,5 @@ registerTreatment('custom', {
 });
 
 registerTreatment('paired-comparison',pairedComparison({esc,validateChart}));
+
+registerTreatment('bearing-shift',bearingShift({esc,required}));

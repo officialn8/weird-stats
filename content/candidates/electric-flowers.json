@@ -1,0 +1,137 @@
+{
+  "id": "electric-flowers",
+  "claim": "Bumblebees can learn floral electric fields and a bee visit changes a flower electric potential.",
+  "sources": [
+    {
+      "url": "https://www.esalq.usp.br/lepse/imgs/conteudo_thumb/Detection-and-Learning-of-Floral-Electric-Fields-by-Bumblebees-1.pdf",
+      "locator": "Clarke et al., online 21 February 2013, DOI 10.1126/science.1230883: page 1 Petunia stem recordings and conditioning; page 2 laboratory-study qualification",
+      "status": "verified",
+      "checkedAt": "2026-10-05",
+      "normalizedUrl": "https://www.esalq.usp.br/lepse/imgs/conteudo_thumb/Detection-and-Learning-of-Floral-Electric-Fields-by-Bumblebees-1.pdf"
+    },
+    {
+      "url": "https://www.bristol.ac.uk/news/2013/9163.html",
+      "locator": "February 21, 2013 institutional release: petunia electrodes, discrimination and nectar-status hypothesis",
+      "status": "verified",
+      "checkedAt": "2026-10-05",
+      "normalizedUrl": "https://www.bristol.ac.uk/news/2013/9163.html"
+    }
+  ],
+  "evidenceGaps": [],
+  "treatmentGaps": [
+    "Build an original flower/bee illustration with an optional field overlay and a clearly illustrative before/after visit; no literal vision, sparks, battery meter, or proven empty-flower detector. Provide static and reduced-motion states."
+  ],
+  "notes": "Science alternate; shares the broader hidden-senses theme with chips but is not the same discovery. Reader novelty untested; Bristol reported extensive contemporary press coverage, so do not label obscure. Retelling hypothesis: a garden has electrical cues humans do not perceive. DOI resolver failed in web tool; the same original paper was opened on a University of São Paulo-hosted mirror. No source figures or datasets copied. Scope limited to the reported laboratory findings, not a current review of all bee electroreception. Full paper body and Fig. 1 caption disagree on the landing sample count (50/51); no sample-count claim or plotted curve is proposed. Do not infer a nectar refill timer or proven avoidance of depleted flowers. No new calculation needed.",
+  "entry": {
+    "id": "electric-flowers",
+    "title": "A flower has another signal",
+    "topic": "biology",
+    "status": "draft",
+    "order": 60,
+    "question": "What can a bumblebee pick up from a flower besides its colour and smell?",
+    "answer": "An electric field.",
+    "explanation": "In a 2013 experiment, bumblebees learned to distinguish artificial flowers by electrical cues. Separate petunia recordings found that a bee visit changed stem potential for about 100 seconds.",
+    "qualification": "Laboratory results, not proof that bees read a flower’s nectar level. The duration is approximate, not a universal countdown.",
+    "whyCare": "A garden contains signals our own senses miss.",
+    "evidence": {
+      "kind": "experiment",
+      "scope": "Bombus terrestris conditioning and Petunia stem recordings in Clarke et al. (2013).",
+      "dataAsOf": "2013 laboratory study",
+      "checkedAt": "2026-10-05",
+      "reviewDue": "2027-01-05",
+      "methodology": "About 100 seconds is the reported duration of the mean stem-potential change, not a nectar refill time. No per-bee success rate or new calculation is presented.",
+      "sources": [
+        {
+          "label": "Clarke et al., online 21 February 2013, DOI 10.1126/science.1230883: page 1 Petunia stem recordings and conditioning; page 2 laboratory-study qualification",
+          "url": "https://www.esalq.usp.br/lepse/imgs/conteudo_thumb/Detection-and-Learning-of-Floral-Electric-Fields-by-Bumblebees-1.pdf",
+          "primary": true
+        },
+        {
+          "label": "February 21, 2013 institutional release: petunia electrodes, discrimination and nectar-status hypothesis",
+          "url": "https://www.bristol.ac.uk/news/2013/9163.html",
+          "primary": true
+        }
+      ]
+    },
+    "treatment": {
+      "kind": "reveal"
+    },
+    "editorial": {
+      "stage": "copy and interaction brief only",
+      "visualReady": false,
+      "proposedTreatment": "illustrative electric-field overlay; reveal is a temporary authoring placeholder, not the proposed final design"
+    }
+  },
+  "input": {
+    "id": "electric-flowers",
+    "claim": "Bumblebees can learn floral electric fields and a bee visit changes a flower electric potential.",
+    "sources": [
+      {
+        "url": "https://www.esalq.usp.br/lepse/imgs/conteudo_thumb/Detection-and-Learning-of-Floral-Electric-Fields-by-Bumblebees-1.pdf",
+        "locator": "Clarke et al., online 21 February 2013, DOI 10.1126/science.1230883: page 1 Petunia stem recordings and conditioning; page 2 laboratory-study qualification",
+        "status": "verified",
+        "checkedAt": "2026-10-05"
+      },
+      {
+        "url": "https://www.bristol.ac.uk/news/2013/9163.html",
+        "locator": "February 21, 2013 institutional release: petunia electrodes, discrimination and nectar-status hypothesis",
+        "status": "verified",
+        "checkedAt": "2026-10-05"
+      }
+    ],
+    "evidenceGaps": [],
+    "treatmentGaps": [
+      "Build an original flower/bee illustration with an optional field overlay and a clearly illustrative before/after visit; no literal vision, sparks, battery meter, or proven empty-flower detector. Provide static and reduced-motion states."
+    ],
+    "notes": "Science alternate; shares the broader hidden-senses theme with chips but is not the same discovery. Reader novelty untested; Bristol reported extensive contemporary press coverage, so do not label obscure. Retelling hypothesis: a garden has electrical cues humans do not perceive. DOI resolver failed in web tool; the same original paper was opened on a University of São Paulo-hosted mirror. No source figures or datasets copied. Scope limited to the reported laboratory findings, not a current review of all bee electroreception. Full paper body and Fig. 1 caption disagree on the landing sample count (50/51); no sample-count claim or plotted curve is proposed. Do not infer a nectar refill timer or proven avoidance of depleted flowers. No new calculation needed.",
+    "entry": {
+      "id": "electric-flowers",
+      "title": "A flower has another signal",
+      "topic": "biology",
+      "status": "draft",
+      "order": 60,
+      "question": "What can a bumblebee pick up from a flower besides its colour and smell?",
+      "answer": "An electric field.",
+      "explanation": "In a 2013 experiment, bumblebees learned to distinguish artificial flowers by electrical cues. Separate petunia recordings found that a bee visit changed stem potential for about 100 seconds.",
+      "qualification": "Laboratory results, not proof that bees read a flower’s nectar level. The duration is approximate, not a universal countdown.",
+      "whyCare": "A garden contains signals our own senses miss.",
+      "evidence": {
+        "kind": "experiment",
+        "scope": "Bombus terrestris conditioning and Petunia stem recordings in Clarke et al. (2013).",
+        "dataAsOf": "2013 laboratory study",
+        "checkedAt": "2026-10-05",
+        "reviewDue": "2027-01-05",
+        "methodology": "About 100 seconds is the reported duration of the mean stem-potential change, not a nectar refill time. No per-bee success rate or new calculation is presented.",
+        "sources": [
+          {
+            "label": "Clarke et al., online 21 February 2013, DOI 10.1126/science.1230883: page 1 Petunia stem recordings and conditioning; page 2 laboratory-study qualification",
+            "url": "https://www.esalq.usp.br/lepse/imgs/conteudo_thumb/Detection-and-Learning-of-Floral-Electric-Fields-by-Bumblebees-1.pdf",
+            "primary": true
+          },
+          {
+            "label": "February 21, 2013 institutional release: petunia electrodes, discrimination and nectar-status hypothesis",
+            "url": "https://www.bristol.ac.uk/news/2013/9163.html",
+            "primary": true
+          }
+        ]
+      },
+      "treatment": {
+        "kind": "reveal"
+      },
+      "editorial": {
+        "stage": "copy and interaction brief only",
+        "visualReady": false,
+        "proposedTreatment": "illustrative electric-field overlay; reveal is a temporary authoring placeholder, not the proposed final design"
+      }
+    }
+  },
+  "claimFingerprint": "22e12c8cb03fc908492740f4eb752d3827090082607599dac6137d7f78e0fe85",
+  "duplicates": [],
+  "disposition": "rejected",
+  "dispositionReason": "Nate explicitly said “keep run-way north, reject bees” in this chat. Bee concept rejected; no additional reason supplied.",
+  "createdAt": "2026-10-05T14:03:44.265Z",
+  "updatedAt": "2026-10-05T14:47:06.307Z",
+  "runIds": [
+    "research-2026-10-05"
+  ]
+}
