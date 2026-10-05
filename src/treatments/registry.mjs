@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { pairedComparison } from './paired-comparison.mjs';
 import { readFile } from 'node:fs/promises';
 const root = new URL('../../', import.meta.url);
 export const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -66,3 +67,5 @@ registerTreatment('custom', {
     return fragment.replaceAll('{{nextHref}}',context.nextHref);
   }
 });
+
+registerTreatment('paired-comparison',pairedComparison({esc,validateChart}));

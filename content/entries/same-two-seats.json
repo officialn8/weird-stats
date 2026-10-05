@@ -16,7 +16,7 @@
     "checkedAt": "2026-10-04",
     "reviewDue": "2027-01-04",
     "denominator": "Resident totals for California and the combined 21-state group, not eligible voters. Seat counts are allocated seats for each group: one state versus 21 states. No individual voting-power ratio is calculated.",
-    "methodology": "Rank the 50 states by 2020 resident population and sum ranks 50 through 30: Wyoming, Vermont, Alaska, North Dakota, South Dakota, Delaware, Montana, Rhode Island, Maine, New Hampshire, Hawaii, West Virginia, Idaho, Nebraska, New Mexico, Kansas, Mississippi, Arkansas, Nevada, Iowa, Utah. Their total is 37,174,921; California has 39,538,223. Adding Connecticut, the next state, brings the total to 40,780,865, exceeding California. Thus 21 is the largest group of least-populous states whose combined population is below California’s. Seat allocation: 21 × 2 = 42 versus 1 × 2 = 2. Each chart view uses a separately labeled zero-based scale.",
+    "methodology": "Rank the 50 states by 2020 resident population and sum ranks 50 through 30: Wyoming, Vermont, Alaska, North Dakota, South Dakota, Delaware, Montana, Rhode Island, Maine, New Hampshire, Hawaii, West Virginia, Idaho, Nebraska, New Mexico, Kansas, Mississippi, Arkansas, Nevada, Iowa, Utah. Their total is 37,174,921; California has 39,538,223. Adding Connecticut, the next state, brings the total to 40,780,865, exceeding California. Thus 21 is the largest group of least-populous states whose combined population is below California’s. Seat allocation: 21 × 2 = 42 versus 1 × 2 = 2. The population bars share a zero-based 0–40 million resident scale. The seat objects use a separate literal count: one chair per allocated seat.",
     "sources": [
       {
         "label": "U.S. Census Bureau, 2020/2010 resident population, Table E",
@@ -31,29 +31,11 @@
     ]
   },
   "treatment": {
-    "kind": "bar",
+    "kind": "paired-comparison",
     "views": [
       {
-        "id": "seats",
-        "label": "Senate seats",
-        "unit": "seats",
-        "baseline": 0,
-        "max": 50,
-        "note": "Allocated seats for each group, not current officeholders. The People view uses a separate resident scale.",
-        "values": [
-          {
-            "label": "California",
-            "value": 2
-          },
-          {
-            "label": "21 states combined",
-            "value": 42
-          }
-        ]
-      },
-      {
         "id": "people",
-        "label": "People",
+        "label": "Resident population",
         "unit": "residents",
         "baseline": 0,
         "max": 40000000,
@@ -67,7 +49,48 @@
             "label": "21 states combined",
             "value": 37174921
           }
-        ]
+        ],
+        "display": "bars"
+      },
+      {
+        "id": "seats",
+        "label": "Senate seats",
+        "unit": "seats",
+        "baseline": 0,
+        "max": 42,
+        "note": "One chair represents one allocated Senate seat, not a current officeholder. Counts: 2 for California; 42 for the 21-state group.",
+        "values": [
+          {
+            "label": "California",
+            "value": 2
+          },
+          {
+            "label": "21 states combined",
+            "value": 42
+          }
+        ],
+        "display": "objects",
+        "object": "seat"
+      }
+    ],
+    "transition": "Nearly the same population. A very different number of seats."
+  },
+  "guess": {
+    "choices": [
+      {
+        "id": "five",
+        "label": "5 states",
+        "feedback": "Further than five: the 21 least-populous states fit below California’s 2020 resident total."
+      },
+      {
+        "id": "fifteen",
+        "label": "15 states",
+        "feedback": "More than fifteen: it takes the 21 least-populous states to get just below California’s 2020 resident total."
+      },
+      {
+        "id": "twenty-one",
+        "label": "21 states",
+        "feedback": "You got the population comparison. Now look at the seats those states are allocated."
       }
     ]
   }
