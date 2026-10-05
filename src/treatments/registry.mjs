@@ -47,7 +47,10 @@ function chart(entry, context) {
     const description=esc(v.values.map(d=>`${d.label}: ${number(d.value)} ${v.unit}`).join("; "));
     let graphic;
     if(t.kind==='bar') graphic=`<div class="data-bars" role="img" aria-label="${description}">${v.values.map(d=>`<div class="data-row"><div><span>${esc(d.label)}</span><strong>${number(d.value)}</strong></div><div class="data-track"><span style="--portion:${d.value/v.max}"></span></div></div>`).join('')}</div>`;
-    else graphic=`<svg class="data-line" viewBox="0 0 600 250" role="img" aria-label="${description}"><path d="M40 30V210H540" fill="none" stroke="currentColor"/><polyline points="${linePoints(v.values,v.max)}" fill="none" stroke="var(--display)" stroke-width="4"/>${v.values.map((d,i)=>{const [x,y]=linePoints(v.values,v.max).split(' ')[i].split(',');return `<circle cx="${x}" cy="${y}" r="5" fill="var(--display)"/><text x="${x}" y="235" text-anchor="middle">${esc(d.label)}</text>`;}).join('')}<text x="35" y="214" text-anchor="end">0</text><text x="40" y="20">${number(v.max)} ${esc(v.unit)}</text></svg>`;
+    else {
+      const points=linePoints(v.values,v.max),coordinates=points.split(' ');
+      graphic=`<svg class="data-line" viewBox="0 0 600 250" role="img" aria-label="${description}"><path d="M40 30V210H540" fill="none" stroke="currentColor"/><polyline points="${points}" fill="none" stroke="var(--display)" stroke-width="4"/>${v.values.map((d,i)=>{const [x,y]=coordinates[i].split(',');return `<circle cx="${x}" cy="${y}" r="5" fill="var(--display)"/><text x="${x}" y="235" text-anchor="middle">${esc(d.label)}</text>`;}).join('')}<text x="35" y="214" text-anchor="end">0</text><text x="40" y="20">${number(v.max)} ${esc(v.unit)}</text></svg>`;
+    }
     return `<div id="${id}-view-${v.id}" class="data-view" ${index?'hidden':''}><p class="data-unit">${esc(v.label)} · ${esc(v.unit)}</p>${graphic}<p class="data-axis">Scale: 0–${number(v.max)} ${esc(v.unit)}. ${esc(v.note)}</p></div>`;
   }).join('');
   const controls=t.views.length>1 ? `<div class="data-controls" role="group" aria-label="Choose comparison" hidden>${t.views.map((v,i)=>`<button type="button" data-view="${id}-view-${v.id}" aria-pressed="${i===0}">${esc(v.label)}</button>`).join('')}</div>` : '';

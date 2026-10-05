@@ -5,7 +5,6 @@ import { checkAssets, copyAssets, sceneHead, assetDigests } from './assets.mjs';
 import {shareCopy,validatePublicOrigin} from './share-copy.mjs';
 import {loadReleaseState,createReviewDesk,reviewIndex,verifyWorkingRevision,releaseReadiness} from './review-packets.mjs';
 import {renderShareImage} from './share-images.mjs';
-const description='Unexpected discoveries, interactive comparisons, and sourced numbers about the world.';
 function metadata({title,description,canonical,image,alt,drafts=false}) {
   return `<title>${esc(title)} | weird.stats</title><meta name="description" content="${esc(description)}"><link rel="canonical" href="${esc(canonical)}"><meta property="og:type" content="website"><meta property="og:site_name" content="weird.stats"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${esc(canonical)}">${image?`<meta property="og:image" content="${esc(image)}"><meta property="og:image:type" content="image/png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${esc(alt)}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${esc(image)}"><meta name="twitter:image:alt" content="${esc(alt)}">`:''}${drafts?'<meta name="robots" content="noindex,nofollow">':''}`;
 }

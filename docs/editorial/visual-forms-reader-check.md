@@ -6,7 +6,7 @@ Prepared October 4, 2026. **Not run. No independent responses collected.** This 
 
 The creator recruits three to five people who have not seen these discoveries, the prototype, or its answers. Use a separate group from both the chip visual check and the plain-text check. Do not send this moderator document to participants. Keep previews local; remote access requires a separately authorized way to share the review build.
 
-First finish and inspect the paired-comparison study and its individual discovery page. Freeze the exact source revision and record it below. Do not mix changed prompts or designs within a round. Run the pending chip version 2 check separately on the local published edition; it must not expose this cohort to the Senate draft before this check.
+First finish and inspect the paired-comparison study and its individual discovery page. Freeze the exact source revision and record it below. Do not mix changed prompts or designs within a round. Run the pending chip version 2 check separately on its exact local proposal preview with a different cohort; no member of this cohort may have seen the Senate draft through that check.
 
 Use the Senate discovery page as the arrival experience. Test copper's penny pile and the painting's physical-scale sequence in the same session, recording each separately. These are prototypes for three different forms; success on one does not approve another. Alternate copper/painting order across participants after the arrival task. Every participant must be free to stop; showing a later scene at the moderator's request is prompted exposure, not voluntary continuation.
 

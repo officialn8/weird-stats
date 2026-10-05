@@ -13,3 +13,5 @@ Checked October 4, 2026 for the approval migration. These are source declaration
 | `mule.webp` | The existing hosted footer and prototype identify a generated illustration. Preserve that declaration; do not relabel it documentary photography or claim a third-party stock license. |
 
 New incorporated assets and reused datasets need their own declared basis, source, attribution and file identity before release. An ordinary outbound research citation does not itself incorporate the linked paper or dataset into the site.
+
+For the private Senate comparison, the Census Bureau's [public-use and citation statement](https://www.census.gov/about/policies/citation.html), checked the same day, explicitly addresses reuse and replication. It asks users producing their own estimates to credit Census for the original data and makes their analysis their own responsibility. Retain the exact Table E reference and identify the 21-state sum as this project's calculation. This source declaration does not approve the draft or independently verify its arithmetic.

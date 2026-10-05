@@ -1,9 +1,10 @@
-import {createHash, randomUUID} from 'node:crypto';
-import {mkdir, readFile, readdir, writeFile, rename, rm, open} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {mkdir, readFile, readdir, writeFile, rm, open} from 'node:fs/promises';
 import {resolve, join} from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 import {root, validate} from './content.mjs';
+import {readJSON,atomicWrite} from './editorial-io.mjs';
 
 export const defaultLimits={investigationsPerRun:10,promotionsPerRun:2,unfinishedPackets:5};
 const idPattern=/^[a-z][a-z0-9-]*$/;
@@ -27,9 +28,8 @@ export function assertDraftOnly(value,path='input') {
   assertDraftOnly(item,`${path}.${key}`);
  }
 }
-async function readJSON(path) {try{return JSON.parse(await readFile(path,'utf8'));}catch(error){if(error.code==='ENOENT')return null;throw error;}}
 async function jsonFiles(directory) {try{return (await readdir(directory)).filter(f=>f.endsWith('.json')).sort();}catch(error){if(error.code==='ENOENT')return [];throw error;}}
-async function atomic(path,value) {await mkdir(resolve(path,'..'),{recursive:true});const temp=path+'.'+randomUUID()+'.tmp';try{await writeFile(temp,JSON.stringify(value,null,2)+'\n',{flag:'wx'});await rename(temp,path);}finally{await rm(temp,{force:true});}}
+const atomic=(path,value)=>atomicWrite(path,()=>JSON.stringify(value,null,2)+'\n');
 function revisioned(value){return {...value,revision:digest(value)};}
 function checkId(id){assert(typeof id==='string'&&idPattern.test(id),'Use a stable lowercase letter/digit/hyphen ID');return id;}
 function checkCandidate(input) {

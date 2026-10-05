@@ -1,6 +1,6 @@
 # weird.stats
 
-A scrolling collection of wonderfully unnecessary discoveries. Orange, tactile, and curious, with optional sound and accessible reveals.
+A scrolling collection of unexpected discoveries. Orange, tactile, and curious, with optional sound and accessible reveals.
 
 [Hosted site](https://weird-stats.vercel.app) · [Private GitHub repository](https://github.com/officialn8/weird-stats) · [Vercel project](https://vercel.com/nathaniels-projects-cc0e35b9/weird-stats)
 
@@ -21,11 +21,15 @@ Open http://localhost:63014 for the published edition, or run `npm run dev:revie
 - `src/shell.html`: shared page layout.
 - `src/exhibits/`: the four original custom interactive compositions.
 - `public/`: shared CSS, browser behavior, and local assets.
-- `scripts/content.mjs`: validation, publication selection, and reusable reveal/bar/line renderers.
+- `src/treatments/`: reusable visual treatments, including a paired comparison that reveals two different measures together.
+- `scripts/content.mjs`: validation, revision selection, and rendering shared by the collection and individual discovery pages.
+- `/discoveries/<id>/`: generated individual pages with question-led social preview images. The collection remains a continuous scrolling experience.
 - `dist/`: generated published site. `review-dist/`: generated local editorial edition. Neither is committed.
 - `docs/`: editorial workflow, evidence, reader responses, design history, and hosting notes.
 
 See [the content system](docs/content-system.md) for adding entries, and [the daily workflow](docs/editorial/daily-workflow.md) for the 9 a.m. Central draft/review cadence. The user reviews new entries before publication.
+
+The [product roadmap](docs/plans/2026-10-04-2200-feat-discovery-product-roadmap-plan.md) is being implemented in stages. The [visual reader check](docs/editorial/visual-forms-reader-check.md) is prepared but has no independent results yet. Further visual-form expansion waits for those results. The drafting desk now saves bounded, resumable candidate investigations; seven actual research runs and a later seven-edition Spread rehearsal remain evidence gates, not completed milestones.
 
 ```sh
 npm run content:new -- a-new-fact bar

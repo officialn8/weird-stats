@@ -1,19 +1,19 @@
 import assert from 'node:assert/strict';
-import {createHash,randomUUID} from 'node:crypto';
-import {readFile,writeFile,readdir,mkdir,rename,rm,open} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {readFile,readdir,mkdir,rm,open} from 'node:fs/promises';
 import {join,resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {root,validate,contentDigest,fragmentEditorialContent,selectRelease,esc} from './content.mjs';
 import {createDesk} from './candidates.mjs';
 import {shareCopy} from './share-copy.mjs';
 import {entryAssets} from './assets.mjs';
+import {readJSON as json,atomicWrite} from './editorial-io.mjs';
 const hash=v=>createHash('sha256').update(typeof v==='string'||Buffer.isBuffer(v)?v:JSON.stringify(v)).digest('hex');
 const text=(v,label)=>assert(typeof v==='string'&&v.trim(),`${label} required`);
 const id=v=>{assert(/^[a-z][a-z0-9-]*$/.test(v),'Invalid ID');return v;};
 const digestId=v=>{assert(/^[a-f0-9]{64}$/.test(v),'Invalid digest');return v;};
-async function json(path){try{return JSON.parse(await readFile(path,'utf8'));}catch(e){if(e.code==='ENOENT')return null;throw e;}}
 async function rows(path){try{return await Promise.all((await readdir(path)).filter(f=>f.endsWith('.json')).sort().map(f=>json(join(path,f))));}catch(e){if(e.code==='ENOENT')return [];throw e;}}
-async function atomic(path,value){await mkdir(resolve(path,'..'),{recursive:true});const temp=path+'.'+randomUUID()+'.tmp';try{await writeFile(temp,typeof value==='string'?value:JSON.stringify(value,null,2)+'\n',{flag:'wx'});await rename(temp,path);}finally{await rm(temp,{force:true});}}
+const atomic=(path,value)=>atomicWrite(path,()=>typeof value==='string'?value:JSON.stringify(value,null,2)+'\n');
 function humanInput(human){text(human?.by,'Actual human identity');text(human?.inputReference,'Actual human input reference');text(human?.note,'Human decision note');assert(/^\d{4}-\d{2}-\d{2}T.*(?:Z|[+-]\d{2}:\d{2})$/.test(human?.at??'')&&Number.isFinite(Date.parse(human.at)),'Human decision timestamp required');}
 export function releaseReadiness(entry){
  const gaps=[];const rights=(value,label)=>{if(!value||typeof value!=='object'||!value.basis?.trim()||/unknown|pending|unverified/i.test(value.basis)||!value.source?.trim()||!value.attribution?.trim())gaps.push(`${label}: declared rights basis, source and attribution required`);};
