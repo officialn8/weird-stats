@@ -1,8 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 import {shareSVG,shareLayout,renderShareImage,shareArtwork,collectionShareSVG,renderCollectionShareImage} from '../scripts/share-images.mjs';
-import {collectionCopy,collectionImagePath} from '../scripts/collection-copy.mjs';
+import {collectionCopy,collectionImagePath,approvedCollectionImageSha256} from '../scripts/collection-copy.mjs';
 import {shareCopy} from '../scripts/share-copy.mjs';
 import {loadEntries,esc} from '../scripts/content.mjs';
 import {publishedFixture,reviewFixture} from './fixtures/entries.mjs';
@@ -84,6 +85,12 @@ test('collection share PNG is 1200×630, deterministic, and distinct from entry 
  assert(png.equals(again),'rendering twice yields identical bytes');
  assert(!png.equals(await renderShareImage(publishedFixture())));
  assert.equal(collectionImagePath(),'social/home-v'+collectionCopy.version+'.png');assert(!collectionImagePath().startsWith('share/'));
+});
+// CI renders on Linux like the deploy builder, so platform drift in the approved card fails here before release.
+test('the collection card renders byte-for-byte as the approved version-1 PNG',()=>{
+ assert.equal(collectionCopy.version,1,'a new version needs its own approval record and approved hash');
+ assert.match(approvedCollectionImageSha256,/^[0-9a-f]{64}$/);
+ assert.equal(createHash('sha256').update(renderCollectionShareImage()).digest('hex'),approvedCollectionImageSha256);
 });
 test('collection copy that would overflow the card throws instead of clipping',()=>{
  assert.throws(()=>collectionShareSVG({...collectionCopy,headline:'Wonderfully unnecessary discoveries, '.repeat(3).trim()}),/Collection headline does not fit/);

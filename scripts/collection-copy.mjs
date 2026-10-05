@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-// Preview copy for the collection (home page) link card. DRAFT until Nate approves it.
+// Preview copy for the collection (home page) link card. Version 1 was approved by Nate on
+// 2026-10-05 (see docs/editorial/2026-10-05-home-preview-approval.md).
 // Kept apart from share-copy.mjs, whose defaults feed approved entry digests. It names no
 // discovery: the home preview is a brand card, not the newest discovery's question.
 // Changing any string here or the art means a new version (new filename) and a new approval
@@ -13,6 +14,8 @@ export const collectionCopy=Object.freeze({
   footer:'Open the collection.',
   alt:'weird.stats: Wonderfully unnecessary discoveries. A collection for the incurably curious.'
 });
+// SHA-256 of the full-size version-1 PNG Nate approved, as recorded in the approval record above.
+export const approvedCollectionImageSha256='127c519365b41381d2a883c108d5008c6c5c19f818657d9f77ef1df7dd5085f8';
 const limits={title:120,description:300,headline:120,subline:120,footer:60,alt:420};
 export function validateCollectionCopy(copy=collectionCopy) {
   assert(copy&&typeof copy==='object','Invalid collection copy');
