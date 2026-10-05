@@ -4,12 +4,6 @@
   "topic": "art",
   "status": "published",
   "order": 40,
-  "publishedAt": "2026-10-04T20:45:36-05:00",
-  "approval": {
-    "by": "Existing hosted edition carried forward",
-    "at": "2026-10-04",
-    "digest": "df22d5ce662142915793cb6cba67eeb1335b40a355393391b8b9822c873ecbf8"
-  },
   "evidence": {
     "kind": "calculation",
     "scope": "Rijksmuseum photograph resolution. Diagrams, not microscopic image tiles.",
@@ -28,10 +22,6 @@
     "kind": "custom",
     "template": "painting"
   },
-  "share": {
-    "question": "One pixel. 0.005 mm of paint.",
-    "description": "A small question. A surprising discovery. Take a look at weird.stats."
-  },
   "assets": [
     {
       "path": "assets/nightwatch.webp",
@@ -41,5 +31,13 @@
         "attribution": "Rembrandt, The Night Watch; Rijksmuseum / Wikimedia Commons overview reproduction"
       }
     }
-  ]
+  ],
+  "publishedAt": "2026-10-05T05:54:45.436Z",
+  "approval": {
+    "by": "Nate",
+    "at": "2026-10-05",
+    "digest": "55d41d5e10934ffd434e3e054746451a950792f2d3fda9530f469a0addc196aa",
+    "inputReference": "docs/editorial/2026-10-05-launch-decision.md",
+    "note": "Human instruction in this chat: \"Approve the four proposals and deploy, so the public sees the new chip, the copper, the painting zoom and eventually the Senate chairs.\" Applies to the four pending proposals listed in the launch decision record."
+  }
 }

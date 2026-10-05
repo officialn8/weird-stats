@@ -5,6 +5,7 @@ import { checkAssets, copyAssets, sceneHead, assetDigests } from './assets.mjs';
 import {shareCopy,validatePublicOrigin} from './share-copy.mjs';
 import {loadReleaseState,createReviewDesk,reviewIndex,verifyWorkingRevision,releaseReadiness} from './review-packets.mjs';
 import {renderShareImage} from './share-images.mjs';
+import {analyticsHead,loadAnalyticsConfig,copyAnalyticsSDK} from './analytics.mjs';
 function metadata({title,description,canonical,image,alt,drafts=false}) {
   return `<title>${esc(title)} | weird.stats</title><meta name="description" content="${esc(description)}"><link rel="canonical" href="${esc(canonical)}"><meta property="og:type" content="website"><meta property="og:site_name" content="weird.stats"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${esc(canonical)}">${image?`<meta property="og:image" content="${esc(image)}"><meta property="og:image:type" content="image/png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${esc(alt)}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${esc(image)}"><meta name="twitter:image:alt" content="${esc(alt)}">`:''}${drafts?'<meta name="robots" content="noindex,nofollow">':''}`;
 }
@@ -17,7 +18,7 @@ function fill(shell,values) {
 function noticeHTML(title,reason) {
   return `<section class="discovery-notice" id="notice"><h1>${esc(title)}</h1><p>${esc(reason)}</p></section>`;
 }
-export async function build({drafts=false,now=new Date(),records,manifest,revisions=[],reviewReport,publicOrigin,output=new URL(drafts?'review-dist/':'dist/',root)}={}) {
+export async function build({drafts=false,now=new Date(),records,manifest,revisions=[],reviewReport,publicOrigin,analytics,output=new URL(drafts?'review-dist/':'dist/',root)}={}) {
   // Inject records, release snapshots and an output directory for isolated tests.
   // Real builds require a verified disk manifest; injected fixture records remain isolated.
   const production=records===undefined;
@@ -31,6 +32,8 @@ export async function build({drafts=false,now=new Date(),records,manifest,revisi
   const proposalFragments=new Map();
   for(const entryId of new Set(previewPackets.map(p=>p.id))){const eligible=previewPackets.filter(p=>p.id===entryId&&p.state==='pending'&&!p.conflict);if(eligible.length===1){const packet=eligible[0],index=selection.entries.findIndex(e=>e.id===entryId);if(index>=0)selection.entries[index]=packet.entry;else selection.entries.push(packet.entry);selection.revisions.delete(entryId);proposalFragments.set(entryId,packet.fragment);}}
   const {entries,withdrawals}=selection;
+  const analyticsConfig=analytics??(production?await loadAnalyticsConfig():null);
+  const tracking=eligible=>analyticsHead(analyticsConfig,{drafts,entries:eligible,publicOrigin});
   if(!entries.length && !withdrawals.length) throw new Error('No publishable entries');
   const context=createPageContext({publicOrigin});
   const releasedFragments=new Map();
@@ -71,10 +74,13 @@ export async function build({drafts=false,now=new Date(),records,manifest,revisi
     packetPages.set(path,{page,entry,image:await renderShareImage(entry)});
   }
   // Validate every selected page dependency and render images before touching prior output.
+  html=html.replace('</head>',tracking(entries)+'</head>');
+  for(const entry of entries)pages.set(entry.id,pages.get(entry.id).replace('</head>',tracking([entry])+'</head>'));
   const assets=await checkAssets([...entries,...previewPackets.map(p=>p.entry)],[html,...pages.values(),...Array.from(packetPages.values(),p=>p.page),notFound].join('\n'));
   await rm(output,{recursive:true,force:true});
   await mkdir(output,{recursive:true});
   await copyAssets(assets,output);
+  if(tracking(entries))await copyAnalyticsSDK(output);
   await writeFile(new URL('index.html',output),html);
   if(review)await writeFile(new URL('review.html',output),reviewIndex(review));
   await writeFile(new URL('404.html',output),notFound);

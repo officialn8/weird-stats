@@ -11,6 +11,8 @@ deepened: 2026-10-04
 
 # A Growing World of Discoveries - Plan
 
+**October 5 direction:** follow the [launch decision](../editorial/2026-10-05-launch-decision.md) for the next phase. The creator approved the four proposals and public deployment, wants about six strong entries before audience promotion, and authorized cookieless launch measurement with a predeclared investment threshold. Preparing the sixth entry no longer waits on fresh-reader recruitment. U5's broader form expansion and U8's daily edition remain unproven future work. This plan's earlier pending-approval and private-Senate descriptions are historical.
+
 ## Goal Capsule
 
 - **Objective:** Give readers a growing collection of surprising, visually memorable discoveries they want to explore and share, with an editorial workload one person can sustain.

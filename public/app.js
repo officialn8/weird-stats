@@ -46,6 +46,7 @@ function reveal(value, trigger) {
   question.hidden = value;
   answer.hidden = !value;
   story.classList.toggle('revealed', value);
+  if(value)window.WeirdAnalytics?.reveal('copper');
   (value ? $('#copper-result') : lastChoice).focus({preventScroll:true});
   if (value && story.getBoundingClientRect().top < 0) story.scrollIntoView({block:'start', behavior:reduced() ? 'instant' : 'smooth'});
 }

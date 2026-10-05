@@ -1,11 +1,13 @@
 {
   "version": 1,
-  "releasedAt": "2026-10-04T20:45:36-05:00",
-  "authorizedBy": "Existing hosted edition carried forward; evidence in docs/editorial/release-baseline.md",
+  "releasedAt": "2026-10-05T05:54:45.436Z",
+  "authorizedBy": "Nate",
+  "inputReference": "docs/editorial/2026-10-05-launch-decision.md",
+  "note": "Human instruction in this chat: \"Approve the four proposals and deploy, so the public sees the new chip, the copper, the painting zoom and eventually the Senate chairs.\" Applies to the four pending proposals listed in the launch decision record.",
   "entries": [
     {
       "id": "crunch",
-      "digest": "58cb3b72be37426fbb7a4a129d7acb0fc1bd9f663093296ec1cb1ba35bb10dc8"
+      "digest": "4d03cf959695708297988c41a83f22d491ae51dde62eb0361483b423806eefde"
     },
     {
       "id": "copper",
@@ -13,16 +15,16 @@
     },
     {
       "id": "mail",
-      "digest": "20cb521eda34769f881895c2bfe14ac6755ec93995efa12471aea9e99ef81405"
+      "digest": "24caf22f4be1773d2fb2d773aeaef407740ae5a89e25488e48c628aee2ede421"
     },
     {
       "id": "painting",
-      "digest": "df22d5ce662142915793cb6cba67eeb1335b40a355393391b8b9822c873ecbf8"
+      "digest": "55d41d5e10934ffd434e3e054746451a950792f2d3fda9530f469a0addc196aa"
+    },
+    {
+      "id": "same-two-seats",
+      "digest": "af60e186be0cac71a5acf5a2ceab828c0cef027708dcafbb74fc5150b90f50d0"
     }
   ],
-  "withdrawals": [],
-  "presentation": {
-    "status": "unreleased",
-    "note": "Individual routes, share metadata/images, and changed layout/runtime are a local release candidate requiring separate release authorization. Share titles below reuse original visible headings, not newly approved question copy."
-  }
+  "withdrawals": []
 }

@@ -2,7 +2,7 @@
   "id": "same-two-seats",
   "title": "One state. How many states’ worth of people?",
   "topic": "politics",
-  "status": "review",
+  "status": "published",
   "order": 15,
   "question": "How many states combined have fewer people than California?",
   "answer": "The 21 least-populous states, combined. They get 42 Senate seats. California gets 2.",
@@ -104,5 +104,13 @@
         "attribution": "U.S. Census Bureau, 2020 Census resident population. Ranking, sum and comparison by weird.stats; conclusions are not Census conclusions."
       }
     }
-  ]
+  ],
+  "publishedAt": "2026-10-05T05:54:45.436Z",
+  "approval": {
+    "by": "Nate",
+    "at": "2026-10-05",
+    "digest": "af60e186be0cac71a5acf5a2ceab828c0cef027708dcafbb74fc5150b90f50d0",
+    "inputReference": "docs/editorial/2026-10-05-launch-decision.md",
+    "note": "Human instruction in this chat: \"Approve the four proposals and deploy, so the public sees the new chip, the copper, the painting zoom and eventually the Senate chairs.\" Applies to the four pending proposals listed in the launch decision record."
+  }
 }

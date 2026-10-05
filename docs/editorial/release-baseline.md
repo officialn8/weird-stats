@@ -1,5 +1,7 @@
 # Original release baseline
 
+**Historical baseline:** the updated five-entry edition was explicitly approved and deployed on October 5. See the [launch decision](2026-10-05-launch-decision.md) and [current hosting record](../hosting.md). The old copy and pending-approval descriptions below record the earlier migration, not today's live state.
+
 Verified October 4, 2026 during roadmap implementation. This records an existing release; it is not a new editorial approval or deployment authorization.
 
 - Vercel deployment: `dpl_AoBGxucc2gA6qZfeGf18ikTc7iaF`

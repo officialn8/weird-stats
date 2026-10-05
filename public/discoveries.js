@@ -26,7 +26,10 @@
     }
     // Native details preserves a complete keyboard/no-JS path. Guessing never opens it.
     const reveal=entry.querySelector('.discovery-reveal');
-    listen(reveal,'toggle',()=>entry.dispatchEvent(new CustomEvent('discoveryreveal',{detail:{open:reveal.open}})));
+    listen(reveal,'toggle',()=>{
+      entry.dispatchEvent(new CustomEvent('discoveryreveal',{detail:{open:reveal.open}}));
+      if(reveal.open)window.WeirdAnalytics?.reveal(entry.id);
+    });
     const cleanup=()=>{controller.abort();mounted.delete(entry);};
     mounted.set(entry,cleanup);return cleanup;
   }

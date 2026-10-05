@@ -138,6 +138,7 @@
     stop('You can listen to either version above whenever you like.');
     syncImpression();
     answer.hidden = false;
+    window.WeirdAnalytics?.reveal('crunch');
     revealButtons.forEach(button => button.setAttribute('aria-expanded', 'true'));
     section.querySelector('#crunch-result').focus({preventScroll:true});
     answer.scrollIntoView({block:'start', behavior:motionOff() ? 'instant' : 'smooth'});

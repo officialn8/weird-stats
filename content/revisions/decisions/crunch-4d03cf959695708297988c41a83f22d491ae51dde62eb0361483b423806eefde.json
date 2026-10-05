@@ -1,0 +1,12 @@
+{
+  "id": "crunch",
+  "packetId": "4d03cf959695708297988c41a83f22d491ae51dde62eb0361483b423806eefde",
+  "digest": "4d03cf959695708297988c41a83f22d491ae51dde62eb0361483b423806eefde",
+  "decision": "keep",
+  "human": {
+    "by": "Nate",
+    "at": "2026-10-05T05:54:45.436Z",
+    "inputReference": "docs/editorial/2026-10-05-launch-decision.md",
+    "note": "Human instruction in this chat: \"Approve the four proposals and deploy, so the public sees the new chip, the copper, the painting zoom and eventually the Senate chairs.\" Applies to the four pending proposals listed in the launch decision record."
+  }
+}

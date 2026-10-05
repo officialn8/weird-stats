@@ -1,0 +1,6 @@
+{
+  "enabled": false,
+  "projectToken": "",
+  "apiHost": "https://us.i.posthog.com",
+  "publicOrigin": "https://weird-stats.vercel.app"
+}

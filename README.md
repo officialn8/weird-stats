@@ -4,7 +4,7 @@ A scrolling collection of unexpected discoveries. Orange, tactile, and curious, 
 
 [Hosted site](https://weird-stats.vercel.app) · [Private GitHub repository](https://github.com/officialn8/weird-stats) · [Vercel project](https://vercel.com/nathaniels-projects-cc0e35b9/weird-stats)
 
-The current site contains chips and auditory perception, copper in coins, mule mail to Supai, and the scale of the Night Watch photograph. This is the first hosted version, not a settled launch lineup.
+The current public site contains five discoveries: chips and auditory perception, copper in coins, mule mail to Supai, the scale of the Night Watch photograph, and the California/21-state Senate comparison. The October 5 release includes the approved chip revision and individual share pages. Audience promotion waits for about six strong entries; see the [launch decision](docs/editorial/2026-10-05-launch-decision.md).
 
 ## Work on the site
 
@@ -42,7 +42,9 @@ npm run build
 
 Vercel uses the repository root, the Other framework preset, `npm run build`, and the `dist` output directory. `vercel.json` records these settings. No environment variables, database, paid integration, or runtime service is required.
 
-The GitHub workflow runs the build on pushes and pull requests. The initial direct-upload deployment is ready. Vercel assigned this first deployment to production automatically and gave it the `weird-stats.vercel.app` alias. Deployment protection remains enabled.
+The GitHub workflow runs tests and the build on pushes and pull requests. The October 5 release was manually deployed and promoted. The main alias is publicly accessible without login; generated deployment URLs may be protected. Check the exact URL rather than assuming protection from a project setting.
+
+Cookieless PostHog instrumentation is implemented but disabled pending confirmation of the dedicated project and an ingestion check. See [launch analytics](docs/launch-analytics.md). The public site does not currently load or send events to PostHog.
 
 **Git integration is pending approval:** Vercel is not yet authorized to access this private GitHub repository, so Git pushes do not currently deploy the site. Once connected, branch changes receive previews and the configured production branch supplies production deployments. Until then, deploy from the repository root with the Vercel CLI. Use `--target=preview` explicitly for previews. See [hosting setup](docs/hosting.md).
 

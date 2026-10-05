@@ -1,0 +1,12 @@
+{
+  "id": "mail",
+  "packetId": "24caf22f4be1773d2fb2d773aeaef407740ae5a89e25488e48c628aee2ede421",
+  "digest": "24caf22f4be1773d2fb2d773aeaef407740ae5a89e25488e48c628aee2ede421",
+  "decision": "keep",
+  "human": {
+    "by": "Nate",
+    "at": "2026-10-05T05:54:45.436Z",
+    "inputReference": "docs/editorial/2026-10-05-launch-decision.md",
+    "note": "Human instruction in this chat: \"Approve the four proposals and deploy, so the public sees the new chip, the copper, the painting zoom and eventually the Senate chairs.\" Applies to the four pending proposals listed in the launch decision record."
+  }
+}

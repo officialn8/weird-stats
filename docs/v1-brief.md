@@ -86,6 +86,8 @@ Advance when the experience is clear, several entries produce a memorable discov
 
 ## Next work
 
+**October 5 update:** the creator's [launch decision](editorial/2026-10-05-launch-decision.md) now sets the immediate order: deploy the five approved entries, prepare a strong sixth, verify cookieless measurement, then consider audience promotion. The protocols below remain available for private feedback, but recruitment is not a prerequisite to preparing that sixth entry. No independent reader evidence is implied by release approval.
+
 Daily publication preparation now proceeds alongside reader checks: review the political comparison draft, build a quality backlog, and expand treatment types when the discovery needs them. These are the immediate operational priorities. The earlier reader checks below remain useful evidence tasks, not a claim that development is complete.
 
 1. Run the [version 2 chip visual check](editorial/2026-10-04-chip-visual-check.md) with fresh readers who have not seen any chip answer. Observe the optional sound impression and direct reveal separately. The creator’s version 1 walkthrough remains historical evidence, not a blind response to this revision.

@@ -1,8 +1,8 @@
 <section class="crunch-story" id="crunch" aria-labelledby="crunch-title">
   <div class="crunch-opening">
     <div class="crunch-copy">
-      <h1 id="crunch-title">Could a volume knob make a potato chip <span>seem fresher?</span></h1>
-      <p>Listen to two versions of one crunch. Then see what happened in the experiment.</p>
+      <h1 id="crunch-title">Could your ears make a chip <span>seem fresher?</span></h1>
+      <p>One recording, two sound treatments. Listen if you like, then see what happened in the experiment.</p>
       <button class="round-link" id="crunch-reveal" data-crunch-reveal aria-expanded="false" aria-controls="crunch-answer">Reveal the discovery <span aria-hidden="true">↗</span></button>
       <p class="sound-optional">No sound? The answer works without it.</p>
     </div>
@@ -16,13 +16,23 @@
         <div class="crunch-listen"><button class="listen-button" data-crunch="a"><span class="listen-letter" aria-hidden="true">A</span><span class="listen-label">Listen A</span><span class="listen-symbol" aria-hidden="true">▶</span></button><button class="listen-button" data-crunch="b"><span class="listen-letter" aria-hidden="true">B</span><span class="listen-label">Listen B</span><span class="listen-symbol" aria-hidden="true">▶</span></button></div>
         <div class="crunch-volume"><label for="crunch-volume">Volume</label><input id="crunch-volume" type="range" min="0" max="100" step="5" value="35"><output for="crunch-volume" id="crunch-level">35%</output><button id="crunch-mute" class="text-button" aria-pressed="false">Mute</button></div>
         <p id="crunch-status" role="status">Sound only plays when you tap Listen.</p>
+        <fieldset class="crunch-prediction">
+          <legend>Which sounds fresher to you? <span>Optional</span></legend>
+          <div><button type="button" data-crunch-guess="A" aria-pressed="false">A</button><button type="button" data-crunch-guess="B" aria-pressed="false">B</button><button type="button" data-crunch-guess="No difference" aria-pressed="false">No difference</button></div>
+          <p id="crunch-guess-status" role="status">Choose an impression, or go straight to the reveal.</p>
+        </fieldset>
+        <button class="round-link crunch-reveal-after-listen" data-crunch-reveal aria-expanded="false" aria-controls="crunch-answer">Reveal the discovery <span aria-hidden="true">↗</span></button>
         <p class="crunch-demo-note" id="crunch-demo-note">An illustrative sound comparison. Listening alone does not recreate the experiment.</p>
       </div>
     </div>
   </div>
   <div class="crunch-answer" id="crunch-answer" hidden>
     <div class="crunch-result-top"><p class="crunch-verdict">Yes. Sound changed how fresh the chips seemed.</p><button id="crunch-reset" class="text-button">Back to the question ↺</button></div>
-    <div class="crunch-result-body"><div class="crunch-count"><p><strong>15</strong><span>of 20 people</span></p><div class="listener-marks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="crunch-explanation"><h2 id="crunch-result" tabindex="-1" aria-label="15 of 20 people thought the chips came from different packages">They thought the chips came from different packages.</h2><p class="crunch-punchline">They came from the same package.</p><p>Researchers changed the biting sounds people heard through headphones. With louder or enhanced high-frequency feedback, the chips seemed crisper and fresher.</p><p class="crunch-boundary">The 15-of-20 count came from informal questions after one small 2004 experiment.</p></div></div>
+    <p id="crunch-choice-feedback" class="crunch-choice-feedback" role="status" hidden></p>
+    <div class="crunch-result-body">
+      <div class="crunch-perception" aria-hidden="true"><span>The hidden ingredient?</span><strong>Sound.</strong></div>
+      <div class="crunch-explanation"><h2 id="crunch-result" tabindex="-1">Your ears help decide how fresh a chip seems.</h2><p>Researchers changed the biting sounds people heard through headphones. With louder or enhanced high-frequency feedback, the chips seemed crisper and fresher.</p><p class="crunch-boundary">In informal questions after this small 2004 experiment, 15 of 20 participants thought the chips came from different packages. They came from the same package. This is not a population estimate or a test of actual freshness.</p></div>
+    </div>
     <div class="crunch-takeaway"><p>The crunch is part of the experience.</p><p>In our comparison, A softens high frequencies and B emphasizes them. Both use the same recording. Your reaction may differ.</p></div>
     <a class="round-link" href="{{nextHref}}">Keep wandering <span aria-hidden="true">↓</span></a>
   </div>

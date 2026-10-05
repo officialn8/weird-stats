@@ -4,7 +4,7 @@ import { readFile, readdir, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { validate, selectEntries, renderEntry, reviewState, linePoints, csv } from '../scripts/content.mjs';
+import { validate, selectEntries, renderEntry, reviewState, linePoints, csv, createPageContext } from '../scripts/content.mjs';
 import { build } from '../scripts/build.mjs';
 import { reviewFixture, publishedFixture } from './fixtures/entries.mjs';
 const now=new Date('2020-06-01T00:00:00Z');
@@ -94,10 +94,13 @@ test('political evidence rules apply to plain reveals and custom scenes',()=>{
  }
 });
 test('existing custom scene copy and reveal contracts survive context adapters',async()=>{
- const expected={crunch:['Could a volume knob','id="crunch-answer" hidden','They came from the same package.'],copper:['Which one','class="copper-answer"','sixty pennies'],mail:['Supai','journey-score','replay-journey'],painting:['0.005','40,000','scale-journey']};
+ const expected={crunch:['id="crunch-title"','id="crunch-answer" hidden','id="crunch-reveal"'],copper:['id="copper-title"','class="copper-answer"','id="penny-pile"'],mail:['id="mail-title"','journey-score','replay-journey'],painting:['id="painting-title"','scale-panel','scale-journey']};
  for(const [id,markers] of Object.entries(expected)) {
   const html=await renderEntry({...publishedFixture(),id,treatment:{kind:'custom',template:id}},null,now);
   for(const marker of markers)assert(html.includes(marker),`${id}: ${marker}`);
+  const fragment='<section><h2>Fictional question?</h2><p>A fictional answer.</p></section>';
+  const fixture=await renderEntry({...publishedFixture(),id,treatment:{kind:'custom',template:id}},null,now,{...createPageContext(),fragment});
+  assert(fixture.includes(fragment),'The adapter must preserve the selected revision copy');
  }
 });
 test('owned assets exclude private media and scene preloads from unrelated pages',async t=>{

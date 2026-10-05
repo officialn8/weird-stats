@@ -1,0 +1,12 @@
+{
+  "id": "same-two-seats",
+  "packetId": "149afad07b37016b0c2bb0cfa48e9126bb1504d3ed6fbfe994d7c243f7163395",
+  "digest": "af60e186be0cac71a5acf5a2ceab828c0cef027708dcafbb74fc5150b90f50d0",
+  "decision": "keep",
+  "human": {
+    "by": "Nate",
+    "at": "2026-10-05T05:54:45.436Z",
+    "inputReference": "docs/editorial/2026-10-05-launch-decision.md",
+    "note": "Human instruction in this chat: \"Approve the four proposals and deploy, so the public sees the new chip, the copper, the painting zoom and eventually the Senate chairs.\" Applies to the four pending proposals listed in the launch decision record."
+  }
+}

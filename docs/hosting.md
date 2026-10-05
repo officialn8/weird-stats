@@ -2,6 +2,21 @@
 
 Set up October 4, 2026.
 
+## Current release — October 5
+
+Nate approved all four pending proposals and authorized deployment in the [launch decision](editorial/2026-10-05-launch-decision.md). The five-entry edition is live at https://weird-stats.vercel.app.
+
+- Deployment: `dpl_5pifowr2twQrgXFfuXVmW4Dezz1N`, target production, status Ready.
+- Immutable URL: https://weird-stats-f8ibh7wrn-nathaniels-projects-cc0e35b9.vercel.app.
+- Uploaded the working tree from `fix/editorial-reveal-review` based on `572a0a3`, including this turn's exact approval records, runtime changes, and disabled analytics configuration. Do not describe the preexisting commit alone as the deployed source.
+- Built with `--prod --skip-domain`, checked via authenticated `vercel curl`, then promoted to the main alias. No protection settings or Git repository access changed.
+- Anonymous checks: collection, five discovery pages, five 1200×630 PNGs, feed, and Senate CSV returned 200. `/review.html`, raw content JSON, and an unknown discovery returned the real 404 page.
+- The updated chip was exercised in the production browser; no console errors. The Senate's optional guess and keyboard reveal passed at 390px locally, with no horizontal overflow.
+- Four share PNGs match the Mac build byte for byte. The mule PNG differs in encoded bytes between hosted/local builds; the hosted image was inspected and correctly shows the new question and mule artwork. No social-platform cache/preview scrape has been performed.
+- All 76 tests and both builds passed. PostHog is implemented but disabled pending the project decision and actual ingestion verification. No audience promotion occurred.
+
+## Original setup
+
 - Workspace and repository root: `/Users/nate/weird.stats`.
 - GitHub: https://github.com/officialn8/weird-stats (private), branch `main`.
 - Vercel project: https://vercel.com/nathaniels-projects-cc0e35b9/weird-stats.

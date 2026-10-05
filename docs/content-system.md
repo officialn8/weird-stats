@@ -12,7 +12,7 @@ npm run content:status
 npm run dev:review
 ```
 
-The scaffolder refuses to overwrite existing files. Complete one JSON file in `content/entries/`. The authoritative validator and renderers live in `scripts/content.mjs`; `same-two-seats.json` is a complete review-stage example.
+The scaffolder refuses to overwrite existing files. Complete one JSON file in `content/entries/`. The authoritative validator and renderers live in `scripts/content.mjs`; `same-two-seats.json` is a complete published paired-comparison example.
 
 Common fields: stable `id`, `title`, `topic`, `status`, `order`, and `treatment`. Reviewable entries require evidence kind, scope, measurement period (`dataAsOf`), source-check date (`checkedAt`), review due date, and primary source references. Reusable entries also require question, answer, explanation, qualification, and why the discovery matters.
 
@@ -21,7 +21,7 @@ Common fields: stable `id`, `title`, `topic`, `status`, `order`, and `treatment`
 - `published`: records an approved revision and its approval timestamp; public inclusion requires a separate due release-manifest pin.
 - `retired`: excluded from both editions; history remains in Git.
 
-Changing status is an editorial action, not an automatic conclusion of validation. Never fabricate an approval. The four existing entries retain their original “Existing hosted edition carried forward” record and the verified October 4, 20:45:36 Central release time; this is not new reader validation. Later chip copy and new mail/painting share questions remain proposals.
+Changing status is an editorial action, not an automatic conclusion of validation. Never fabricate an approval. Original snapshots retain their carried-forward approval and October 4 release provenance. On October 5, Nate explicitly approved the four pending proposals and authorized deployment: new chip copy, new mail/painting share questions, and the Senate comparison. Copper retains its previous approval. See the [launch decision](editorial/2026-10-05-launch-decision.md) and exact manifest pins. These approvals are not independent reader validation.
 
 ## Treatments
 
