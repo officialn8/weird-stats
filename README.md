@@ -2,6 +2,8 @@
 
 A scrolling collection of wonderfully unnecessary discoveries. Orange, tactile, and curious, with optional sound and accessible reveals.
 
+[Hosted site](https://weird-stats.vercel.app) · [Private GitHub repository](https://github.com/officialn8/weird-stats) · [Vercel project](https://vercel.com/nathaniels-projects-cc0e35b9/weird-stats)
+
 The current site contains chips and auditory perception, copper in coins, mule mail to Supai, and the scale of the Night Watch photograph. This is the first hosted version, not a settled launch lineup.
 
 ## Work on the site
@@ -26,7 +28,9 @@ Open http://localhost:63014. Edit `public/`; no framework or build dependency is
 
 Vercel uses the repository root, the Other framework preset, `npm run build`, and the `dist` output directory. `vercel.json` records these settings. No environment variables, database, paid integration, or runtime service is required.
 
-The GitHub workflow runs the build on pushes and pull requests. When Vercel's Git integration is connected, branch changes receive previews and the configured production branch supplies production deployments. Keep preview protection enabled.
+The GitHub workflow runs the build on pushes and pull requests. The initial direct-upload deployment is ready. Vercel assigned this first deployment to production automatically and gave it the `weird-stats.vercel.app` alias. Deployment protection remains enabled.
+
+**Git integration is pending approval:** Vercel is not yet authorized to access this private GitHub repository, so Git pushes do not currently deploy the site. Once connected, branch changes receive previews and the configured production branch supplies production deployments. Until then, deploy from the repository root with the Vercel CLI. Use `--target=preview` explicitly for previews. See [hosting setup](docs/hosting.md).
 
 Research documents and historical artifacts are not included in `dist/` and are not served by the site. Asset URLs are not fingerprinted, so their cache lifetime is short and must revalidate after expiry.
 
