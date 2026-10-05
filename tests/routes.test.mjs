@@ -55,21 +55,50 @@ test('invalid origins and missing/non-string IDs fail before destroying output',
  const out=await output(t);
  for(const publicOrigin of ['http://example.org','https://user:pass@example.org','https://example.org/path','https://example.org/?key=x','https://example.org/#hash','not a URL'])await assert.rejects(build({now,records:[publishedFixture()],output:out,publicOrigin}),/public origin/i);
 });
-test('share is keyboard-native and preserves canonical URLs through native, clipboard and selectable fallback paths',async()=>{
+// share.js is a deferred classic script; analytics.js, a module, runs after it on the same page.
+const canonical='https://example.org/discoveries/fictional/';
+class ShareNode {constructor(){this.hidden=true;this.listeners={};this.value='';}addEventListener(type,fn){this.listeners[type]=fn;}focus(){this.focused=true;}select(){this.selected=true;}getAttribute(name){return name==='href'?this.href??null:null;}setAttribute(name,value){if(name==='href')this.href=String(value);}}
+const shareSource=readFile(new URL('../public/share.js',import.meta.url),'utf8');
+async function loadShare(navigator,page=canonical){
  const {runInNewContext}=await import('node:vm');
- const source=await readFile(new URL('../public/share.js',import.meta.url),'utf8');
- class Element {constructor(){this.hidden=true;this.listeners={};this.value='';}addEventListener(type,fn){this.listeners[type]=fn;}focus(){this.focused=true;}select(){this.selected=true;}}
- async function run(navigator){
-  const nodes=Object.fromEntries(['[data-share-button]','[data-share-link]','[data-share-fallback]','input','[role="status"]'].map(key=>[key,new Element()]));
-  const control={dataset:{shareUrl:'https://example.org/discoveries/fictional/',shareTitle:'A question?'},querySelector:key=>nodes[key]};
-  runInNewContext(source,{document:{querySelectorAll:()=>[control]},navigator});
-  await nodes['[data-share-button]'].listeners.click();return nodes;
- }
- let received;let nodes=await run({share:async payload=>received=payload});assert.equal(received.url,'https://example.org/discoveries/fictional/');assert(!received.url.includes('#'));assert.equal(nodes['[role="status"]'].textContent,'Share sheet opened.');
- nodes=await run({clipboard:{writeText:async url=>received=url}});assert.equal(received,'https://example.org/discoveries/fictional/');assert.equal(nodes['[role="status"]'].textContent,'Link copied');
- nodes=await run({share:async()=>{throw new Error('Unavailable');},clipboard:{writeText:async()=>{throw new Error('Denied');}}});assert.equal(nodes['[data-share-fallback]'].hidden,false);assert(nodes.input.focused&&nodes.input.selected);assert.equal(nodes.input.value,'https://example.org/discoveries/fictional/');assert.equal(nodes['[data-share-button]'].disabled,false);
+ const nodes=Object.fromEntries(['[data-share-button]','[data-share-link]','[data-share-fallback]','input','[role="status"]'].map(key=>[key,new ShareNode()]));
+ nodes['[data-share-link]'].href='/discoveries/fictional/';
+ const control={dataset:{shareUrl:canonical,shareTitle:'A question?'},querySelector:key=>nodes[key]};
+ const document={title:'A question?',body:{prepend(){}},createElement:()=>({}),querySelectorAll:selector=>selector==='a[href]'?[nodes['[data-share-link]']]:[control]};
+ const location=new URL(page);
+ runInNewContext(await shareSource,{document,navigator,location});
+ return {nodes,control,document,location};
+}
+const clickShare=async({nodes})=>{await nodes['[data-share-button]'].listeners.click();return nodes;};
+test('share is keyboard-native and preserves canonical URLs through native, clipboard and selectable fallback paths',async()=>{
+ const run=async(navigator,page)=>clickShare(await loadShare(navigator,page));
+ let received;let nodes=await run({share:async payload=>received=payload});assert.equal(received.url,canonical);assert(!received.url.includes('#'));assert.equal(nodes['[role="status"]'].textContent,'Share sheet opened.');
+ nodes=await run({clipboard:{writeText:async url=>received=url}});assert.equal(received,canonical);assert.equal(nodes['[role="status"]'].textContent,'Link copied');
+ nodes=await run({share:async()=>{throw new Error('Unavailable');},clipboard:{writeText:async()=>{throw new Error('Denied');}}});assert.equal(nodes['[data-share-fallback]'].hidden,false);assert(nodes.input.focused&&nodes.input.selected);assert.equal(nodes.input.value,canonical);assert.equal(nodes['[data-share-button]'].disabled,false);
  let copied=false;nodes=await run({share:async()=>{throw Object.assign(new Error('Canceled'),{name:'AbortError'});},clipboard:{writeText:async()=>copied=true}});assert.equal(copied,false);assert.equal(nodes['[data-share-fallback]'].hidden,true);
+ // Only the canonical origin swaps in the canonical permalink; local and preview origins keep the relative link, so navigation stays there.
+ for(const [page,permalink] of [[canonical,canonical],['http://localhost:63014/','/discoveries/fictional/'],['https://weird-stats-git-fix.vercel.app/discoveries/fictional/','/discoveries/fictional/']]){
+  const shared=[];
+  nodes=await run({share:async payload=>shared.push(payload.url)},page);assert.equal(nodes['[data-share-link]'].href,permalink,page);
+  await run({clipboard:{writeText:async url=>shared.push(url)}},page);
+  shared.push((await run({},page)).input.value);
+  assert.deepEqual(shared,[canonical,canonical,canonical],page);
+ }
  const html=await renderEntry(publishedFixture());assert(html.includes('<button class="text-button" type="button" data-share-button hidden>'));assert(html.indexOf('data-share-url')>html.indexOf('</details><div class="discovery-evidence">'));
+});
+test('QA marking follows the permalink but never reaches shared values',async()=>{
+ const {markQA}=await import('../public/analytics.js');
+ for(const [page,permalink] of [['https://example.org/?qa=1',canonical+'?qa=1'],['http://localhost:63014/discoveries/fictional/?qa=1','/discoveries/fictional/?qa=1']]){
+  const shared=[];
+  for(const navigator of [{share:async payload=>shared.push(payload.url)},{clipboard:{writeText:async url=>shared.push(url)}},{}]){
+   const loaded=await loadShare(navigator,page);
+   assert.equal(markQA(loaded.document,loaded.location),true,page);
+   const nodes=await clickShare(loaded);
+   assert.equal(nodes['[data-share-link]'].href,permalink,page);assert.equal(loaded.control.dataset.shareUrl,canonical,page);
+   if(!nodes['[data-share-fallback]'].hidden)shared.push(nodes.input.value);
+  }
+  assert.deepEqual(shared,[canonical,canonical,canonical],page);
+ }
 });
 test('share copy participates in exact editorial digests',()=>{
  const entry=publishedFixture();assert.notEqual(contentDigest(entry),contentDigest({...entry,share:{question:'A different question?'}}));

@@ -5,10 +5,36 @@ export function filterEvent(event) {
   if(!event||!events.has(event.event))return null;
   return {...event,properties:Object.fromEntries(Object.entries(event.properties??{}).filter(([key])=>properties.has(key)))};
 }
+// The collection and released discovery pages: the only pages that track, and the only links QA marking follows.
+const trackedPath=/^\/(?:discoveries\/[a-z][a-z0-9-]*\/)?$/;
 export function mayTrack(config,location,navigator,privatePage=false) {
-  return Boolean(config?.enabled&&!privatePage&&location.origin===config.publicOrigin&&
-    (location.pathname==='/'||/^\/discoveries\/[a-z][a-z0-9-]*\/$/.test(location.pathname))&&
+  return Boolean(config?.enabled&&!privatePage&&location.origin===config.publicOrigin&&trackedPath.test(location.pathname)&&
     navigator.doNotTrack!=='1'&&!navigator.globalPrivacyControl&&!navigator.webdriver);
+}
+// Returns href carrying qa=1 when it leads to a tracked page on pageUrl's origin; any other value comes back unchanged.
+export function qaHref(href,pageUrl) {
+  if(typeof href!=='string'||!href||href.startsWith('#'))return href;
+  let page,url;
+  try{page=new URL(pageUrl);url=new URL(href,page);}catch{return href;}
+  if(url.origin!==page.origin||!trackedPath.test(url.pathname))return href;
+  const marks=url.searchParams.getAll('qa');
+  if(marks.length===1&&marks[0]==='1')return href;
+  url.searchParams.set('qa','1');
+  return /^[a-z][a-z\d+.-]*:/i.test(href)?url.href:url.pathname+url.search+url.hash;
+}
+// A qa=1 page keeps the marker on its own page links (new tabs included) and says so. Nothing is stored or sent.
+export function markQA(document,location) {
+  if(new URLSearchParams(location.search).get('qa')!=='1')return false;
+  for(const link of document.querySelectorAll('a[href]')){
+    const href=link.getAttribute('href'),marked=qaHref(href,location.href);
+    if(marked!==href)link.setAttribute('href',marked);
+  }
+  document.title='QA · '+document.title;
+  const strip=document.createElement('aside');
+  strip.className='draft-banner';
+  strip.textContent='QA test mode · This visit is marked as a test and not counted. Remove ?qa=1 from the address to leave.';
+  document.body.prepend(strip);
+  return true;
 }
 export function posthogOptions(config) {
   return {
@@ -52,6 +78,8 @@ export function createVisit({entries,capture,visitId,pageKind,qa=false}) {
 }
 
 async function boot() {
+  // Before the tracking gate, so local and preview builds show QA marking too.
+  const qa=markQA(document,location);
   const node=document.querySelector('#analytics-config');
   if(!node)return;
   const config=JSON.parse(node.textContent);
@@ -61,7 +89,7 @@ async function boot() {
   const capture=(event,properties)=>{
     if(client){try{client.capture(event,properties);}catch{}}else if(pending.length<100)pending.push([event,properties]);
   };
-  const visit=createVisit({entries:config.entries,capture,visitId:crypto.randomUUID(),pageKind:location.pathname==='/'?'collection':'discovery',qa:new URLSearchParams(location.search).get('qa')==='1'});
+  const visit=createVisit({entries:config.entries,capture,visitId:crypto.randomUUID(),pageKind:location.pathname==='/'?'collection':'discovery',qa});
   // These callbacks never block an interaction if analytics fails or is blocked.
   window.WeirdAnalytics={
     reveal:id=>{if(!document.hidden)visit.reveal(id);},

@@ -8,13 +8,13 @@ PostHog is configured with `persistence: 'memory'`, `disable_persistence: true`,
 
 Autocapture, pageview/pageleave capture, recordings, surveys, performance capture, exceptions, rage/dead clicks, and feature-flag requests are disabled. The pinned SDK is served from our own build; external SDK extensions cannot load. An allowlist drops unrequested events and properties, including URL queries, referrers, browser metadata, and person updates. The dedicated project discards IP addresses and has its GeoIP transformation disabled. Both settings matter: [IP deletion alone does not prevent location enrichment](https://posthog.com/docs/privacy/data-storage). No `identify` calls or email collection.
 
-Tracking runs only at the configured production origin, on the collection and released discovery pages. It does not initialize on localhost, previews, review pages, 404s, or withdrawn pages. Do Not Track, Global Privacy Control, and the browser automation flag disable it. A blocked or failed analytics request never blocks a reveal or share.
+Tracking runs only at the configured production origin, on the collection and released discovery pages. It does not initialize on localhost, previews, review pages, 404s, or withdrawn pages. Do Not Track, Global Privacy Control, and the browser automation flag (`navigator.webdriver`) disable it. Default Playwright, Puppeteer and Selenium runs set that flag and send nothing; the Claude in-app browser, extension-driven Chrome and Playwright attached to an ordinary Chrome do not set it and are tracked like readers unless the visit is marked (see [QA procedure](#qa-procedure)). A blocked or failed analytics request never blocks a reveal or share.
 
 Configuration: `config/analytics.json`. The project ingestion token is public client configuration, not a personal API credential. `enabled: false` omits analytics initialization and the SDK from generated pages. A configuration change reaches the site with the next production deployment, normally a push to `main`. Never place a personal API key here. See [PostHog configuration](https://posthog.com/docs/libraries/js/config) for the SDK option definitions.
 
 ## Event contract, version 1
 
-Every event includes a random memory-only `visit_id`, `page_kind` (`collection` or `discovery`), `available_reveals`, `schema_version`, and `qa`. Add `?qa=1` to production checks; exclude these events from product results. Page reload/navigation creates a new visit ID. Browser back-forward cache restoration retains that page visit.
+Every event includes a random memory-only `visit_id`, `page_kind` (`collection` or `discovery`), `available_reveals`, `schema_version`, and `qa`. Production checks start at a `?qa=1` address; the page then carries the marker on its own links to the collection and discovery pages, so the whole walk stays marked. Exclude these events from product results. Page reload/navigation creates a new visit ID. Browser back-forward cache restoration retains that page visit.
 
 | Event | Meaning | Extra properties |
 | --- | --- | --- |
@@ -57,4 +57,29 @@ The tracking origin moved to `https://weirdstats.dev` with the [domain release](
 
 Project `646286` settings were checked the same day. Its Authorized URLs list was empty; it now contains `https://weirdstats.dev`. That list is bookkeeping for PostHog's toolbar and web tools, not an ingestion requirement, and the SDK here disables external loading anyway. Events carry no URL, host or referrer, so the saved readout and the internal/test-user cohort filter needed no change. IP discarding stayed on and replay stayed off.
 
-A marked QA visit from the in-app browser on `weirdstats.dev` at 11:59 CDT stored `visit_started` with `qa: true` and no city, IP or URL. PostHog flagged that browser as automated traffic (`$virt_is_bot`); the readout does not filter on it. Four unmarked collection visits arrived between 11:51 and 11:56 CDT, after the origin switch and before this check; their source is unknown. They appear in the rolling operational readout but not in a launch window, which has not begun.
+A marked QA visit from the in-app browser on `weirdstats.dev` at 11:59 CDT stored `visit_started` with `qa: true` and no city, IP or URL. PostHog's automation flag (`$virt_is_bot`) was set on it, as it is on every event this project receives; see [Automation and test traffic](#automation-and-test-traffic). Four unmarked collection visits arrived between 11:51 and 11:56 CDT, after the origin switch and before this check; their source is unknown. They appear in the rolling operational readout but not in a launch window, which has not begun.
+
+## Automation and test traffic
+
+PostHog's automation classification (`$virt_is_bot`, traffic type "Automation", category `no_user_agent`) is set on every event this project has received, readers and QA alike. The pinned SDK sends `$raw_user_agent`, and `filterEvent` drops it because it is not allowlisted, so PostHog never sees a user agent. That flag says nothing about any one browser and must not be used as a filter: it would remove every visit.
+
+The [launch decision](editorial/2026-10-05-launch-decision.md) excludes "recognized automation" from eligible visits. In practice that exclusion is the client-side `navigator.webdriver` gate, which keeps flagged automation from initializing analytics at all, plus `qa` marking for checks run in browsers that pass the gate. This mapping awaits Nate's acknowledgment; the decision rule itself is unchanged.
+
+Unmarked visits on October 5, all before any launch window:
+
+- 11:51–12:35 CDT: about ten visits of unknown origin after the move to `weirdstats.dev`, including the four noted above.
+- 12:39:50–12:51:03 CDT: 72 visits (119 events, 8 eligible collection visits) from Claude's step 5 check, run in a Chrome without the automation flag and without `?qa=1`.
+
+They remain in PostHog and inflate the rolling seven-day readout until they age out. A launch window chosen later starts after them.
+
+## QA procedure
+
+For people and agents checking the site.
+
+- **Functional checks** (layout, interactions, keyboard, share controls) run on a local build, a preview, or an immutable deployment URL. Those origins never initialize analytics, and their in-site links stay on the same origin.
+- **Event checks** run on production. Start at `https://weirdstats.dev/?qa=1` or a discovery page with `?qa=1`, confirm the "QA test mode" strip and the "QA · " title prefix, and move only through the site's own links. If either cue is missing, stop, do not follow any link, and record the time. Typed addresses, bookmarks, the 404 page and withdrawn pages drop the marker.
+- **Record** the start and end time of each production check, so any unmarked leak can be dated and excluded.
+- **Never share a QA address.** A copied address keeps `?qa=1` and would mark every visit made from it. Post and share only the canonical URLs the share button provides.
+- **Do not open production unmarked** to confirm a fix, follow a deployment "Visit" link, or test a shared link. Use an unflagged browser on production only with `?qa=1`.
+
+QA marking follows in-site navigation from the first production deployment that includes it; its date is recorded in the [hosting record](hosting.md) when it ships.

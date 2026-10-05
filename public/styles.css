@@ -274,7 +274,7 @@ body.reduce-motion .crunch-wave i{transform:scaleY(.08)!important}
 .data-view:not([hidden]) .data-track>span{animation:bar-arrival .55s cubic-bezier(.2,.7,.2,1) both}
 @keyframes bar-arrival{from{transform:scaleX(0)}to{transform:scaleX(var(--portion))}}
 .data-axis{font-size:13px;color:var(--muted);margin:20px 0;max-width:70ch}
-.data-status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.data-status,.journey-announcer{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 .data-line{display:block;width:100%;max-height:420px;overflow:visible;font-size:12px;fill:var(--ink)}
 .data-table{overflow:auto;margin:25px 0}
 .data-table table{width:100%;font-size:14px;border-collapse:collapse;min-width:300px;margin:15px 0}

@@ -72,7 +72,7 @@ npm run build
 npx vercel deploy --target=preview --scope nathaniels-projects-cc0e35b9
 ```
 
-The first deploy command did not request production, but Vercel’s first-deployment behavior assigned it to production automatically. Explicitly select preview for review deployments. A CLI production deployment from another branch stays live only until the next push to `main` redeploys from Git, so release through `main`. A production deployment updates the already-public site immediately. Release/deployment authorization and any protection change remain separate decisions.
+The first deploy command did not request production, but Vercel’s first-deployment behavior assigned it to production automatically. Explicitly select preview for review deployments. A CLI production deployment from another branch stays live only until the next push to `main` redeploys from Git, so release through `main`. Browser checks of production follow the [QA procedure](launch-analytics.md#qa-procedure). A production deployment updates the already-public site immediately. Release/deployment authorization and any protection change remain separate decisions.
 
 ## Verification
 

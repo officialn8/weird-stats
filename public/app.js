@@ -80,6 +80,13 @@ const copy = mail.querySelector('.mail-copy');
 const score = mail.querySelector('.journey-score');
 const replay = $('#replay-journey');
 const journeyStatus = $('#journey-status');
+// The visible status narrates every run, so it stays silent; only a press-started run is announced,
+// through a hidden region placed after the score because children of role="img" are not exposed.
+journeyStatus.removeAttribute('aria-live');
+const journeyAnnouncer = document.createElement('p');
+journeyAnnouncer.className = 'journey-announcer';
+journeyAnnouncer.setAttribute('role', 'status');
+score.after(journeyAnnouncer);
 const bars = [...mail.querySelectorAll('.hour-marks i')];
 const initialJourneyStatus = journeyStatus.textContent;
 const legs = ['down', 'up'].map(direction => {
@@ -93,33 +100,44 @@ const legs = ['down', 'up'].map(direction => {
 });
 const journeyTotal = legs.reduce((sum, leg) => sum + leg.duration, 0);
 const journeySummary = `${legs.map(leg => `${leg.label}: ${leg.duration}${leg.unit}`).join('. ')}. ${journeyTotal}${legs[0].unit} total.`;
-let journeyTimers = [], journeyStarted = false;
+let journeyTimers = [], journeyStarted = false, announceTimer = null;
 const visible = new Map([[scene, false], [copy, false], [score, false]]);
 
+function announceJourney() {
+  // Clear now and refill on a later task so a repeated, identical summary is read again.
+  clearTimeout(announceTimer);
+  journeyAnnouncer.textContent = '';
+  announceTimer = setTimeout(() => { journeyAnnouncer.textContent = journeySummary; }, 100);
+}
 function stopJourney() {
   journeyTimers.forEach(clearTimeout);
   journeyTimers = [];
   score.classList.remove('playing');
-  replay.disabled = false;
 }
+// A pending announcement is dropped by resets and restarts, but not by stopJourney():
+// reduced-motion syncMail() calls it on observer callbacks and must not swallow a press.
 function resetJourney() {
   stopJourney();
+  clearTimeout(announceTimer);
   journeyStarted = false;
   bars.forEach(bar => bar.classList.remove('arrived'));
   journeyStatus.textContent = initialJourneyStatus;
   replay.innerHTML = 'Watch the round trip <span aria-hidden="true">↗</span>';
 }
-function playJourney() {
+// The replay button stays enabled in every state so it never drops keyboard focus;
+// a press mid-play restarts, and only press-started runs are announced.
+function playJourney(pressed = false) {
   stopJourney();
+  clearTimeout(announceTimer);
   journeyStarted = true;
   bars.forEach(bar => bar.classList.remove('arrived'));
   if(reduced()) {
     bars.forEach(bar => bar.classList.add('arrived'));
     journeyStatus.textContent = journeySummary;
+    if(pressed) announceJourney();
     return;
   }
   score.classList.add('playing');
-  replay.disabled = true;
   journeyStatus.textContent = `${legs[0].label}…`;
   let elapsed = 0;
   legs.forEach((leg, legIndex) => {
@@ -132,6 +150,7 @@ function playJourney() {
         if(finished) {
           stopJourney();
           replay.innerHTML = 'Watch it again <span aria-hidden="true">↺</span>';
+          if(pressed) announceJourney();
         }
       }, (elapsed + progress) * 650));
     });
@@ -165,7 +184,7 @@ const mailObserver = new IntersectionObserver(entries => {
   syncMail();
 }, {threshold:[0,.35]});
 [scene,copy,score].forEach(element => mailObserver.observe(element));
-replay.addEventListener('click', playJourney);
+replay.addEventListener('click', () => playJourney(true));
 document.addEventListener('motionchange', () => { resetJourney(); syncMail(); });
 document.addEventListener('visibilitychange', () => {
   if(document.hidden) resetJourney();
