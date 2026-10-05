@@ -50,3 +50,11 @@ The initial marked QA events exposed the default GeoIP enrichment. After disabli
 A separate real-browser local receiver test of the same pinned SDK showed empty cookies, localStorage, and sessionStorage before and after capture. Only allowed properties reached the receiver; an intentionally added email field was stripped. Production storage inspection was unavailable through the browser tool, so storage evidence comes from that SDK check, while cloud ingestion and privacy fields were checked against actual production QA events.
 
 The saved [collection engagement readout](https://us.posthog.com/project/646286/insights/2IZHwHcR) measures the rolling seven days using the visit-based formula above, excludes QA, and requires a matching visit start. Its setup check returned zero eligible visits and no percentage; QA is not reader evidence. This rolling report is operational, but the fixed launch evaluation window has not begun. Record its start and end only when audience promotion is authorized.
+
+## Domain move — October 5
+
+The tracking origin moved to `https://weirdstats.dev` with the [domain release](hosting.md). `config/analytics.json` `publicOrigin` must equal the site's public origin; the build rejects a mismatch, and the browser initializes only on that exact origin. `weird-stats.vercel.app` now redirects and never initializes analytics.
+
+Project `646286` settings were checked the same day. Its Authorized URLs list was empty; it now contains `https://weirdstats.dev`. That list is bookkeeping for PostHog's toolbar and web tools, not an ingestion requirement, and the SDK here disables external loading anyway. Events carry no URL, host or referrer, so the saved readout and the internal/test-user cohort filter needed no change. IP discarding stayed on and replay stayed off.
+
+A marked QA visit from the in-app browser on `weirdstats.dev` at 11:59 CDT stored `visit_started` with `qa: true` and no city, IP or URL. PostHog flagged that browser as automated traffic (`$virt_is_bot`); the readout does not filter on it. Four unmarked collection visits arrived between 11:51 and 11:56 CDT, after the origin switch and before this check; their source is unknown. They appear in the rolling operational readout but not in a launch window, which has not begun.
