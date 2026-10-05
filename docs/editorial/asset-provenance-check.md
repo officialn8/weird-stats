@@ -22,3 +22,8 @@ For the private Senate comparison, the Census Bureau's [public-use and citation 
 `public/assets/outfit-bold.ttf` is the official static Bold face from [Outfitio/Outfit-Fonts, commit 9027738](https://github.com/Outfitio/Outfit-Fonts/blob/902773808eb372f70fb34e8946dd1ffe604efc79/fonts/ttf/Outfit-Bold.ttf). Its SFNT tables have no variable-font axis table and OS/2 weight is 700. SHA-256: `f620b69582e06d7e1b3bbde74ed8c5876eadabb038390780db2a3414a1490197`. The source repository's OFL notice matches the existing license and author declaration. This build-only font renders the share PNGs; it does not replace the website's variable font or wordmark.
 
 Share cards reuse each selected scene's existing image bytes, converted to PNG at build time by Sharp. Their ownership and approved source-byte hashes remain checked before output. No remote image/font requests are made during a build.
+
+## Collection preview card, October 5, 2026
+
+`social/home-v1.png`, the home-page link preview, is rendered at build time from original vector artwork drawn in `scripts/share-images.mjs`: three fanned card shapes and a "?" in the bundled static Outfit Bold face. It incorporates no photograph, illustration, entry asset or third-party artwork. Nate approved version 1 on October 5 ([approval record](2026-10-05-home-preview-approval.md)); SHA-256 `127c519365b41381d2a883c108d5008c6c5c19f818657d9f77ef1df7dd5085f8`.
+
