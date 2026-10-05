@@ -1,0 +1,9 @@
+{
+  "limits": {
+    "investigationsPerRun": 10,
+    "promotionsPerRun": 2,
+    "unfinishedPackets": 5
+  },
+  "timezone": "America/Chicago",
+  "budgetPolicy": "Ceilings, not quotas. Review seven actual completed runs and the creator's review workload before increasing limits."
+}

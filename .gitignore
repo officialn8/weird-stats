@@ -7,6 +7,8 @@ dist/
 .DS_Store
 *.log
 review-dist/
+content/.editorial.lock
+content/**/*.tmp
 
 # Generated audits and visual QA (existing history remains intact).
 /reports/

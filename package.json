@@ -9,12 +9,13 @@
   },
   "scripts": {
     "dev": "node scripts/dev.mjs",
-    "check": "node --check public/app.js && node --check public/crunch.js && node --check public/discoveries.js && node scripts/check.mjs",
+    "check": "node scripts/syntax.mjs && node scripts/check.mjs",
     "build": "npm run check && node scripts/build.mjs",
     "dev:review": "node scripts/dev.mjs --drafts",
     "test": "node --test",
     "build:review": "npm run check && node scripts/build.mjs --drafts",
     "content:new": "node scripts/new-entry.mjs",
-    "content:status": "node scripts/status.mjs"
+    "content:status": "node scripts/status.mjs",
+    "content:candidates": "node scripts/candidates.mjs"
   }
 }
