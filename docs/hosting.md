@@ -2,7 +2,19 @@
 
 Set up October 4, 2026.
 
-## Current release — October 5
+## Current release — analytics activation, October 5
+
+The five-entry edition remains live at https://weird-stats.vercel.app, now with the separately authorized PostHog project enabled.
+
+- Source commit: `efa73c6` on `fix/editorial-reveal-review`, backed up to the private GitHub branch.
+- Deployment: `dpl_AFeSB5BmZuJEJZeS3VV8bckCrqT1`, production, build succeeded and main alias assigned.
+- Immutable URL: https://weird-stats-kjykzkqgb-nathaniels-projects-cc0e35b9.vercel.app.
+- Deployed with `vercel deploy --prod --yes --scope nathaniels-projects-cc0e35b9`. Git integration and protection settings were unchanged.
+- All 76 tests and both builds passed before deployment. The configuration change enables the public ingestion token and US host; it makes no editorial changes.
+- Actual marked browser events reached project `646286`. IP storage and GeoIP enrichment are disabled. See [launch analytics](launch-analytics.md) for the stored-event evidence, SDK storage check, saved readout, and coverage limits.
+- No audience promotion occurred.
+
+## Earlier five-entry release — October 5
 
 Nate approved all four pending proposals and authorized deployment in the [launch decision](editorial/2026-10-05-launch-decision.md). The five-entry edition is live at https://weird-stats.vercel.app.
 
@@ -13,7 +25,7 @@ Nate approved all four pending proposals and authorized deployment in the [launc
 - Anonymous checks: collection, five discovery pages, five 1200×630 PNGs, feed, and Senate CSV returned 200. `/review.html`, raw content JSON, and an unknown discovery returned the real 404 page.
 - The updated chip was exercised in the production browser; no console errors. The Senate's optional guess and keyboard reveal passed at 390px locally, with no horizontal overflow.
 - Four share PNGs match the Mac build byte for byte. The mule PNG differs in encoded bytes between hosted/local builds; the hosted image was inspected and correctly shows the new question and mule artwork. No social-platform cache/preview scrape has been performed.
-- All 76 tests and both builds passed. PostHog is implemented but disabled pending the project decision and actual ingestion verification. No audience promotion occurred.
+- All 76 tests and both builds passed. At this earlier deployment, PostHog was implemented but disabled pending the project decision and ingestion verification. No audience promotion occurred.
 
 ## Original setup
 

@@ -44,7 +44,7 @@ Vercel uses the repository root, the Other framework preset, `npm run build`, an
 
 The GitHub workflow runs tests and the build on pushes and pull requests. The October 5 release was manually deployed and promoted. The main alias is publicly accessible without login; generated deployment URLs may be protected. Check the exact URL rather than assuming protection from a project setting.
 
-Cookieless PostHog instrumentation is implemented but disabled pending confirmation of the dedicated project and an ingestion check. See [launch analytics](docs/launch-analytics.md). The public site does not currently load or send events to PostHog.
+Cookieless PostHog tracking is active in the dedicated weird.stats project. Production QA verified reveals, continuation, and share intent; QA traffic is excluded from the engagement readout. IP storage, location enrichment, recordings, and person profiles are disabled. See [launch analytics](docs/launch-analytics.md) for the event contract and verification limits.
 
 **Git integration is pending approval:** Vercel is not yet authorized to access this private GitHub repository, so Git pushes do not currently deploy the site. Once connected, branch changes receive previews and the configured production branch supplies production deployments. Until then, deploy from the repository root with the Vercel CLI. Use `--target=preview` explicitly for previews. See [hosting setup](docs/hosting.md).
 

@@ -6,7 +6,7 @@ The [launch decision](editorial/2026-10-05-launch-decision.md) fixes the product
 
 PostHog is configured with `persistence: 'memory'`, `disable_persistence: true`, `person_profiles: 'never'`, and `ip: false`. There are no analytics cookies or persistent local/session-storage identifiers. We deliberately measure a single loaded page rather than identifying a person across visits. This uses the SDK's [memory persistence](https://posthog.com/docs/libraries/js/persistence), not its separate server-hash identity mode.
 
-Autocapture, pageview/pageleave capture, recordings, surveys, performance capture, exceptions, rage/dead clicks, and feature-flag requests are disabled. The pinned SDK is served from our own build; external SDK extensions cannot load. An allowlist drops unrequested events and properties, including URL queries, referrers, browser metadata, and person updates. IP storage must also be disabled in the dedicated project before activation. No `identify` calls or email collection.
+Autocapture, pageview/pageleave capture, recordings, surveys, performance capture, exceptions, rage/dead clicks, and feature-flag requests are disabled. The pinned SDK is served from our own build; external SDK extensions cannot load. An allowlist drops unrequested events and properties, including URL queries, referrers, browser metadata, and person updates. The dedicated project discards IP addresses and has its GeoIP transformation disabled. Both settings matter: [IP deletion alone does not prevent location enrichment](https://posthog.com/docs/privacy/data-storage). No `identify` calls or email collection.
 
 Tracking runs only at the configured production origin, on the collection and released discovery pages. It does not initialize on localhost, previews, review pages, 404s, or withdrawn pages. Do Not Track, Global Privacy Control, and the browser automation flag disable it. A blocked or failed analytics request never blocks a reveal or share.
 
@@ -37,11 +37,16 @@ Also report per-entry views/reveals, the fraction of visits with `discovery_cont
 
 The threshold is 30% of at least 300 eligible collection visits revealing two discoveries. A minimum sample below 300 after 14 days is inconclusive. Full decision branches are in the launch decision document. These are page visits, not 300 verified strangers.
 
-## Activation checklist
+## Activation verified — October 5
 
-Status on October 5: PostHog reports only the existing `Portfolio` project in `Projects LLC`. A question to Nate is pending about creating `weird.stats` there. No project was created or existing project altered without that choice. Production remains disabled. A real-browser local receiver test of the pinned SDK showed empty cookies, localStorage, and sessionStorage before/after capture. The emitted payload contained only allowed properties; an intentionally added email field was stripped. This confirms the local SDK boundary, not cloud ingestion.
+Nate explicitly authorized the separate project. [weird.stats](https://us.posthog.com/project/646286/settings/project) is project `646286` in `Projects LLC`, US region, with timezone `America/Chicago`. The existing Portfolio project was unchanged. IP storage is disabled; the default GeoIP transformation was also disabled at `2026-10-05T06:16:55Z`. Recordings and person profiles are off.
 
-1. Confirm the dedicated PostHog project in the intended organization, get its public ingestion token and region, and disable IP storage.
-2. Set the token/host and enable the checked-in configuration. Build and deploy.
-3. In an ordinary browser, visit production with `?qa=1`, reveal two different entries, scroll onward, and use a share action. Check that the marked events arrive in the correct project with the contract above and without identifying fields. Check cookie/local/session storage before and after.
-4. Create the launch readout from the verified event schema. Only then treat measurement as operational. A unit test or successful deploy is not proof of PostHog ingestion.
+Configuration was activated in commit `efa73c6`, pushed to the private working branch, and deployed to production as `dpl_AFeSB5BmZuJEJZeS3VV8bckCrqT1`. All 76 tests and both builds passed. The [hosting record](hosting.md) identifies the immutable deployment.
+
+A production browser visit marked `?qa=1` produced `visit_started`, views, distinct chip and copper reveals, continuation from chips to copper, and share intent in this project. Both reveals used the same visit ID; the second had `revealed_count: 2`. Stored events had no IP or full URL, and person-profile processing was false. The browser's native share stayed pending, so completed sharing was not verified in this check.
+
+The initial marked QA events exposed the default GeoIP enrichment. After disabling that transformation, a fresh visit starting at `2026-10-05T06:17:10Z` had no city, latitude, IP, or full URL. Earlier QA events retain their enrichment and are excluded from product results.
+
+A separate real-browser local receiver test of the same pinned SDK showed empty cookies, localStorage, and sessionStorage before and after capture. Only allowed properties reached the receiver; an intentionally added email field was stripped. Production storage inspection was unavailable through the browser tool, so storage evidence comes from that SDK check, while cloud ingestion and privacy fields were checked against actual production QA events.
+
+The saved [collection engagement readout](https://us.posthog.com/project/646286/insights/2IZHwHcR) measures the rolling seven days using the visit-based formula above, excludes QA, and requires a matching visit start. Its setup check returned zero eligible visits and no percentage; QA is not reader evidence. This rolling report is operational, but the fixed launch evaluation window has not begun. Record its start and end only when audience promotion is authorized.

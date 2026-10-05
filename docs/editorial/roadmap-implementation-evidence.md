@@ -1,6 +1,6 @@
 # Roadmap implementation evidence
 
-**October 5 release update:** Nate approved all four pending proposals, and the five-entry edition is now public. All 76 tests pass. The [launch decision](2026-10-05-launch-decision.md) supersedes the immediate recruitment order: prepare about six strong entries before audience promotion. [Hosting](../hosting.md) records the actual deployment and checks. PostHog instrumentation is implemented but not activated; the project decision and ingestion verification remain open. The entries below preserve the history of earlier implementation checkpoints.
+**October 5 release update:** Nate approved all four pending proposals, and the five-entry edition is now public. All 76 tests pass. The [launch decision](2026-10-05-launch-decision.md) supersedes the immediate recruitment order: prepare about six strong entries before audience promotion. [Hosting](../hosting.md) records the actual deployment and checks. Cookieless PostHog is now active in the separately authorized weird.stats project; [production QA and the saved engagement readout](../launch-analytics.md) verify ingestion. Audience promotion and the fixed launch evaluation window have not begun. The entries below preserve the history of earlier implementation checkpoints.
 
 Local implementation began October 4, 2026, from `94f2c0d` on `fix/editorial-reveal-review`, using the [product roadmap](../plans/2026-10-04-2200-feat-discovery-product-roadmap-plan.md). This is an execution record, not a claim that the whole roadmap or its audience gates are complete.
 
