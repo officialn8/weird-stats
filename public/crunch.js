@@ -18,17 +18,13 @@
   function syncImpression() {
     if (!choiceFeedback) return;
     choiceFeedback.hidden = impression === null;
-    choiceFeedback.textContent = impression === null ? '' : impression === 'No difference'
-      ? 'You heard no difference. That’s a valid impression: this listening demo doesn’t reproduce the biting experiment.'
-      : `You picked ${impression} as fresher. Both clips came from the same recording; only the sound treatment changed. Your choice isn’t a freshness test.`;
+    choiceFeedback.textContent = impression === null ? '' : `Your impression: ${impression}.`;
   }
   guesses.forEach(button => button.addEventListener('click', () => {
-    impression = button.dataset.crunchGuess;
+    impression = button.textContent.trim();
     guesses.forEach(choice => choice.setAttribute('aria-pressed', String(choice === button)));
     syncImpression();
-    if (guessStatus) guessStatus.textContent = button.dataset.crunchGuess === 'No difference'
-      ? 'You heard no difference. Your impression is yours; this isn’t a scored test.'
-      : `You chose ${button.dataset.crunchGuess}. Your impression is yours; this isn’t a scored test.`;
+    if (guessStatus) guessStatus.textContent = `You chose ${impression}. Reveal when you’re ready.`;
   }));
   const player = document.createElement('audio');
   player.id = 'crunch-audio';

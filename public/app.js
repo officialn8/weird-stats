@@ -19,19 +19,20 @@ const story=document.querySelector('#copper');
 const $=selector=>story.querySelector(selector), $$=selector=>[...story.querySelectorAll(selector)];
 const question=$('.copper-question'), answer=$('.copper-answer');
 const pile=$('#penny-pile');
-for(let i=0;i<60;i++){
-  const img=document.createElement('img');img.src='/assets/penny.webp';img.alt='';img.width=500;img.height=500;
+// Facts and owned imagery come from the approved fragment, not runtime constants.
+const ratio=Number.parseInt($('.giant-ratio').textContent,10);
+const coinSource=$('.hero-penny img').getAttribute('src');
+const answerLead=$('#coin-feedback').textContent;
+for(let i=0;i<ratio;i++){
+  const img=document.createElement('img');img.src=coinSource;img.alt='';img.width=500;img.height=500;
   img.style.setProperty('--i',i);img.style.setProperty('--launch-x',(-85-(i%6)*24)+'px');img.style.setProperty('--launch-y',(120-Math.floor(i/6)*25)+'px');img.style.setProperty('--turn',((i*37)%50-25)+'deg');pile.append(img);
 }
 let lastChoice = $('#reveal');
 function reveal(value, trigger) {
   if (trigger) lastChoice = trigger;
   if (value) {
-    const picked = trigger?.dataset.coin;
-    $('#coin-feedback').textContent = picked === 'penny'
-      ? 'You picked the penny. It’s the nickel.'
-      : picked === 'nickel' ? 'You picked the nickel. Here’s how much more.'
-      : 'The nickel. And it’s not even close.';
+    const picked = trigger?.dataset.coin ? trigger.textContent.trim() : null;
+    $('#coin-feedback').textContent = picked ? `You picked ${picked}. ${answerLead}` : answerLead;
   }
   question.hidden = value;
   answer.hidden = !value;
@@ -70,6 +71,18 @@ const score = mail.querySelector('.journey-score');
 const replay = $('#replay-journey');
 const journeyStatus = $('#journey-status');
 const bars = [...mail.querySelectorAll('.hour-marks i')];
+const initialJourneyStatus = journeyStatus.textContent;
+const legs = ['down', 'up'].map(direction => {
+  const leg = $(`.journey-leg.${direction}`);
+  return {
+    label: leg.querySelector('div > span').textContent.trim(),
+    duration: Number.parseFloat(leg.querySelector('strong').textContent),
+    unit: leg.querySelector('strong span').textContent.trim(),
+    bars: [...leg.querySelectorAll('.hour-marks i')],
+  };
+});
+const journeyTotal = legs.reduce((sum, leg) => sum + leg.duration, 0);
+const journeySummary = `${legs.map(leg => `${leg.label}: ${leg.duration}${leg.unit}`).join('. ')}. ${journeyTotal}${legs[0].unit} total.`;
 let journeyTimers = [], journeyStarted = false;
 const visible = new Map([[scene, false], [copy, false], [score, false]]);
 
@@ -83,7 +96,7 @@ function resetJourney() {
   stopJourney();
   journeyStarted = false;
   bars.forEach(bar => bar.classList.remove('arrived'));
-  journeyStatus.textContent = 'A longer journey home.';
+  journeyStatus.textContent = initialJourneyStatus;
   replay.innerHTML = 'Watch the round trip <span aria-hidden="true">↗</span>';
 }
 function playJourney() {
@@ -92,20 +105,28 @@ function playJourney() {
   bars.forEach(bar => bar.classList.remove('arrived'));
   if(reduced()) {
     bars.forEach(bar => bar.classList.add('arrived'));
-    journeyStatus.textContent = '3 hours down. 5 hours back. 8 hours total.';
+    journeyStatus.textContent = journeySummary;
     return;
   }
   score.classList.add('playing');
   replay.disabled = true;
-  journeyStatus.textContent = 'Heading down to Supai…';
-  bars.forEach((bar,i) => journeyTimers.push(setTimeout(() => {
-    bar.classList.add('arrived');
-    journeyStatus.textContent = i<2 ? `${i+1} hours into the descent…` : i===2 ? '3 hours. The mail reaches Supai.' : i<7 ? `${i-2} hours into the return…` : '8 hours total. Back at the rim.';
-    if(i===7) {
-      stopJourney();
-      replay.innerHTML = 'Watch it again <span aria-hidden="true">↺</span>';
-    }
-  },(i+1)*650)));
+  journeyStatus.textContent = `${legs[0].label}…`;
+  let elapsed = 0;
+  legs.forEach((leg, legIndex) => {
+    leg.bars.forEach((bar, index) => {
+      const progress = leg.duration * (index + 1) / leg.bars.length;
+      const finished = legIndex === legs.length - 1 && index === leg.bars.length - 1;
+      journeyTimers.push(setTimeout(() => {
+        bar.classList.add('arrived');
+        journeyStatus.textContent = finished ? journeySummary : `${leg.label}: ${Number(progress.toFixed(2))}${leg.unit}…`;
+        if(finished) {
+          stopJourney();
+          replay.innerHTML = 'Watch it again <span aria-hidden="true">↺</span>';
+        }
+      }, (elapsed + progress) * 650));
+    });
+    elapsed += leg.duration;
+  });
 }
 function syncMail() {
   // Each visual owns its trigger: on mobile the mule sits below the intro text.
@@ -116,7 +137,7 @@ function syncMail() {
   if(reduced()) {
     stopJourney();
     bars.forEach(bar => bar.classList.add('arrived'));
-    journeyStatus.textContent = '3 hours down. 5 hours back. 8 hours total.';
+    journeyStatus.textContent = journeySummary;
   } else if(!document.hidden && visible.get(score) && !journeyStarted) {
     playJourney();
   }

@@ -29,12 +29,17 @@
     const pause=()=>animations.forEach(a=>a.pause());
     const replay=()=>{animations.forEach(a=>a.cancel());animations=[];settled=false;play();};
     const stop=window.WeirdDiscoveries.observeVisual(visual,{prepare,play,pause,finish,replay});
-    const requestReplay=()=>visual.dispatchEvent(new Event('discoveryreplay'));
+    const requestReplay=()=>{if(!replayButton.disabled)visual.dispatchEvent(new Event('discoveryreplay'));};
+    const syncMotion=()=>{
+      replayButton.disabled=!motionAvailable||reduced.matches||document.body.classList.contains('reduce-motion');
+      if(replayButton.disabled)finish();
+    };
     replayButton.hidden=!motionAvailable;
     replayButton.addEventListener('click',requestReplay);
-    const reducedChange=()=>{if(reduced.matches)finish();};
-    reduced.addEventListener('change',reducedChange);
-    const cleanup=()=>{stop();finish();replayButton.removeEventListener('click',requestReplay);reduced.removeEventListener('change',reducedChange);mounted.delete(entry);};
+    reduced.addEventListener('change',syncMotion);
+    document.addEventListener('motionchange',syncMotion);
+    syncMotion();
+    const cleanup=()=>{stop();finish();replayButton.removeEventListener('click',requestReplay);reduced.removeEventListener('change',syncMotion);document.removeEventListener('motionchange',syncMotion);mounted.delete(entry);};
     mounted.set(entry,cleanup);return cleanup;
   }
   window.WeirdPairedComparison={initialize};
