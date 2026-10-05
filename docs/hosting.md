@@ -10,6 +10,7 @@ The six-discovery edition is live at https://weirdstats.dev. Nate authorized the
 - The canonical public origin is `https://weirdstats.dev`: the `PUBLIC_SITE_ORIGIN` default, `config/analytics.json` `publicOrigin`, and canonical, share-image and feed URLs. Analytics only initializes on this exact origin.
 - `vercel.json` 308-redirects every path on `weird-stats.vercel.app` to the same path on `weirdstats.dev`. Immutable deployment URLs are unaffected.
 - Deployment: https://weird-stats-7jpc1odh7-nathaniels-projects-cc0e35b9.vercel.app from `16e5056` on `chore/weirdstats-domain`, deployed with `vercel deploy --prod --yes`, aliased to all three hosts. All 85 tests and the build passed.
+- Merging the source as [pull request 2](https://github.com/officialn8/weird-stats/pull/2) (`61cfdd4`) and the PostHog notes as [pull request 3](https://github.com/officialn8/weird-stats/pull/3) (`542b5f7`) redeployed production through Git integration (`weird-stats-m177b37vw`, then `weird-stats-9su6k5128`). After the second, the collection and runway pages matched a local build of `main` byte for byte; the feed differed only in `builtAt`.
 - Verified over HTTPS against the apex A record (216.198.79.1): Let's Encrypt certificate for `weirdstats.dev`, valid to January 3, 2027; collection, discovery page, asset, share PNG and feed return 200; `/review.html` and unknown paths return the 404 page; `www` redirects to the apex. Old-host paths, including `/` and slash-ended pages, reach the same page on the new domain in one redirect.
 - DNS propagation was partial at release: Google, Quad9 and OpenDNS resolved the apex; Cloudflare 1.1.1.1 still returned intermittent SERVFAIL from its cache of the period before Vercel served the zone. After release, the in-app browser loaded the collection on `weirdstats.dev` with styles and artwork intact, and a marked QA visit from it was stored in PostHog; see [launch analytics](launch-analytics.md).
 - A misspelled `weidstats.dev` (plus `www.`) was added in the dashboard before this release. It is unregistered and should be removed from the project and team; its current state was not rechecked.
@@ -55,15 +56,15 @@ Nate approved all four pending proposals and authorized deployment in the [launc
 
 The project uses the repository root, no framework, `npm run build`, and `dist/`. The build emits the selected public edition to `dist/` and requires no environment variables. The Vercel CLI created an ignored local `.env.local` for its own authentication workflow; do not commit it or `.vercel/`.
 
-## Git integration: pending
+## Git integration
 
-Automatic approval review rejected connecting Vercel to this private repository because that would grant ongoing external-service access. No workaround was used. The initial deployment was uploaded directly through the authenticated Vercel CLI. The GitHub build workflow is active, but pushes are not wired to Vercel deployments yet.
+Nate connected the Vercel project to `officialn8/weird-stats` on October 5, 2026 (about 11:26 CDT), with production branch `main`. Every push to `main` builds and deploys production, which updates the public site immediately. Other branches and pull requests get preview deployments, which appear as a `Vercel` check on the pull request. Merging into `main` is therefore a release and needs release authorization, even when the change is documentation only, because each merge redeploys the site.
 
-After the user specifically approves Vercel access to `officialn8/weird-stats`, connect only that repository to the existing Vercel project. Do not expand access to unrelated repositories. If the GitHub app installation needs a repository-selection change, confirm its scope is restricted to this repository.
+An earlier automated attempt to connect the repository was rejected by approval review because it grants ongoing external-service access; no workaround was used, and the connection was made by Nate directly. The Vercel GitHub app's repository scope was not verified from this machine. Confirm in GitHub's installed-apps settings that it is limited to this repository.
 
-## Manual deployment
+## CLI deployment
 
-From the repository root:
+The Vercel CLI still works for previews and for out-of-band production deployments. From the repository root:
 
 ```sh
 npm ci
@@ -71,7 +72,7 @@ npm run build
 npx vercel deploy --target=preview --scope nathaniels-projects-cc0e35b9
 ```
 
-The first deploy command did not request production, but Vercel’s first-deployment behavior assigned it to production automatically. Explicitly select preview for future review deployments. A production deployment updates the already-public site immediately. Release/deployment authorization and any protection change remain separate decisions.
+The first deploy command did not request production, but Vercel’s first-deployment behavior assigned it to production automatically. Explicitly select preview for review deployments. A CLI production deployment from another branch stays live only until the next push to `main` redeploys from Git, so release through `main`. A production deployment updates the already-public site immediately. Release/deployment authorization and any protection change remain separate decisions.
 
 ## Verification
 
