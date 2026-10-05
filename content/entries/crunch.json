@@ -4,10 +4,11 @@
   "topic": "sound",
   "status": "published",
   "order": 10,
-  "publishedAt": "2026-10-04T00:00:00-05:00",
+  "publishedAt": "2026-10-04T20:45:36-05:00",
   "approval": {
     "by": "Existing hosted edition carried forward",
-    "at": "2026-10-04"
+    "at": "2026-10-04",
+    "digest": "58cb3b72be37426fbb7a4a129d7acb0fc1bd9f663093296ec1cb1ba35bb10dc8"
   },
   "evidence": {
     "kind": "experiment",
@@ -26,5 +27,43 @@
   "treatment": {
     "kind": "custom",
     "template": "crunch"
-  }
+  },
+  "share": {
+    "question": "Could a volume knob make a potato chip seem fresher?",
+    "description": "A small question. A surprising discovery. Take a look at weird.stats."
+  },
+  "assets": [
+    {
+      "path": "assets/chip.webp",
+      "rights": {
+        "basis": "Generated decorative illustration",
+        "source": "docs/prototypes/visual-studies/assets/chip-audio.md",
+        "attribution": "Generated illustration; not a study photograph"
+      }
+    },
+    {
+      "path": "assets/chip-small.webp",
+      "rights": {
+        "basis": "Generated decorative illustration",
+        "source": "docs/prototypes/visual-studies/assets/chip-audio.md",
+        "attribution": "Generated illustration; not a study photograph"
+      }
+    },
+    {
+      "path": "assets/chip-a.mp3",
+      "rights": {
+        "basis": "CC0 per original sound source declaration",
+        "source": "https://bigsoundbank.com/eating-potato-chips-1-s1430.html",
+        "attribution": "Joseph Sardin, BigSoundBank #1430; edited versions documented in docs/prototypes/visual-studies/assets/chip-audio.md"
+      }
+    },
+    {
+      "path": "assets/chip-b.mp3",
+      "rights": {
+        "basis": "CC0 per original sound source declaration",
+        "source": "https://bigsoundbank.com/eating-potato-chips-1-s1430.html",
+        "attribution": "Joseph Sardin, BigSoundBank #1430; edited versions documented in docs/prototypes/visual-studies/assets/chip-audio.md"
+      }
+    }
+  ]
 }

@@ -1,6 +1,6 @@
 # Release contract
 
-A release manifest pins exact approved revision digests independently of editorial approval. U1 implements and tests this contract with fictional records; it does not infer a production baseline or create any approval. U7 owns baseline migration and authoring commands.
+A release manifest pins exact approved revision digests independently of editorial approval. The verified original hosted edition is pinned in `current.json`; approval and release commands live in `scripts/review-packets.mjs`. Snapshots retain their original carry-forward provenance; later copy remains private proposals.
 
 ```json
 {
@@ -12,6 +12,6 @@ A release manifest pins exact approved revision digests independently of editori
 }
 ```
 
-Injected revisions have `{id, digest, entry, fragment?, assetDigests?}`. `entry.approval.digest` must match the manifest pin and the recomputed editorial digest. Custom fragments retain their released copy; a build recomputes working fragment and asset digests and fails on mismatch. Unapproved replacement records do not replace a pin. A withdrawal has `{id, reason, at, authorizedBy}` and requires a previously released revision with explicit `release: {at, authorizedBy}` evidence; a never-public retired entry is simply absent. Withdrawal copy is a safe public notice and must not repeat the withdrawn claim.
+Injected revisions have `{id, digest, entry, fragment?, assetDigests?}`. `entry.approval.digest` must match the manifest pin and the recomputed editorial digest. A custom working fragment holds the latest approved copy. A build verifies it against that approval, emits the pinned snapshot if a newer approved revision is awaiting release, and checks the actual pinned asset bytes. Unapproved working edits fail. Unapproved replacement records do not replace a pin. A withdrawal has `{id, reason, at, authorizedBy}` and requires a previously released revision with explicit `release: {at, authorizedBy}` evidence; a never-public retired entry is simply absent. Withdrawal copy is a safe public notice and must not repeat the withdrawn claim.
 
-Until U7 installs a verified manifest, the existing build retains its clearly marked legacy selection path. Do not treat U1's fixture coverage as production revision protection.
+Production builds require this disk manifest. Fixture builds with explicitly injected records may omit it for isolated status-selection tests. See `docs/content-system.md` for the human-input contract, separate release command, interruption recovery, and pending share-presentation rollout gates.

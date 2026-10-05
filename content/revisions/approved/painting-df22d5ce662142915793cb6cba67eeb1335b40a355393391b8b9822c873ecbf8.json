@@ -1,0 +1,64 @@
+{
+  "id": "painting",
+  "digest": "df22d5ce662142915793cb6cba67eeb1335b40a355393391b8b9822c873ecbf8",
+  "entry": {
+    "id": "painting",
+    "title": "One pixel of paint",
+    "topic": "art",
+    "status": "published",
+    "order": 40,
+    "publishedAt": "2026-10-04T20:45:36-05:00",
+    "approval": {
+      "by": "Existing hosted edition carried forward",
+      "at": "2026-10-04",
+      "digest": "df22d5ce662142915793cb6cba67eeb1335b40a355393391b8b9822c873ecbf8"
+    },
+    "evidence": {
+      "kind": "calculation",
+      "scope": "Rijksmuseum photograph resolution. Diagrams, not microscopic image tiles.",
+      "dataAsOf": "January 2022",
+      "checkedAt": "2026-10-04",
+      "reviewDue": "2027-01-04",
+      "sources": [
+        {
+          "label": "Rijksmuseum",
+          "url": "https://www.rijksmuseum.nl/en/press/press-releases/rijksmuseum-publishes-717-gigapixel-photograph-of-the-night-watch",
+          "primary": true
+        }
+      ]
+    },
+    "treatment": {
+      "kind": "custom",
+      "template": "painting"
+    },
+    "share": {
+      "question": "One pixel. 0.005 mm of paint.",
+      "description": "A small question. A surprising discovery. Take a look at weird.stats."
+    },
+    "assets": [
+      {
+        "path": "assets/nightwatch.webp",
+        "rights": {
+          "basis": "Public Domain Mark for faithful reproduction; photographic reproduction rules vary by jurisdiction",
+          "source": "https://commons.wikimedia.org/wiki/File:The_Nightwatch_by_Rembrandt_-_Rijksmuseum.jpg",
+          "attribution": "Rembrandt, The Night Watch; Rijksmuseum / Wikimedia Commons overview reproduction"
+        }
+      }
+    ]
+  },
+  "fragment": "<section class=\"painting-story\" id=\"painting\" aria-labelledby=\"painting-title\">\n  <div class=\"painting-heading\"><p>Let’s get very, very close.</p><h2 id=\"painting-title\">One pixel.<br><span>0.005 mm of paint.</span></h2><p class=\"painting-invitation\">Scroll from the whole painting into a single square millimeter.</p></div>\n  <div class=\"scale-journey\" id=\"scale-journey\">\n    <div class=\"scale-sticky\">\n      <div class=\"scale-panels\">\n        <div class=\"scale-panel scale-whole\" id=\"scale-whole\">\n          <div class=\"scale-copy\"><h3>Start with<br>the whole thing.</h3><p>The Night Watch, by Rembrandt. There’s a lot to look at. We’re heading for a very small part.</p><span class=\"scale-caption\">Overview reproduction</span></div>\n          <figure class=\"scale-visual whole-visual\"><div class=\"overview-crop\"><img src=\"assets/nightwatch.webp\" alt=\"Overview of Rembrandt’s The Night Watch\" width=\"1280\" height=\"1041\" loading=\"lazy\"></div><figcaption>The Night Watch · Rembrandt</figcaption></figure>\n        </div>\n        <div class=\"scale-panel scale-millimeter\" id=\"scale-millimeter\">\n          <div class=\"scale-copy\"><p class=\"scale-measure\">1 mm × 1 mm</p><h3>This tiny patch.<br><span>40,000 pixels.</span></h3><p>At the museum’s image resolution, 200 pixels fit along each edge. That’s 200 × 200.</p><span class=\"scale-caption\">Enlarged scale diagram begins here.</span></div>\n          <figure class=\"scale-visual\"><div class=\"millimeter-square\" role=\"img\" aria-label=\"Mathematical diagram: 200 columns by 200 rows represent 40,000 pixels across one square millimeter of paint\"><div class=\"pixel-matrix\" aria-hidden=\"true\"></div></div><figcaption>200 pixels across · 1 mm of paint</figcaption></figure>\n        </div>\n        <div class=\"scale-panel scale-pixel\" id=\"scale-pixel\">\n          <div class=\"scale-copy\"><p class=\"scale-measure\">0.005 mm × 0.005 mm</p><h3>And this?<br><span>One pixel.</span></h3><p>Each pixel in the museum photograph represents a patch of paint just five thousandths of a millimeter wide.</p><span class=\"scale-caption\">Magnified diagram, not a paint photograph.</span></div>\n          <figure class=\"scale-visual\"><div class=\"pixel-closeup\" role=\"img\" aria-label=\"Ten by ten illustrative pixels, with one pixel highlighted. Each cell represents 0.005 millimeters per side.\"><div class=\"pixel-matrix\" aria-hidden=\"true\"></div><div class=\"chosen-pixel\" aria-hidden=\"true\"></div></div><figcaption>The highlighted square is one pixel.</figcaption></figure>\n        </div>\n      </div>\n      <div class=\"scale-footer\"><p>Overview → scale diagram → one pixel</p><div class=\"scale-controls\" aria-label=\"Painting scale controls\"><button class=\"text-button\" data-scale=\"0\">Whole painting</button><button class=\"text-button\" data-scale=\"1\">One millimeter</button><button class=\"text-button\" data-scale=\"2\">One pixel</button></div><div class=\"scale-progress\" aria-hidden=\"true\"><span></span></div></div>\n    </div>\n  </div>\n  <div class=\"painting-aftermath\"><h3>A very big photograph.<br>For very small details.</h3><div class=\"photograph-facts\"><p><strong>717 billion</strong><span>pixels in the photograph</span></p><p><strong>8,439</strong><span>photographs stitched together</span></p></div><p>The zoom moves from an overview reproduction to mathematical diagrams. It does not display the museum’s full-resolution scan.</p></div>\n  <details class=\"source\"><summary>The receipts</summary><p><a href=\"https://www.rijksmuseum.nl/en/press/press-releases/rijksmuseum-publishes-717-gigapixel-photograph-of-the-night-watch\" target=\"_blank\" rel=\"noopener\">Rijksmuseum, January 2022 ↗</a><br>The museum reports 717 gigapixels, 8,439 photographs, and 0.005 mm per pixel side. Calculation: 1 ÷ 0.005 = 200 pixels per edge; 200 × 200 = 40,000 per square millimeter. Overview reproduction via <a href=\"https://commons.wikimedia.org/wiki/File:The_Nightwatch_by_Rembrandt_-_Rijksmuseum.jpg\" target=\"_blank\" rel=\"noopener\">Wikimedia Commons</a>. The diagram colors do not represent sampled paint.</p></details>\n</section>\n",
+  "assetDigests": {
+    "assets/nightwatch.webp": "e066525b7c63111a3bfdff390cad64b7d71309c0a115828dec1022adbf38c473"
+  },
+  "release": {
+    "at": "2026-10-04T20:45:36-05:00",
+    "authorizedBy": "Existing hosted edition carried forward; evidence in docs/editorial/release-baseline.md"
+  },
+  "provenance": {
+    "reference": "docs/editorial/release-baseline.md; d0bd7d6 records, 0edaeec HTML exactly matched authenticated hosted HTML",
+    "releasedAt": "2026-10-04T20:45:36-05:00",
+    "authorizedBy": "Existing hosted edition carried forward; evidence in docs/editorial/release-baseline.md",
+    "rightsReference": "docs/editorial/asset-provenance-check.md",
+    "sharePresentation": "Unreleased new surface using unchanged original heading; no new factual copy approval"
+  }
+}

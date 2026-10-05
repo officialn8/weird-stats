@@ -89,8 +89,17 @@ export function createDesk({directory=fileURLToPath(root),limits:limitOverrides=
   // A saved promotion reservation is part of the unfinished workload even if interrupted
   // just before its entry write. Count each entry ID once across records and reservations.
   const reservations=(await all(runs)).flatMap(r=>r.promotions??[]).filter(p=>p.state==='reserved'&&!closed.has(p.entryId));
-  const ids=new Set([...items.map(e=>e.id),...reservations.map(p=>p.entryId)]);
-  return {count:ids.size,entries:[...ids].sort().map(id=>{const entry=items.find(e=>e.id===id),candidate=packets.find(c=>c.id===id);return {id,status:entry?.status??'interrupted-promotion',treatmentGaps:candidate?.treatmentGaps??[],createdAt:candidate?.createdAt??null,ageDays:candidate?.createdAt?Math.max(0,Math.floor((clock().getTime()-Date.parse(candidate.createdAt))/86400000)):null};})};
+  const proposalDirectory=join(content,'revisions/proposals'),decisionDirectory=join(content,'revisions/decisions');
+  const proposals=await Promise.all((await jsonFiles(proposalDirectory)).map(file=>readJSON(join(proposalDirectory,file))));
+  const decisions=await Promise.all((await jsonFiles(decisionDirectory)).map(file=>readJSON(join(decisionDirectory,file))));
+  const pending=proposals.filter(p=>!decisions.some(d=>d.id===p.id&&d.digest===p.digest&&['keep','reject'].includes(d.decision)));
+  // An entry with a packet occupies that packet's slot; distinct correction revisions
+  // each consume capacity because each requires a separate human review.
+  const covered=new Set(pending.map(p=>p.id));
+  const ids=new Set([...items.map(e=>e.id),...reservations.map(p=>p.entryId)].filter(id=>!covered.has(id)));
+  const entryRows=[...ids].sort().map(id=>{const entry=items.find(e=>e.id===id),candidate=packets.find(c=>c.id===id);return {id,status:entry?.status??'interrupted-promotion',treatmentGaps:candidate?.treatmentGaps??[],createdAt:candidate?.createdAt??null,ageDays:candidate?.createdAt?Math.max(0,Math.floor((clock().getTime()-Date.parse(candidate.createdAt))/86400000)):null};});
+  const revisionRows=pending.map(p=>({id:p.id,digest:p.digest,status:'revision-review',createdAt:p.createdAt??null,ageDays:p.createdAt?Math.max(0,Math.floor((clock().getTime()-Date.parse(p.createdAt))/86400000)):null}));
+  return {count:entryRows.length+revisionRows.length,entries:[...entryRows,...revisionRows]};
  }
  const api={
   startRun(id) {return mutate(async()=>{checkId(id);const existing=await storedRun(id);if(existing){if(!['active','completed'].includes(existing.status)){existing.attempts=[...(existing.attempts??[]),{finishedAt:existing.finishedAt,summary:existing.summary}];delete existing.finishedAt;delete existing.summary;existing.status='active';existing.events.push({at:now(),action:'resume'});await atomic(runPath(id),existing);return result('created',{id,run:existing,reason:'Resumed the existing run without resetting its budget.'});}return result('unchanged',{id,run:existing});}const run={id,startedAt:now(),status:'active',investigations:[],promotions:[],events:[]};await atomic(runPath(id),run);return result('created',{id,run});});},

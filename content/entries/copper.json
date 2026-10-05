@@ -4,10 +4,11 @@
   "topic": "materials",
   "status": "published",
   "order": 20,
-  "publishedAt": "2026-10-04T00:00:00-05:00",
+  "publishedAt": "2026-10-04T20:45:36-05:00",
   "approval": {
     "by": "Existing hosted edition carried forward",
-    "at": "2026-10-04"
+    "at": "2026-10-04",
+    "digest": "c30200e2edcd9244d8d3165ba29c53841f7516ca5247400f0a2d232fcf8e74e5"
   },
   "evidence": {
     "kind": "calculation",
@@ -26,5 +27,27 @@
   "treatment": {
     "kind": "custom",
     "template": "copper"
-  }
+  },
+  "share": {
+    "question": "Which one has more copper?",
+    "description": "A small question. A surprising discovery. Take a look at weird.stats."
+  },
+  "assets": [
+    {
+      "path": "assets/penny.webp",
+      "rights": {
+        "basis": "Public domain in the United States, U.S. Treasury work per source declaration",
+        "source": "https://commons.wikimedia.org/wiki/File:US_One_Cent_Obv.png",
+        "attribution": "U.S. Treasury"
+      }
+    },
+    {
+      "path": "assets/nickel.webp",
+      "rights": {
+        "basis": "Public domain in the United States, U.S. Treasury work per source declaration",
+        "source": "https://commons.wikimedia.org/wiki/File:US_Nickel_2013_Rev.png",
+        "attribution": "U.S. Mint"
+      }
+    }
+  ]
 }

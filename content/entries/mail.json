@@ -4,10 +4,11 @@
   "topic": "logistics",
   "status": "published",
   "order": 30,
-  "publishedAt": "2026-10-04T00:00:00-05:00",
+  "publishedAt": "2026-10-04T20:45:36-05:00",
   "approval": {
     "by": "Existing hosted edition carried forward",
-    "at": "2026-10-04"
+    "at": "2026-10-04",
+    "digest": "20cb521eda34769f881895c2bfe14ac6755ec93995efa12471aea9e99ef81405"
   },
   "evidence": {
     "kind": "reported",
@@ -26,5 +27,19 @@
   "treatment": {
     "kind": "custom",
     "template": "mail"
-  }
+  },
+  "share": {
+    "question": "The last 9 miles.",
+    "description": "A small question. A surprising discovery. Take a look at weird.stats."
+  },
+  "assets": [
+    {
+      "path": "assets/mule.webp",
+      "rights": {
+        "basis": "Generated decorative illustration carried forward from hosted prototype",
+        "source": "docs/editorial/asset-provenance-check.md",
+        "attribution": "Generated illustration; not documentary photography"
+      }
+    }
+  ]
 }

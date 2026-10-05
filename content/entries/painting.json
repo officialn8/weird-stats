@@ -4,10 +4,11 @@
   "topic": "art",
   "status": "published",
   "order": 40,
-  "publishedAt": "2026-10-04T00:00:00-05:00",
+  "publishedAt": "2026-10-04T20:45:36-05:00",
   "approval": {
     "by": "Existing hosted edition carried forward",
-    "at": "2026-10-04"
+    "at": "2026-10-04",
+    "digest": "df22d5ce662142915793cb6cba67eeb1335b40a355393391b8b9822c873ecbf8"
   },
   "evidence": {
     "kind": "calculation",
@@ -26,5 +27,19 @@
   "treatment": {
     "kind": "custom",
     "template": "painting"
-  }
+  },
+  "share": {
+    "question": "One pixel. 0.005 mm of paint.",
+    "description": "A small question. A surprising discovery. Take a look at weird.stats."
+  },
+  "assets": [
+    {
+      "path": "assets/nightwatch.webp",
+      "rights": {
+        "basis": "Public Domain Mark for faithful reproduction; photographic reproduction rules vary by jurisdiction",
+        "source": "https://commons.wikimedia.org/wiki/File:The_Nightwatch_by_Rembrandt_-_Rijksmuseum.jpg",
+        "attribution": "Rembrandt, The Night Watch; Rijksmuseum / Wikimedia Commons overview reproduction"
+      }
+    }
+  ]
 }

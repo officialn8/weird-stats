@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "releasedAt": "2026-10-04T20:45:36-05:00",
+  "authorizedBy": "Existing hosted edition carried forward; evidence in docs/editorial/release-baseline.md",
+  "entries": [
+    {
+      "id": "crunch",
+      "digest": "58cb3b72be37426fbb7a4a129d7acb0fc1bd9f663093296ec1cb1ba35bb10dc8"
+    },
+    {
+      "id": "copper",
+      "digest": "c30200e2edcd9244d8d3165ba29c53841f7516ca5247400f0a2d232fcf8e74e5"
+    },
+    {
+      "id": "mail",
+      "digest": "20cb521eda34769f881895c2bfe14ac6755ec93995efa12471aea9e99ef81405"
+    },
+    {
+      "id": "painting",
+      "digest": "df22d5ce662142915793cb6cba67eeb1335b40a355393391b8b9822c873ecbf8"
+    }
+  ],
+  "withdrawals": [],
+  "presentation": {
+    "status": "unreleased",
+    "note": "Individual routes, share metadata/images, and changed layout/runtime are a local release candidate requiring separate release authorization. Share titles below reuse original visible headings, not newly approved question copy."
+  }
+}

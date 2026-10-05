@@ -16,7 +16,8 @@
     "build:review": "npm run check && node scripts/build.mjs --drafts",
     "content:new": "node scripts/new-entry.mjs",
     "content:status": "node scripts/status.mjs",
-    "content:candidates": "node scripts/candidates.mjs"
+    "content:candidates": "node scripts/candidates.mjs",
+    "content:review": "node scripts/review-packets.mjs"
   },
   "devDependencies": {
     "@resvg/resvg-js": "2.6.2"

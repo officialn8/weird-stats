@@ -93,5 +93,16 @@
         "feedback": "You got the population comparison. Now look at the seats those states are allocated."
       }
     ]
-  }
+  },
+  "dataReuse": [
+    {
+      "source": "https://www.census.gov/data/tables/2020/dec/2020-apportionment-data.html",
+      "scope": "2020 resident population counts for the 50 states; ranked and summed locally. Senate seat allocation is a factual constitutional rule, cited separately.",
+      "rights": {
+        "basis": "Census Public-Use Statement encourages reuse and replication; derived estimates must identify Census as original data source and distinguish analytical conclusions.",
+        "source": "https://www.census.gov/about/policies/citation.html",
+        "attribution": "U.S. Census Bureau, 2020 Census resident population. Ranking, sum and comparison by weird.stats; conclusions are not Census conclusions."
+      }
+    }
+  ]
 }

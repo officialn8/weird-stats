@@ -94,7 +94,7 @@ test('political evidence rules apply to plain reveals and custom scenes',()=>{
  }
 });
 test('existing custom scene copy and reveal contracts survive context adapters',async()=>{
- const expected={crunch:['Could your ears','id="crunch-answer" hidden','Sound.'],copper:['Which one','class="copper-answer"','sixty pennies'],mail:['Supai','journey-score','replay-journey'],painting:['0.005','40,000','scale-journey']};
+ const expected={crunch:['Could a volume knob','id="crunch-answer" hidden','They came from the same package.'],copper:['Which one','class="copper-answer"','sixty pennies'],mail:['Supai','journey-score','replay-journey'],painting:['0.005','40,000','scale-journey']};
  for(const [id,markers] of Object.entries(expected)) {
   const html=await renderEntry({...publishedFixture(),id,treatment:{kind:'custom',template:id}},null,now);
   for(const marker of markers)assert(html.includes(marker),`${id}: ${marker}`);

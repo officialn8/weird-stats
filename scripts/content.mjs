@@ -69,6 +69,7 @@ export async function renderEntry(entry,next,now=new Date(),context=createPageCo
   return `<section class="data-discovery" data-treatment="${esc(entry.treatment.kind)}" id="${id}" aria-labelledby="${id}-title"><div class="discovery-heading"><p class="edition-note">${entry.status==='review'?'Draft for review · ':''}${esc(e.dataAsOf)}</p><h2 id="${id}-title">${esc(entry.question)}</h2><p>${esc(entry.whyCare)}</p></div>${guess}<details class="discovery-reveal"><summary>${entry.guess?'Show me':'Reveal the discovery'} <span aria-hidden="true">↗</span></summary>${feedback}${definition.answerAfterGraphic?graphic:''}<div class="discovery-answer"><h3>${esc(entry.answer)}</h3><p>${esc(entry.explanation)}</p><p class="discovery-qualification">${esc(entry.qualification)}</p></div>${definition.answerAfterGraphic?'':graphic}</details><div class="discovery-evidence"><p>${reviewState(entry,now)} ${esc(e.checkedAt)} · Data: ${esc(e.dataAsOf)}</p><details class="source"><summary>The receipts</summary><p>${esc(e.scope)}</p>${e.methodology?`<p>${esc(e.methodology)}</p>`:''}${e.denominator?`<p>Denominator: ${esc(e.denominator)}</p>`:''}<ul>${e.sources.map(s=>`<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a></li>`).join('')}</ul></details>${shareControl(entry,page)}</div></section>`;
 }
 export function shareControl(entry,context=createPageContext()) {
+  if(context.privateReview)return `<div class="discovery-share"><a class="text-button" href="${esc(context.discoveryHref(entry.id))}">Open local preview</a><a class="text-button" href="/review.html">Editorial review</a></div>`;
   const {question}=shareCopy(entry),url=context.publicOrigin+context.discoveryHref(entry.id);
   return `<div class="discovery-share" data-share-url="${esc(url)}" data-share-title="${esc(question)}"><button class="text-button" type="button" data-share-button hidden>Share discovery ↗</button><a class="text-button discovery-permalink" data-share-link href="${esc(context.discoveryHref(entry.id))}">Open this discovery</a><span role="status" class="share-status"></span><label data-share-fallback hidden>Discovery link <input type="text" readonly aria-label="Discovery link" value="${esc(url)}"></label></div>`;
 }
@@ -109,7 +110,7 @@ export function fragmentEditorialContent(fragment='') {
   return {text:decodeHTML(text),labels,sources};
 }
 export function contentDigest(entry,{fragment='',assetDigests={}}={}) {
-  const fields=['id','title','topic','question','answer','explanation','qualification','whyCare','evidence','treatment','guess','assets'];
+  const fields=['id','title','topic','question','answer','explanation','qualification','whyCare','evidence','treatment','guess','assets','dataReuse'];
   const subject=Object.fromEntries(fields.filter(k=>entry[k]!==undefined).map(k=>[k,entry[k]]));
   subject.share=shareCopy(entry);
   if(entry.treatment.kind==='custom') subject.fragment=fragmentEditorialContent(fragment);

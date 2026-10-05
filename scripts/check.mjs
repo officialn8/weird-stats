@@ -1,10 +1,14 @@
 import { readFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
-import { root, loadEntries, selectEntries, renderEntry, createPageContext } from './content.mjs';
-import { checkAssets, sceneHead } from './assets.mjs';
+import { root, loadEntries, selectRelease, renderEntry, createPageContext } from './content.mjs';
+import {loadReleaseState,releaseReadiness,verifyWorkingRevision} from './review-packets.mjs';
+import { checkAssets, sceneHead, assetDigests } from './assets.mjs';
 import {validatePublicOrigin} from './share-copy.mjs';
 const entries=await loadEntries();
-const selected=selectEntries(entries,{drafts:true});
+const state=await loadReleaseState();
+const released=selectRelease(entries,state);
+for(const entry of released.entries){const working=entries.find(e=>e.id===entry.id),head=state.revisions.find(r=>r.id===entry.id&&r.digest===working?.approval?.digest);const fragment=entry.treatment.kind==='custom'?await readFile(new URL(`src/exhibits/${entry.treatment.template}.html`,root),'utf8'):'';verifyWorkingRevision(working,head,{fragment,assetDigests:await assetDigests(working)});assert(!releaseReadiness(entry).length,releaseReadiness(entry).join('; '));}
+const selected=selectRelease(entries,{...state,drafts:true}).entries;
 const context=createPageContext({publicOrigin:validatePublicOrigin()});
 function checkAnchors(html) {
  const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
