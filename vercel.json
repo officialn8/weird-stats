@@ -3,6 +3,19 @@
   "framework": null,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/:path(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "weird-stats.vercel.app"
+        }
+      ],
+      "destination": "https://weirdstats.dev/:path",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",

@@ -2,6 +2,22 @@
 
 Set up October 4, 2026.
 
+## Current release — custom domain weirdstats.dev, October 5
+
+The six-discovery edition is live at https://weirdstats.dev. Nate authorized the commit and production deployment. Editorial content is unchanged: before deploying, the live feed entries and the collection, runway and mail pages matched the new build apart from the origin.
+
+- Domain: `weirdstats.dev` was registered at Namecheap on October 5 with nameservers `ns1.vercel-dns.com` and `ns2.vercel-dns.com` (registry RDAP, no DS records). It is the apex production domain of the `weird-stats` project; `www.weirdstats.dev` is a 308 redirect to the apex.
+- The canonical public origin is `https://weirdstats.dev`: the `PUBLIC_SITE_ORIGIN` default, `config/analytics.json` `publicOrigin`, and canonical, share-image and feed URLs. Analytics only initializes on this exact origin.
+- `vercel.json` 308-redirects every path on `weird-stats.vercel.app` to the same path on `weirdstats.dev`. Immutable deployment URLs are unaffected.
+- Deployment: https://weird-stats-7jpc1odh7-nathaniels-projects-cc0e35b9.vercel.app from `16e5056` on `chore/weirdstats-domain`, deployed with `vercel deploy --prod --yes`, aliased to all three hosts. All 85 tests and the build passed.
+- Verified over HTTPS against the apex A record (216.198.79.1): Let's Encrypt certificate for `weirdstats.dev`, valid to January 3, 2027; collection, discovery page, asset, share PNG and feed return 200; `/review.html` and unknown paths return the 404 page; `www` redirects to the apex. Old-host paths, including `/` and slash-ended pages, reach the same page on the new domain in one redirect.
+- DNS propagation was partial at release: Google, Quad9 and OpenDNS resolved the apex; Cloudflare 1.1.1.1 still returned intermittent SERVFAIL from its cache of the period before Vercel served the zone. The page was not browser-tested on the new domain because this Mac uses Cloudflare DNS, and analytics events from the new origin have not been verified in PostHog.
+- A misspelled `weidstats.dev` (plus `www.`) was added in the dashboard before this release. It is unregistered and should be removed from the project and team; its current state was not rechecked.
+
+### Interim deployment and partial outage
+
+The first domain deployment, `weird-stats-2w3kbbuu2` from `e26915d`, was live for about ten minutes before the fix. Its redirect source `/:path*` is compiled strictly when `trailingSlash` is enabled, so it skipped `/` and every slash-ended page but redirected assets, share images, CSVs and the feed. Because `weirdstats.dev` did not resolve yet, pages on `weird-stats.vercel.app` loaded without images, fonts or scripts. The fix uses `/:path(.*)`, checked against Vercel's route compiler before deploying. No rollback was performed. Browsers may have cached those permanent asset redirects; they now resolve to identical files.
+
 ## Current release — analytics activation, October 5
 
 The five-entry edition remains live at https://weird-stats.vercel.app, now with the separately authorized PostHog project enabled.

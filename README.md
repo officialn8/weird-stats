@@ -2,7 +2,7 @@
 
 A scrolling collection of unexpected discoveries. Orange, tactile, and curious, with optional sound and accessible reveals.
 
-[Hosted site](https://weird-stats.vercel.app) · [Private GitHub repository](https://github.com/officialn8/weird-stats) · [Vercel project](https://vercel.com/nathaniels-projects-cc0e35b9/weird-stats)
+[Hosted site](https://weirdstats.dev) · [Private GitHub repository](https://github.com/officialn8/weird-stats) · [Vercel project](https://vercel.com/nathaniels-projects-cc0e35b9/weird-stats)
 
 The current public site contains five discoveries: chips and auditory perception, copper in coins, mule mail to Supai, the scale of the Night Watch photograph, and the California/21-state Senate comparison. The October 5 release includes the approved chip revision and individual share pages. Audience promotion waits for about six strong entries; see the [launch decision](docs/editorial/2026-10-05-launch-decision.md).
 
