@@ -20,7 +20,7 @@ Investigate at most ten candidates per run, promote at most two drafts, and keep
 4. Update the candidate using its current revision token, then promote only promising, adequately sourced work into a content record and dated review note. Pick an available reusable treatment only if it explains the idea. A custom interaction remains appropriate when the mechanism needs it; describe missing assets or code honestly. Do not force every entry into a chart card.
 5. Validate and inspect the draft: `npm run check`, `npm test`, `npm run build:review`, then `npm run dev:review`. Include a concise explanation, visible qualification, sources, data table, and appropriate motion/silent fallback. Keep incomplete work in `draft`; use `review` for a complete review packet.
 6. Give the user the preview and the editorial decision to make: keep, revise, or reject. Record their actual response. Do not mark a candidate approved because it passed a schema check.
-7. Only after explicit approval, record `approval.by` and `approval.at`, set a timezone-bearing `publishedAt`, and change status to `published`. Build/test, review the intended release, and deploy only within the user's release authorization. Git integration remains separately pending approval; do not retry or bypass its earlier rejection.
+7. Only after explicit approval, record `approval.by` and `approval.at`, set a timezone-bearing `publishedAt`, and change status to `published`. Build/test, review the intended release, and deploy only within the user's release authorization. Vercel deploys every push to `main` to production, so merging into `main` is the release step itself.
 
 ## Political and changing data
 

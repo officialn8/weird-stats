@@ -10,7 +10,7 @@ Autocapture, pageview/pageleave capture, recordings, surveys, performance captur
 
 Tracking runs only at the configured production origin, on the collection and released discovery pages. It does not initialize on localhost, previews, review pages, 404s, or withdrawn pages. Do Not Track, Global Privacy Control, and the browser automation flag disable it. A blocked or failed analytics request never blocks a reveal or share.
 
-Configuration: `config/analytics.json`. The project ingestion token is public client configuration, not a personal API credential. `enabled: false` omits analytics initialization and the SDK from generated pages. Rebuild and manually deploy after activation. Never place a personal API key here. See [PostHog configuration](https://posthog.com/docs/libraries/js/config) for the SDK option definitions.
+Configuration: `config/analytics.json`. The project ingestion token is public client configuration, not a personal API credential. `enabled: false` omits analytics initialization and the SDK from generated pages. A configuration change reaches the site with the next production deployment, normally a push to `main`. Never place a personal API key here. See [PostHog configuration](https://posthog.com/docs/libraries/js/config) for the SDK option definitions.
 
 ## Event contract, version 1
 

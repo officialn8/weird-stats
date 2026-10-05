@@ -42,11 +42,11 @@ npm run build
 
 Vercel uses the repository root, the Other framework preset, `npm run build`, and the `dist` output directory. `vercel.json` records these settings. No environment variables, database, paid integration, or runtime service is required.
 
-The GitHub workflow runs tests and the build on pushes and pull requests. The October 5 release was manually deployed and promoted. The main alias is publicly accessible without login; generated deployment URLs may be protected. Check the exact URL rather than assuming protection from a project setting.
+The GitHub workflow runs tests and the build on pushes and pull requests. The production site, https://weirdstats.dev, is publicly accessible without login; generated deployment URLs may be protected. Check the exact URL rather than assuming protection from a project setting.
 
 Cookieless PostHog tracking is active in the dedicated weird.stats project. Production QA verified reveals, continuation, and share intent; QA traffic is excluded from the engagement readout. IP storage, location enrichment, recordings, and person profiles are disabled. See [launch analytics](docs/launch-analytics.md) for the event contract and verification limits.
 
-**Git integration is pending approval:** Vercel is not yet authorized to access this private GitHub repository, so Git pushes do not currently deploy the site. Once connected, branch changes receive previews and the configured production branch supplies production deployments. Until then, deploy from the repository root with the Vercel CLI. Use `--target=preview` explicitly for previews. See [hosting setup](docs/hosting.md).
+**Pushing to `main` deploys production.** Vercel's Git integration is connected: every push to `main`, including a merged pull request, builds and publishes the site immediately, and other branches receive preview deployments. Treat a merge into `main` as a release. The Vercel CLI remains available for previews with `--target=preview`. See [hosting setup](docs/hosting.md).
 
 Research documents, unpublished entries, and their CSV exports are excluded from `dist/`. Drafts are available only in the separate local editorial build. Asset URLs are not fingerprinted, so their cache lifetime is short and must revalidate after expiry.
 

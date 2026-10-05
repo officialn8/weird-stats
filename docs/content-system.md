@@ -41,7 +41,7 @@ The scrolling collection and feed always put the newest discovery first. Publish
 
 `npm run build` creates `dist/` from the exact approved snapshots pinned in `content/releases/current.json`, once the manifest is due. Review markup, draft records, and their generated CSVs do not enter that edition. `npm run build:review` creates `review-dist/`, includes review entries, shows a draft banner, and adds noindex metadata. The review output is ignored by Git and Vercel and is never deployed by the normal build. Noindex is not access control: keep that preview local unless the user explicitly authorizes sharing it.
 
-Selection happens at build time. A future publication timestamp alone does not trigger a rebuild or deployment. The daily automation prepares drafts; it does not publish them. No scheduled Vercel release pipeline is active. Git auto-deployment remains pending separate repository-access approval.
+Selection happens at build time. A future publication timestamp alone does not trigger a rebuild or deployment. The daily automation prepares drafts; it does not publish them. Nothing rebuilds on a schedule, but Vercel rebuilds production on every push to `main`, and that build selects whatever is eligible at that moment.
 
 The dev server rebuilds when content, templates, or public files change; refresh the browser to see the update. It serves the published edition on port 63014 and editorial edition on 63214, bound to localhost. Override with `PORT` if occupied. Restart the dev process after changing generator code under `scripts/`. Python 3 serves files; Node 22 performs generation and change detection.
 
