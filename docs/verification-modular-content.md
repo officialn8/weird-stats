@@ -50,3 +50,9 @@ The Senate reveal headline now includes both seat allocations, and its first cha
 The active version 2 text script now changes the selfie opening and adds the five-foot model result, the historical AAFPRS surgeon-response poll, EFF’s blue-light method, and the ice-cream weight requirement. Primary references are linked in the script and research notes. These revisions remain untested with fresh readers.
 
 This follow-up saves the complete review corrections on `fix/editorial-reveal-review`. No deployment or push was performed; no new claim about live Vercel state is inferred from Git status.
+
+### Mail animation visibility fix
+
+The mule scene and its copy now observe their own visibility instead of a one-shot intersection on the entire intro. Each starts only after 35% of its target is visible; leaving the viewport resets it for a later visit. The postmark and caption share the mule’s trigger. Journey bars stay pending until their own target reaches the threshold, cancel offscreen or in a hidden tab, and can replay on return. Reduced motion shows the complete static result.
+
+Verified in the local browser: at the top, no mule entrance class and zero arrived journey marks; ordinary desktop scrolling activates the mule while the journey remains pending; further scrolling begins the journey at zero marks. Mobile at 390 × 844 shows the mule before starting the lower chart, with no horizontal overflow. Motion-off shows all eight marks and no mule animation. Both builds and ten existing tests pass. No deployment performed.

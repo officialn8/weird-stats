@@ -60,30 +60,84 @@ document.addEventListener('visibilitychange',()=>{duet.classList.toggle('is-paus
 
 }
 if($('#mail')) {
-let journeyTimers=[];
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{
-  if(e.isIntersecting){e.target.classList.add('in-view');observer.unobserve(e.target);}
-}),{threshold:.18});
-$$('.mail-intro').forEach(el=>observer.observe(el));
-function stopJourney(){journeyTimers.forEach(clearTimeout);journeyTimers=[];$('.journey-score').classList.remove('playing');$('#replay-journey').disabled=false;}
-function playJourney(){
-  stopJourney();const bars=$$('.hour-marks i');bars.forEach(el=>el.classList.remove('arrived'));
-  if(reduced()){bars.forEach(el=>el.classList.add('arrived'));$('#journey-status').textContent='3 hours down. 5 hours back. 8 hours total.';return;}
-  $('.journey-score').classList.add('playing');$('#replay-journey').disabled=true;
-  $('#journey-status').textContent='Heading down to Supai…';
-  bars.forEach((bar,i)=>journeyTimers.push(setTimeout(()=>{
+const mail = $('#mail');
+const scene = mail.querySelector('.mule-scene');
+const copy = mail.querySelector('.mail-copy');
+const score = mail.querySelector('.journey-score');
+const replay = $('#replay-journey');
+const journeyStatus = $('#journey-status');
+const bars = [...mail.querySelectorAll('.hour-marks i')];
+let journeyTimers = [], journeyStarted = false;
+const visible = new Map([[scene, false], [copy, false], [score, false]]);
+
+function stopJourney() {
+  journeyTimers.forEach(clearTimeout);
+  journeyTimers = [];
+  score.classList.remove('playing');
+  replay.disabled = false;
+}
+function resetJourney() {
+  stopJourney();
+  journeyStarted = false;
+  bars.forEach(bar => bar.classList.remove('arrived'));
+  journeyStatus.textContent = 'A longer journey home.';
+  replay.innerHTML = 'Watch the round trip <span aria-hidden="true">↗</span>';
+}
+function playJourney() {
+  stopJourney();
+  journeyStarted = true;
+  bars.forEach(bar => bar.classList.remove('arrived'));
+  if(reduced()) {
+    bars.forEach(bar => bar.classList.add('arrived'));
+    journeyStatus.textContent = '3 hours down. 5 hours back. 8 hours total.';
+    return;
+  }
+  score.classList.add('playing');
+  replay.disabled = true;
+  journeyStatus.textContent = 'Heading down to Supai…';
+  bars.forEach((bar,i) => journeyTimers.push(setTimeout(() => {
     bar.classList.add('arrived');
-    $('#journey-status').textContent=i<2?`${i+1} hours into the descent…`:i===2?'3 hours. The mail reaches Supai.':i<7?`${i-2} hours into the return…`:'8 hours total. Back at the rim.';
-    if(i===7){$('#replay-journey').disabled=false;$('#replay-journey').innerHTML='Watch it again <span aria-hidden="true">↺</span>';}
+    journeyStatus.textContent = i<2 ? `${i+1} hours into the descent…` : i===2 ? '3 hours. The mail reaches Supai.' : i<7 ? `${i-2} hours into the return…` : '8 hours total. Back at the rim.';
+    if(i===7) {
+      stopJourney();
+      replay.innerHTML = 'Watch it again <span aria-hidden="true">↺</span>';
+    }
   },(i+1)*650)));
 }
-$('#replay-journey').addEventListener('click',playJourney);
-const journeyObserver=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){playJourney();journeyObserver.disconnect()}},{threshold:.65});
-journeyObserver.observe($('.journey-score'));
-
-document.addEventListener('motionchange',()=>{if(reduced())stopJourney()});
-document.addEventListener('visibilitychange',()=>{if(document.hidden)stopJourney()});
-
+function syncMail() {
+  // Each visual owns its trigger: on mobile the mule sits below the intro text.
+  for(const element of [scene, copy]) {
+    element.classList.toggle('in-view', !document.hidden && visible.get(element));
+  }
+  score.classList.toggle('journey-ready', !reduced());
+  if(reduced()) {
+    stopJourney();
+    bars.forEach(bar => bar.classList.add('arrived'));
+    journeyStatus.textContent = '3 hours down. 5 hours back. 8 hours total.';
+  } else if(!document.hidden && visible.get(score) && !journeyStarted) {
+    playJourney();
+  }
+}
+const mailObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    // isIntersecting alone is true even below the requested threshold.
+    const enoughVisible = entry.isIntersecting && entry.intersectionRatio >= .35;
+    if(enoughVisible) visible.set(entry.target, true);
+    else if(!entry.isIntersecting) {
+      visible.set(entry.target, false);
+      if(entry.target === score) resetJourney();
+    }
+  });
+  syncMail();
+}, {threshold:[0,.35]});
+[scene,copy,score].forEach(element => mailObserver.observe(element));
+replay.addEventListener('click', playJourney);
+document.addEventListener('motionchange', () => { resetJourney(); syncMail(); });
+document.addEventListener('visibilitychange', () => {
+  if(document.hidden) resetJourney();
+  syncMail();
+});
+syncMail();
 }
 if($('#painting')) {
 // The browser owns continuous zoom progress. Buttons offer direct, keyboard-accessible stops.
