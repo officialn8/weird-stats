@@ -152,6 +152,45 @@ test('same-digest approval and repeated release preserve first approval and rele
  const state=await desk.report();assert.equal((await desk.release({entries:state.manifest.entries,expectedManifest:state.manifestDigest,human})).outcome,'created');assert.equal(await readFile(path,'utf8'),bytes);
 });
 
+test('different-digest corrections preserve the earliest release date in approved records and feed',async t=>{
+ const {desk,entry,digest,directory,revision}=await setup(t);
+ const firstReleaseAt='2020-01-02T00:00:00Z';
+ const first={...revision,release:{at:firstReleaseAt,authorizedBy:'Original release'}};
+ const firstPath=join(directory,'content/revisions/approved',entry.id+'-'+digest+'.json');await writeFile(firstPath,JSON.stringify(first));
+ // An older correction may already carry the reset date produced by the previous implementation.
+ const corrected={...entry,answer:'Earlier correction',publishedAt:'2020-05-01T12:00:00Z',approval:{...entry.approval,at:'2020-05-01'}};
+ const correctedDigest=contentDigest(corrected);corrected.approval.digest=correctedDigest;
+ const correctedPath=join(directory,'content/revisions/approved',entry.id+'-'+correctedDigest+'.json');
+ await writeFile(correctedPath,JSON.stringify({id:entry.id,digest:correctedDigest,entry:corrected,release:{at:'2020-05-02T12:00:00Z',authorizedBy:'Earlier correction release'}}));
+ await writeFile(join(directory,'content/entries',entry.id+'.json'),JSON.stringify(corrected));
+ const originals=await Promise.all([firstPath,correctedPath].map(path=>readFile(path,'utf8')));
+ const proposal={...corrected,status:'review',answer:'Latest correction'};delete proposal.approval;delete proposal.publishedAt;
+ const packet=await desk.propose({entry:proposal,baselineDigest:correctedDigest});assert.equal(packet.outcome,'created');
+ assert.equal((await desk.decide(entry.id,packet.packetId,'keep',human)).outcome,'created');
+ let state=await desk.report();const approved=state.revisions.find(r=>r.digest===packet.digest);
+ assert.equal(approved.entry.publishedAt,firstReleaseAt);assert.equal(approved.entry.approval.at,human.at.slice(0,10));
+ assert.equal((await desk.release({entries:[{id:entry.id,digest:packet.digest}],expectedManifest:state.manifestDigest,human})).outcome,'created');
+ const second=await desk.propose({entry:{...proposal,answer:'Another correction'},baselineDigest:packet.digest});
+ const laterHuman={...human,at:now.toISOString()};assert.equal((await desk.decide(entry.id,second.packetId,'keep',laterHuman)).outcome,'created');
+ state=await desk.report();const secondApproved=state.revisions.find(r=>r.digest===second.digest);
+ assert.equal(secondApproved.entry.publishedAt,firstReleaseAt);
+ assert.equal((await desk.release({entries:[{id:entry.id,digest:second.digest}],expectedManifest:state.manifestDigest,human:laterHuman})).outcome,'created');
+ state=await desk.report();const output=pathToFileURL(join(directory,'corrected-output')+'/');
+ await build({records:[secondApproved.entry],manifest:state.manifest,revisions:state.revisions,output,now});
+ const feed=JSON.parse(await readFile(new URL('feed.json',output),'utf8'));assert.equal(feed.entries[0].publishedAt,firstReleaseAt);
+ assert.deepEqual(await Promise.all([firstPath,correctedPath].map(path=>readFile(path,'utf8'))),originals);
+});
+
+test('new-entry approval uses the human timestamp and unreleased corrections retain it',async t=>{
+ const {desk,directory}=await setup(t);const entry=reviewFixture();
+ await writeFile(join(directory,'content/entries',entry.id+'.json'),JSON.stringify(entry));
+ const packet=await desk.propose({entry});assert.equal((await desk.decide(entry.id,packet.packetId,'keep',human)).outcome,'created');
+ let state=await desk.report();assert.equal(state.revisions.find(r=>r.digest===packet.digest).entry.publishedAt,human.at);
+ const correction=await desk.propose({entry:{...entry,answer:'Corrected before release'},baselineDigest:packet.digest});
+ assert.equal((await desk.decide(entry.id,correction.packetId,'keep',{...human,at:'2020-06-02T00:00:00Z'})).outcome,'created');
+ state=await desk.report();assert.equal(state.revisions.find(r=>r.digest===correction.digest).entry.publishedAt,human.at);
+});
+
 test('release must preserve public IDs and withdrawal notices until explicitly restored',async t=>{
  const {desk,entry,digest,directory,revision}=await setup(t);
  await writeFile(join(directory,'content/revisions/approved',entry.id+'-'+digest+'.json'),JSON.stringify({...revision,release:{at:'2020-01-01T00:00:00Z',authorizedBy:'Original release'}}));

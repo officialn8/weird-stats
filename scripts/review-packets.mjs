@@ -102,7 +102,9 @@ export function createReviewDesk({directory=fileURLToPath(root),clock=()=>new Da
    const material=await subject(packet.entry,packet.fragment);assert(contentDigest(packet.entry,material)===digest,'Assets changed after review');
    const stored=await json(approvedPath(entryId,digest));
    if(stored)assert(stored.id===entryId&&stored.digest===digest&&stored.entry.approval?.digest===digest&&contentDigest(stored.entry,stored)===digest,'Existing approved snapshot does not match its identity');
-   const entry=stored?.entry??{...packet.entry,status:'published',publishedAt:human.at,approval:{by:human.by,at:human.at.slice(0,10),digest,inputReference:human.inputReference,note:human.note}};
+   const firstRelease=stored?null:(await rows(approved)).filter(r=>r.id===entryId&&r.release?.authorizedBy&&Number.isFinite(Date.parse(r.release.at))).sort((a,b)=>Date.parse(a.release.at)-Date.parse(b.release.at))[0]?.release.at;
+   const publishedAt=firstRelease??(packet.baselineDigest?current?.publishedAt:null)??human.at;
+   const entry=stored?.entry??{...packet.entry,status:'published',publishedAt,approval:{by:human.by,at:human.at.slice(0,10),digest,inputReference:human.inputReference,note:human.note}};
    if(!stored)await atomic(approvedPath(entryId,digest),{id:entryId,digest,entry,...material});
    if(entry.treatment.kind==='custom')await atomic(join(base,'src/exhibits',entry.treatment.template+'.html'),stored?.fragment??material.fragment);
    await atomic(entryPath(entryId),entry);
