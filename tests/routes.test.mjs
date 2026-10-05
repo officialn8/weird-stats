@@ -60,6 +60,15 @@ test('the collection head carries the approved link preview in its initial HTML,
  const cards=await readdir(new URL('share/',out));assert.deepEqual(cards,['fixture-published.png','fixture-second.png']);
  for(const card of cards)assert(!png.equals(await readFile(new URL(`share/${card}`,out))),`${card} must differ from the collection card`);
 });
+// Production builds run no tests, so the build itself refuses link-preview copy that differs from the approval record.
+test('a build with unapproved home-preview copy throws before replacing prior output',async t=>{
+ const out=await output(t),options={now,records:[publishedFixture()],output:out,publicOrigin:'https://example.org'};
+ await build({...options,homeCopy:{...collectionCopy}});
+ const before=await readFile(new URL('index.html',out),'utf8'),files=await readdir(out,{recursive:true});
+ for(const [field,value] of [['title','weird.stats: wonderfully necessary discoveries'],['description','Sourced numbers about the world.'],['alt','weird.stats: A collection.'],['headline','Wonderfully unnecessary findings.'],['version',2]])
+  await assert.rejects(build({...options,homeCopy:{...collectionCopy,[field]:value}}),/home preview needs a new version and a new approval record/,field);
+ assert.equal(await readFile(new URL('index.html',out),'utf8'),before);assert.deepEqual(await readdir(out,{recursive:true}),files);
+});
 test('discovery previews keep their exact metadata and card bytes',async t=>{
  const entry=publishedFixture(),out=await output(t);await build({now,records:[entry],output:out,publicOrigin:'https://example.org'});
  const head=(await page(out,entry.id)).split('</head>')[0];

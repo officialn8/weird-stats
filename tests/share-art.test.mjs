@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {shareSVG,shareLayout,renderShareImage,shareArtwork,collectionShareSVG,renderCollectionShareImage} from '../scripts/share-images.mjs';
-import {collectionCopy,collectionImagePath,approvedCollectionImageSha256} from '../scripts/collection-copy.mjs';
+import {collectionCopy,collectionImagePath,approvedCollectionImageSha256,approvedCollectionCopySha256,serializeCollectionCopy,collectionCopySha256,approvedCollectionPreview} from '../scripts/collection-copy.mjs';
 import {shareCopy} from '../scripts/share-copy.mjs';
 import {loadEntries,esc} from '../scripts/content.mjs';
 import {publishedFixture,reviewFixture} from './fixtures/entries.mjs';
@@ -93,6 +93,48 @@ test('the collection card renders byte-for-byte as the approved version-1 PNG',(
  assert.equal(collectionCopy.version,1,'a new version needs its own approval record and approved hash');
  assert.match(approvedCollectionImageSha256,/^[0-9a-f]{64}$/);
  assert.equal(createHash('sha256').update(renderCollectionShareImage()).digest('hex'),approvedCollectionImageSha256);
+});
+// og:title, og:description and alt never reach the PNG, so the image hash alone cannot hold them to the approval.
+test('the approved collection copy is pinned by a canonical hash that covers every field',()=>{
+ assert.match(approvedCollectionCopySha256,/^[0-9a-f]{64}$/);
+ assert.equal(collectionCopySha256(),approvedCollectionCopySha256);
+ assert.equal(serializeCollectionCopy(Object.fromEntries(Object.entries(collectionCopy).reverse())),serializeCollectionCopy(),'key order does not change the canonical form');
+ for(const field of Object.keys(collectionCopy)){
+  const edited={...collectionCopy,[field]:field==='version'?2:collectionCopy[field]+' Again.'};
+  assert.notEqual(collectionCopySha256(edited),approvedCollectionCopySha256,field+' is pinned');
+ }
+ assert.throws(()=>serializeCollectionCopy({...collectionCopy,kicker:'Something new.'}),/unpinned field kicker/,'a new field cannot ship outside the pin');
+});
+test('the home preview is released only when its copy and rendered PNG both match the approval pins',()=>{
+ const approval=/home preview needs a new version and a new approval record/;
+ const {path,png}=approvedCollectionPreview(collectionCopy,renderCollectionShareImage);
+ assert.equal(path,collectionImagePath());assert.equal(createHash('sha256').update(png).digest('hex'),approvedCollectionImageSha256);
+ let rendered=false;
+ for(const field of ['title','description','alt'])assert.throws(()=>approvedCollectionPreview({...collectionCopy,[field]:collectionCopy[field]+' Updated.'},()=>{rendered=true;}),approval,field+' edits need approval');
+ assert(!rendered,'copy is refused before any card is rendered');
+ assert.throws(()=>approvedCollectionPreview(collectionCopy,()=>Buffer.from('a redrawn card')),approval,'a card that renders differently needs approval');
+});
+test('the approval record names exactly the pinned strings and image hash',async()=>{
+ const record=await readFile(new URL('../docs/editorial/2026-10-05-home-preview-approval.md',import.meta.url),'utf8');
+ const rows=new Map([...record.matchAll(/^\| (.+?) \| (.+?) \|$/gm)].map(m=>[m[1],m[2]]));
+ const labels={title:'Link title (`og:title`)',description:'Description (`og:description`)',headline:'Image headline',subline:'Image sub-line',footer:'Image footer',alt:'Alt text (`og:image:alt`, `twitter:image:alt`)'};
+ const approved={version:Number(record.match(/^# Home-page preview card, version (\d+)$/m)?.[1])};
+ for(const [field,label] of Object.entries(labels)){
+  assert(rows.has(label),'approval record row: '+label);approved[field]=rows.get(label);
+  assert(record.includes(collectionCopy[field]),field+' appears verbatim in the approval record');
+ }
+ // The record shows the footer as drawn, followed by the card's fixed arrow glyph.
+ assert(approved.footer.endsWith(' ↗'));approved.footer=approved.footer.slice(0,-2);
+ assert.deepEqual(approved,{...collectionCopy});
+ assert.equal(collectionCopySha256(approved),approvedCollectionCopySha256,'the copy pin is the hash of the recorded strings');
+ assert(record.includes('**SHA-256:** `'+approvedCollectionImageSha256+'`'),'the image pin is the recorded SHA-256');
+ assert(record.includes('**Path:** `'+collectionImagePath()+'`'));
+});
+// Discovery cards share card() and shareLayout() with the home card; a frame change re-renders every published
+// discovery card, so the generic fixture card is pinned. It embeds no raster artwork, so only the renderer can move it.
+test('a generic discovery share card renders byte-for-byte as its golden PNG',async()=>{
+ assert(!(await shareSVG(publishedFixture())).includes('<image'));
+ assert.equal(createHash('sha256').update(await renderShareImage(publishedFixture())).digest('hex'),'2756a190d1f0691d34d284d06658277e220005f7a1c0679c25fa86b23b029247');
 });
 test('collection copy that would overflow the card throws instead of clipping',()=>{
  assert.throws(()=>collectionShareSVG({...collectionCopy,headline:'Wonderfully unnecessary discoveries, '.repeat(3).trim()}),/Collection headline does not fit/);

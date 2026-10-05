@@ -32,4 +32,4 @@ The square crop cuts off the headline and wordmark, as the discovery cards' layo
 
 ## Changing the card
 
-Any change to these strings or the art is a new version: a new `version` in `scripts/collection-copy.mjs`, which publishes under a new filename, plus a new approval record with the exact strings and the new image's SHA-256. A test pins the approved hash, so an unapproved change to the rendered card fails CI. Crawlers cache previews by URL and cannot be recalled, so a published version is never overwritten.
+Any change to these strings or the art is a new version: a new `version` in `scripts/collection-copy.mjs`, which publishes under a new filename, plus a new approval record with the exact strings and the new image's SHA-256. A test pins the approved hash, so an unapproved change to the rendered card fails CI. Crawlers cache previews by URL and cannot be recalled, so a published version is never overwritten. The build emits only the current version, so after a version change an older shared link loses its image if a platform re-fetches it; keep emitting the previous approved file at that point if old shares matter.
