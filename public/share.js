@@ -26,8 +26,9 @@
         track('manual','fallback');
       } finally {button.disabled=false;}
     });
-    // The ordinary canonical link remains usable without JavaScript.
-    link.href=control.dataset.shareUrl;
+    // The relative link in the HTML works without JavaScript. Only the canonical origin swaps in the
+    // canonical URL; localhost and previews keep the relative link so navigation stays on them.
+    if(control.dataset.shareUrl.startsWith(location.origin+'/'))link.href=control.dataset.shareUrl;
   }
   document.querySelectorAll('[data-share-url]').forEach(initialize);
 })();
