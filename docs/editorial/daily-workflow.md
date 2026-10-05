@@ -2,6 +2,8 @@
 
 The hosted site is the foundation of an ongoing publication. Preserve its orange identity, continuous scrolling, surprise/reveal rhythm, and custom interactivity while expanding the range of subjects. The user explicitly chose **daily drafts for review**, not automatic publication.
 
+New discoveries go at the top of the continuous-scroll collection automatically. Prepare an exact review packet so the preview has a stable first-review date; do not use manual `order` edits or source-check dates to promote older discoveries.
+
 ## Cadence
 
 Current priority from the [October 5 launch decision](2026-10-05-launch-decision.md): prepare a strong sixth discovery before audience promotion. Five entries are approved for the public edition, and all four earlier packets received explicit keep decisions. Research can continue before independent reader testing; do not treat this as evidence that the opener or visual treatments are validated. Preserve human review for every new draft.

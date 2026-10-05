@@ -16,6 +16,7 @@ export function bearingShift({esc,required}) {
   },
   render(entry) {
    const t=entry.treatment,e=entry.evidence,start=designation(t.from),end=designation(t.to);
+   const plane='M0 62C-7 56-9 42-9 23L-59-9V-18L-9 0V-32L-28-48V-54L-6-46V-59H6V-46L28-54V-48L9-32V0L59-18V-9L9 23C9 42 7 56 0 62Z';
    const stripes=Array.from({length:5},(_,i)=>`<rect x="${229+i*12}" y="131" width="6" height="36"/><rect x="${310+i*12}" y="131" width="6" height="36"/>`).join('');
    return `<section class="data-discovery runway-story" id="${esc(entry.id)}" data-treatment="bearing-shift" data-from="${t.from}" data-to="${t.to}" data-true-bearing="${t.trueBearing}" data-duration="${t.duration}" aria-labelledby="${esc(entry.id)}-title">
     <div class="runway-inner">
@@ -38,6 +39,14 @@ export function bearingShift({esc,required}) {
         <text class="runway-painted-number" x="300" y="268" text-anchor="middle" fill="#fff8ee" font-family="Outfit, sans-serif" font-size="104" font-weight="700">${start}</text>
         <path d="M196 110V554M402 110V554" stroke="#ff893e" stroke-width="3" stroke-dasharray="2 25"/>
         <g class="runway-magnetic" transform="rotate(${t.trueBearing-t.from} 300 328)"><path d="M300 326V28" stroke="#ff893e" stroke-width="2"/><path d="M290 45L300 23L310 45" stroke="#ff893e" stroke-width="2"/><circle cx="300" cy="328" r="6" fill="#ff893e"/></g>
+        <path class="runway-plane-shadow" d="${plane}" fill="#07110a" opacity="0"/>
+        <g class="runway-plane" opacity="0">
+         <path d="${plane}" fill="#fff8ee" stroke="#babeb3" stroke-width="1.5" stroke-linejoin="round"/>
+         <path d="M-6 34Q0 42 6 34L5 26Q0 30-5 26Z" fill="#263b3b"/>
+         <path d="M0-52V18" stroke="#ff893e" stroke-width="4"/>
+         <rect x="-28" y="1" width="9" height="21" rx="4" fill="#d7dfd3"/><rect x="19" y="1" width="9" height="21" rx="4" fill="#d7dfd3"/>
+         <path d="M-58-13H-50M50-13H58" stroke="#ff893e" stroke-width="3"/>
+        </g>
        </svg>
        <div class="runway-number-plate"><span>RUNWAY</span><strong class="runway-sign-number">${start}</strong><span class="runway-sign-change" hidden>NUMBER UPDATED</span></div>
        <div class="runway-bearing-readout"><span>Magnetic heading</span><strong><span class="runway-heading-value">${t.from.toFixed(1)}</span>°</strong></div>

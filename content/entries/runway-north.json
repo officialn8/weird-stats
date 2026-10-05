@@ -2,7 +2,7 @@
   "id": "runway-north",
   "title": "Same runway. New number.",
   "topic": "navigation",
-  "status": "review",
+  "status": "published",
   "order": 50,
   "question": "Why would an airport repaint a runway that hasn’t moved?",
   "answer": "Magnetic north moved. The runway stayed put.",
@@ -48,12 +48,20 @@
     "exampleLabel": "Illustrative headings, not measurements from Tampa."
   },
   "editorial": {
-    "stage": "interactive study for review",
+    "stage": "approved for release",
     "visualReady": true,
-    "conceptDecision": "Nate kept the runway concept on October 5, 2026; see docs/editorial/batches/2026-10-05.md#creator-decision. Final treatment remains unapproved."
+    "conceptDecision": "Nate kept the runway concept on October 5, 2026; see docs/editorial/batches/2026-10-05.md#creator-decision. Final treatment remains unapproved. Nate subsequently authorized shipping the reviewed implementation on October 5; see its approval record."
   },
   "share": {
     "question": "Why would an airport repaint a runway that hasn’t moved?",
     "description": "Same strip of tarmac. A different number. Discover why at weird.stats."
+  },
+  "publishedAt": "2026-10-05T15:34:20.052Z",
+  "approval": {
+    "by": "Nate",
+    "at": "2026-10-05",
+    "digest": "dd44e7e04167969a988a72886e38ce70bab0a28d3c02a25ddf2c064e72a7c2c9",
+    "inputReference": "Codex chat 01a108bc-4331-75d3-b8d2-1f4892e8f1bd, October 5, 2026: \"commit, push, merge, and deploy\"",
+    "note": "Explicit instruction to ship the reviewed collection after adding the runway landing animation and newest-first ordering; authorizes this runway revision and its public release. No automated future approval or Vercel Git integration is authorized."
   }
 }

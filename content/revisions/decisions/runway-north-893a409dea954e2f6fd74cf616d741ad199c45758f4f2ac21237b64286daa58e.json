@@ -1,0 +1,12 @@
+{
+  "id": "runway-north",
+  "packetId": "893a409dea954e2f6fd74cf616d741ad199c45758f4f2ac21237b64286daa58e",
+  "digest": "dd44e7e04167969a988a72886e38ce70bab0a28d3c02a25ddf2c064e72a7c2c9",
+  "decision": "keep",
+  "human": {
+    "by": "Nate",
+    "at": "2026-10-05T15:34:20.052Z",
+    "inputReference": "Codex chat 01a108bc-4331-75d3-b8d2-1f4892e8f1bd, October 5, 2026: \"commit, push, merge, and deploy\"",
+    "note": "Explicit instruction to ship the reviewed collection after adding the runway landing animation and newest-first ordering; authorizes this runway revision and its public release. No automated future approval or Vercel Git integration is authorized."
+  }
+}

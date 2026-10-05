@@ -1,3 +1,4 @@
+import {newestFirst} from './collection-order.mjs';
 import { mkdir, rm, readFile, writeFile } from 'node:fs/promises';
 import { root, loadEntries, selectRelease, renderEntry, csv, validate, createPageContext, contentDigest, esc } from './content.mjs';
 import { getTreatment } from '../src/treatments/registry.mjs';
@@ -31,6 +32,7 @@ export async function build({drafts=false,now=new Date(),records,manifest,revisi
   const previewPackets=review?.packets.filter(p=>['pending','revise'].includes(p.state)&&p.entry.status==='review')??[];
   const proposalFragments=new Map();
   for(const entryId of new Set(previewPackets.map(p=>p.id))){const eligible=previewPackets.filter(p=>p.id===entryId&&p.state==='pending'&&!p.conflict);if(eligible.length===1){const packet=eligible[0],index=selection.entries.findIndex(e=>e.id===entryId);if(index>=0)selection.entries[index]=packet.entry;else selection.entries.push(packet.entry);selection.revisions.delete(entryId);proposalFragments.set(entryId,packet.fragment);}}
+  selection.entries=newestFirst(selection.entries,{revisions,packets:review?.packets});
   const {entries,withdrawals}=selection;
   const analyticsConfig=analytics??(production?await loadAnalyticsConfig():null);
   const tracking=eligible=>analyticsHead(analyticsConfig,{drafts,entries:eligible,publicOrigin});

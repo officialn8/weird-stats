@@ -31,7 +31,7 @@ test('runway motion waits for reveal and visibility; scrub, reduced motion, repl
  const entry=new Element(),visual=new Element(),reveal=new Element(),range=new Element(),replay=new Element();reveal.open=false;
  entry.dataset={from:'184',to:'186',trueBearing:'180',duration:'4000'};
  entry.nodes={'.runway-visual':visual,'.discovery-reveal':reveal,'input[type="range"]':range,'.runway-replay':replay};
- for(const s of ['.runway-magnetic','.runway-heading-value','.runway-painted-number','.runway-sign-number','.runway-sign-change','.runway-announcement','.runway-controls'])entry.nodes[s]=new Element();
+ for(const s of ['.runway-magnetic','.runway-heading-value','.runway-painted-number','.runway-sign-number','.runway-sign-change','.runway-announcement','.runway-controls','.runway-plane','.runway-plane-shadow'])entry.nodes[s]=new Element();
  const media=new EventTarget();media.matches=false;
  let siteReduced=false,observer,disconnected=false,next=0;const frames=new Map();
  const document=new EventTarget();document.hidden=false;document.body={classList:{contains:()=>siteReduced}};document.querySelectorAll=()=>[entry];
@@ -44,8 +44,11 @@ test('runway motion waits for reveal and visibility; scrub, reduced motion, repl
  advance(0);advance(1000);assert.equal(range.value,'25');
  observer.pause();assert.equal(frames.size,0,'offscreen pauses');observer.play();advance(10000);assert.equal(range.value,'25','resume excludes time offscreen');advance(11000);assert.equal(entry.nodes['.runway-sign-number'].textContent,'19');
  range.value='10';range.dispatchEvent(new Event('input'));assert.equal(frames.size,0);assert.equal(entry.nodes['.runway-sign-number'].textContent,'18');observer.pause();observer.play();assert.equal(frames.size,0,'manual scrubbing takes over');
- replay.dispatchEvent(new Event('click'));assert.equal(range.value,'0');advance(12000);advance(16000);assert.equal(range.value,'100');assert.equal(frames.size,0);
- replay.dispatchEvent(new Event('click'));siteReduced=true;document.dispatchEvent(new Event('motionchange'));assert.equal(frames.size,0);assert.equal(range.value,'100');assert.equal(replay.disabled,true);
+ replay.dispatchEvent(new Event('click'));assert.equal(range.value,'0');advance(12000);advance(16000);assert.equal(range.value,'100');assert.equal(entry.nodes['.runway-plane'].attributes.opacity,'0','plane waits until the shift finishes');
+ advance(17000);assert.equal(entry.nodes['.runway-plane'].attributes.opacity,'1');
+ const airborne=entry.nodes['.runway-plane'].attributes.transform;observer.pause();assert.equal(frames.size,0);observer.play();advance(50000);assert.equal(entry.nodes['.runway-plane'].attributes.transform,airborne,'landing resumes without jumping');
+ advance(53600);assert.equal(entry.nodes['.runway-plane'].attributes.transform,'translate(300 450) scale(0.6)');assert.equal(frames.size,0);
+ replay.dispatchEvent(new Event('click'));siteReduced=true;document.dispatchEvent(new Event('motionchange'));assert.equal(frames.size,0);assert.equal(range.value,'100');assert.equal(replay.disabled,true);assert.equal(entry.nodes['.runway-plane'].attributes.transform,'translate(300 450) scale(0.6)');
  range.value='0';range.dispatchEvent(new Event('input'));assert.equal(entry.nodes['.runway-sign-number'].textContent,'18','motion off still allows direct manipulation');
  media.matches=true;media.dispatchEvent(new Event('change'));siteReduced=false;document.dispatchEvent(new Event('motionchange'));assert.equal(replay.disabled,true);
  media.matches=false;media.dispatchEvent(new Event('change'));assert.equal(replay.disabled,false);
@@ -64,7 +67,7 @@ const entry=new El(),visual=new El(),reveal=new El(),slider=new El(),button=new 
 reveal.open=false;
 entry.dataset={from:'184',to:'186',trueBearing:'180',duration:'4000'};
 entry.nodes={'.runway-visual':visual,'.discovery-reveal':reveal,'input[type="range"]':slider,'.runway-replay':button};
-for(const n of ['magnetic','heading-value','painted-number','sign-number','sign-change','announcement','controls'])entry.nodes['.runway-'+n]=new El();
+for(const n of ['magnetic','heading-value','painted-number','sign-number','sign-change','announcement','controls','plane','plane-shadow'])entry.nodes['.runway-'+n]=new El();
 const media=new EventTarget();media.matches=true;
 const document=new EventTarget();document.hidden=false;document.body={classList:{contains:()=>false}};document.querySelectorAll=()=>[entry];
 const window=new EventTarget(),observers=[];

@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "releasedAt": "2026-10-05T05:54:45.436Z",
+  "releasedAt": "2026-10-05T15:34:20.052Z",
   "authorizedBy": "Nate",
-  "inputReference": "docs/editorial/2026-10-05-launch-decision.md",
-  "note": "Human instruction in this chat: \"Approve the four proposals and deploy, so the public sees the new chip, the copper, the painting zoom and eventually the Senate chairs.\" Applies to the four pending proposals listed in the launch decision record.",
+  "inputReference": "Codex chat 01a108bc-4331-75d3-b8d2-1f4892e8f1bd, October 5, 2026: \"commit, push, merge, and deploy\"",
+  "note": "Explicit instruction to ship the reviewed collection after adding the runway landing animation and newest-first ordering; authorizes this runway revision and its public release. No automated future approval or Vercel Git integration is authorized.",
   "entries": [
     {
       "id": "crunch",
@@ -24,6 +24,10 @@
     {
       "id": "same-two-seats",
       "digest": "af60e186be0cac71a5acf5a2ceab828c0cef027708dcafbb74fc5150b90f50d0"
+    },
+    {
+      "id": "runway-north",
+      "digest": "dd44e7e04167969a988a72886e38ce70bab0a28d3c02a25ddf2c064e72a7c2c9"
     }
   ],
   "withdrawals": []

@@ -394,3 +394,5 @@ body.reduce-motion .crunch-wave i{transform:scaleY(.08)!important}
 @media(max-width:767px){.runway-story.data-discovery{padding:56px 22px}.runway-inner{grid-template-columns:1fr}.runway-intro :is(h1,h2){font-size:clamp(43px,10.5vw,70px)}.runway-kicker{margin-bottom:22px}.runway-tease{font-size:17px;margin-top:20px}.runway-visual{position:relative;top:auto;grid-column:1;grid-row:3;margin-top:26px;max-width:430px;justify-self:center}.runway-reveal{grid-row:2;margin-top:22px}.runway-receipts{grid-row:4}.runway-sign-number{font-size:clamp(83px,24vw,118px)}.runway-bearing-readout strong{font-size:30px}.runway-answer h3{font-size:35px}.runway-reveal>summary{width:100%}.runway-scene{aspect-ratio:600/610}.runway-visual figcaption{font-size:11px}}
 
 .runway-inner:not(:has(.runway-reveal[open])) .runway-controls{display:none}
+
+.runway-plane,.runway-plane-shadow{pointer-events:none}.runway-inner:not(:has(.runway-reveal[open])) :is(.runway-plane,.runway-plane-shadow){visibility:hidden}
