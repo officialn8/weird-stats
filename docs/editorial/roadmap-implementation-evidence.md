@@ -32,7 +32,7 @@ Three read-only reviewers examined reuse, quality and efficiency. Applied two sh
 2. Observe seven actual research runs before changing drafting limits. Test data and this implementation session do not count.
 3. After the dependent units are ready, decide whether the homepage opens on the continuous collection or the latest Spread, and rehearse seven dated Spreads with at least one first-publication discovery each. Do not claim a fresh daily reader edition before that gate.
 4. Review editorial proposals and explicitly authorize any release. Individual pages and PNGs are local release candidates; no deployment was performed in this task.
-5. On an authorized deployment, test anonymous page/image access and an actual social preview. Existing deployment protection makes authenticated local/CLI inspection insufficient.
+5. On an authorized deployment, test anonymous page/image access and an actual social preview. The existing production homepage is public (verified anonymously October 5). New route/image access and social previews still need checks on the actual deployment; local/CLI inspection is insufficient.
 
 The migrated mail and painting share titles retain their old released headings; those are not the intended question-led previews. The private proposals show the new questions. Their review and separate release authorization remain blockers for publicly rolling out the new share surfaces. Restoring the verified baseline is not approval of those older hooks as the final design.
 
@@ -46,7 +46,7 @@ All eight findings were applied and verified. Review instances now preserve deci
 
 Final integration on October 5 passed `npm run check`, all 67 tests, `npm run build`, `npm run build:review`, and `git diff --check`. A final test run left the timestamps and sizes of all 64 generated files unchanged. The public build contains four pinned discoveries; the private build contains five. The Senate draft now has an exact private packet, so the queue contains four pending proposals, zero unpacketized drafts and four of five occupied slots. No human approval or release decision was invented. No push or deployment occurred.
 
-Final browser checks confirmed the paired reveal and Motion off disabling Replay, a 390-pixel layout with no horizontal overflow, the mail's derived 3h/5h/8h narration and eight marks, and copper's approved answer with 60 generated pennies. Browser warnings/errors were empty. A screenshot is saved locally at `artifacts/preview-paired-comparison.jpg` (ignored by Git). Native sharing stayed pending in the in-app browser during an earlier check, so actual native sharing remains unverified despite passing fallback tests. OS reduced-motion emulation, JavaScript-disabled browser reading and anonymous hosted/social checks remain explicit coverage limits.
+Final browser checks confirmed the paired reveal and Motion off disabling Replay, a 390-pixel layout with no horizontal overflow, the mail's derived 3h/5h/8h narration and eight marks, and copper's approved answer with 60 generated pennies. Browser warnings/errors were empty. A screenshot is saved locally at `artifacts/preview-paired-comparison.jpg` (ignored by Git). Native sharing stayed pending in the in-app browser during an earlier check, so actual native sharing remains unverified despite passing fallback tests. OS reduced-motion emulation, JavaScript-disabled browser reading and new hosted-route/social checks remain explicit coverage limits. The existing production homepage was subsequently verified as anonymously accessible on October 5.
 
 ## Requirement status
 
@@ -68,3 +68,5 @@ Final browser checks confirmed the paired reveal and Motion off disabling Replay
 For the next authorized preview, the implementer should verify every pinned discovery route, image and export, plus a never-public ID and a withdrawal. Confirm the public build contains no review index, draft data or private media. Exercise reveal, silent reading, reduced motion, mobile layout and onward navigation on the deployed origin. Record the deployment ID alongside the manifest revision.
 
 During that preview session, a draft leak, wrong pinned copy, missing preview image, broken reveal or failed source link is a release blocker. Preserve the previous release and correct the candidate before promotion. If an authorized release regresses, restore the preceding complete release artifact, including HTML, metadata, images and data exports. The creator owns release authorization; the implementer owns these checks. No unattended production monitoring or unverified analytics baseline is claimed.
+
+See [the pre-deploy follow-up](2026-10-05-pre-deploy-review.md) for the corrected access status, share-card redesign, consistent guesses and simpler review surface.

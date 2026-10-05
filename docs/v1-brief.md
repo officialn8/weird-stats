@@ -23,7 +23,7 @@ This brief incorporates the October 4 conversation and narrows the [original ide
 ## The first visit
 
 1. **Arrive at a curiosity.** A featured question, an expressive visual, and a visible action occupy the opening screen. A brief description establishes the site. The collection begins within easy scrolling distance.
-2. **Reveal it.** One tap gives the answer. An optional choice or guess can precede the same reveal. There is no score, timer, or penalty.
+2. **Reveal it.** One tap gives the answer. An optional choice or guess can precede the same reveal. Choosing records the guess without revealing; the separate reveal action works with or without a guess. There is no score, timer, or penalty.
 3. **Understand it.** A prominent number and a short explanation make the discovery clear. Any qualification needed to keep the claim true appears here. Sources and calculations expand below.
 4. **Keep wandering.** Scrolling brings the next discovery into view. Optional related links offer a second route. Back returns to the previous place and state.
 5. **Browse or share.** A collection view exposes the range of entries. Each stat has a direct link; someone arriving through it can discover the rest of the site.

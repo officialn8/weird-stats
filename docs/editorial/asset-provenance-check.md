@@ -15,3 +15,10 @@ Checked October 4, 2026 for the approval migration. These are source declaration
 New incorporated assets and reused datasets need their own declared basis, source, attribution and file identity before release. An ordinary outbound research citation does not itself incorporate the linked paper or dataset into the site.
 
 For the private Senate comparison, the Census Bureau's [public-use and citation statement](https://www.census.gov/about/policies/citation.html), checked the same day, explicitly addresses reuse and replication. It asks users producing their own estimates to credit Census for the original data and makes their analysis their own responsibility. Retain the exact Table E reference and identify the 21-state sum as this project's calculation. This source declaration does not approve the draft or independently verify its arithmetic.
+
+
+## Static share-card font, October 5, 2026
+
+`public/assets/outfit-bold.ttf` is the official static Bold face from [Outfitio/Outfit-Fonts, commit 9027738](https://github.com/Outfitio/Outfit-Fonts/blob/902773808eb372f70fb34e8946dd1ffe604efc79/fonts/ttf/Outfit-Bold.ttf). Its SFNT tables have no variable-font axis table and OS/2 weight is 700. SHA-256: `f620b69582e06d7e1b3bbde74ed8c5876eadabb038390780db2a3414a1490197`. The source repository's OFL notice matches the existing license and author declaration. This build-only font renders the share PNGs; it does not replace the website's variable font or wordmark.
+
+Share cards reuse each selected scene's existing image bytes, converted to PNG at build time by Sharp. Their ownership and approved source-byte hashes remain checked before output. No remote image/font requests are made during a build.

@@ -59,7 +59,7 @@ export async function build({drafts=false,now=new Date(),records,manifest,revisi
   for(const entry of entries) {
     const {question,description}=shareCopy(entry),canonical=publicOrigin+context.discoveryHref(entry.id);
     pages.set(entry.id,fill(discoveryShell,{metadata:metadata({title:question,description,canonical,image:`${publicOrigin}/share/${entry.id}.png`,alt:question,drafts}),firstId:entry.id,draftBanner,entries:heading(await renderEntry(entry,null,now,entryContext(entry,individualContext)),1),sceneHead:sceneHead([entry],individualContext)}));
-    images.set(entry.id,renderShareImage(entry));
+    images.set(entry.id,await renderShareImage(entry));
   }
   for(const withdrawal of withdrawals) pages.set(withdrawal.id,fill(discoveryShell,{metadata:metadata({title:'Discovery withdrawn',description:'This discovery is no longer available. Keep exploring the collection.',canonical:publicOrigin+context.discoveryHref(withdrawal.id),drafts}),firstId:'notice',draftBanner,entries:noticeHTML('Discovery withdrawn',withdrawal.reason),sceneHead:''}));
   const notFound=fill(discoveryShell,{metadata:metadata({title:'Discovery not found',description:'This discovery could not be found. Keep exploring the collection.',canonical:publicOrigin+'/404.html',drafts:true}),firstId:'notice',draftBanner:'',entries:noticeHTML('Discovery not found','This link does not lead to an available discovery.'),sceneHead:''});
@@ -68,7 +68,7 @@ export async function build({drafts=false,now=new Date(),records,manifest,revisi
     const path=`review/${packet.id}/${packet.packetId??packet.digest}/`,entry=packet.entry;
     const packetContext=createPageContext({mode:'discovery',publicOrigin,privateReview:true,fragment:packet.fragment,discoveryHref:()=>`/${path}`,dataHref:()=>`/${path}data.csv`});
     const page=fill(discoveryShell,{metadata:metadata({title:shareCopy(entry).question,description:'Private exact-revision review',canonical:`${publicOrigin}/${path}`,drafts:true}),firstId:entry.id,draftBanner,entries:heading(await renderEntry(entry,null,now,packetContext),1),sceneHead:sceneHead([entry],packetContext)});
-    packetPages.set(path,{page,entry});
+    packetPages.set(path,{page,entry,image:await renderShareImage(entry)});
   }
   // Validate every selected page dependency and render images before touching prior output.
   const assets=await checkAssets([...entries,...previewPackets.map(p=>p.entry)],[html,...pages.values(),...Array.from(packetPages.values(),p=>p.page),notFound].join('\n'));
@@ -80,7 +80,7 @@ export async function build({drafts=false,now=new Date(),records,manifest,revisi
   await writeFile(new URL('404.html',output),notFound);
   for(const directory of ['data/','share/','discoveries/'])await mkdir(new URL(directory,output),{recursive:true});
   for(const [id,page] of pages) {const directory=new URL(`discoveries/${id}/`,output);await mkdir(directory,{recursive:true});await writeFile(new URL('index.html',directory),page);}
-  for(const [path,{page,entry}] of packetPages){await mkdir(new URL(path,output),{recursive:true});await writeFile(new URL(path+'index.html',output),page);if(getTreatment(entry.treatment.kind).exportsData)await writeFile(new URL(path+'data.csv',output),csv(entry));}
+  for(const [path,{page,entry,image}] of packetPages){await mkdir(new URL(path,output),{recursive:true});await writeFile(new URL(path+'index.html',output),page);await writeFile(new URL(path+'share.png',output),image);if(getTreatment(entry.treatment.kind).exportsData)await writeFile(new URL(path+'data.csv',output),csv(entry));}
   for(const [id,png] of images)await writeFile(new URL(`share/${id}.png`,output),png);
   for(const e of entries.filter(e=>getTreatment(e.treatment.kind).exportsData)) await writeFile(new URL(`data/${e.id}.csv`,output),csv(e));
   await writeFile(new URL('feed.json',output),JSON.stringify({builtAt:now.toISOString(),entries:entries.map(e=>({id:e.id,title:shareCopy(e).question,topic:e.topic,publishedAt:e.publishedAt ?? null,dataAsOf:e.evidence.dataAsOf,checkedAt:e.evidence.checkedAt,reviewDue:e.evidence.reviewDue,url:publicOrigin+context.discoveryHref(e.id)}))},null,2));

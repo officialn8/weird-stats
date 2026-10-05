@@ -8,9 +8,9 @@ Set up October 4, 2026.
 - Site alias: https://weird-stats.vercel.app.
 - First deployment: `dpl_AoBGxucc2gA6qZfeGf18ikTc7iaF`, Vercel reported `READY`.
 - Vercel team: Nathaniel’s projects (`nathaniels-projects-cc0e35b9`).
-- Deployment protection left enabled. Access may require Vercel sign-in.
+- Production alias is public: an anonymous HTTP GET on October 5, 2026 returned 200 and the original site HTML. The earlier protection assumption was incorrect. Preview URLs need their own access check.
 
-The project uses the repository root, no framework, `npm run build`, and `dist/`. The build serves only `public/` and requires no environment variables. The Vercel CLI created an ignored local `.env.local` for its own authentication workflow; do not commit it or `.vercel/`.
+The project uses the repository root, no framework, `npm run build`, and `dist/`. The build emits the selected public edition to `dist/` and requires no environment variables. The Vercel CLI created an ignored local `.env.local` for its own authentication workflow; do not commit it or `.vercel/`.
 
 ## Git integration: pending
 
@@ -28,7 +28,7 @@ npm run build
 npx vercel deploy --target=preview --scope nathaniels-projects-cc0e35b9
 ```
 
-The first deploy command did not request production, but Vercel’s first-deployment behavior assigned it to production automatically. Explicitly select preview for future review deployments. A deliberate public launch or protection change remains a separate decision.
+The first deploy command did not request production, but Vercel’s first-deployment behavior assigned it to production automatically. Explicitly select preview for future review deployments. A production deployment updates the already-public site immediately. Release/deployment authorization and any protection change remain separate decisions.
 
 ## Verification
 

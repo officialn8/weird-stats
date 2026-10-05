@@ -48,10 +48,16 @@ test('copper pile and reveal use the pinned fragment ratio, image and answer for
       '.giant-ratio':new Element(`${ratio}×`), '.hero-penny img':image, '#coin-feedback':feedback,
       '#reveal':new Element(), '#copper-result':new Element(), '#again':new Element(), '.coin-duet':new Element(), '.coin-choice':[button],
     };
+    story.nodes['.copper-question'].nodes['.question-copy']=new Element();
+    story.nodes['.copper-answer'].hidden=true;
     runInNewContext(source, environment({'#copper':story}).sandbox);
     assert.equal(story.nodes['#penny-pile'].children.length, ratio);
     assert(story.nodes['#penny-pile'].children.every(coin => coin.src === '/assets/fictional-coin.webp'));
     button.dispatchEvent(new Event('click'));
+    assert.equal(story.nodes['.copper-answer'].hidden,true,'a guess must not reveal');
+    assert.equal(button.attrs['aria-pressed'],'true');
+    story.nodes['#reveal'].dispatchEvent(new Event('click'));
+    assert.equal(story.nodes['.copper-answer'].hidden,false);
     assert.equal(feedback.textContent, 'You picked Fictional coin. The approved fictional answer.');
     story.nodes['#again'].dispatchEvent(new Event('click'));
     story.nodes['#reveal'].dispatchEvent(new Event('click'));

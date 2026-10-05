@@ -52,12 +52,12 @@ test('approval B alone keeps A across generated public surfaces; release is sepa
  const state=await desk.report();assert.deepEqual(state.manifest,manifest);
  const output=pathToFileURL(join(directory,'output')+'/');const result=await build({records:[next],manifest:state.manifest,revisions:state.revisions,output,now});
  assert(!result.html.includes('Private B'));assert(!(await readFile(new URL('feed.json',output),'utf8')).includes('Private B'));assert(!result.pages.get(entry.id).includes('Private B'));
- assert.equal(await readFile(new URL(`data/${entry.id}.csv`,output),'utf8'),csv(entry));assert.deepEqual(await readFile(new URL(`share/${entry.id}.png`,output)),renderShareImage(entry));
+ assert.equal(await readFile(new URL(`data/${entry.id}.csv`,output),'utf8'),csv(entry));assert.deepEqual(await readFile(new URL(`share/${entry.id}.png`,output)),await renderShareImage(entry));
  assert.equal(selectRelease([next],{manifest,revisions:[revision],now}).entries[0].answer,entry.answer);
  const released=await desk.release({entries:[{id:entry.id,digest:p.digest}],withdrawals:[],expectedManifest:state.manifestDigest,human});assert.equal(released.outcome,'created');
  const after=await desk.report();assert.equal(after.manifest.entries[0].digest,p.digest);
  await build({records:[next],manifest:after.manifest,revisions:after.revisions,output,now});
- assert.equal(await readFile(new URL(`data/${entry.id}.csv`,output),'utf8'),csv(next));assert.deepEqual(await readFile(new URL(`share/${entry.id}.png`,output)),renderShareImage(next));assert.notDeepEqual(renderShareImage(entry),renderShareImage(next));
+ assert.equal(await readFile(new URL(`data/${entry.id}.csv`,output),'utf8'),csv(next));assert.deepEqual(await readFile(new URL(`share/${entry.id}.png`,output)),await renderShareImage(next));assert.notDeepEqual(await renderShareImage(entry),await renderShareImage(next));
 });
 test('outdated baseline conflicts and preserves newer approval',async t=>{
  const {desk,entry,digest}=await setup(t);const a={...entry,status:'review',answer:'B'},b={...a,answer:'C'};delete a.approval;delete b.approval;

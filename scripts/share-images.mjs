@@ -1,20 +1,58 @@
 import {Resvg} from '@resvg/resvg-js';
+import sharp from 'sharp';
+import {readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {createHash} from 'node:crypto';
+import assert from 'node:assert/strict';
 import {esc} from '../src/treatments/registry.mjs';
 import {shareCopy} from './share-copy.mjs';
-const font=fileURLToPath(new URL('../public/assets/outfit.ttf',import.meta.url));
-// Only our own geometry and escaped text enter this SVG: no image/use/font URLs.
-// Outfit is bundled under public/assets/OFL-Outfit.txt. No system or remote fonts.
-export function shareSVG(entry) {
- const {question}=shareCopy(entry),words=question.split(/\s+/),lines=[];
- const size=question.length>165?44:question.length>120?53:question.length>75?64:76;
- const columns=size===76?25:size===64?30:size===53?36:44;
- const pieces=words.flatMap(word=>word.match(new RegExp(`.{1,${columns}}`,'gu'))??[]);
- let line='';for(const word of pieces){if(line&&line.length+word.length+1>columns){lines.push(line);line=word;}else line+=(line?' ':'')+word;}if(line)lines.push(line);
- const seed=createHash('sha256').update(entry.id).digest()[0];
- return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#ff5b19"/><g fill="none" stroke="#30160c" stroke-width="2" opacity=".23"><circle cx="1070" cy="330" r="${150+seed%45}"/><circle cx="1070" cy="330" r="${230+seed%30}"/><path d="M890 60V570M840 330H1180"/></g><g fill="#26140d" font-family="Outfit"><text x="62" y="72" font-size="35" font-weight="600" stroke="#26140d" stroke-width="1" paint-order="stroke">weird.stats</text><text x="1138" y="70" text-anchor="end" font-size="18" letter-spacing="2">FOR THE CURIOUS</text>${lines.map((text,i)=>`<text x="62" y="${180+i*(size+8)}" font-size="${size}" font-weight="600" stroke="#26140d" stroke-width="2" stroke-linejoin="round" paint-order="stroke">${esc(text)}</text>`).join('')}<text x="62" y="570" font-size="23">Open the question. Find the discovery.</text><text x="1110" y="568" font-size="52">↗</text></g></svg>`;
+import {entryAssets} from './assets.mjs';
+const font=fileURLToPath(new URL('../public/assets/outfit-bold.ttf',import.meta.url));
+const options={font:{fontFiles:[font],loadSystemFonts:false,defaultFontFamily:'Outfit'}};
+const type='font-family="Outfit" font-weight="700"';
+// Fixed scene artwork only, never an arbitrary URL or unreleased entry's asset.
+const artwork={
+ crunch:[['assets/chip.webp',710,135,500,460,-12]],
+ copper:[['assets/penny.webp',780,112,285,285,-16],['assets/nickel.webp',885,327,285,285,12]],
+ mail:[['assets/mule.webp',684,158,510,400,0]],
+ painting:[['assets/nightwatch.webp',745,145,420,390,5]]
+};
+export function shareArtwork(entry) {
+ const items=entry.treatment.kind==='custom' ? artwork[entry.treatment.template]??[] : [];
+ const owned=new Set(entryAssets(entry));
+ for(const [path] of items)assert(owned.has(path),entry.id+': share artwork must belong to the selected entry');
+ return items;
 }
-export function renderShareImage(entry) {
- return new Resvg(shareSVG(entry),{font:{fontFiles:[font],loadSystemFonts:false,defaultFontFamily:'Outfit'}}).render().asPng();
+function width(text,size) {
+ const svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="200"><text x="0" y="100" '+type+' font-size="'+size+'">'+esc(text)+'</text></svg>';
+ return new Resvg(svg,options).innerBBox()?.width??0;
+}
+export function shareLayout(question) {
+ for(const size of [86,80,74,66,58,50,42,36,30]) {
+  const lines=[]; let line='';
+  for(const word of question.split(/\s+/)) {
+   if(line&&width(line+' '+word,size)>650){lines.push(line);line='';}
+   for(const letter of word) {
+    if(width(line+letter,size)>650){lines.push(line);line='';}
+    line+=letter;
+   }
+   line+=' ';
+  }
+  if(line.trim())lines.push(line.trim());
+  if(lines.length*(size+4)<=345)return {size,lines:lines.map(s=>s.trim())};
+ }
+ throw new Error('Share question does not fit the image');
+}
+export async function shareSVG(entry) {
+ const {question}=shareCopy(entry),{size,lines}=shareLayout(question);
+ const objects=await Promise.all(shareArtwork(entry).map(async([path,x,y,w,h,angle])=>{
+  const bytes=await readFile(new URL('../public/'+path,import.meta.url));
+  const png=await sharp(bytes).resize({width:640,height:640,fit:'inside',withoutEnlargement:true}).png().toBuffer();
+  return '<image href="data:image/png;base64,'+png.toString('base64')+'" x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" preserveAspectRatio="xMidYMid meet" transform="rotate('+angle+' '+(x+w/2)+' '+(y+h/2)+')"/>';
+ }));
+ const image=objects.join('')||'<text x="945" y="475" text-anchor="middle" '+type+' font-size="400" fill="#29211b">?</text>';
+ const start=175+(345-lines.length*(size+4))/2+size*.72;
+ return '<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#ff681f"/>'+image+'<g fill="#29211b" '+type+'><text x="58" y="77" font-size="39" letter-spacing="-1.8">weird.stats</text>'+lines.map((line,i)=>'<text x="58" y="'+(start+i*(size+4))+'" font-size="'+size+'" letter-spacing="-1.5">'+esc(line)+'</text>').join('')+'<text x="58" y="576" font-size="24">Open the question.</text><text x="654" y="580" font-size="42" text-anchor="end">↗</text></g></svg>';
+}
+export async function renderShareImage(entry) {
+ return new Resvg(await shareSVG(entry),options).render().asPng();
 }

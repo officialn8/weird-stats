@@ -27,11 +27,20 @@ for(let i=0;i<ratio;i++){
   const img=document.createElement('img');img.src=coinSource;img.alt='';img.width=500;img.height=500;
   img.style.setProperty('--i',i);img.style.setProperty('--launch-x',(-85-(i%6)*24)+'px');img.style.setProperty('--launch-y',(120-Math.floor(i/6)*25)+'px');img.style.setProperty('--turn',((i*37)%50-25)+'deg');pile.append(img);
 }
-let lastChoice = $('#reveal');
+let lastChoice = $('#reveal'), pickedCoin = null;
+const guessStatus=document.createElement('p');
+guessStatus.className='coin-guess-status';guessStatus.setAttribute('role','status');
+question.querySelector('.question-copy').append(guessStatus);
+function chooseCoin(button) {
+  pickedCoin=button;
+  $$('.coin-choice').forEach(coin=>coin.setAttribute('aria-pressed',String(coin===button)));
+  guessStatus.textContent=button ? 'You chose '+button.textContent.trim()+'. Reveal when you’re ready.' : '';
+}
+chooseCoin(null);
 function reveal(value, trigger) {
   if (trigger) lastChoice = trigger;
   if (value) {
-    const picked = trigger?.dataset.coin ? trigger.textContent.trim() : null;
+    const picked = pickedCoin?.textContent.trim();
     $('#coin-feedback').textContent = picked ? `You picked ${picked}. ${answerLead}` : answerLead;
   }
   question.hidden = value;
@@ -41,8 +50,8 @@ function reveal(value, trigger) {
   if (value && story.getBoundingClientRect().top < 0) story.scrollIntoView({block:'start', behavior:reduced() ? 'instant' : 'smooth'});
 }
 $('#reveal').addEventListener('click', event => reveal(true, event.currentTarget));
-$$('.coin-choice').forEach(button => button.addEventListener('click', event => reveal(true, event.currentTarget)));
-$('#again').addEventListener('click', () => reveal(false));
+$$('.coin-choice').forEach(button => button.addEventListener('click', () => chooseCoin(button)));
+$('#again').addEventListener('click', () => {reveal(false);chooseCoin(null);});
 // Pause ambient object movement outside the viewport; pointer response is desktop-only.
 const duet=$('.coin-duet');
 const visibilityObserver=new IntersectionObserver(entries=>entries.forEach(e=>e.target.classList.toggle('is-visible',e.isIntersecting)),{threshold:.1});
