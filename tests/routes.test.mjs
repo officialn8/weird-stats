@@ -86,3 +86,11 @@ test('legacy chip markup still reveals and resets without optional guessing node
  nodes['#crunch-reveal'].dispatchEvent(new Event('click'));assert.equal(nodes['#crunch-answer'].hidden,false);
  nodes['#crunch-reset'].dispatchEvent(new Event('click'));assert.equal(nodes['#crunch-answer'].hidden,true);
 });
+test('both page shells expose the existing copper explanation when scripts are disabled',async()=>{
+ for(const file of ['shell.html','discovery-shell.html']) {
+  const shell=await readFile(new URL(`../src/${file}`,import.meta.url),'utf8');
+  const fallback=shell.match(/<noscript><style>([\s\S]*?)<\/style><\/noscript>/)?.[1]??'';
+  assert(fallback.includes('#copper .copper-answer[hidden]{display:grid!important'),`${file}: hidden answer needs a no-script fallback`);
+  assert(fallback.includes('.copper-question'),`${file}: question must not overlay the static answer`);
+ }
+});
