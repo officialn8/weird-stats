@@ -10,12 +10,13 @@
   const mute = section.querySelector('#crunch-mute');
   const answer = section.querySelector('#crunch-answer');
   const revealButton = section.querySelector('#crunch-reveal');
-  const revealButtons = [...section.querySelectorAll('[data-crunch-reveal]')];
+  const revealButtons = [...new Set([revealButton,...section.querySelectorAll('[data-crunch-reveal]')].filter(Boolean))];
   const guesses = [...section.querySelectorAll('[data-crunch-guess]')];
   const guessStatus = section.querySelector('#crunch-guess-status');
   const choiceFeedback = section.querySelector('#crunch-choice-feedback');
   let impression = null;
   function syncImpression() {
+    if (!choiceFeedback) return;
     choiceFeedback.hidden = impression === null;
     choiceFeedback.textContent = impression === null ? '' : impression === 'No difference'
       ? 'You heard no difference. That’s a valid impression: this listening demo doesn’t reproduce the biting experiment.'
@@ -25,7 +26,7 @@
     impression = button.dataset.crunchGuess;
     guesses.forEach(choice => choice.setAttribute('aria-pressed', String(choice === button)));
     syncImpression();
-    guessStatus.textContent = button.dataset.crunchGuess === 'No difference'
+    if (guessStatus) guessStatus.textContent = button.dataset.crunchGuess === 'No difference'
       ? 'You heard no difference. Your impression is yours; this isn’t a scored test.'
       : `You chose ${button.dataset.crunchGuess}. Your impression is yours; this isn’t a scored test.`;
   }));
@@ -151,7 +152,7 @@
     impression = null;
     syncImpression();
     guesses.forEach(choice => choice.setAttribute('aria-pressed', 'false'));
-    guessStatus.textContent = 'Choose an impression, or go straight to the reveal.';
+    if (guessStatus) guessStatus.textContent = 'Choose an impression, or go straight to the reveal.';
     revealButtons.forEach(button => button.setAttribute('aria-expanded', 'false'));
     revealButton.focus({preventScroll:true});
     section.scrollIntoView({block:'start', behavior:motionOff() ? 'instant' : 'smooth'});

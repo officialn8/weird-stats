@@ -1,6 +1,7 @@
 import { readFile, readdir } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import {shareCopy} from './share-copy.mjs';
 import { getTreatment, esc } from '../src/treatments/registry.mjs';
 export { esc, linePoints } from '../src/treatments/registry.mjs';
 export const root = new URL('../', import.meta.url);
@@ -8,7 +9,7 @@ const text = (v, name) => assert(typeof v === 'string' && v.trim(), `Missing ${n
 const date = (v, name) => { text(v,name); assert(/^\d{4}-\d{2}-\d{2}$/.test(v) && new Date(v).toISOString().slice(0,10) === v, `Invalid ${name}`); };
 export function validate(entry) {
   const {id,status,treatment:t,evidence:e} = entry;
-  assert(/^[a-z][a-z0-9-]*$/.test(id), 'Invalid entry id');
+  assert(typeof id==='string' && /^[a-z][a-z0-9-]*$/.test(id), 'Invalid entry id');
   text(entry.title,'title'); text(entry.topic,'topic');
   assert(['draft','review','published','retired'].includes(status), `${id}: invalid status`);
   assert(Number.isFinite(entry.order), `${id}: order must be a number`);
@@ -31,6 +32,7 @@ export function validate(entry) {
   if(entry.topic === 'politics') {assert(e.sources.filter(s=>s.primary).length>=2,'Political comparisons require at least two primary source references'); text(e.denominator,'political data denominator'); text(e.methodology,'political data methodology');}
   if(!definition.custom) for(const key of ['question','answer','explanation','qualification','whyCare']) text(entry[key], key);
   definition.validate(entry);
+  shareCopy(entry);
   return entry;
 }
 export async function loadEntries() {
@@ -45,10 +47,10 @@ export function selectEntries(entries,{drafts=false,now=new Date()}={}) {
 export function reviewState(entry, now=new Date()) {
   return entry.evidence?.reviewDue < now.toISOString().slice(0,10) ? 'Review due' : 'Checked';
 }
-export function createPageContext({mode='collection', assetBase='/', collectionHref='/', ...overrides}={}) {
+export function createPageContext({mode='collection', assetBase='/', collectionHref='/', publicOrigin='https://weird-stats.vercel.app', ...overrides}={}) {
   assert(['collection','discovery'].includes(mode), 'Invalid page context');
   return {
-    mode, assetHref:path => assetBase+path.replace(/^\//,''),
+    mode, publicOrigin, assetHref:path => assetBase+path.replace(/^\//,''),
     dataHref:id => `/data/${id}.csv`, discoveryHref:id => `/discoveries/${id}/`,
     nextHref:collectionHref, collectionHref, ...overrides
   };
@@ -57,11 +59,18 @@ export async function renderEntry(entry,next,now=new Date(),context=createPageCo
   const definition=getTreatment(entry.treatment.kind);
   const page={...context,nextHref:next ? (context.mode==='collection' ? '#'+next.id : context.discoveryHref(next.id)) : context.collectionHref};
   const graphic=await definition.render(entry,page);
-  if(definition.custom) return graphic.replace(/(["'])assets\//g,(_,quote)=>quote+page.assetHref('assets/'));
+  if(definition.custom) {
+    const normalized=graphic.replace(/([\"' ,])assets\//g,(_,prefix)=>prefix+page.assetHref('assets/'));
+    return `<div class="discovery-frame">${shareControl(entry,page)}${normalized}</div>`;
+  }
   const {id,evidence:e}=entry;
   const guess=entry.guess ? `<div class="data-controls discovery-guess" role="group" aria-label="Optional guess" hidden>${entry.guess.choices.map(c=>`<button type="button" data-guess="${esc(c.id)}" aria-pressed="false">${esc(c.label)}</button>`).join('')}</div><p class="guess-status" role="status"></p>` : '';
   const feedback=entry.guess ? `<div class="guess-feedback" role="status">${entry.guess.choices.map(c=>`<p data-feedback="${esc(c.id)}" hidden>${esc(c.feedback)}</p>`).join('')}</div>` : '';
-  return `<section class="data-discovery" data-treatment="${esc(entry.treatment.kind)}" id="${id}" aria-labelledby="${id}-title"><div class="discovery-heading"><p class="edition-note">${entry.status==='review'?'Draft for review · ':''}${esc(e.dataAsOf)}</p><h2 id="${id}-title">${esc(entry.question)}</h2><p>${esc(entry.whyCare)}</p></div>${guess}<details class="discovery-reveal"><summary>${entry.guess?'Show me':'Reveal the discovery'} <span aria-hidden="true">↗</span></summary>${feedback}${definition.answerAfterGraphic?graphic:''}<div class="discovery-answer"><h3>${esc(entry.answer)}</h3><p>${esc(entry.explanation)}</p><p class="discovery-qualification">${esc(entry.qualification)}</p></div>${definition.answerAfterGraphic?'':graphic}</details><div class="discovery-evidence"><p>${reviewState(entry,now)} ${esc(e.checkedAt)} · Data: ${esc(e.dataAsOf)}</p><details class="source"><summary>The receipts</summary><p>${esc(e.scope)}</p>${e.methodology?`<p>${esc(e.methodology)}</p>`:''}${e.denominator?`<p>Denominator: ${esc(e.denominator)}</p>`:''}<ul>${e.sources.map(s=>`<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a></li>`).join('')}</ul></details><a class="text-button" href="${esc(page.discoveryHref(id))}">Link to this discovery</a></div></section>`;
+  return `<section class="data-discovery" data-treatment="${esc(entry.treatment.kind)}" id="${id}" aria-labelledby="${id}-title"><div class="discovery-heading"><p class="edition-note">${entry.status==='review'?'Draft for review · ':''}${esc(e.dataAsOf)}</p><h2 id="${id}-title">${esc(entry.question)}</h2><p>${esc(entry.whyCare)}</p></div>${guess}<details class="discovery-reveal"><summary>${entry.guess?'Show me':'Reveal the discovery'} <span aria-hidden="true">↗</span></summary>${feedback}${definition.answerAfterGraphic?graphic:''}<div class="discovery-answer"><h3>${esc(entry.answer)}</h3><p>${esc(entry.explanation)}</p><p class="discovery-qualification">${esc(entry.qualification)}</p></div>${definition.answerAfterGraphic?'':graphic}</details><div class="discovery-evidence"><p>${reviewState(entry,now)} ${esc(e.checkedAt)} · Data: ${esc(e.dataAsOf)}</p><details class="source"><summary>The receipts</summary><p>${esc(e.scope)}</p>${e.methodology?`<p>${esc(e.methodology)}</p>`:''}${e.denominator?`<p>Denominator: ${esc(e.denominator)}</p>`:''}<ul>${e.sources.map(s=>`<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a></li>`).join('')}</ul></details>${shareControl(entry,page)}</div></section>`;
+}
+export function shareControl(entry,context=createPageContext()) {
+  const {question}=shareCopy(entry),url=context.publicOrigin+context.discoveryHref(entry.id);
+  return `<div class="discovery-share" data-share-url="${esc(url)}" data-share-title="${esc(question)}"><button class="text-button" type="button" data-share-button hidden>Share discovery ↗</button><a class="text-button discovery-permalink" data-share-link href="${esc(context.discoveryHref(entry.id))}">Open this discovery</a><span role="status" class="share-status"></span><label data-share-fallback hidden>Discovery link <input type="text" readonly aria-label="Discovery link" value="${esc(url)}"></label></div>`;
 }
 function validateGuess(guess) {
   assert(Array.isArray(guess.choices) && guess.choices.length>=2, 'Guess needs at least two choices');
@@ -102,6 +111,7 @@ export function fragmentEditorialContent(fragment='') {
 export function contentDigest(entry,{fragment='',assetDigests={}}={}) {
   const fields=['id','title','topic','question','answer','explanation','qualification','whyCare','evidence','treatment','guess','assets'];
   const subject=Object.fromEntries(fields.filter(k=>entry[k]!==undefined).map(k=>[k,entry[k]]));
+  subject.share=shareCopy(entry);
   if(entry.treatment.kind==='custom') subject.fragment=fragmentEditorialContent(fragment);
   subject.assetDigests=assetDigests;
   return createHash('sha256').update(JSON.stringify(stable(subject))).digest('hex');
@@ -114,7 +124,7 @@ export function selectRelease(records,{manifest,revisions=[],drafts=false,now=ne
   assert(Date.parse(manifest.releasedAt)<=now.getTime(),'Release is not due');
   assert(Array.isArray(manifest.entries) && Array.isArray(manifest.withdrawals),'Release entries and withdrawals required');
   const ids=[...manifest.entries,...manifest.withdrawals].map(p=>p.id);
-  assert(ids.every(id=>/^[a-z][a-z0-9-]*$/.test(id)) && new Set(ids).size===ids.length,'Invalid or duplicate release id');
+  assert(ids.every(id=>typeof id==='string'&&/^[a-z][a-z0-9-]*$/.test(id)) && new Set(ids).size===ids.length,'Invalid or duplicate release id');
   const selected=new Map();
   const entries=manifest.entries.map(pin=>{
     const revision=revisions.find(r=>r.id===pin.id && r.digest===pin.digest);
