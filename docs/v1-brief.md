@@ -23,7 +23,7 @@ This brief incorporates the October 4 conversation and narrows the [original ide
 ## The first visit
 
 1. **Arrive at a curiosity.** A featured question, an expressive visual, and a visible action occupy the opening screen. A brief description establishes the site. The collection begins within easy scrolling distance.
-2. **Reveal it.** One tap gives the answer. An optional choice or guess can precede the same reveal. There is no score, timer, or penalty.
+2. **Reveal it.** One tap gives the answer. An optional choice or guess can precede the same reveal. Choosing records the guess without revealing; the separate reveal action works with or without a guess. There is no score, timer, or penalty.
 3. **Understand it.** A prominent number and a short explanation make the discovery clear. Any qualification needed to keep the claim true appears here. Sources and calculations expand below.
 4. **Keep wandering.** Scrolling brings the next discovery into view. Optional related links offer a second route. Back returns to the previous place and state.
 5. **Browse or share.** A collection view exposes the range of entries. Each stat has a direct link; someone arriving through it can discover the rest of the site.
@@ -76,18 +76,22 @@ Buttons must work with touch and keyboard. Reveals must be readable by assistive
 
 ## How to judge the prototype
 
-First, show a handful of curious readers the questions and reveals in plain text. Record whether they already knew the underlying fact, whether the answer changed their expectation, and whether they would tell someone about it. Recognition and interest are separate: a fact can be unfamiliar and still uninteresting. Record individual reactions rather than presenting a small sample as a population estimate. Replace entries that repeatedly receive “I already knew that” or “so what?” before polishing them.
+Use two separate groups of fresh readers. Run the current visual check first with people who have not seen the chip answer or text protocol. Observe revealing, sound use, sources, and voluntary continuation without instruction; then ask about comprehension, familiarity, retelling, recall, and visual enjoyment separately.
 
-Then, with first-time prototype visitors, observe whether they can reveal an answer, find its source, and move to another entry without instructions. Ask what they remember and what surprised them. Watch which discoveries they voluntarily open next; record hesitation and confusion. Evaluate visual enjoyment separately from learning something new.
+Use a different group for the version 2 plain-text check. Show its fixed questions and reveals, rotate order, and record whether the underlying idea is familiar, changes expectations, or earns a specific retelling. Recognition and interest are separate: a fact can be unfamiliar and still uninteresting.
+
+Do not put the same participant through text then visuals and count both as first impressions. If recruitment is limited, prioritize the visual check; any later session with that reader is explicitly a follow-up usability check, excluded from fresh-reader novelty and surprise evidence. Record prior exposure and exact responses rather than presenting a small sample as a population estimate.
 
 Advance when the experience is clear, several entries produce a memorable discovery, and visitors choose to keep exploring. A tiny qualitative review cannot establish broad retention or demand. Revise weak content and confusing interactions before multiplying the collection.
 
 ## Next work
 
+**October 5 update:** the creator's [launch decision](editorial/2026-10-05-launch-decision.md) now sets the immediate order: deploy the five approved entries, prepare a strong sixth, verify cookieless measurement, then consider audience promotion. The protocols below remain available for private feedback, but recruitment is not a prerequisite to preparing that sixth entry. No independent reader evidence is implied by release approval.
+
 Daily publication preparation now proceeds alongside reader checks: review the political comparison draft, build a quality backlog, and expand treatment types when the discovery needs them. These are the immediate operational priorities. The earlier reader checks below remain useful evidence tasks, not a claim that development is complete.
 
-1. Run the [second reader check](editorial/2026-10-04-second-reader-check.md) with independent readers on the four new candidates and copper baseline. Keep questions and reveals fixed, rotate order, record familiarity, and capture actual retellings. The creator's new-candidate walkthrough is complete: chips earned the strongest articulated interest, printers remain secondary, ice cream had weak sharing interest, and the selfie opening was skipped. All three revealed topics were recalled, and the creator would probably want more. Independent responses remain uncollected.
-2. Run the [chip visual check](editorial/2026-10-04-chip-visual-check.md) with fresh readers. The creator authorized this treatment before independent text screening; record visual observations separately from the original text protocol. Further candidates should earn visual investment through independent comprehension, novelty, and retelling evidence.
-3. Test those treatments in the orange scrolling experience. Evaluate clarity, visual enjoyment, and voluntary continuation separately from novelty. Choose the opener after that evidence.
+1. Run the [version 2 chip visual check](editorial/2026-10-04-chip-visual-check.md) with fresh readers who have not seen any chip answer. Observe the optional sound impression and direct reveal separately. The creator’s version 1 walkthrough remains historical evidence, not a blind response to this revision.
+2. With a **different, unexposed group**, run the [version 2 text check](editorial/2026-10-04-second-reader-check.md) for the four candidates and copper baseline. Do not recruit visual-check participants into the fresh text cohort. Keep copy fixed, rotate order, and capture actual retellings.
+3. Compare the two groups descriptively, without attributing differences to visuals in this tiny qualitative sample. Choose the opener after evidence of comprehension, novelty, interest, and voluntary continuation. If fresh readers are scarce, do step 1 only; later repeat exposure can test usability, not novelty.
 
 **Reader-check status, October 4:** the [first creator walkthrough](editorial/2026-10-04-reader-walkthrough.md) is complete, and the copper, mule, and painting studies were built afterward. The creator had seen the answers before the walkthrough. Later, he relayed his girlfriend's whole-site feedback about familiarity, relevance, and blandness; that was not a controlled per-entry test. Independent checks of the new candidates remain open.

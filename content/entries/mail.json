@@ -4,11 +4,6 @@
   "topic": "logistics",
   "status": "published",
   "order": 30,
-  "publishedAt": "2026-10-04T00:00:00-05:00",
-  "approval": {
-    "by": "Existing hosted edition carried forward",
-    "at": "2026-10-04"
-  },
   "evidence": {
     "kind": "reported",
     "scope": "USPS mule route to Supai. Reported schedule and journey times.",
@@ -26,5 +21,23 @@
   "treatment": {
     "kind": "custom",
     "template": "mail"
+  },
+  "assets": [
+    {
+      "path": "assets/mule.webp",
+      "rights": {
+        "basis": "Generated decorative illustration carried forward from hosted prototype",
+        "source": "docs/editorial/asset-provenance-check.md",
+        "attribution": "Generated illustration; not documentary photography"
+      }
+    }
+  ],
+  "publishedAt": "2026-10-05T05:54:45.436Z",
+  "approval": {
+    "by": "Nate",
+    "at": "2026-10-05",
+    "digest": "24caf22f4be1773d2fb2d773aeaef407740ae5a89e25488e48c628aee2ede421",
+    "inputReference": "docs/editorial/2026-10-05-launch-decision.md",
+    "note": "Human instruction in this chat: \"Approve the four proposals and deploy, so the public sees the new chip, the copper, the painting zoom and eventually the Senate chairs.\" Applies to the four pending proposals listed in the launch decision record."
   }
 }

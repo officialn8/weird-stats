@@ -15,31 +15,44 @@ document.body.classList.add('motion-ready');
 
 
 if($('#copper')) {
-const story=$('#copper'), question=$('.copper-question'), answer=$('.copper-answer');
+const story=document.querySelector('#copper');
+const $=selector=>story.querySelector(selector), $$=selector=>[...story.querySelectorAll(selector)];
+const question=$('.copper-question'), answer=$('.copper-answer');
 const pile=$('#penny-pile');
-for(let i=0;i<60;i++){
-  const img=document.createElement('img');img.src='assets/penny.webp';img.alt='';img.width=500;img.height=500;
+// Facts and owned imagery come from the approved fragment, not runtime constants.
+const ratio=Number.parseInt($('.giant-ratio').textContent,10);
+const coinSource=$('.hero-penny img').getAttribute('src');
+const answerLead=$('#coin-feedback').textContent;
+for(let i=0;i<ratio;i++){
+  const img=document.createElement('img');img.src=coinSource;img.alt='';img.width=500;img.height=500;
   img.style.setProperty('--i',i);img.style.setProperty('--launch-x',(-85-(i%6)*24)+'px');img.style.setProperty('--launch-y',(120-Math.floor(i/6)*25)+'px');img.style.setProperty('--turn',((i*37)%50-25)+'deg');pile.append(img);
 }
-let lastChoice = $('#reveal');
+let lastChoice = $('#reveal'), pickedCoin = null;
+const guessStatus=document.createElement('p');
+guessStatus.className='coin-guess-status';guessStatus.setAttribute('role','status');
+question.querySelector('.question-copy').append(guessStatus);
+function chooseCoin(button) {
+  pickedCoin=button;
+  $$('.coin-choice').forEach(coin=>coin.setAttribute('aria-pressed',String(coin===button)));
+  guessStatus.textContent=button ? 'You chose '+button.textContent.trim()+'. Reveal when you’re ready.' : '';
+}
+chooseCoin(null);
 function reveal(value, trigger) {
   if (trigger) lastChoice = trigger;
   if (value) {
-    const picked = trigger?.dataset.coin;
-    $('#coin-feedback').textContent = picked === 'penny'
-      ? 'You picked the penny. It’s the nickel.'
-      : picked === 'nickel' ? 'You picked the nickel. Here’s how much more.'
-      : 'The nickel. And it’s not even close.';
+    const picked = pickedCoin?.textContent.trim();
+    $('#coin-feedback').textContent = picked ? `You picked ${picked}. ${answerLead}` : answerLead;
   }
   question.hidden = value;
   answer.hidden = !value;
   story.classList.toggle('revealed', value);
+  if(value)window.WeirdAnalytics?.reveal('copper');
   (value ? $('#copper-result') : lastChoice).focus({preventScroll:true});
   if (value && story.getBoundingClientRect().top < 0) story.scrollIntoView({block:'start', behavior:reduced() ? 'instant' : 'smooth'});
 }
 $('#reveal').addEventListener('click', event => reveal(true, event.currentTarget));
-$$('.coin-choice').forEach(button => button.addEventListener('click', event => reveal(true, event.currentTarget)));
-$('#again').addEventListener('click', () => reveal(false));
+$$('.coin-choice').forEach(button => button.addEventListener('click', () => chooseCoin(button)));
+$('#again').addEventListener('click', () => {reveal(false);chooseCoin(null);});
 // Pause ambient object movement outside the viewport; pointer response is desktop-only.
 const duet=$('.coin-duet');
 const visibilityObserver=new IntersectionObserver(entries=>entries.forEach(e=>e.target.classList.toggle('is-visible',e.isIntersecting)),{threshold:.1});
@@ -60,32 +73,109 @@ document.addEventListener('visibilitychange',()=>{duet.classList.toggle('is-paus
 
 }
 if($('#mail')) {
-let journeyTimers=[];
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{
-  if(e.isIntersecting){e.target.classList.add('in-view');observer.unobserve(e.target);}
-}),{threshold:.18});
-$$('.mail-intro').forEach(el=>observer.observe(el));
-function stopJourney(){journeyTimers.forEach(clearTimeout);journeyTimers=[];$('.journey-score').classList.remove('playing');$('#replay-journey').disabled=false;}
-function playJourney(){
-  stopJourney();const bars=$$('.hour-marks i');bars.forEach(el=>el.classList.remove('arrived'));
-  if(reduced()){bars.forEach(el=>el.classList.add('arrived'));$('#journey-status').textContent='3 hours down. 5 hours back. 8 hours total.';return;}
-  $('.journey-score').classList.add('playing');$('#replay-journey').disabled=true;
-  $('#journey-status').textContent='Heading down to Supai…';
-  bars.forEach((bar,i)=>journeyTimers.push(setTimeout(()=>{
-    bar.classList.add('arrived');
-    $('#journey-status').textContent=i<2?`${i+1} hours into the descent…`:i===2?'3 hours. The mail reaches Supai.':i<7?`${i-2} hours into the return…`:'8 hours total. Back at the rim.';
-    if(i===7){$('#replay-journey').disabled=false;$('#replay-journey').innerHTML='Watch it again <span aria-hidden="true">↺</span>';}
-  },(i+1)*650)));
+const mail = document.querySelector('#mail');
+const $=selector=>mail.querySelector(selector);
+const scene = mail.querySelector('.mule-scene');
+const copy = mail.querySelector('.mail-copy');
+const score = mail.querySelector('.journey-score');
+const replay = $('#replay-journey');
+const journeyStatus = $('#journey-status');
+const bars = [...mail.querySelectorAll('.hour-marks i')];
+const initialJourneyStatus = journeyStatus.textContent;
+const legs = ['down', 'up'].map(direction => {
+  const leg = $(`.journey-leg.${direction}`);
+  return {
+    label: leg.querySelector('div > span').textContent.trim(),
+    duration: Number.parseFloat(leg.querySelector('strong').textContent),
+    unit: leg.querySelector('strong span').textContent.trim(),
+    bars: [...leg.querySelectorAll('.hour-marks i')],
+  };
+});
+const journeyTotal = legs.reduce((sum, leg) => sum + leg.duration, 0);
+const journeySummary = `${legs.map(leg => `${leg.label}: ${leg.duration}${leg.unit}`).join('. ')}. ${journeyTotal}${legs[0].unit} total.`;
+let journeyTimers = [], journeyStarted = false;
+const visible = new Map([[scene, false], [copy, false], [score, false]]);
+
+function stopJourney() {
+  journeyTimers.forEach(clearTimeout);
+  journeyTimers = [];
+  score.classList.remove('playing');
+  replay.disabled = false;
 }
-$('#replay-journey').addEventListener('click',playJourney);
-const journeyObserver=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){playJourney();journeyObserver.disconnect()}},{threshold:.65});
-journeyObserver.observe($('.journey-score'));
-
-document.addEventListener('motionchange',()=>{if(reduced())stopJourney()});
-document.addEventListener('visibilitychange',()=>{if(document.hidden)stopJourney()});
-
+function resetJourney() {
+  stopJourney();
+  journeyStarted = false;
+  bars.forEach(bar => bar.classList.remove('arrived'));
+  journeyStatus.textContent = initialJourneyStatus;
+  replay.innerHTML = 'Watch the round trip <span aria-hidden="true">↗</span>';
+}
+function playJourney() {
+  stopJourney();
+  journeyStarted = true;
+  bars.forEach(bar => bar.classList.remove('arrived'));
+  if(reduced()) {
+    bars.forEach(bar => bar.classList.add('arrived'));
+    journeyStatus.textContent = journeySummary;
+    return;
+  }
+  score.classList.add('playing');
+  replay.disabled = true;
+  journeyStatus.textContent = `${legs[0].label}…`;
+  let elapsed = 0;
+  legs.forEach((leg, legIndex) => {
+    leg.bars.forEach((bar, index) => {
+      const progress = leg.duration * (index + 1) / leg.bars.length;
+      const finished = legIndex === legs.length - 1 && index === leg.bars.length - 1;
+      journeyTimers.push(setTimeout(() => {
+        bar.classList.add('arrived');
+        journeyStatus.textContent = finished ? journeySummary : `${leg.label}: ${Number(progress.toFixed(2))}${leg.unit}…`;
+        if(finished) {
+          stopJourney();
+          replay.innerHTML = 'Watch it again <span aria-hidden="true">↺</span>';
+        }
+      }, (elapsed + progress) * 650));
+    });
+    elapsed += leg.duration;
+  });
+}
+function syncMail() {
+  // Each visual owns its trigger: on mobile the mule sits below the intro text.
+  for(const element of [scene, copy]) {
+    element.classList.toggle('in-view', !document.hidden && visible.get(element));
+  }
+  score.classList.toggle('journey-ready', !reduced());
+  if(reduced()) {
+    stopJourney();
+    bars.forEach(bar => bar.classList.add('arrived'));
+    journeyStatus.textContent = journeySummary;
+  } else if(!document.hidden && visible.get(score) && !journeyStarted) {
+    playJourney();
+  }
+}
+const mailObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    // isIntersecting alone is true even below the requested threshold.
+    const enoughVisible = entry.isIntersecting && entry.intersectionRatio >= .35;
+    if(enoughVisible) visible.set(entry.target, true);
+    else if(!entry.isIntersecting) {
+      visible.set(entry.target, false);
+      if(entry.target === score) resetJourney();
+    }
+  });
+  syncMail();
+}, {threshold:[0,.35]});
+[scene,copy,score].forEach(element => mailObserver.observe(element));
+replay.addEventListener('click', playJourney);
+document.addEventListener('motionchange', () => { resetJourney(); syncMail(); });
+document.addEventListener('visibilitychange', () => {
+  if(document.hidden) resetJourney();
+  syncMail();
+});
+syncMail();
 }
 if($('#painting')) {
+const painting=document.querySelector('#painting');
+const $=selector=>painting.querySelector(selector), $$=selector=>[...painting.querySelectorAll(selector)];
 // The browser owns continuous zoom progress. Buttons offer direct, keyboard-accessible stops.
 const scaleJourney = $('#scale-journey');
 const scaleStops = [0, 0.51, 0.95];

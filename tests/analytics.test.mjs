@@ -1,0 +1,62 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {mkdtemp,rm,readFile,access} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join,sep} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {createVisit,filterEvent,mayTrack,posthogOptions} from '../public/analytics.js';
+import {analyticsHead} from '../scripts/analytics.mjs';
+import {build} from '../scripts/build.mjs';
+import {publishedFixture} from './fixtures/entries.mjs';
+const config={enabled:true,projectToken:'phc_Fixture123',apiHost:'https://us.i.posthog.com',publicOrigin:'https://example.org'};
+const entries=[{id:'first',revealable:true},{id:'second',revealable:true},{id:'immediate',revealable:false}];
+test('replays and repeat views cannot inflate the two-distinct-reveals metric',()=>{
+  const calls=[];const visit=createVisit({entries,capture:(event,properties)=>calls.push({event,properties}),visitId:'fixture',pageKind:'collection'});
+  visit.start();visit.start();visit.view('first');visit.view('first');visit.reveal('first');visit.reveal('first');visit.reveal('immediate');visit.reveal('unknown');
+  visit.view('second');visit.view('second');visit.reveal('second');visit.reveal('second');
+  visit.view('first');
+  assert.equal(calls.filter(e=>e.event==='visit_started').length,1);
+  assert.deepEqual(calls.filter(e=>e.event==='discovery_revealed').map(e=>[e.properties.entry_id,e.properties.revealed_count]),[['first',1],['second',2]]);
+  assert.equal(calls.filter(e=>e.event==='discovery_continued').length,1);
+  assert.equal(calls[0].properties.available_reveals,2);
+  assert(calls.every(e=>e.properties.visit_id==='fixture'));
+});
+test('shares distinguish intent, cancellation, fallback, and browser completion',()=>{
+  const calls=[];const visit=createVisit({entries,capture:(event,properties)=>calls.push({event,properties}),visitId:'fixture',pageKind:'discovery'});
+  visit.share('first','button','intent');visit.share('first','native','cancelled');visit.share('first','manual','fallback');visit.share('first','clipboard','completed');
+  visit.share('unknown','clipboard','completed');visit.share('first','arbitrary','completed');
+  assert.deepEqual(calls.filter(e=>e.event==='discovery_share').map(e=>e.properties.outcome),['intent','cancelled','fallback','completed']);
+});
+test('privacy boundary rejects other origins, review pages, automation and opt-outs',()=>{
+  const location={origin:config.publicOrigin,pathname:'/'};
+  assert.equal(mayTrack(config,location,{}),true);
+  for(const navigator of [{doNotTrack:'1'},{globalPrivacyControl:true},{webdriver:true}])assert.equal(mayTrack(config,location,navigator),false);
+  for(const pathname of ['/review.html','/review/first/digest/','/404.html'])assert.equal(mayTrack(config,{...location,pathname},{}),false);
+  for(const origin of ['http://localhost:63014','https://preview.vercel.app'])assert.equal(mayTrack(config,{...location,origin},{}),false);
+  assert.equal(mayTrack(config,location,{},true),false);
+  assert.equal(mayTrack({...config,enabled:false},location,{}),false);
+});
+test('SDK sends only approved event properties and keeps no persistent identity',()=>{
+  const options=posthogOptions(config);
+  assert.equal(options.persistence,'memory');assert.equal(options.disable_persistence,true);assert.equal(options.person_profiles,'never');assert.equal(options.ip,false);
+  assert.equal(options.autocapture,false);assert.equal(options.capture_pageview,false);assert.equal(options.disable_session_recording,true);assert.equal(options.disable_external_dependency_loading,true);
+  assert.equal(filterEvent({event:'$autocapture',properties:{}}),null);
+  const event=filterEvent({event:'discovery_revealed',properties:{entry_id:'first',distinct_id:'temporary',token:'fixture','$current_url':'https://example.org/?email=private','$referrer':'private',email:'private','$set':{email:'private'}}});
+  assert.deepEqual(event.properties,{entry_id:'first',distinct_id:'temporary',token:'fixture'});
+});
+test('tracking config is validated and public builds alone load the pinned SDK',async t=>{
+  const entry=publishedFixture();
+  assert.equal(analyticsHead(config,{drafts:true,entries:[entry],publicOrigin:config.publicOrigin}),'');
+  assert.throws(()=>analyticsHead({...config,projectToken:'secret<script>'},{entries:[entry],publicOrigin:config.publicOrigin}),/token/);
+  assert.throws(()=>analyticsHead(config,{entries:[entry],publicOrigin:'https://elsewhere.org'}),/origin/);
+  const dir=await mkdtemp(join(tmpdir(),'weird-analytics-'));t.after(()=>rm(dir,{recursive:true,force:true}));const output=pathToFileURL(dir+sep);
+  const args={records:[entry],analytics:config,publicOrigin:config.publicOrigin,output,now:new Date('2020-06-01')};
+  await build(args);
+  assert((await readFile(new URL('index.html',output),'utf8')).includes('id="analytics-config"'));
+  assert((await readFile(new URL('discoveries/fixture-published/index.html',output),'utf8')).includes('id="analytics-config"'));
+  assert(!(await readFile(new URL('404.html',output),'utf8')).includes('id="analytics-config"'));
+  await access(new URL('vendor/posthog.mjs',output));
+  await build({...args,drafts:true});
+  assert(!(await readFile(new URL('index.html',output),'utf8')).includes('id="analytics-config"'));
+  await assert.rejects(access(new URL('vendor/posthog.mjs',output)),{code:'ENOENT'});
+});

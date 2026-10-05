@@ -4,11 +4,6 @@
   "topic": "sound",
   "status": "published",
   "order": 10,
-  "publishedAt": "2026-10-04T00:00:00-05:00",
-  "approval": {
-    "by": "Existing hosted edition carried forward",
-    "at": "2026-10-04"
-  },
   "evidence": {
     "kind": "experiment",
     "scope": "20 participants in a 2004 biting-sound experiment. The package response was informal follow-up questioning.",
@@ -26,5 +21,47 @@
   "treatment": {
     "kind": "custom",
     "template": "crunch"
+  },
+  "assets": [
+    {
+      "path": "assets/chip.webp",
+      "rights": {
+        "basis": "Generated decorative illustration",
+        "source": "docs/prototypes/visual-studies/assets/chip-audio.md",
+        "attribution": "Generated illustration; not a study photograph"
+      }
+    },
+    {
+      "path": "assets/chip-small.webp",
+      "rights": {
+        "basis": "Generated decorative illustration",
+        "source": "docs/prototypes/visual-studies/assets/chip-audio.md",
+        "attribution": "Generated illustration; not a study photograph"
+      }
+    },
+    {
+      "path": "assets/chip-a.mp3",
+      "rights": {
+        "basis": "CC0 per original sound source declaration",
+        "source": "https://bigsoundbank.com/eating-potato-chips-1-s1430.html",
+        "attribution": "Joseph Sardin, BigSoundBank #1430; edited versions documented in docs/prototypes/visual-studies/assets/chip-audio.md"
+      }
+    },
+    {
+      "path": "assets/chip-b.mp3",
+      "rights": {
+        "basis": "CC0 per original sound source declaration",
+        "source": "https://bigsoundbank.com/eating-potato-chips-1-s1430.html",
+        "attribution": "Joseph Sardin, BigSoundBank #1430; edited versions documented in docs/prototypes/visual-studies/assets/chip-audio.md"
+      }
+    }
+  ],
+  "publishedAt": "2026-10-05T05:54:45.436Z",
+  "approval": {
+    "by": "Nate",
+    "at": "2026-10-05",
+    "digest": "4d03cf959695708297988c41a83f22d491ae51dde62eb0361483b423806eefde",
+    "inputReference": "docs/editorial/2026-10-05-launch-decision.md",
+    "note": "Human instruction in this chat: \"Approve the four proposals and deploy, so the public sees the new chip, the copper, the painting zoom and eventually the Senate chairs.\" Applies to the four pending proposals listed in the launch decision record."
   }
 }

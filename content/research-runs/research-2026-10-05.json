@@ -1,0 +1,63 @@
+{
+  "id": "research-2026-10-05",
+  "startedAt": "2026-10-05T14:03:44.256Z",
+  "status": "completed",
+  "investigations": [
+    "runway-north",
+    "electric-flowers",
+    "banknote-folds"
+  ],
+  "promotions": [
+    {
+      "key": "runway-north:e02a044f008fe0a039ace5e2a9f0a3d95480ca8c0d9e8bf3ff8f8e072875e7d8",
+      "entryId": "runway-north",
+      "candidateRevision": "e02a044f008fe0a039ace5e2a9f0a3d95480ca8c0d9e8bf3ff8f8e072875e7d8",
+      "entryDigest": "664a2a77e4ec37da5ac18fcc82802d93de2ace78febd436d89fc0491400c0f88",
+      "state": "written",
+      "at": "2026-10-05T14:06:32.887Z"
+    },
+    {
+      "key": "electric-flowers:8426a5b2e70537aaeb2bf7c59086306c3551ffce1a103bb8b6385fe7e89403a1",
+      "entryId": "electric-flowers",
+      "candidateRevision": "8426a5b2e70537aaeb2bf7c59086306c3551ffce1a103bb8b6385fe7e89403a1",
+      "entryDigest": "1de411dbd47aeb9e365a79487de38b8414a27ab36a75cd80e37dddbf9ab5ad38",
+      "state": "written",
+      "at": "2026-10-05T14:06:32.896Z"
+    }
+  ],
+  "events": [
+    {
+      "at": "2026-10-05T14:03:44.260Z",
+      "action": "investigate",
+      "id": "runway-north"
+    },
+    {
+      "at": "2026-10-05T14:03:44.264Z",
+      "action": "investigate",
+      "id": "electric-flowers"
+    },
+    {
+      "at": "2026-10-05T14:03:44.267Z",
+      "action": "investigate",
+      "id": "banknote-folds"
+    },
+    {
+      "at": "2026-10-05T14:06:32.888Z",
+      "action": "promote",
+      "id": "runway-north",
+      "revision": "e02a044f008fe0a039ace5e2a9f0a3d95480ca8c0d9e8bf3ff8f8e072875e7d8"
+    },
+    {
+      "at": "2026-10-05T14:06:32.897Z",
+      "action": "promote",
+      "id": "electric-flowers",
+      "revision": "8426a5b2e70537aaeb2bf7c59086306c3551ffce1a103bb8b6385fe7e89403a1"
+    }
+  ],
+  "finishedAt": "2026-10-05T14:09:10.373Z",
+  "summary": {
+    "outcome": "completed",
+    "note": "Completed research and verification: 3 investigations, 2 private treatment-blocked drafts with exact packets, 1 preserved rejection. 76 tests and both builds pass. Public five-entry edition unchanged. Run elapsed 5.44 minutes including preparation/checks; human review time unmeasured. No publication or integration actions.",
+    "researchMinutes": 5.44
+  }
+}

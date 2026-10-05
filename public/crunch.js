@@ -10,6 +10,22 @@
   const mute = section.querySelector('#crunch-mute');
   const answer = section.querySelector('#crunch-answer');
   const revealButton = section.querySelector('#crunch-reveal');
+  const revealButtons = [...new Set([revealButton,...section.querySelectorAll('[data-crunch-reveal]')].filter(Boolean))];
+  const guesses = [...section.querySelectorAll('[data-crunch-guess]')];
+  const guessStatus = section.querySelector('#crunch-guess-status');
+  const choiceFeedback = section.querySelector('#crunch-choice-feedback');
+  let impression = null;
+  function syncImpression() {
+    if (!choiceFeedback) return;
+    choiceFeedback.hidden = impression === null;
+    choiceFeedback.textContent = impression === null ? '' : `Your impression: ${impression}.`;
+  }
+  guesses.forEach(button => button.addEventListener('click', () => {
+    impression = button.textContent.trim();
+    guesses.forEach(choice => choice.setAttribute('aria-pressed', String(choice === button)));
+    syncImpression();
+    if (guessStatus) guessStatus.textContent = `You chose ${impression}. Reveal when you’re ready.`;
+  }));
   const player = document.createElement('audio');
   player.id = 'crunch-audio';
   player.preload = 'none';
@@ -82,7 +98,7 @@
     active = key;
     syncButtons();
     status.textContent = `Loading crunch ${key.toUpperCase()}…`;
-    player.src = `assets/chip-${key}.mp3`;
+    player.src = `/assets/chip-${key}.mp3`;
     try {
       await setupAudio();
       if (request !== generation) return;
@@ -118,17 +134,23 @@
     stop(muted ? 'Sound muted. The discovery still works without it.' : 'Sound unmuted. Tap Listen when you’re ready.');
   });
   syncVolume();
-  revealButton.addEventListener('click', () => {
+  revealButtons.forEach(button => button.addEventListener('click', () => {
     stop('You can listen to either version above whenever you like.');
+    syncImpression();
     answer.hidden = false;
-    revealButton.setAttribute('aria-expanded', 'true');
+    window.WeirdAnalytics?.reveal('crunch');
+    revealButtons.forEach(button => button.setAttribute('aria-expanded', 'true'));
     section.querySelector('#crunch-result').focus({preventScroll:true});
     answer.scrollIntoView({block:'start', behavior:motionOff() ? 'instant' : 'smooth'});
-  });
+  }));
   section.querySelector('#crunch-reset').addEventListener('click', () => {
     stop('Tap either version to listen, or reveal without sound.');
     answer.hidden = true;
-    revealButton.setAttribute('aria-expanded', 'false');
+    impression = null;
+    syncImpression();
+    guesses.forEach(choice => choice.setAttribute('aria-pressed', 'false'));
+    if (guessStatus) guessStatus.textContent = 'Choose an impression, or go straight to the reveal.';
+    revealButtons.forEach(button => button.setAttribute('aria-expanded', 'false'));
     revealButton.focus({preventScroll:true});
     section.scrollIntoView({block:'start', behavior:motionOff() ? 'instant' : 'smooth'});
   });

@@ -1,0 +1,184 @@
+{
+  "id": "runway-north",
+  "claim": "A runway can need a new number because magnetic north shifts, without the runway moving.",
+  "sources": [
+    {
+      "url": "https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap2_section_3.html",
+      "locator": "2-3-3(b), Runway Designators",
+      "status": "verified",
+      "checkedAt": "2026-10-05",
+      "normalizedUrl": "https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap2_section_3.html"
+    },
+    {
+      "url": "https://news.tampaairport.com/tpa-runway-designation-change/",
+      "locator": "January 4, 2011 notice; effective January 13, 2011 table, 18R/36L to 19R/1L",
+      "status": "verified",
+      "checkedAt": "2026-10-05",
+      "normalizedUrl": "https://news.tampaairport.com/tpa-runway-designation-change"
+    },
+    {
+      "url": "https://news.tampaairport.com/community-noise-alert_20180918132055806/",
+      "locator": "January 4, 2011 notice, magnetic-north explanation and west runway closure/reopening plan",
+      "status": "verified",
+      "checkedAt": "2026-10-05",
+      "normalizedUrl": "https://news.tampaairport.com/community-noise-alert_20180918132055806"
+    },
+    {
+      "url": "https://www.ncei.noaa.gov/news/airport-runway-names-shift-magnetic-field",
+      "locator": "Opening and FAA Uses Magnetic Information; published 2017-11-20, updated 2021-05-25",
+      "status": "verified",
+      "checkedAt": "2026-10-05",
+      "normalizedUrl": "https://www.ncei.noaa.gov/news/airport-runway-names-shift-magnetic-field"
+    }
+  ],
+  "evidenceGaps": [],
+  "treatmentGaps": [
+    "Build an original stationary runway and moving magnetic-reference interaction with a separate reveal, keyboard/touch controls and reduced-motion reading. No bespoke treatment exists yet."
+  ],
+  "notes": "Editorial recommendation for sixth-entry visual work. Familiar to pilots and flight-simulation audiences; general-reader novelty untested. Retelling hypothesis: moving magnetic north can make an airport repaint its runway number. No semantic duplicate found in existing entries or earlier selection/reset notes. Same logistics topic as mail, different mechanism. Tampa CMS masthead says September 2014; dated notice body is January 4, 2011. Use the historical notice, not an asserted current runway status. Closure dates were announced plans, not independently verified completion dates. No actual Tampa angle or drift speed inferred. Illustrative arithmetic independently computed: round(184/10)=18; round(186/10)=19; two degrees of heading difference can change a rounded label by one. These are invented demonstration inputs, not measurements. No incorporated source images or datasets; citations and factual designations only.",
+  "entry": {
+    "id": "runway-north",
+    "title": "Same runway. New number.",
+    "topic": "navigation",
+    "status": "draft",
+    "order": 50,
+    "question": "Why would an airport repaint a runway that hasn’t moved?",
+    "answer": "Magnetic north moved. The runway stayed put.",
+    "explanation": "Runway numbers generally describe their direction relative to magnetic north, rounded to tens of degrees. Tampa’s January 2011 notice changed 18R/36L to 19R/1L as part of a renumbering prompted by magnetic drift.",
+    "qualification": "A historical example, not today’s flight information. Renumbering follows coordinated updates; it does not happen automatically whenever a compass reading changes.",
+    "whyCare": "Those huge painted numbers are a direction, not a runway’s place in a queue.",
+    "evidence": {
+      "kind": "reported",
+      "scope": "Tampa International Airport’s January 2011 designation notice and the FAA magnetic-heading convention.",
+      "dataAsOf": "January 2011 example",
+      "checkedAt": "2026-10-05",
+      "reviewDue": "2027-01-05",
+      "methodology": "Runway designations are labels, not counts. Any future 184° → 186° illustration must be labeled hypothetical; no Tampa angle is inferred.",
+      "sources": [
+        {
+          "label": "2-3-3(b), Runway Designators",
+          "url": "https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap2_section_3.html",
+          "primary": true
+        },
+        {
+          "label": "January 4, 2011 notice; effective January 13, 2011 table, 18R/36L to 19R/1L",
+          "url": "https://news.tampaairport.com/tpa-runway-designation-change/",
+          "primary": true
+        },
+        {
+          "label": "January 4, 2011 notice, magnetic-north explanation and west runway closure/reopening plan",
+          "url": "https://news.tampaairport.com/community-noise-alert_20180918132055806/",
+          "primary": true
+        },
+        {
+          "label": "Opening and FAA Uses Magnetic Information; published 2017-11-20, updated 2021-05-25",
+          "url": "https://www.ncei.noaa.gov/news/airport-runway-names-shift-magnetic-field",
+          "primary": true
+        }
+      ]
+    },
+    "treatment": {
+      "kind": "reveal"
+    },
+    "editorial": {
+      "stage": "copy and interaction brief only",
+      "visualReady": false,
+      "proposedTreatment": "stationary runway / moving magnetic reference; reveal is a temporary authoring placeholder, not the proposed final design"
+    }
+  },
+  "input": {
+    "id": "runway-north",
+    "claim": "A runway can need a new number because magnetic north shifts, without the runway moving.",
+    "sources": [
+      {
+        "url": "https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap2_section_3.html",
+        "locator": "2-3-3(b), Runway Designators",
+        "status": "verified",
+        "checkedAt": "2026-10-05"
+      },
+      {
+        "url": "https://news.tampaairport.com/tpa-runway-designation-change/",
+        "locator": "January 4, 2011 notice; effective January 13, 2011 table, 18R/36L to 19R/1L",
+        "status": "verified",
+        "checkedAt": "2026-10-05"
+      },
+      {
+        "url": "https://news.tampaairport.com/community-noise-alert_20180918132055806/",
+        "locator": "January 4, 2011 notice, magnetic-north explanation and west runway closure/reopening plan",
+        "status": "verified",
+        "checkedAt": "2026-10-05"
+      },
+      {
+        "url": "https://www.ncei.noaa.gov/news/airport-runway-names-shift-magnetic-field",
+        "locator": "Opening and FAA Uses Magnetic Information; published 2017-11-20, updated 2021-05-25",
+        "status": "verified",
+        "checkedAt": "2026-10-05"
+      }
+    ],
+    "evidenceGaps": [],
+    "treatmentGaps": [
+      "Build an original stationary runway and moving magnetic-reference interaction with a separate reveal, keyboard/touch controls and reduced-motion reading. No bespoke treatment exists yet."
+    ],
+    "notes": "Editorial recommendation for sixth-entry visual work. Familiar to pilots and flight-simulation audiences; general-reader novelty untested. Retelling hypothesis: moving magnetic north can make an airport repaint its runway number. No semantic duplicate found in existing entries or earlier selection/reset notes. Same logistics topic as mail, different mechanism. Tampa CMS masthead says September 2014; dated notice body is January 4, 2011. Use the historical notice, not an asserted current runway status. Closure dates were announced plans, not independently verified completion dates. No actual Tampa angle or drift speed inferred. Illustrative arithmetic independently computed: round(184/10)=18; round(186/10)=19; two degrees of heading difference can change a rounded label by one. These are invented demonstration inputs, not measurements. No incorporated source images or datasets; citations and factual designations only.",
+    "entry": {
+      "id": "runway-north",
+      "title": "Same runway. New number.",
+      "topic": "navigation",
+      "status": "draft",
+      "order": 50,
+      "question": "Why would an airport repaint a runway that hasn’t moved?",
+      "answer": "Magnetic north moved. The runway stayed put.",
+      "explanation": "Runway numbers generally describe their direction relative to magnetic north, rounded to tens of degrees. Tampa’s January 2011 notice changed 18R/36L to 19R/1L as part of a renumbering prompted by magnetic drift.",
+      "qualification": "A historical example, not today’s flight information. Renumbering follows coordinated updates; it does not happen automatically whenever a compass reading changes.",
+      "whyCare": "Those huge painted numbers are a direction, not a runway’s place in a queue.",
+      "evidence": {
+        "kind": "reported",
+        "scope": "Tampa International Airport’s January 2011 designation notice and the FAA magnetic-heading convention.",
+        "dataAsOf": "January 2011 example",
+        "checkedAt": "2026-10-05",
+        "reviewDue": "2027-01-05",
+        "methodology": "Runway designations are labels, not counts. Any future 184° → 186° illustration must be labeled hypothetical; no Tampa angle is inferred.",
+        "sources": [
+          {
+            "label": "2-3-3(b), Runway Designators",
+            "url": "https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap2_section_3.html",
+            "primary": true
+          },
+          {
+            "label": "January 4, 2011 notice; effective January 13, 2011 table, 18R/36L to 19R/1L",
+            "url": "https://news.tampaairport.com/tpa-runway-designation-change/",
+            "primary": true
+          },
+          {
+            "label": "January 4, 2011 notice, magnetic-north explanation and west runway closure/reopening plan",
+            "url": "https://news.tampaairport.com/community-noise-alert_20180918132055806/",
+            "primary": true
+          },
+          {
+            "label": "Opening and FAA Uses Magnetic Information; published 2017-11-20, updated 2021-05-25",
+            "url": "https://www.ncei.noaa.gov/news/airport-runway-names-shift-magnetic-field",
+            "primary": true
+          }
+        ]
+      },
+      "treatment": {
+        "kind": "reveal"
+      },
+      "editorial": {
+        "stage": "copy and interaction brief only",
+        "visualReady": false,
+        "proposedTreatment": "stationary runway / moving magnetic reference; reveal is a temporary authoring placeholder, not the proposed final design"
+      }
+    }
+  },
+  "claimFingerprint": "22802bc7fa93c471fc34d0e3f85dcf5a98563f2bca60fe88bf19e5219a3d11b0",
+  "duplicates": [],
+  "disposition": "open",
+  "dispositionReason": "Nate kept the concept for visual development on October 5, 2026. The bearing-shift study is now implemented in a private review revision; see docs/editorial/batches/2026-10-05.md#interactive-study. Original research and treatment-gap notes above preserve the investigation checkpoint. Final visual/content approval remains pending; no release authorization inferred.",
+  "createdAt": "2026-10-05T14:03:44.263Z",
+  "updatedAt": "2026-10-05T15:07:18.819Z",
+  "runIds": [
+    "research-2026-10-05"
+  ],
+  "revision": "1b30f64106684475bbe4bbfe1285f0ff9da618a1d4a3d665e149e08dd232b682"
+}

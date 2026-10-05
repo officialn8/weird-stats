@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "releasedAt": "2026-10-05T15:34:20.052Z",
+  "authorizedBy": "Nate",
+  "inputReference": "Codex chat 01a108bc-4331-75d3-b8d2-1f4892e8f1bd, October 5, 2026: \"commit, push, merge, and deploy\"",
+  "note": "Explicit instruction to ship the reviewed collection after adding the runway landing animation and newest-first ordering; authorizes this runway revision and its public release. No automated future approval or Vercel Git integration is authorized.",
+  "entries": [
+    {
+      "id": "crunch",
+      "digest": "4d03cf959695708297988c41a83f22d491ae51dde62eb0361483b423806eefde"
+    },
+    {
+      "id": "copper",
+      "digest": "c30200e2edcd9244d8d3165ba29c53841f7516ca5247400f0a2d232fcf8e74e5"
+    },
+    {
+      "id": "mail",
+      "digest": "24caf22f4be1773d2fb2d773aeaef407740ae5a89e25488e48c628aee2ede421"
+    },
+    {
+      "id": "painting",
+      "digest": "55d41d5e10934ffd434e3e054746451a950792f2d3fda9530f469a0addc196aa"
+    },
+    {
+      "id": "same-two-seats",
+      "digest": "af60e186be0cac71a5acf5a2ceab828c0cef027708dcafbb74fc5150b90f50d0"
+    },
+    {
+      "id": "runway-north",
+      "digest": "dd44e7e04167969a988a72886e38ce70bab0a28d3c02a25ddf2c064e72a7c2c9"
+    }
+  ],
+  "withdrawals": []
+}

@@ -1,0 +1,49 @@
+{
+  "id": "banknote-folds",
+  "claim": "US currency paper is cotton and linen and is reported to withstand about 4000 double folds before tearing.",
+  "sources": [
+    {
+      "url": "https://www.bep.gov/currency/faqs",
+      "locator": "What is currency paper made of? and How durable is paper currency?",
+      "status": "verified",
+      "checkedAt": "2026-10-05",
+      "normalizedUrl": "https://www.bep.gov/currency/faqs"
+    }
+  ],
+  "evidenceGaps": [
+    "FAQ gives no test protocol, specimen condition, distribution or measurement period for its approximate durability claim."
+  ],
+  "treatmentGaps": [
+    "A repetitive folding counter adds little explanation."
+  ],
+  "notes": "Opened BEP FAQ on 2026-10-05; confirms 75% cotton / 25% linen and approximately 4,000 forward-and-back folds. Undated institutional generalization, not a fresh experiment or lifetime guarantee. Initial /currency/currency-faqs locator was a research lead; search resolved the supporting page to /currency/faqs. Not a duplicate of copper, but another money/materials fact reduces collection variety. Familiarity risk is editorial judgment, not reader evidence.",
+  "input": {
+    "id": "banknote-folds",
+    "claim": "US currency paper is cotton and linen and is reported to withstand about 4000 double folds before tearing.",
+    "sources": [
+      {
+        "url": "https://www.bep.gov/currency/faqs",
+        "locator": "What is currency paper made of? and How durable is paper currency?",
+        "status": "verified",
+        "checkedAt": "2026-10-05"
+      }
+    ],
+    "evidenceGaps": [
+      "FAQ gives no test protocol, specimen condition, distribution or measurement period for its approximate durability claim."
+    ],
+    "treatmentGaps": [
+      "A repetitive folding counter adds little explanation."
+    ],
+    "notes": "Opened BEP FAQ on 2026-10-05; confirms 75% cotton / 25% linen and approximately 4,000 forward-and-back folds. Undated institutional generalization, not a fresh experiment or lifetime guarantee. Initial /currency/currency-faqs locator was a research lead; search resolved the supporting page to /currency/faqs. Not a duplicate of copper, but another money/materials fact reduces collection variety. Familiarity risk is editorial judgment, not reader evidence."
+  },
+  "claimFingerprint": "ca0d105b961111bec5da1cc1957c09ed0ce8745ecac68902c4bbfaeff60a2b3b",
+  "duplicates": [],
+  "disposition": "rejected",
+  "dispositionReason": "Not strong enough for the sixth-entry shortlist: weak mechanism and limited variety beside copper; durability lacks test context. Preserve for duplicate screening, not promotion.",
+  "createdAt": "2026-10-05T14:03:44.268Z",
+  "updatedAt": "2026-10-05T14:06:32.903Z",
+  "runIds": [
+    "research-2026-10-05"
+  ],
+  "revision": "ee4737ac95b928df1f178f8f17ceeec3f8f9129186fe94179b73bd391f482248"
+}

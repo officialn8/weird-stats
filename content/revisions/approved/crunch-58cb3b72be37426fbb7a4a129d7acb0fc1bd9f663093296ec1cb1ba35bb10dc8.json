@@ -1,0 +1,91 @@
+{
+  "id": "crunch",
+  "digest": "58cb3b72be37426fbb7a4a129d7acb0fc1bd9f663093296ec1cb1ba35bb10dc8",
+  "entry": {
+    "id": "crunch",
+    "title": "The crunch changes the chip",
+    "topic": "sound",
+    "status": "published",
+    "order": 10,
+    "publishedAt": "2026-10-04T20:45:36-05:00",
+    "approval": {
+      "by": "Existing hosted edition carried forward",
+      "at": "2026-10-04",
+      "digest": "58cb3b72be37426fbb7a4a129d7acb0fc1bd9f663093296ec1cb1ba35bb10dc8"
+    },
+    "evidence": {
+      "kind": "experiment",
+      "scope": "20 participants in a 2004 biting-sound experiment. The package response was informal follow-up questioning.",
+      "dataAsOf": "2004",
+      "checkedAt": "2026-10-04",
+      "reviewDue": "2027-01-04",
+      "sources": [
+        {
+          "label": "Zampini & Spence (2004)",
+          "url": "https://doi.org/10.1111/j.1745-459x.2004.080403.x",
+          "primary": true
+        }
+      ]
+    },
+    "treatment": {
+      "kind": "custom",
+      "template": "crunch"
+    },
+    "share": {
+      "question": "Could a volume knob make a potato chip seem fresher?",
+      "description": "A small question. A surprising discovery. Take a look at weird.stats."
+    },
+    "assets": [
+      {
+        "path": "assets/chip.webp",
+        "rights": {
+          "basis": "Generated decorative illustration",
+          "source": "docs/prototypes/visual-studies/assets/chip-audio.md",
+          "attribution": "Generated illustration; not a study photograph"
+        }
+      },
+      {
+        "path": "assets/chip-small.webp",
+        "rights": {
+          "basis": "Generated decorative illustration",
+          "source": "docs/prototypes/visual-studies/assets/chip-audio.md",
+          "attribution": "Generated illustration; not a study photograph"
+        }
+      },
+      {
+        "path": "assets/chip-a.mp3",
+        "rights": {
+          "basis": "CC0 per original sound source declaration",
+          "source": "https://bigsoundbank.com/eating-potato-chips-1-s1430.html",
+          "attribution": "Joseph Sardin, BigSoundBank #1430; edited versions documented in docs/prototypes/visual-studies/assets/chip-audio.md"
+        }
+      },
+      {
+        "path": "assets/chip-b.mp3",
+        "rights": {
+          "basis": "CC0 per original sound source declaration",
+          "source": "https://bigsoundbank.com/eating-potato-chips-1-s1430.html",
+          "attribution": "Joseph Sardin, BigSoundBank #1430; edited versions documented in docs/prototypes/visual-studies/assets/chip-audio.md"
+        }
+      }
+    ]
+  },
+  "fragment": "<section class=\"crunch-story\" id=\"crunch\" aria-labelledby=\"crunch-title\">\n  <div class=\"crunch-opening\">\n    <div class=\"crunch-copy\">\n      <h1 id=\"crunch-title\">Could a volume knob make a potato chip <span>seem fresher?</span></h1>\n      <p>Listen to two versions of one crunch. Then see what happened in the experiment.</p>\n      <button class=\"round-link\" id=\"crunch-reveal\" data-crunch-reveal aria-expanded=\"false\" aria-controls=\"crunch-answer\">Reveal the discovery <span aria-hidden=\"true\">↗</span></button>\n      <p class=\"sound-optional\">No sound? The answer works without it.</p>\n    </div>\n    <div class=\"crunch-lab\">\n      <div class=\"chip-stage\" aria-hidden=\"true\">\n        <div class=\"sound-ring ring-one\"></div><div class=\"sound-ring ring-two\"></div><div class=\"sound-ring ring-three\"></div>\n        <div class=\"chip-float\"><img id=\"chip-image\" src=\"assets/chip.webp\" srcset=\"assets/chip-small.webp 600w, assets/chip.webp 800w\" sizes=\"(max-width:767px) 300px, (max-width:1450px) 31vw, 440px\" alt=\"\" width=\"800\" height=\"800\" fetchpriority=\"high\"></div>\n        <div class=\"crunch-wave\"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>\n      </div>\n      <div class=\"crunch-player\" role=\"group\" aria-label=\"Optional crunch sound comparison\" aria-describedby=\"crunch-demo-note\">\n        <div class=\"crunch-listen\"><button class=\"listen-button\" data-crunch=\"a\"><span class=\"listen-letter\" aria-hidden=\"true\">A</span><span class=\"listen-label\">Listen A</span><span class=\"listen-symbol\" aria-hidden=\"true\">▶</span></button><button class=\"listen-button\" data-crunch=\"b\"><span class=\"listen-letter\" aria-hidden=\"true\">B</span><span class=\"listen-label\">Listen B</span><span class=\"listen-symbol\" aria-hidden=\"true\">▶</span></button></div>\n        <div class=\"crunch-volume\"><label for=\"crunch-volume\">Volume</label><input id=\"crunch-volume\" type=\"range\" min=\"0\" max=\"100\" step=\"5\" value=\"35\"><output for=\"crunch-volume\" id=\"crunch-level\">35%</output><button id=\"crunch-mute\" class=\"text-button\" aria-pressed=\"false\">Mute</button></div>\n        <p id=\"crunch-status\" role=\"status\">Sound only plays when you tap Listen.</p>\n        <p class=\"crunch-demo-note\" id=\"crunch-demo-note\">An illustrative sound comparison. Listening alone does not recreate the experiment.</p>\n      </div>\n    </div>\n  </div>\n  <div class=\"crunch-answer\" id=\"crunch-answer\" hidden>\n    <div class=\"crunch-result-top\"><p class=\"crunch-verdict\">Yes. Sound changed how fresh the chips seemed.</p><button id=\"crunch-reset\" class=\"text-button\">Back to the question ↺</button></div>\n    <div class=\"crunch-result-body\"><div class=\"crunch-count\"><p><strong>15</strong><span>of 20 people</span></p><div class=\"listener-marks\" aria-hidden=\"true\"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class=\"crunch-explanation\"><h2 id=\"crunch-result\" tabindex=\"-1\" aria-label=\"15 of 20 people thought the chips came from different packages\">They thought the chips came from different packages.</h2><p class=\"crunch-punchline\">They came from the same package.</p><p>Researchers changed the biting sounds people heard through headphones. With louder or enhanced high-frequency feedback, the chips seemed crisper and fresher.</p><p class=\"crunch-boundary\">The 15-of-20 count came from informal questions after one small 2004 experiment.</p></div></div>\n    <div class=\"crunch-takeaway\"><p>The crunch is part of the experience.</p><p>In our comparison, A softens high frequencies and B emphasizes them. Both use the same recording. Your reaction may differ.</p></div>\n    <a class=\"round-link\" href=\"{{nextHref}}\">Keep wandering <span aria-hidden=\"true\">↓</span></a>\n  </div>\n  <details class=\"source crunch-source\"><summary>The receipts</summary><p><a href=\"https://doi.org/10.1111/j.1745-459x.2004.080403.x\" target=\"_blank\" rel=\"noopener\">Zampini &amp; Spence, Journal of Sensory Studies (2004) ↗</a><br>The experiment manipulated auditory feedback during biting. The 15-of-20 package response is reported in the discussion, p. 357, as informal post-experiment questioning. It is not a population estimate or a measure of food freshness. <a href=\"https://www.psy.ox.ac.uk/publication/4405\" target=\"_blank\" rel=\"noopener\">Oxford abstract ↗</a>. Our two clips are filtered versions of a separate <a href=\"https://bigsoundbank.com/eating-potato-chips-1-s1430.html\" target=\"_blank\" rel=\"noopener\">CC0 recording by Joseph Sardin ↗</a>, not study recordings. The chip image is generated.</p></details>\n  <noscript><p class=\"crunch-noscript\">The discovery: changing biting sounds changed perceived crispness and freshness. After one small experiment, 15 of 20 participants thought chips from the same package came from different packages. That count was collected informally afterward. Audio and reveal controls require JavaScript.</p></noscript>\n</section>\n",
+  "assetDigests": {
+    "assets/chip.webp": "1757879f06ab1a66e99fcb611a6778eda627061f1f754614ce36c48d043703e6",
+    "assets/chip-small.webp": "12b9c8b948e8457e926927d80acd60113f25241e3942a5ab81fa1d5415e7da8c",
+    "assets/chip-a.mp3": "81da90b42893b32204d0af9e32e74d821cde362a248d396aa38db1d9548996ab",
+    "assets/chip-b.mp3": "bf4fe680be83936daad416a1ba8e46cda54b3a8dc1c427a086b54ecc9277d18e"
+  },
+  "release": {
+    "at": "2026-10-04T20:45:36-05:00",
+    "authorizedBy": "Existing hosted edition carried forward; evidence in docs/editorial/release-baseline.md"
+  },
+  "provenance": {
+    "reference": "docs/editorial/release-baseline.md; d0bd7d6 records, 0edaeec HTML exactly matched authenticated hosted HTML",
+    "releasedAt": "2026-10-04T20:45:36-05:00",
+    "authorizedBy": "Existing hosted edition carried forward; evidence in docs/editorial/release-baseline.md",
+    "rightsReference": "docs/editorial/asset-provenance-check.md",
+    "sharePresentation": "Unreleased new surface using unchanged original heading; no new factual copy approval"
+  }
+}

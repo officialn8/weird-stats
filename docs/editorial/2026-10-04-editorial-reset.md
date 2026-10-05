@@ -106,3 +106,11 @@ The next visual round should make the discovered mechanism tangible, use orange 
 ## Visual follow-up
 
 After the completed creator check, the creator authorized a complete WS-15 chip treatment. It now opens the four-entry scrolling prototype, with optional illustrative audio, an audio-responsive chip, and a silent reveal. This moves one visual experiment ahead of the independent-reader gate proposed above. It does not change the recorded evidence: independent responses are still uncollected, and the opener remains provisional. Use the [chip visual check](2026-10-04-chip-visual-check.md) to assess this implementation separately.
+
+## Version 2 source additions after review
+
+Reopened the original Ward et al. paper: its five-foot projection has negligible distortion relative to the orthographic reference. The exact version 2 reader copy adds this practical comparison without treating the 30% as an exact twelve-inch/five-foot difference. The [AAFPRS-authored release of January 26, 2017](https://www.prnewswire.com/news-releases/aafprs-annual-survey-unveils-rising-trends-in-facial-plastic-surgery-300396391.html) reports that 42% of surgeons in its 2016 member survey saw patients seeking cosmetic procedures to look better in selfies or other social channels. This is a historical surgeon-response percentage, not a patient prevalence or causal finding.
+
+Reopened [EFF’s decoding guide](https://w2.eff.org/Privacy/printers/docucolor/) to verify that blue illumination makes the yellow marks appear dark and magnification can help. Version 2 now includes that observable mechanism and the limit that machine identifiers do not identify the person who printed a page.
+
+Verified [21 CFR 135.110(a)(2)](https://www.ecfr.gov/current/title-21/section-135.110): the U.S. ice-cream standard includes a 4.5-pound-per-gallon minimum. This is a weight-per-volume requirement, not a universal air percentage or a rule for every frozen dessert. These additions are sourced context for untested copy, not new reader-validation results. The historical candidate openings and creator responses above are retained; the active wording lives in the version 2 reader scripts.

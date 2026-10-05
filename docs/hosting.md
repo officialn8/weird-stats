@@ -2,15 +2,42 @@
 
 Set up October 4, 2026.
 
+## Current release — analytics activation, October 5
+
+The five-entry edition remains live at https://weird-stats.vercel.app, now with the separately authorized PostHog project enabled.
+
+- Source commit: `efa73c6` on `fix/editorial-reveal-review`, backed up to the private GitHub branch.
+- Deployment: `dpl_AFeSB5BmZuJEJZeS3VV8bckCrqT1`, production, build succeeded and main alias assigned.
+- Immutable URL: https://weird-stats-kjykzkqgb-nathaniels-projects-cc0e35b9.vercel.app.
+- Deployed with `vercel deploy --prod --yes --scope nathaniels-projects-cc0e35b9`. Git integration and protection settings were unchanged.
+- All 76 tests and both builds passed before deployment. The configuration change enables the public ingestion token and US host; it makes no editorial changes.
+- Actual marked browser events reached project `646286`. IP storage and GeoIP enrichment are disabled. See [launch analytics](launch-analytics.md) for the stored-event evidence, SDK storage check, saved readout, and coverage limits.
+- No audience promotion occurred.
+
+## Earlier five-entry release — October 5
+
+Nate approved all four pending proposals and authorized deployment in the [launch decision](editorial/2026-10-05-launch-decision.md). The five-entry edition is live at https://weird-stats.vercel.app.
+
+- Deployment: `dpl_5pifowr2twQrgXFfuXVmW4Dezz1N`, target production, status Ready.
+- Immutable URL: https://weird-stats-f8ibh7wrn-nathaniels-projects-cc0e35b9.vercel.app.
+- Uploaded the working tree from `fix/editorial-reveal-review` based on `572a0a3`, including this turn's exact approval records, runtime changes, and disabled analytics configuration. Do not describe the preexisting commit alone as the deployed source.
+- Built with `--prod --skip-domain`, checked via authenticated `vercel curl`, then promoted to the main alias. No protection settings or Git repository access changed.
+- Anonymous checks: collection, five discovery pages, five 1200×630 PNGs, feed, and Senate CSV returned 200. `/review.html`, raw content JSON, and an unknown discovery returned the real 404 page.
+- The updated chip was exercised in the production browser; no console errors. The Senate's optional guess and keyboard reveal passed at 390px locally, with no horizontal overflow.
+- Four share PNGs match the Mac build byte for byte. The mule PNG differs in encoded bytes between hosted/local builds; the hosted image was inspected and correctly shows the new question and mule artwork. No social-platform cache/preview scrape has been performed.
+- All 76 tests and both builds passed. At this earlier deployment, PostHog was implemented but disabled pending the project decision and ingestion verification. No audience promotion occurred.
+
+## Original setup
+
 - Workspace and repository root: `/Users/nate/weird.stats`.
 - GitHub: https://github.com/officialn8/weird-stats (private), branch `main`.
 - Vercel project: https://vercel.com/nathaniels-projects-cc0e35b9/weird-stats.
 - Site alias: https://weird-stats.vercel.app.
 - First deployment: `dpl_AoBGxucc2gA6qZfeGf18ikTc7iaF`, Vercel reported `READY`.
 - Vercel team: Nathaniel’s projects (`nathaniels-projects-cc0e35b9`).
-- Deployment protection left enabled. Access may require Vercel sign-in.
+- Production alias is public: an anonymous HTTP GET on October 5, 2026 returned 200 and the original site HTML. The earlier protection assumption was incorrect. Preview URLs need their own access check.
 
-The project uses the repository root, no framework, `npm run build`, and `dist/`. The build serves only `public/` and requires no environment variables. The Vercel CLI created an ignored local `.env.local` for its own authentication workflow; do not commit it or `.vercel/`.
+The project uses the repository root, no framework, `npm run build`, and `dist/`. The build emits the selected public edition to `dist/` and requires no environment variables. The Vercel CLI created an ignored local `.env.local` for its own authentication workflow; do not commit it or `.vercel/`.
 
 ## Git integration: pending
 
@@ -28,7 +55,7 @@ npm run build
 npx vercel deploy --target=preview --scope nathaniels-projects-cc0e35b9
 ```
 
-The first deploy command did not request production, but Vercel’s first-deployment behavior assigned it to production automatically. Explicitly select preview for future review deployments. A deliberate public launch or protection change remains a separate decision.
+The first deploy command did not request production, but Vercel’s first-deployment behavior assigned it to production automatically. Explicitly select preview for future review deployments. A production deployment updates the already-public site immediately. Release/deployment authorization and any protection change remain separate decisions.
 
 ## Verification
 

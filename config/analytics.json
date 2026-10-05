@@ -1,0 +1,6 @@
+{
+  "enabled": true,
+  "projectToken": "phc_BWvVW7sVeHaJXUmx93Wnx4FsjusZ2wquQYWoJP7t8gBL",
+  "apiHost": "https://us.i.posthog.com",
+  "publicOrigin": "https://weird-stats.vercel.app"
+}

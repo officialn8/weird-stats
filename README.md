@@ -1,10 +1,10 @@
 # weird.stats
 
-A scrolling collection of wonderfully unnecessary discoveries. Orange, tactile, and curious, with optional sound and accessible reveals.
+A scrolling collection of unexpected discoveries. Orange, tactile, and curious, with optional sound and accessible reveals.
 
 [Hosted site](https://weird-stats.vercel.app) · [Private GitHub repository](https://github.com/officialn8/weird-stats) · [Vercel project](https://vercel.com/nathaniels-projects-cc0e35b9/weird-stats)
 
-The current site contains chips and auditory perception, copper in coins, mule mail to Supai, and the scale of the Night Watch photograph. This is the first hosted version, not a settled launch lineup.
+The current public site contains five discoveries: chips and auditory perception, copper in coins, mule mail to Supai, the scale of the Night Watch photograph, and the California/21-state Senate comparison. The October 5 release includes the approved chip revision and individual share pages. Audience promotion waits for about six strong entries; see the [launch decision](docs/editorial/2026-10-05-launch-decision.md).
 
 ## Work on the site
 
@@ -21,11 +21,15 @@ Open http://localhost:63014 for the published edition, or run `npm run dev:revie
 - `src/shell.html`: shared page layout.
 - `src/exhibits/`: the four original custom interactive compositions.
 - `public/`: shared CSS, browser behavior, and local assets.
-- `scripts/content.mjs`: validation, publication selection, and reusable reveal/bar/line renderers.
+- `src/treatments/`: reusable visual treatments, including a paired comparison that reveals two different measures together.
+- `scripts/content.mjs`: validation, revision selection, and rendering shared by the collection and individual discovery pages.
+- `/discoveries/<id>/`: generated individual pages with question-led social preview images. The collection remains a continuous scrolling experience.
 - `dist/`: generated published site. `review-dist/`: generated local editorial edition. Neither is committed.
 - `docs/`: editorial workflow, evidence, reader responses, design history, and hosting notes.
 
 See [the content system](docs/content-system.md) for adding entries, and [the daily workflow](docs/editorial/daily-workflow.md) for the 9 a.m. Central draft/review cadence. The user reviews new entries before publication.
+
+The [product roadmap](docs/plans/2026-10-04-2200-feat-discovery-product-roadmap-plan.md) is being implemented in stages. The [visual reader check](docs/editorial/visual-forms-reader-check.md) is prepared but has no independent results yet. Further visual-form expansion waits for those results. The drafting desk now saves bounded, resumable candidate investigations; seven actual research runs and a later seven-edition Spread rehearsal remain evidence gates, not completed milestones.
 
 ```sh
 npm run content:new -- a-new-fact bar
@@ -38,7 +42,9 @@ npm run build
 
 Vercel uses the repository root, the Other framework preset, `npm run build`, and the `dist` output directory. `vercel.json` records these settings. No environment variables, database, paid integration, or runtime service is required.
 
-The GitHub workflow runs the build on pushes and pull requests. The initial direct-upload deployment is ready. Vercel assigned this first deployment to production automatically and gave it the `weird-stats.vercel.app` alias. Deployment protection remains enabled.
+The GitHub workflow runs tests and the build on pushes and pull requests. The October 5 release was manually deployed and promoted. The main alias is publicly accessible without login; generated deployment URLs may be protected. Check the exact URL rather than assuming protection from a project setting.
+
+Cookieless PostHog tracking is active in the dedicated weird.stats project. Production QA verified reveals, continuation, and share intent; QA traffic is excluded from the engagement readout. IP storage, location enrichment, recordings, and person profiles are disabled. See [launch analytics](docs/launch-analytics.md) for the event contract and verification limits.
 
 **Git integration is pending approval:** Vercel is not yet authorized to access this private GitHub repository, so Git pushes do not currently deploy the site. Once connected, branch changes receive previews and the configured production branch supplies production deployments. Until then, deploy from the repository root with the Vercel CLI. Use `--target=preview` explicitly for previews. See [hosting setup](docs/hosting.md).
 

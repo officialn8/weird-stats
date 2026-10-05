@@ -1,0 +1,67 @@
+{
+  "id": "runway-north",
+  "packetId": "0b19581f8b94d608158af63a88a63027f85dcaaf2935451700fc9f7237adc953",
+  "digest": "d4d7c5d38c78925fd863514a9dce8b7bb2e087e3a9063f4de5c40b49921aef62",
+  "baselineDigest": null,
+  "entry": {
+    "id": "runway-north",
+    "title": "Same runway. New number.",
+    "topic": "navigation",
+    "status": "draft",
+    "order": 50,
+    "question": "Why would an airport repaint a runway that hasn’t moved?",
+    "answer": "Magnetic north moved. The runway stayed put.",
+    "explanation": "Runway numbers generally describe their direction relative to magnetic north, rounded to tens of degrees. Tampa’s January 2011 notice changed 18R/36L to 19R/1L as part of a renumbering prompted by magnetic drift.",
+    "qualification": "A historical example, not today’s flight information. Renumbering follows coordinated updates; it does not happen automatically whenever a compass reading changes.",
+    "whyCare": "Those huge painted numbers are a direction, not a runway’s place in a queue.",
+    "evidence": {
+      "kind": "reported",
+      "scope": "Tampa International Airport’s January 2011 designation notice and the FAA magnetic-heading convention.",
+      "dataAsOf": "January 2011 example",
+      "checkedAt": "2026-10-05",
+      "reviewDue": "2027-01-05",
+      "methodology": "Runway designations are labels, not counts. Any future 184° → 186° illustration must be labeled hypothetical; no Tampa angle is inferred.",
+      "sources": [
+        {
+          "label": "2-3-3(b), Runway Designators",
+          "url": "https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap2_section_3.html",
+          "primary": true
+        },
+        {
+          "label": "January 4, 2011 notice; effective January 13, 2011 table, 18R/36L to 19R/1L",
+          "url": "https://news.tampaairport.com/tpa-runway-designation-change/",
+          "primary": true
+        },
+        {
+          "label": "January 4, 2011 notice, magnetic-north explanation and west runway closure/reopening plan",
+          "url": "https://news.tampaairport.com/community-noise-alert_20180918132055806/",
+          "primary": true
+        },
+        {
+          "label": "Opening and FAA Uses Magnetic Information; published 2017-11-20, updated 2021-05-25",
+          "url": "https://www.ncei.noaa.gov/news/airport-runway-names-shift-magnetic-field",
+          "primary": true
+        }
+      ]
+    },
+    "treatment": {
+      "kind": "reveal"
+    },
+    "editorial": {
+      "stage": "copy and interaction brief only",
+      "visualReady": false,
+      "proposedTreatment": "stationary runway / moving magnetic reference; reveal is a temporary authoring placeholder, not the proposed final design"
+    }
+  },
+  "fragment": "",
+  "assetDigests": {},
+  "state": "pending",
+  "createdAt": "2026-10-05T14:06:32.891Z",
+  "workingRecordHash": "ddc9f3459844e4393fdf24a8b53ed1df025b71fdf19ed677ac5121b9e4566713",
+  "supersedes": [],
+  "superseded": {
+    "by": "893a409dea954e2f6fd74cf616d741ad199c45758f4f2ac21237b64286daa58e",
+    "reason": "Replacement packet reconciles the requested revision or changed working baseline.",
+    "at": "2026-10-05T14:56:28.069Z"
+  }
+}
