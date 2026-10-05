@@ -1,0 +1,30 @@
+{
+  "id": "copper",
+  "title": "Copper in your pocket",
+  "topic": "materials",
+  "status": "published",
+  "order": 20,
+  "publishedAt": "2026-10-04T00:00:00-05:00",
+  "approval": {
+    "by": "Existing hosted edition carried forward",
+    "at": "2026-10-04"
+  },
+  "evidence": {
+    "kind": "calculation",
+    "scope": "Modern U.S. penny and nickel specifications; copper mass, not face value.",
+    "dataAsOf": "U.S. Mint specifications checked October 2026",
+    "checkedAt": "2026-10-04",
+    "reviewDue": "2027-01-04",
+    "sources": [
+      {
+        "label": "U.S. Mint specifications",
+        "url": "https://www.usmint.gov/learn/coins-and-medals/circulating-coins/coin-specifications",
+        "primary": true
+      }
+    ]
+  },
+  "treatment": {
+    "kind": "custom",
+    "template": "copper"
+  }
+}

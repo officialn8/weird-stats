@@ -28,6 +28,12 @@ This brief incorporates the October 4 conversation and narrows the [original ide
 4. **Keep wandering.** Scrolling brings the next discovery into view. Optional related links offer a second route. Back returns to the previous place and state.
 5. **Browse or share.** A collection view exposes the range of entries. Each stat has a direct link; someone arriving through it can discover the rest of the site.
 
+## Ongoing publication direction
+
+The October 4 follow-up establishes the hosted page as a starting point, not a finished four-fact product. Build a modular, continuously growing collection with daily researched drafts for the creator’s review. Political institutions, public datasets, real charts, and other serious subjects belong alongside surprising everyday discoveries. Maintain varied, purposeful interactivity and the approved orange scrolling direction as content grows.
+
+The current implementation separates records from reusable reveal/bar/line treatments and the four bespoke experiences. Drafts cannot enter the normal build before an approval record and publication date are supplied. The daily editorial automation prepares review packets at 9 a.m. Central; it does not automatically publish. See [daily workflow](editorial/daily-workflow.md) and [content architecture](content-system.md).
+
 ## Prototype and first release
 
 **Prototype:** work toward six finished entries, one coherent visual direction, mobile and desktop layouts, a scrolling collection, source details, and direct links. The current four-entry visual prototype covers chips, copper, mule mail, and the painting. Its content lineup is provisional. Following the creator’s completed text check and explicit authorization, WS-15 (chips) received a complete visual treatment before independent responses were collected. Chips lead this test; that placement is not validated. Other editorial candidates still need screening. No opening entry is settled.
@@ -41,10 +47,10 @@ This brief incorporates the October 4 conversation and narrows the [original ide
 | Tap-to-reveal and optional choices | Daily games, streaks, and crowd comparisons |
 | A few purposeful interactive visuals | Personalization and deeper simulations |
 | Browsing, direct links, and curated next steps | A zoomable number-line view |
-| Sources, dates, assumptions, and corrections | Automated discovery and approval tools |
+| Sources, dates, assumptions, corrections, and daily assisted research | Automatic publication and a full editorial CMS |
 | Share previews for individual entries | Accounts, collections, and community features |
 
-The content can be prepared ahead of visits; live data is unnecessary for the selected prototype. Choose the technical stack when implementation is scoped.
+Content is prepared ahead of visits and generated at build time. Dated public-data snapshots and review reminders come first; a live data feed needs its own sourcing, revision, reliability, and chart design work. The current native site does not need a framework migration to add new records.
 
 ## Editorial standard
 
@@ -77,6 +83,8 @@ Then, with first-time prototype visitors, observe whether they can reveal an ans
 Advance when the experience is clear, several entries produce a memorable discovery, and visitors choose to keep exploring. A tiny qualitative review cannot establish broad retention or demand. Revise weak content and confusing interactions before multiplying the collection.
 
 ## Next work
+
+Daily publication preparation now proceeds alongside reader checks: review the political comparison draft, build a quality backlog, and expand treatment types when the discovery needs them. These are the immediate operational priorities. The earlier reader checks below remain useful evidence tasks, not a claim that development is complete.
 
 1. Run the [second reader check](editorial/2026-10-04-second-reader-check.md) with independent readers on the four new candidates and copper baseline. Keep questions and reveals fixed, rotate order, record familiarity, and capture actual retellings. The creator's new-candidate walkthrough is complete: chips earned the strongest articulated interest, printers remain secondary, ice cream had weak sharing interest, and the selfie opening was skipped. All three revealed topics were recalled, and the creator would probably want more. Independent responses remain uncollected.
 2. Run the [chip visual check](editorial/2026-10-04-chip-visual-check.md) with fresh readers. The creator authorized this treatment before independent text screening; record visual observations separately from the original text protocol. Further candidates should earn visual investment through independent comprehension, novelty, and retelling evidence.

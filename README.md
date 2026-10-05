@@ -15,14 +15,24 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:63014. Edit `public/`; no framework or build dependency is required. `npm run build` checks local asset references, anchors, and JavaScript syntax, then creates `dist/`.
+Open http://localhost:63014 for the published edition, or run `npm run dev:review` and open http://localhost:63214 for unpublished review entries. Source edits rebuild automatically; refresh to see them. No framework or runtime content API is required.
 
-- `public/index.html`: discovery markup and sources.
-- `public/styles.css`: layout, color, motion, and responsive styles.
-- `public/app.js`: copper, mail, painting, appearance, and motion controls.
-- `public/crunch.js`: optional A/B audio and chip reveal.
-- `public/assets/`: only the images, audio, font, and license used by the site.
-- `docs/`: editorial research, reader responses, design notes, and historical prototypes. The old prototype is an archive; new site changes belong in `public/`.
+- `content/entries/`: one discovery per JSON record, including status, evidence, dates, and visual treatment.
+- `src/shell.html`: shared page layout.
+- `src/exhibits/`: the four original custom interactive compositions.
+- `public/`: shared CSS, browser behavior, and local assets.
+- `scripts/content.mjs`: validation, publication selection, and reusable reveal/bar/line renderers.
+- `dist/`: generated published site. `review-dist/`: generated local editorial edition. Neither is committed.
+- `docs/`: editorial workflow, evidence, reader responses, design history, and hosting notes.
+
+See [the content system](docs/content-system.md) for adding entries, and [the daily workflow](docs/editorial/daily-workflow.md) for the 9 a.m. Central draft/review cadence. The user reviews new entries before publication.
+
+```sh
+npm run content:new -- a-new-fact bar
+npm run content:status
+npm test
+npm run build
+```
 
 ## Deployment
 
@@ -32,7 +42,7 @@ The GitHub workflow runs the build on pushes and pull requests. The initial dire
 
 **Git integration is pending approval:** Vercel is not yet authorized to access this private GitHub repository, so Git pushes do not currently deploy the site. Once connected, branch changes receive previews and the configured production branch supplies production deployments. Until then, deploy from the repository root with the Vercel CLI. Use `--target=preview` explicitly for previews. See [hosting setup](docs/hosting.md).
 
-Research documents and historical artifacts are not included in `dist/` and are not served by the site. Asset URLs are not fingerprinted, so their cache lifetime is short and must revalidate after expiry.
+Research documents, unpublished entries, and their CSV exports are excluded from `dist/`. Drafts are available only in the separate local editorial build. Asset URLs are not fingerprinted, so their cache lifetime is short and must revalidate after expiry.
 
 ## Editorial and asset standards
 

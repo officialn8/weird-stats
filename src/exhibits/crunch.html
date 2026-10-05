@@ -1,0 +1,31 @@
+<section class="crunch-story" id="crunch" aria-labelledby="crunch-title">
+  <div class="crunch-opening">
+    <div class="crunch-copy">
+      <h1 id="crunch-title">Could a volume knob make a potato chip <span>seem fresher?</span></h1>
+      <p>Listen to two versions of one crunch. Then see what happened in the experiment.</p>
+      <button class="round-link" id="crunch-reveal" aria-expanded="false" aria-controls="crunch-answer">Reveal the discovery <span aria-hidden="true">↗</span></button>
+      <p class="sound-optional">No sound? The answer works without it.</p>
+    </div>
+    <div class="crunch-lab">
+      <div class="chip-stage" aria-hidden="true">
+        <div class="sound-ring ring-one"></div><div class="sound-ring ring-two"></div><div class="sound-ring ring-three"></div>
+        <div class="chip-float"><img id="chip-image" src="assets/chip.webp" srcset="assets/chip-small.webp 600w, assets/chip.webp 800w" sizes="(max-width:767px) 300px, (max-width:1450px) 31vw, 440px" alt="" width="800" height="800" fetchpriority="high"></div>
+        <div class="crunch-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="crunch-player" role="group" aria-label="Optional crunch sound comparison" aria-describedby="crunch-demo-note">
+        <div class="crunch-listen"><button class="listen-button" data-crunch="a"><span class="listen-letter" aria-hidden="true">A</span><span class="listen-label">Listen A</span><span class="listen-symbol" aria-hidden="true">▶</span></button><button class="listen-button" data-crunch="b"><span class="listen-letter" aria-hidden="true">B</span><span class="listen-label">Listen B</span><span class="listen-symbol" aria-hidden="true">▶</span></button></div>
+        <div class="crunch-volume"><label for="crunch-volume">Volume</label><input id="crunch-volume" type="range" min="0" max="100" step="5" value="35"><output for="crunch-volume" id="crunch-level">35%</output><button id="crunch-mute" class="text-button" aria-pressed="false">Mute</button></div>
+        <p id="crunch-status" role="status">Sound only plays when you tap Listen.</p>
+        <p class="crunch-demo-note" id="crunch-demo-note">An illustrative sound comparison. Listening alone does not recreate the experiment.</p>
+      </div>
+    </div>
+  </div>
+  <div class="crunch-answer" id="crunch-answer" hidden>
+    <div class="crunch-result-top"><p class="crunch-verdict">Yes. Sound changed how fresh the chips seemed.</p><button id="crunch-reset" class="text-button">Back to the question ↺</button></div>
+    <div class="crunch-result-body"><div class="crunch-count"><p><strong>15</strong><span>of 20 people</span></p><div class="listener-marks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="crunch-explanation"><h2 id="crunch-result" tabindex="-1" aria-label="15 of 20 people thought the chips came from different packages">They thought the chips came from different packages.</h2><p class="crunch-punchline">They came from the same package.</p><p>Researchers changed the biting sounds people heard through headphones. With louder or enhanced high-frequency feedback, the chips seemed crisper and fresher.</p><p class="crunch-boundary">The 15-of-20 count came from informal questions after one small 2004 experiment.</p></div></div>
+    <div class="crunch-takeaway"><p>The crunch is part of the experience.</p><p>In our comparison, A softens high frequencies and B emphasizes them. Both use the same recording. Your reaction may differ.</p></div>
+    <a class="round-link" href="{{nextHref}}">Keep wandering <span aria-hidden="true">↓</span></a>
+  </div>
+  <details class="source crunch-source"><summary>The receipts</summary><p><a href="https://doi.org/10.1111/j.1745-459x.2004.080403.x" target="_blank" rel="noopener">Zampini &amp; Spence, Journal of Sensory Studies (2004) ↗</a><br>The experiment manipulated auditory feedback during biting. The 15-of-20 package response is reported in the discussion, p. 357, as informal post-experiment questioning. It is not a population estimate or a measure of food freshness. <a href="https://www.psy.ox.ac.uk/publication/4405" target="_blank" rel="noopener">Oxford abstract ↗</a>. Our two clips are filtered versions of a separate <a href="https://bigsoundbank.com/eating-potato-chips-1-s1430.html" target="_blank" rel="noopener">CC0 recording by Joseph Sardin ↗</a>, not study recordings. The chip image is generated.</p></details>
+  <noscript><p class="crunch-noscript">The discovery: changing biting sounds changed perceived crispness and freshness. After one small experiment, 15 of 20 participants thought chips from the same package came from different packages. That count was collected informally afterward. Audio and reveal controls require JavaScript.</p></noscript>
+</section>

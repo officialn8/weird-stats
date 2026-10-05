@@ -1,6 +1,7 @@
 'use strict';
 (() => {
   const section = document.querySelector('#crunch');
+  if (!section) return;
   const stage = section.querySelector('.chip-stage');
   const buttons = [...section.querySelectorAll('[data-crunch]')];
   const bars = [...section.querySelectorAll('.crunch-wave i')];

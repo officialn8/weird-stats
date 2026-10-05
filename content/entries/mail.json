@@ -1,0 +1,30 @@
+{
+  "id": "mail",
+  "title": "The last nine miles",
+  "topic": "logistics",
+  "status": "published",
+  "order": 30,
+  "publishedAt": "2026-10-04T00:00:00-05:00",
+  "approval": {
+    "by": "Existing hosted edition carried forward",
+    "at": "2026-10-04"
+  },
+  "evidence": {
+    "kind": "reported",
+    "scope": "USPS mule route to Supai. Reported schedule and journey times.",
+    "dataAsOf": "USPS May 2026",
+    "checkedAt": "2026-10-04",
+    "reviewDue": "2027-01-04",
+    "sources": [
+      {
+        "label": "USPS Postal Facts",
+        "url": "https://facts.usps.com/fun/",
+        "primary": true
+      }
+    ]
+  },
+  "treatment": {
+    "kind": "custom",
+    "template": "mail"
+  }
+}

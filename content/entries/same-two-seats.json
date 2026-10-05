@@ -1,0 +1,32 @@
+{
+  "id": "same-two-seats",
+  "title": "Different populations. The same two Senate seats.",
+  "topic": "politics",
+  "status": "review",
+  "order": 15,
+  "question": "How many people share the same two seats?",
+  "answer": "About 68.5 times the population. Exactly the same number of Senate seats.",
+  "explanation": "California counted 39,538,223 residents in the 2020 Census; Wyoming counted 576,851. Each state has two U.S. Senate seats. Divide the two population counts and the ratio is about 68.5 to one.",
+  "qualification": "This compares resident populations and allocated Senate seats using a fixed 2020 snapshot. It is not a count of eligible voters, a current population estimate, or a measure of an individual vote’s power. House representation follows a different system.",
+  "whyCare": "Switch between people and seats. The numbers describe two different ways of representing the same country.",
+  "evidence": {
+    "kind": "calculation",
+    "scope": "California and Wyoming, the most and least populous states in the 2020 Census. Historical comparison, not a live political dashboard.",
+    "dataAsOf": "April 1, 2020 Census",
+    "checkedAt": "2026-10-04",
+    "reviewDue": "2027-01-04",
+    "denominator": "Wyoming resident population for the population ratio. Each state’s allocated Senate seats are counted separately; this is not a voter denominator.",
+    "methodology": "39,538,223 ÷ 576,851 = 68.54148298…, rounded to 68.5. Resident population comes from Census Table E; equal two-seat representation is documented by the U.S. Senate. The two chart views have different units and explicitly labeled zero-based scales.",
+    "sources": [
+      {"label": "U.S. Census Bureau, 2020/2010 resident population, Table E", "url": "https://www2.census.gov/programs-surveys/decennial/2020/data/apportionment/apportionment-2020-tableE.pdf", "primary": true},
+      {"label": "U.S. Senate: equal state representation", "url": "https://www.senate.gov/about/origins-foundations/senate-and-constitution.htm", "primary": true}
+    ]
+  },
+  "treatment": {
+    "kind": "bar",
+    "views": [
+      {"id": "people", "label": "People", "unit": "residents", "baseline": 0, "max": 40000000, "note": "2020 Census counts; both states use the same scale.", "values": [{"label": "California", "value": 39538223}, {"label": "Wyoming", "value": 576851}]},
+      {"id": "seats", "label": "Senate seats", "unit": "seats", "baseline": 0, "max": 2, "note": "Allocated seats per state, not the number of currently seated senators.", "values": [{"label": "California", "value": 2}, {"label": "Wyoming", "value": 2}]}
+    ]
+  }
+}

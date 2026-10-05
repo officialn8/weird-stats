@@ -4,10 +4,17 @@
   "private": true,
   "description": "Wonderfully unnecessary discoveries, made tangible.",
   "type": "module",
-  "engines": { "node": "22.x" },
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
-    "dev": "python3 -m http.server 63014 --bind 127.0.0.1 --directory public",
-    "check": "node --check public/app.js && node --check public/crunch.js && node scripts/check.mjs",
-    "build": "npm run check && node scripts/build.mjs"
+    "dev": "node scripts/dev.mjs",
+    "check": "node --check public/app.js && node --check public/crunch.js && node --check public/discoveries.js && node scripts/check.mjs",
+    "build": "npm run check && node scripts/build.mjs",
+    "dev:review": "node scripts/dev.mjs --drafts",
+    "test": "node --test",
+    "build:review": "npm run check && node scripts/build.mjs --drafts",
+    "content:new": "node scripts/new-entry.mjs",
+    "content:status": "node scripts/status.mjs"
   }
 }

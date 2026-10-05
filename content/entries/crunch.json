@@ -1,0 +1,30 @@
+{
+  "id": "crunch",
+  "title": "The crunch changes the chip",
+  "topic": "sound",
+  "status": "published",
+  "order": 10,
+  "publishedAt": "2026-10-04T00:00:00-05:00",
+  "approval": {
+    "by": "Existing hosted edition carried forward",
+    "at": "2026-10-04"
+  },
+  "evidence": {
+    "kind": "experiment",
+    "scope": "20 participants in a 2004 biting-sound experiment. The package response was informal follow-up questioning.",
+    "dataAsOf": "2004",
+    "checkedAt": "2026-10-04",
+    "reviewDue": "2027-01-04",
+    "sources": [
+      {
+        "label": "Zampini & Spence (2004)",
+        "url": "https://doi.org/10.1111/j.1745-459x.2004.080403.x",
+        "primary": true
+      }
+    ]
+  },
+  "treatment": {
+    "kind": "custom",
+    "template": "crunch"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "painting",
+  "title": "One pixel of paint",
+  "topic": "art",
+  "status": "published",
+  "order": 40,
+  "publishedAt": "2026-10-04T00:00:00-05:00",
+  "approval": {
+    "by": "Existing hosted edition carried forward",
+    "at": "2026-10-04"
+  },
+  "evidence": {
+    "kind": "calculation",
+    "scope": "Rijksmuseum photograph resolution. Diagrams, not microscopic image tiles.",
+    "dataAsOf": "January 2022",
+    "checkedAt": "2026-10-04",
+    "reviewDue": "2027-01-04",
+    "sources": [
+      {
+        "label": "Rijksmuseum",
+        "url": "https://www.rijksmuseum.nl/en/press/press-releases/rijksmuseum-publishes-717-gigapixel-photograph-of-the-night-watch",
+        "primary": true
+      }
+    ]
+  },
+  "treatment": {
+    "kind": "custom",
+    "template": "painting"
+  }
+}
