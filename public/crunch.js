@@ -101,7 +101,7 @@
     active = key;
     syncButtons();
     status.textContent = `Loading crunch ${key.toUpperCase()}…`;
-    player.src = `assets/chip-${key}.mp3`;
+    player.src = `/assets/chip-${key}.mp3`;
     try {
       await setupAudio();
       if (request !== generation) return;

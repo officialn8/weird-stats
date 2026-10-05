@@ -15,10 +15,12 @@ document.body.classList.add('motion-ready');
 
 
 if($('#copper')) {
-const story=$('#copper'), question=$('.copper-question'), answer=$('.copper-answer');
+const story=document.querySelector('#copper');
+const $=selector=>story.querySelector(selector), $$=selector=>[...story.querySelectorAll(selector)];
+const question=$('.copper-question'), answer=$('.copper-answer');
 const pile=$('#penny-pile');
 for(let i=0;i<60;i++){
-  const img=document.createElement('img');img.src='assets/penny.webp';img.alt='';img.width=500;img.height=500;
+  const img=document.createElement('img');img.src='/assets/penny.webp';img.alt='';img.width=500;img.height=500;
   img.style.setProperty('--i',i);img.style.setProperty('--launch-x',(-85-(i%6)*24)+'px');img.style.setProperty('--launch-y',(120-Math.floor(i/6)*25)+'px');img.style.setProperty('--turn',((i*37)%50-25)+'deg');pile.append(img);
 }
 let lastChoice = $('#reveal');
@@ -60,7 +62,8 @@ document.addEventListener('visibilitychange',()=>{duet.classList.toggle('is-paus
 
 }
 if($('#mail')) {
-const mail = $('#mail');
+const mail = document.querySelector('#mail');
+const $=selector=>mail.querySelector(selector);
 const scene = mail.querySelector('.mule-scene');
 const copy = mail.querySelector('.mail-copy');
 const score = mail.querySelector('.journey-score');
@@ -140,6 +143,8 @@ document.addEventListener('visibilitychange', () => {
 syncMail();
 }
 if($('#painting')) {
+const painting=document.querySelector('#painting');
+const $=selector=>painting.querySelector(selector), $$=selector=>[...painting.querySelectorAll(selector)];
 // The browser owns continuous zoom progress. Buttons offer direct, keyboard-accessible stops.
 const scaleJourney = $('#scale-journey');
 const scaleStops = [0, 0.51, 0.95];
