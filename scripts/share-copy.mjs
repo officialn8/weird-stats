@@ -14,7 +14,8 @@ export function shareCopy(entry) {
   assert(typeof description==='string'&&description.trim()&&description.length<=300,`${entry.id}: share description must contain 1–300 characters`);
   return {question,description};
 }
-export function validatePublicOrigin(value=process.env.PUBLIC_SITE_ORIGIN ?? 'https://weird-stats.vercel.app') {
+export const defaultPublicOrigin='https://weirdstats.dev';
+export function validatePublicOrigin(value=process.env.PUBLIC_SITE_ORIGIN ?? defaultPublicOrigin) {
   let url;
   try {url=new URL(value);} catch {throw new Error('Invalid public origin');}
   assert(url.protocol==='https:'&&!url.username&&!url.password&&url.pathname==='/'&&!url.search&&!url.hash,'Invalid public origin: use an HTTPS origin without credentials, path, query or hash');

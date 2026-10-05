@@ -2,6 +2,14 @@
 
 Set up October 4, 2026.
 
+## Custom domain — weirdstats.dev, October 5
+
+- `weirdstats.dev` was registered at Namecheap on October 5, 2026, with nameservers `ns1.vercel-dns.com` and `ns2.vercel-dns.com` (registry RDAP checked October 5).
+- Added to the `weird-stats` Vercel project as the apex production domain. `www.weirdstats.dev` is attached as a 308 redirect to the apex. Vercel reported both as verified on creation; DNS resolution and certificate issuance were not checked from this machine.
+- The canonical public origin is now `https://weirdstats.dev`: `PUBLIC_SITE_ORIGIN` default, `config/analytics.json` `publicOrigin`, canonical/share/feed URLs. Analytics only initializes on this exact origin.
+- `vercel.json` permanently redirects every path on `weird-stats.vercel.app` to the same path on `weirdstats.dev`. Immutable deployment URLs are unaffected. Until a production deployment ships this source, the live build still names `weird-stats.vercel.app` as its canonical and analytics origin, so visits through `weirdstats.dev` are served but not tracked.
+- A misspelled `weidstats.dev` (plus `www.`) was added to the project in the dashboard just before this. That name is not registered and should be removed from the project and team.
+
 ## Current release — analytics activation, October 5
 
 The five-entry edition remains live at https://weird-stats.vercel.app, now with the separately authorized PostHog project enabled.

@@ -1,7 +1,7 @@
 import { readFile, readdir } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import {shareCopy} from './share-copy.mjs';
+import {shareCopy,defaultPublicOrigin} from './share-copy.mjs';
 import { getTreatment, esc } from '../src/treatments/registry.mjs';
 export { esc, linePoints } from '../src/treatments/registry.mjs';
 export const root = new URL('../', import.meta.url);
@@ -47,7 +47,7 @@ export function selectEntries(entries,{drafts=false,now=new Date()}={}) {
 export function reviewState(entry, now=new Date()) {
   return entry.evidence?.reviewDue < now.toISOString().slice(0,10) ? 'Review due' : 'Checked';
 }
-export function createPageContext({mode='collection', assetBase='/', collectionHref='/', publicOrigin='https://weird-stats.vercel.app', ...overrides}={}) {
+export function createPageContext({mode='collection', assetBase='/', collectionHref='/', publicOrigin=defaultPublicOrigin, ...overrides}={}) {
   assert(['collection','discovery'].includes(mode), 'Invalid page context');
   return {
     mode, publicOrigin, assetHref:path => assetBase+path.replace(/^\//,''),
