@@ -9,9 +9,11 @@ import {loadEntries,esc} from '../scripts/content.mjs';
 import {publishedFixture,reviewFixture} from './fixtures/entries.mjs';
 import {reviewIndex} from '../scripts/review-packets.mjs';
 const entry=(template)=>({...publishedFixture(),id:template,treatment:{kind:'custom',template},share:{question:'Which everyday thing would you choose?'}});
+// SFNT table directory: tag -> byte offset.
+function sfntTables(font){const tables=new Map();for(let i=0;i<font.readUInt16BE(4);i++){const o=12+i*16;tables.set(font.toString('ascii',o,o+4),font.readUInt32BE(o+8));}return tables;}
 test('share renderer bundles an actual static bold face and does not fake weight with strokes',async()=>{
  const font=await readFile(new URL('../public/assets/outfit-bold.ttf',import.meta.url));
- const tables=new Map();for(let i=0;i<font.readUInt16BE(4);i++){const o=12+i*16;tables.set(font.toString('ascii',o,o+4),font.readUInt32BE(o+8));}
+ const tables=sfntTables(font);
  assert(!tables.has('fvar'));assert.equal(font.readUInt16BE(tables.get('OS/2')+4),700);
  const svg=await shareSVG(entry('crunch'));assert(!svg.includes('stroke='));assert(svg.includes('font-weight="700"'));
 });
@@ -45,7 +47,7 @@ test('private review leads with exact preview and share art, with raw diffs coll
 // Code points with a glyph in the bundled face (cmap format 4), so copy edits cannot render blank boxes.
 async function outfitCodePoints() {
  const font=await readFile(new URL('../public/assets/outfit-bold.ttf',import.meta.url)),points=new Set();
- const tables=new Map();for(let i=0;i<font.readUInt16BE(4);i++){const o=12+i*16;tables.set(font.toString('ascii',o,o+4),font.readUInt32BE(o+8));}
+ const tables=sfntTables(font);
  const cmap=tables.get('cmap');
  for(let i=0;i<font.readUInt16BE(cmap+2);i++){
   const t=cmap+font.readUInt32BE(cmap+8+i*8);if(font.readUInt16BE(t)!==4)continue;

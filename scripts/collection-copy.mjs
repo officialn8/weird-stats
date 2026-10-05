@@ -1,10 +1,9 @@
 import assert from 'node:assert/strict';
-// Preview copy for the collection (home page) link card. Version 1 was approved by Nate on
-// 2026-10-05 (see docs/editorial/2026-10-05-home-preview-approval.md).
+// Preview copy for the collection (home page) link card. Approval: docs/editorial/2026-10-05-home-preview-approval.md.
 // Kept apart from share-copy.mjs, whose defaults feed approved entry digests. It names no
 // discovery: the home preview is a brand card, not the newest discovery's question.
 // Changing any string here or the art means a new version (new filename) and a new approval
-// record with the exact strings and the SHA-256 of the approved PNG; this module never records approval.
+// record with the exact strings and the SHA-256 of the approved PNG. The hash below mirrors that record; it is not approval.
 export const collectionCopy=Object.freeze({
   version:1,
   title:'weird.stats: wonderfully unnecessary discoveries',
@@ -14,7 +13,7 @@ export const collectionCopy=Object.freeze({
   footer:'Open the collection.',
   alt:'weird.stats: Wonderfully unnecessary discoveries. A collection for the incurably curious.'
 });
-// SHA-256 of the full-size version-1 PNG Nate approved, as recorded in the approval record above.
+// SHA-256 of the approved full-size PNG for the current version; a test pins the rendered card to it.
 export const approvedCollectionImageSha256='127c519365b41381d2a883c108d5008c6c5c19f818657d9f77ef1df7dd5085f8';
 const limits={title:120,description:300,headline:120,subline:120,footer:60,alt:420};
 export function validateCollectionCopy(copy=collectionCopy) {

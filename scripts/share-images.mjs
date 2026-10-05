@@ -28,18 +28,23 @@ function width(text,size) {
  const svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="200"><text x="0" y="100" '+type+' font-size="'+size+'">'+esc(text)+'</text></svg>';
  return new Resvg(svg,options).innerBBox()?.width??0;
 }
+// Text column shared by every card: top edge, height, and the baseline factor for the first line.
+const column={top:175,height:345};
+const centered=(block,size)=>column.top+(column.height-block)/2+size*.72;
 // Wraps text into the left column at the largest size that fits; throws rather than clipping.
 // Defaults are the entry headline; breakWords:false never splits a word across lines.
-export function shareLayout(text,{measure=650,height=345,sizes=[86,80,74,66,58,50,42,36,30],breakWords=true,label='Share question'}={}) {
+export function shareLayout(text,{measure=650,height=column.height,sizes=[86,80,74,66,58,50,42,36,30],breakWords=true,label='Share question'}={}) {
  fit: for(const size of sizes) {
   const lines=[]; let line='';
   for(const word of text.split(/\s+/)) {
    if(line&&width(line+' '+word,size)>measure){lines.push(line);line='';}
    if(!breakWords&&width(word,size)>measure)continue fit;
-   for(const letter of word) {
+   // A word that may not break already fits: it passed the wrap check, or the width check above on an empty line.
+   if(breakWords)for(const letter of word) {
     if(width(line+letter,size)>measure){lines.push(line);line='';}
     line+=letter;
    }
+   else line+=word;
    line+=' ';
   }
   if(line.trim())lines.push(line.trim());
@@ -63,34 +68,33 @@ export async function shareSVG(entry) {
  }));
  const runway=entry.treatment.kind==='bearing-shift' ? '<g transform="rotate(14 960 340)"><rect x="801" y="95" width="304" height="480" rx="4" fill="#202922"/><path d="M820 110V560M1086 110V560" stroke="#e5e5cf" stroke-width="3"/><path d="M840 130V185M863 130V185M886 130V185M1020 130V185M1043 130V185M1066 130V185" stroke="#e5e5cf" stroke-width="10"/><text x="953" y="345" text-anchor="middle" '+type+' font-size="160" fill="#fff8ee">'+esc(Math.round(entry.treatment.from/10)||36)+'</text><path d="M953 385V555" stroke="#e5e5cf" stroke-width="6" stroke-dasharray="30 20"/></g>' : '';
  const image=objects.join('')||runway||'<text x="945" y="475" text-anchor="middle" '+type+' font-size="400" fill="'+ink+'">?</text>';
- const start=175+(345-lines.length*(size+4))/2+size*.72;
- return card(image,headline(layout,start),'Open the question.');
+ return card(image,headline(layout,centered(lines.length*(size+4),size)),'Open the question.');
 }
 export async function renderShareImage(entry) {
  return new Resvg(await shareSVG(entry),options).render().asPng();
 }
 // Collection (home) card: a brand card, not any discovery. Vector only: no <image>, no entry artwork.
-// Original art: a fanned stack of three ink cards, separated by orange gaps, the front one carrying a paper "?".
 function collectionArt() {
- const w=250,h=340,r=22,gap=9,cx=945,cy=300,x=cx-w/2,y=cy-h/2,pivot=' '+cx+' 640)"';
- return [-15,-3,9].map((angle,i)=>'<g transform="rotate('+angle+pivot+'>'
+ const w=250,h=340,r=22,gap=9,cx=945,cy=300,x=cx-w/2,y=cy-h/2,origin=cx+' 640';
+ return [-15,-3,9].map((angle,i)=>'<g transform="rotate('+angle+' '+origin+')">'
   +(i?'<rect x="'+(x-gap)+'" y="'+(y-gap)+'" width="'+(w+2*gap)+'" height="'+(h+2*gap)+'" rx="'+(r+gap)+'" fill="'+orange+'"/>':'')
   +'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+r+'" fill="'+ink+'"/>'
   +(i===2?'<text x="'+cx+'" y="'+(cy+92)+'" text-anchor="middle" '+type+' font-size="250" fill="'+paper+'">?</text>':'')+'</g>').join('');
 }
-export function collectionLayout(copy=collectionCopy) {
- assert(typeof copy?.headline==='string','Invalid collection copy: expected collection copy, not an entry');
+function collectionLayout(copy=collectionCopy) {
  validateCollectionCopy(copy);
- const head=shareLayout(copy.headline,{measure:600,height:345-62,sizes:[86,80,74,66,58],breakWords:false,label:'Collection headline'});
+ // 62 reserves the largest sub-line size (34) plus its gap (28) under the headline.
+ const head=shareLayout(copy.headline,{measure:600,height:column.height-62,sizes:[86,80,74,66,58],breakWords:false,label:'Collection headline'});
  const sub=shareLayout(copy.subline,{measure:600,height:38,sizes:[34,32,30,28],breakWords:false,label:'Collection sub-line'});
+ // Only a fit check: the footer is drawn at the card's fixed position, but must not run into the arrow.
  shareLayout(copy.footer,{measure:520,height:28,sizes:[24],breakWords:false,label:'Collection footer'});
  const gap=sub.size+28,block=head.size*.72+(head.lines.length-1)*(head.size+4)+gap;
- const start=175+(345-block)/2+head.size*.72;
- return {head,sub,start,subline:start+(head.lines.length-1)*(head.size+4)+gap};
+ const headlineY=centered(block,head.size);
+ return {head,sub,headlineY,sublineY:headlineY+(head.lines.length-1)*(head.size+4)+gap};
 }
 export function collectionShareSVG(copy=collectionCopy) {
- const {head,sub,start,subline}=collectionLayout(copy);
- return card(collectionArt(),headline(head,start)+'<text x="58" y="'+subline+'" font-size="'+sub.size+'" letter-spacing="-.5">'+esc(copy.subline)+'</text>',copy.footer);
+ const {head,sub,headlineY,sublineY}=collectionLayout(copy);
+ return card(collectionArt(),headline(head,headlineY)+'<text x="58" y="'+sublineY+'" font-size="'+sub.size+'" letter-spacing="-.5">'+esc(copy.subline)+'</text>',copy.footer);
 }
 export function renderCollectionShareImage(copy=collectionCopy) {
  return new Resvg(collectionShareSVG(copy),options).render().asPng();

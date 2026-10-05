@@ -89,7 +89,7 @@ test('the collection head names no discovery, and only the private review build 
    const result=await build({now,records,drafts,output:pathToFileURL(join(directory,drafts?'review':'published')+sep)});
    const head=result.html.split('</head>')[0],body=result.html.slice(head.length),label=drafts?'review':'public';
    assert(body.includes(published.question)&&body.includes(published.answer));assert.equal(body.includes(draft.question),drafts);
-   for(const entry of records)for(const text of new Set([entry.id,entry.title,entry.question,shareCopy(entry).question,entry.answer]))
+   for(const entry of records)for(const text of new Set([entry.id,entry.title,entry.question,shareCopy(entry).question,entry.answer].filter(Boolean)))
      assert(!head.includes(text)&&!head.includes(esc(text)),`${label} collection head leaks ${text}`);
    assert.equal((head.match(/name="robots"/g)||[]).length,drafts?1:0,`${label} robots tags`);
    if(drafts)assert(head.includes('<meta name="robots" content="noindex,nofollow">'));
