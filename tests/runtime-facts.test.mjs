@@ -86,22 +86,9 @@ test('copper pile and reveal use the pinned fragment ratio, image and answer for
 });
 
 test('mail timing, intermediate narration and reduced-motion summary follow approved leg values and labels', async () => {
-  const source = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
   for(const [down, up] of [[2, 4], [4, 7]]) for(const reduced of [false, true]) {
-    const story = new Element(), legs = [down, up].map((duration, index) => {
-      const leg = new Element();
-      leg.nodes = {'div > span':new Element(index ? 'Return to station' : 'To orchard'), strong:new Element(`${duration}h`), 'strong span':new Element('h'), '.hour-marks i':Array.from({length:duration}, () => new Element())};
-      return leg;
-    });
-    story.nodes = {
-      '.mule-scene':new Element(), '.mail-copy':new Element(), '.journey-score':new Element(),
-      '#replay-journey':new Element(), '#journey-status':new Element('Approved opening status.'),
-      '.journey-leg.down':legs[0], '.journey-leg.up':legs[1], '.hour-marks i':legs.flatMap(leg => leg.nodes['.hour-marks i']),
-    };
-    const {sandbox, timers} = environment({'#mail':story}, reduced);
-    runInNewContext(source, sandbox);
-    story.nodes['#replay-journey'].dispatchEvent(new Event('click'));
-    const status = story.nodes['#journey-status'];
+    const {status, timers, press} = await mountMail({down, up, reduced});
+    press();
     if(!reduced) {
       assert.equal(status.textContent, 'To orchard…');
       assert.equal(timers.length, down + up);
@@ -114,6 +101,7 @@ test('mail timing, intermediate narration and reduced-motion summary follow appr
   }
 });
 
+const appSource = readFile(new URL('../public/app.js', import.meta.url), 'utf8');
 async function mountMail({down = 2, up = 4, reduced = false} = {}) {
   const legs = [down, up].map((duration, index) => {
     const leg = new Element();
@@ -131,7 +119,7 @@ async function mountMail({down = 2, up = 4, reduced = false} = {}) {
     '.journey-leg.down':legs[0], '.journey-leg.up':legs[1], '.hour-marks i':bars,
   };
   const env = environment({'#mail':story}, reduced);
-  runInNewContext(await readFile(new URL('../public/app.js', import.meta.url), 'utf8'), env.sandbox);
+  runInNewContext(await appSource, env.sandbox);
   const announcer = score.nextSibling;
   return {
     ...env, story, score, status, replay, disabledWrites, bars, announcer,
@@ -155,7 +143,7 @@ test('mail init leaves the visual status silent and adds one empty status region
     assert.equal(mail.announcer.previousSibling, mail.score, 'the region is a sibling after [role="img"], not inside it');
     assert(!mail.score.children.includes(mail.announcer));
     assert(mail.announcer.className, 'the region carries a class');
-    assert.match(css, new RegExp(`\\.${mail.announcer.className}\\{[^}]*clip-path:inset\\(50%\\)`), 'the region is visually hidden');
+    assert.match(css, new RegExp(`\\.${mail.announcer.className}[,{][^}]*clip-path:inset\\(50%\\)`), 'the region is visually hidden');
     mail.advance();
     assert.deepEqual(mail.announcer.writes, []);
   }
