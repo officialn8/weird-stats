@@ -5,14 +5,14 @@
   "outputDirectory": "dist",
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/:path(.*)",
       "has": [
         {
           "type": "host",
           "value": "weird-stats.vercel.app"
         }
       ],
-      "destination": "https://weirdstats.dev/:path*",
+      "destination": "https://weirdstats.dev/:path",
       "permanent": true
     }
   ],
