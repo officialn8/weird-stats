@@ -1,0 +1,13 @@
+{
+  "name": "weird-stats",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Wonderfully unnecessary discoveries, made tangible.",
+  "type": "module",
+  "engines": { "node": "22.x" },
+  "scripts": {
+    "dev": "python3 -m http.server 63014 --bind 127.0.0.1 --directory public",
+    "check": "node --check public/app.js && node --check public/crunch.js && node scripts/check.mjs",
+    "build": "npm run check && node scripts/build.mjs"
+  }
+}

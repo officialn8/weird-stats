@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Three wonderfully unnecessary discoveries. Look closer, follow the mail, and find the copper hiding in your pocket.">
+  <title>weird.stats | A little more curious</title>
+  <link rel="preload" href="assets/outfit.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="nightwatch.jpg" as="image">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to discovery</a>
+<header class="site-header">
+  <a class="brand" href="#painting" aria-label="weird.stats home">weird<i>.</i>stats</a>
+  <nav aria-label="Choose a discovery">
+    <button data-study="painting" aria-pressed="true">The painting</button>
+    <button data-study="mail" aria-pressed="false">The mail</button>
+    <button data-study="copper" aria-pressed="false">The copper</button>
+  </nav>
+  <span class="site-promise">Wonderfully unnecessary.</span>
+</header>
+<main id="main" tabindex="-1">
+<section id="painting" class="study painting-study" aria-labelledby="painting-title">
+  <div class="study-heading">
+    <h1 id="painting-title">A masterpiece,<br class="desktop-break"> pixel by pixel.</h1>
+    <p>How close can you get to a painting without standing in front of it?</p>
+  </div>
+  <div class="gallery">
+    <div class="gallery-media">
+      <div class="art-stage" data-scale="0">
+        <figure class="artwork"><img src="nightwatch.jpg" alt="Rembrandt’s The Night Watch, a group portrait with brightly lit central figures" width="1280" height="1041" fetchpriority="high"><figcaption class="sr">Public-domain overview reproduction, not the museum’s full-resolution image.</figcaption></figure>
+        <div class="pixel-model" hidden role="img" aria-label="Measured schematic of the image’s pixels">
+          <div class="pixel-grid"></div>
+          <div class="measurement"><span id="measurement-text">1 mm across</span></div>
+        </div>
+        <p class="asset-error" hidden>The painting could not load. You can still explore its pixel scale below.</p>
+      </div>
+      <div class="scale-control" aria-label="Choose a scale">
+        <button data-scale="0" aria-pressed="true">The painting</button>
+        <button data-scale="1" aria-pressed="false">1 mm</button>
+        <button data-scale="2" aria-pressed="false">0.1 mm</button>
+        <button data-scale="3" aria-pressed="false">One pixel</button>
+      </div>
+      <p id="art-caption" class="caption">Rembrandt’s The Night Watch. Start with the whole painting.</p>
+    </div>
+    <aside class="art-reading" aria-label="The discovery">
+      <div class="reading-content" aria-live="polite" aria-atomic="true">
+        <span id="art-label" class="plain-label">There’s more in the details.</span>
+        <p id="art-number" class="art-number initial">How small<br>is a pixel?</p>
+        <p id="art-copy">The museum photographed this painting in extraordinary detail. Take a closer look at what one pixel represents.</p>
+      </div>
+      <button id="closer" class="primary">Look closer <span aria-hidden="true">↗</span></button>
+      <div class="art-context" hidden><img src="nightwatch.jpg" loading="lazy" alt="" width="1280" height="1041"><span>Same painting.<br>A much smaller scale.</span></div>
+      <a class="museum-link" href="https://www.rijksmuseum.nl/en/press/press-releases/rijksmuseum-publishes-717-gigapixel-photograph-of-the-night-watch" target="_blank" rel="noopener">Meet the imaging project <span aria-hidden="true">↗</span></a>
+    </aside>
+  </div>
+  <details class="source"><summary>Source &amp; how to read this</summary><div class="source-body"><p>The Rijksmuseum’s 2022 image represents a 0.005 mm square of paint per pixel. A 1 mm square therefore contains 200 × 200 pixels; a 0.1 mm square contains 20 × 20. The magnified grids are measured diagrams, not microscopic photographs or actual paint colors.</p><p><a href="https://www.rijksmuseum.nl/en/press/press-releases/rijksmuseum-publishes-717-gigapixel-photograph-of-the-night-watch" target="_blank" rel="noopener">Rijksmuseum, January 2022 ↗</a><br>Overview: <a href="https://commons.wikimedia.org/wiki/File:The_Nightwatch_by_Rembrandt_-_Rijksmuseum.jpg" target="_blank" rel="noopener">public-domain reproduction via Wikimedia Commons ↗</a>.</p></div></details>
+</section>
+<section id="mail" class="study mail-study" aria-labelledby="mail-title" hidden>
+  <div class="mail-heading"><div class="study-heading"><h1 id="mail-title">The last nine miles<br class="desktop-break"> have hooves.</h1><p>For Supai, home of the Havasupai people, the mail’s final leg is a mule train.</p></div><img class="mail-mule" src="mule.png" loading="lazy" alt="Illustrated brown mule carrying red mail panniers" width="1536" height="1024"></div>
+  <div class="route-stage is-loading">
+    <svg viewBox="0 0 1536 1024" preserveAspectRatio="none" role="img" aria-label="Illustrated canyon with a schematic route from the rim to Supai">
+      <image id="canyon-image" width="1536" height="1024"/>
+      <path id="trail" d="M320 255 C290 302 277 326 341 377 S454 449 582 487 S858 557 913 675 S1011 781 1210 846" fill="none" stroke="#f8f6e8" stroke-width="20" stroke-linecap="round"/>
+      <path d="M320 255 C290 302 277 326 341 377 S454 449 582 487 S858 557 913 675 S1011 781 1210 846" fill="none" stroke="#34573e" stroke-width="5" stroke-dasharray="8 12"/>
+      <circle cx="320" cy="255" r="13" fill="#365240" stroke="#f7f5e9" stroke-width="5"/>
+      <circle cx="1210" cy="846" r="13" fill="#365240" stroke="#f7f5e9" stroke-width="5"/>
+      <g id="mail-marker" transform="translate(320 255)"><circle r="27" fill="#365240" stroke="#f7f5e9" stroke-width="7"/><circle r="7" fill="#f7f5e9"/></g>
+    </svg>
+    <p class="route-load" role="status">Loading the illustrated route…</p>
+  </div>
+  <div class="route-controls"><button class="primary" id="journey">Follow the mail <span aria-hidden="true">→</span></button><div class="route-scrub"><label for="trail-position">Explore the journey</label><input id="trail-position" type="range" min="0" max="100" value="0" aria-valuetext="At the canyon rim"><div class="route-endpoints"><span>Canyon rim</span><span>Supai Post Office</span></div></div><p id="map-status" class="route-status" aria-live="polite">Ready at the rim.</p></div>
+  <p class="caption">An illustrated journey, not a geographic map. Route shape and playback speed are schematic.</p>
+  <div class="delivery-facts"><p><strong>10-22</strong><span>mules on a delivery</span></p><p><strong>3 hours</strong><span>down to Supai</span></p><p><strong>5 hours</strong><span>back up the canyon</span></p><p class="delivery-note">Nine miles.<br>Five days a week.<br>Mail gets through.</p></div>
+  <details class="source"><summary>Source &amp; how to read this</summary><div class="source-body"><p><a href="https://facts.usps.com/fun/" target="_blank" rel="noopener">USPS Postal Facts, May 2026 ↗</a> reports these delivery totals. Supai is in Havasu Canyon, a side canyon within the Grand Canyon.</p><p>The generated terrain and mule are illustrations. The route is not navigable geography, a measured elevation profile, or a statement about speed along particular segments.</p></div></details>
+</section>
+<section id="copper" class="study copper-study" aria-labelledby="copper-title" hidden>
+  <div class="study-heading"><h1 id="copper-title">The copper is<br class="desktop-break"> in the other coin.</h1><p>Which holds more copper: a modern U.S. penny or a nickel?</p></div>
+  <div class="coin-experiment">
+    <div class="coin-choices">
+      <button class="coin-choice" data-guess="penny" aria-label="I think the penny has more copper"><span class="coin penny-coin" aria-hidden="true"><span>1<span>¢</span></span></span><span class="coin-name">The penny <span aria-hidden="true">↗</span></span></button>
+      <button class="coin-choice" data-guess="nickel" aria-label="I think the nickel has more copper"><span class="coin nickel-coin" aria-hidden="true"><span>5<span>¢</span></span></span><span class="coin-name">The nickel <span aria-hidden="true">↗</span></span></button>
+    </div>
+    <div class="copper-result" hidden>
+      <div class="result-number" aria-live="polite"><span>The nickel contains about</span><strong>60<span>×</span></strong><span>as much copper.</span></div>
+      <div class="mass-comparison"><div class="mass-row"><div class="mass-name"><strong>Penny</strong><span>0.0625 g copper</span></div><div class="penny-units" aria-hidden="true"><i class="copper-unit"></i></div></div><div class="mass-row"><div class="mass-name"><strong>Nickel</strong><span>3.75 g copper</span></div><div class="nickel-units" aria-hidden="true"></div></div><p class="unit-key"><i></i>Each square is one penny’s copper content.</p></div>
+    </div>
+  </div>
+  <div class="copper-controls"><button class="primary" id="compare">Show the copper <span aria-hidden="true">→</span></button><p id="copper-note">Pick a coin, or skip the guess.</p></div>
+  <p id="copper-explanation" class="copper-explanation" hidden>A penny is copper-coated zinc. A nickel is mostly copper and weighs twice as much.</p>
+  <details class="source"><summary>Source &amp; how to read this</summary><div class="source-body"><p><a href="https://www.usmint.gov/learn/coins-and-medals/circulating-coins/coin-specifications" target="_blank" rel="noopener">U.S. Mint coin specifications ↗</a>: penny, 2.5 g × 2.5% copper = 0.0625 g; nickel, 5 g × 75% copper = 3.75 g. Dividing gives 60.</p><p>These amounts come from rounded manufacturing specifications, not measurements of individual coins. Equal squares represent equal copper mass. Coin illustrations do not depict composition by area.</p></div></details>
+</section>
+</main>
+<footer class="site-footer"><button class="next-discovery">Another weird thing <span aria-hidden="true">→</span></button><div class="preferences"><label for="theme">Appearance</label><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select><label class="motion-label"><input id="motion" type="checkbox"> Less motion</label></div></footer>
+<noscript><p class="noscript">This interactive study needs JavaScript. The source links still explain the discoveries.</p></noscript>
+</body></html>

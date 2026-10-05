@@ -1,0 +1,1067 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ideation: weird.stats</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #f5f3ee;
+  --surface: #ffffff;
+  --ink: #17161b;
+  --muted: #5d5b66;
+  --line: #e3dfd6;
+  --accent: #c2410c;
+  --accent-soft: #fbe7db;
+  --accent-text: #9a3412;
+  --direct-bg: #dcf0e2; --direct-fg: #14532d;
+  --external-bg: #dde8f7; --external-fg: #1e3a8a;
+  --reasoned-bg: #efe3f6; --reasoned-fg: #581c87;
+  --chip-bg: #eeebe4; --chip-fg: #2b2a31;
+  --good: #16a34a; --warn: #d97706; --bad: #dc2626;
+  --fig-bg: #faf8f4;
+  --serif: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans: "Inter", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e0e12;
+    --surface: #16161c;
+    --ink: #ecebe6;
+    --muted: #a6a4ad;
+    --line: #2a2a33;
+    --accent: #fb923c;
+    --accent-soft: #3b2417;
+    --accent-text: #fdba74;
+    --direct-bg: #143222; --direct-fg: #a7f3c4;
+    --external-bg: #172640; --external-fg: #bfd5fb;
+    --reasoned-bg: #2c1a3a; --reasoned-fg: #e2c6f7;
+    --chip-bg: #24242c; --chip-fg: #dcdbe2;
+    --good: #4ade80; --warn: #fbbf24; --bad: #f87171;
+    --fig-bg: #121217;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+}
+.page { max-width: 900px; margin-inline: auto; padding: 56px 20px 40px; }
+p, li, dd { max-width: 70ch; }
+a { color: var(--accent-text); text-underline-offset: 2px; }
+strong { color: inherit; font-weight: 600; }
+code { font-family: var(--mono); font-size: 0.88em; background: var(--chip-bg); padding: 1px 5px; border-radius: 4px; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  margin: 0 0 8px;
+}
+h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(40px, 7vw, 64px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px;
+}
+h1 em { font-style: italic; color: var(--accent); }
+.lede { font-size: 18px; color: var(--muted); margin: 0 0 28px; }
+h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1.15;
+  margin: 0 0 6px;
+}
+h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.15;
+  margin: 0;
+}
+h4 {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 22px 0 6px;
+}
+
+.meta-header {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px 24px;
+  margin: 0 0 24px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.meta-header div { min-width: 0; }
+.meta-header dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.meta-header dd { margin: 2px 0 0; font-size: 14px; overflow-wrap: anywhere; }
+
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 0 0 36px;
+}
+.stats-strip div { background: var(--surface); padding: 14px 16px; }
+.stats-strip .num { font-family: var(--serif); font-size: 36px; line-height: 1; display: block; }
+.stats-strip .lbl { font-size: 13px; color: var(--muted); }
+
+nav.toc { margin: 0 0 48px; }
+nav.toc ol { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+nav.toc a {
+  display: inline-block;
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--chip-bg);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+nav.toc a:hover { background: var(--accent-soft); color: var(--accent-text); }
+
+section.doc-section { margin: 0 0 64px; }
+.section-intro { color: var(--muted); margin: 0 0 20px; }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px 24px;
+  margin: 0 0 16px;
+}
+.panel h3 { font-size: 24px; margin-bottom: 8px; }
+.panel ul { padding-left: 20px; margin: 8px 0 0; }
+.panel li { margin: 4px 0; }
+
+ol.axes { padding: 0; margin: 0; list-style: none; counter-reset: ax; }
+ol.axes li {
+  counter-increment: ax;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  max-width: none;
+}
+ol.axes li::before {
+  content: counter(ax, decimal-leading-zero);
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent-text);
+  padding-top: 3px;
+}
+ol.axes li span { color: var(--muted); }
+
+.fit-note {
+  background: var(--accent-soft);
+  color: var(--ink);
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin: 0 0 24px;
+}
+.fit-note .eyebrow { color: var(--accent-text); margin-bottom: 6px; }
+.fit-note p { margin: 0; }
+
+ul.jump { list-style: none; padding: 0; margin: 0 0 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 6px 20px; }
+ul.jump li { max-width: none; }
+ul.jump a { text-decoration: none; color: var(--ink); display: flex; gap: 10px; align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--line); }
+ul.jump a:hover { color: var(--accent-text); }
+ul.jump .n { font-family: var(--mono); font-size: 12px; color: var(--accent-text); }
+ul.jump .ax { margin-left: auto; font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+article.idea {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 28px 28px 24px;
+  margin: 0 0 28px;
+}
+.idea-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+.tagline { font-family: var(--serif); font-style: italic; font-size: 21px; color: var(--muted); margin: 4px 0 16px; line-height: 1.3; }
+
+.chip {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--chip-bg);
+  color: var(--chip-fg);
+  white-space: nowrap;
+}
+.chip.id { background: var(--accent-soft); color: var(--accent-text); font-weight: 500; }
+
+dl.meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 4px; }
+dl.meta div { display: inline-flex; align-items: center; gap: 6px; background: var(--chip-bg); color: var(--chip-fg); border-radius: 999px; padding: 5px 12px; }
+dl.meta dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+dl.meta dd { margin: 0; font-size: 13px; font-weight: 500; }
+
+ul.forms { padding-left: 20px; margin: 8px 0; }
+ul.forms li { margin: 2px 0; }
+
+ul.basis { list-style: none; padding: 0; margin: 0; }
+ul.basis li { display: grid; grid-template-columns: 84px 1fr; gap: 10px; align-items: baseline; margin: 0 0 8px; max-width: none; }
+ul.basis li > span:last-child { max-width: 68ch; }
+.tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-align: center;
+  padding: 4px 0;
+  border-radius: 999px;
+}
+.tag.direct { background: var(--direct-bg); color: var(--direct-fg); }
+.tag.external { background: var(--external-bg); color: var(--external-fg); }
+.tag.reasoned { background: var(--reasoned-bg); color: var(--reasoned-fg); }
+
+ul.downsides { padding-left: 20px; margin: 0; }
+ul.downsides li { margin: 4px 0; }
+
+figure.viz {
+  margin: 18px 0 6px;
+  background: var(--fig-bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 12px 10px;
+}
+figure.viz svg { display: block; width: 100%; height: auto; }
+figure.viz figcaption { font-size: 13px; color: var(--muted); margin: 8px 6px 2px; max-width: 80ch; }
+
+/* SVG styling */
+.s-box { fill: var(--surface); stroke: var(--line); stroke-width: 1.2; }
+.s-box-accent { fill: var(--accent-soft); stroke: none; }
+.s-text { fill: var(--ink); font-family: var(--sans); font-size: 13px; }
+.s-small { fill: var(--muted); font-family: var(--sans); font-size: 11.5px; }
+.s-mono { fill: var(--muted); font-family: var(--mono); font-size: 11px; }
+.s-head { fill: var(--accent-text); font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; }
+.s-strong { fill: var(--ink); font-family: var(--sans); font-size: 13px; font-weight: 600; }
+.s-accent-text { fill: var(--accent-text); font-family: var(--sans); font-size: 12px; font-weight: 600; }
+.s-line { stroke: var(--muted); stroke-width: 1.4; fill: none; }
+.s-axis { stroke: var(--ink); stroke-width: 1.4; fill: none; }
+.s-dash { stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 4 4; fill: none; }
+.s-accent { fill: var(--accent); }
+.s-accent-stroke { stroke: var(--accent); stroke-width: 2; fill: none; }
+.s-dot { fill: var(--muted); }
+.s-bar { fill: var(--muted); opacity: 0.55; }
+.s-ghost { fill: none; stroke: var(--muted); stroke-width: 1.6; stroke-dasharray: 3 3; }
+.s-good { fill: var(--good); } .s-warn { fill: var(--warn); } .s-bad { fill: var(--bad); }
+.s-arrowhead { fill: var(--muted); }
+.s-door { fill: var(--external-bg); stroke: none; }
+.s-door-text { fill: var(--external-fg); font-family: var(--sans); font-size: 13px; font-weight: 600; }
+
+article.combined {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 28px 28px 24px;
+  margin: 0 0 28px;
+}
+article.combined h3 { font-size: 30px; }
+table.plain { width: 100%; border-collapse: collapse; font-size: 14px; margin: 6px 0 4px; }
+table.plain th, table.plain td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+table.plain th { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+table.plain td:first-child { font-weight: 600; white-space: nowrap; }
+table.plain tr:last-child td { border-bottom: none; }
+table.releases td:nth-child(3) { font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+table.reject { width: 100%; border-collapse: collapse; font-size: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+table.reject th, table.reject td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+table.reject th { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 500; background: var(--chip-bg); }
+table.reject td:first-child { font-family: var(--mono); color: var(--muted); width: 40px; }
+table.reject td:nth-child(2) { font-weight: 500; width: 30%; }
+table.reject tr:last-child td { border-bottom: none; }
+
+ul.sources { padding-left: 20px; font-size: 14px; }
+ul.sources li { margin: 3px 0; }
+
+footer.composition-signal {
+  margin-top: 56px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  .page { padding: 36px 16px 32px; }
+  article.idea { padding: 22px 18px 18px; }
+  .panel { padding: 18px; }
+  ul.basis li { grid-template-columns: 1fr; gap: 4px; }
+  .tag { justify-self: start; padding: 4px 10px; }
+  table.reject td:nth-child(2) { width: auto; }
+  .table-wrap { overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+
+<header>
+  <p class="eyebrow">Ideation · ranked &amp; critiqued</p>
+  <h1>Ideation: <em>weird.stats</em></h1>
+  <p class="lede">A site full of weird, semi-useful statistics, where the visual presentation is the hook. Five idea agents came at it from different angles; every idea was checked by a separate verifier, and seven survived. Together they form one site, laid out at the top of Ranked Ideas.</p>
+  <dl class="meta-header">
+    <div><dt>Date</dt><dd><time datetime="2026-10-04">2026-10-04</time></dd></div>
+    <div><dt>Topic</dt><dd>weird-stats-site</dd></div>
+    <div><dt>Focus</dt><dd>Weird, semi-useful stats; jaw-dropping design; no single category</dd></div>
+    <div><dt>Mode</dt><dd>elsewhere-software</dd></div>
+  </dl>
+  <div class="stats-strip">
+    <div><span class="num">39</span><span class="lbl">raw ideas</span></div>
+    <div><span class="num">25</span><span class="lbl">after merging</span></div>
+    <div><span class="num">7</span><span class="lbl">survivors</span></div>
+    <div><span class="num">5</span><span class="lbl">axes, all covered</span></div>
+    <div><span class="num">0</span><span class="lbl">bases refuted</span></div>
+  </div>
+  <nav class="toc" aria-label="Sections">
+    <ol>
+      <li><a href="#grounding-context">Grounding Context</a></li>
+      <li><a href="#topic-axes">Topic Axes</a></li>
+      <li><a href="#ranked-ideas">Ranked Ideas</a></li>
+      <li><a href="#rejection-summary">Rejection Summary</a></li>
+    </ol>
+  </nav>
+</header>
+
+<section class="doc-section" id="grounding-context">
+  <p class="eyebrow">What the ideas were judged against</p>
+  <h2>Grounding Context</h2>
+  <p class="section-intro">There is no code yet, so the ideas were checked against the original brief and against web research on prior art, data sources and what makes data experiences spread.</p>
+
+  <div class="panel" id="topic-context">
+    <h3>Topic Context</h3>
+    <p>A new website (working name <strong>weird.stats</strong>) holding a large, uncategorized collection of weird, interest-piquing, "semi useful" statistics. Built by one person on a modern serverless stack (Vercel, Supabase, Neon, Railway and PostHog are already connected).</p>
+    <ul>
+      <li><strong>Firm:</strong> "a lot of weird stats"; "super sleek", "a beautiful … design that when you look at it your jaw drops", called "the other part of this", so design matters as much as the stats.</li>
+      <li><strong>Soft:</strong> "semi useful, I think"; leaning away from any category ("I really don't think I do").</li>
+      <li><strong>Open:</strong> which stats, how they're organized, how useful they must be. "I don't really know what else I want to do for this."</li>
+      <li><strong>Named worry:</strong> "that's going to be a lot of data or API requests."</li>
+      <li><strong>Tensions:</strong> random pile vs a site people can navigate and remember; weird vs useful; lots of data plus top-tier craft vs one person's time.</li>
+    </ul>
+  </div>
+
+  <div class="panel" id="external-context">
+    <h3>External Context</h3>
+    <ul>
+      <li><strong>neal.fun</strong> is the solo precedent. Neal Agarwal works on it full time, funded by ads, a tip jar and a newsletter. The Deep Sea and The Size of Space turn scale into space. The guiding rule is "one strong interaction": no accounts, no onboarding.</li>
+      <li><strong>Spurious Correlations</strong> used software to merge free government datasets and auto-produce charts. Because the charts were reusable, they spread to the BBC, blogs and a 2015 book.</li>
+      <li><strong>Higher Lower</strong> (500M+ plays) and <strong>Wordle</strong> (~4M daily users in 2025) show that guessing before the reveal works. <strong>One Million Checkboxes</strong> reached ~500k people in two weeks for ~$850, with bandwidth capped rather than auto-scaled.</li>
+      <li><strong>Worldometer</strong>'s "live" counters are modeled projections, not live feeds; it makes money from ads and from licensing those counters. FiveThirtyEight's 2025 shutdown shows how fragile a data brand tied to a single parent company is.</li>
+      <li><strong>Data:</strong>
+        <ul>
+          <li>Wikipedia pageviews: CC0, hourly since 2007.</li>
+          <li>Wikidata: good for offline mining, not live requests.</li>
+          <li>Our World in Data: CC BY, all CSVs on GitHub.</li>
+          <li>USGS and NASA feeds.</li>
+          <li>Trap: Open-Meteo's free tier is non-commercial only.</li>
+          <li>Nearly everything can be precomputed into static files on a CDN, which mostly removes the API worry.</li>
+        </ul>
+      </li>
+      <li><strong>Four shapes that spread:</strong> you vs the world (Spotify Wrapped); guess, then reveal; scale made spatial; absurd side-by-sides (Harper's Index, a "statistical poem").</li>
+      <li><strong>Gaps:</strong>
+        <ul>
+          <li>Nobody runs a continuously refreshed weird-stats collection with one premium visual language.</li>
+          <li>None of the sites checked has a share image for each stat.</li>
+          <li>Nobody personalizes without collecting data.</li>
+        </ul>
+      </li>
+    </ul>
+    <h4>Sources</h4>
+    <ul class="sources">
+      <li><a href="https://en.wikipedia.org/wiki/Neal_Agarwal">Neal Agarwal (Wikipedia)</a>: ad-funded solo creator, project history</li>
+      <li><a href="https://www.statisticsviews.com/article/really-it-was-me-just-wanting-to-play-with-statistics-and-seeing-what-i-could-come-up-with-an-interview-with-tyler-vigen/">Interview with Tyler Vigen</a>: the Spurious Correlations engine</li>
+      <li><a href="https://www.codecomputerlove.com/blog/the-higher-lower-game-goes-viral">The Higher Lower Game goes viral</a>: origin and play counts</li>
+      <li><a href="https://eieio.games/blog/scaling-one-million-checkboxes">Scaling One Million Checkboxes</a>: cost and bandwidth cap</li>
+      <li><a href="https://wikitech.wikimedia.org/wiki/Robot_policy">Wikimedia robot policy</a>: rate limits; dumps preferred</li>
+      <li><a href="https://www.mediawiki.org/wiki/Wikidata_Query_Service/User_Manual">Wikidata Query Service manual</a>: query limits</li>
+      <li><a href="https://open-meteo.com/en/pricing">Open-Meteo pricing</a>: non-commercial free tier</li>
+      <li><a href="https://ourworldindata.org/faq">Our World in Data FAQ</a>: licensing, third-party charts</li>
+      <li><a href="https://www.ipsos.com/en-us/new-polls/perils-of-perception-us-2017-12-6">Ipsos Perils of Perception 2017</a>: misperception survey</li>
+      <li><a href="https://en.wikipedia.org/wiki/Elias_Sports_Bureau">Elias Sports Bureau (Wikipedia)</a>: "first since" stat notes for broadcasters</li>
+      <li><a href="https://www.snopes.com/lisa-birgit-holst/">Snopes: Lisa Birgit Holst</a>: the spider-myth hoax</li>
+      <li><a href="https://www.niemanlab.org/2025/03/fivethirtyeight-is-shutting-down-as-part-of-broader-cuts-at-abc-and-disney/">FiveThirtyEight shutdown (Nieman Lab)</a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="doc-section" id="topic-axes">
+  <p class="eyebrow">The parts of the subject every lens had to cover</p>
+  <h2>Topic Axes</h2>
+  <ol class="axes">
+    <li><div><strong>The stats themselves</strong>: <span>what counts as a weird-but-semi-useful stat, and where such stats come from.</span></div></li>
+    <li><div><strong>How one stat is shown</strong>: <span>the visual and interaction form of a single stat.</span></div></li>
+    <li><div><strong>How the collection hangs together</strong>: <span>the organizing principle and navigation for an uncategorized pile.</span></div></li>
+    <li><div><strong>Why people come back and share</strong>: <span>return rituals, personalization, share artifacts.</span></div></li>
+    <li><div><strong>Keeping it alive solo</strong>: <span>data refresh, cost, upkeep, and how it pays for itself.</span></div></li>
+  </ol>
+</section>
+
+<section class="doc-section" id="ranked-ideas">
+  <p class="eyebrow">Seven directions, ranked</p>
+  <h2>Ranked Ideas</h2>
+
+  <article class="combined" id="combined-site">
+    <p class="eyebrow">All seven, as one site</p>
+    <h3>The combined site: one engine, one look, one verb, three doors</h3>
+    <p class="tagline">Guess the number, then fall down the rabbit hole.</p>
+    <p>The seven ideas aren't competing sites. Each one is a different layer of the same site. Behind the scenes, the Mint (I3) and the Stat Crew (I7) drop candidates into one approval queue on your phone. Anything approved becomes a Receipt (I6), and the site is built from those records into static files every night, so visitors never trigger an API call. Every record is drawn by one of the Seven Forms (I1) and opens with a guess (I2). Visitors come in through three doors: Today (I5), the Line (I4), and individual stat pages reached from shared links and search. The crowd's guesses then flow back into the engine as new stats.</p>
+
+    <figure class="viz">
+      <svg viewBox="0 0 860 476" role="img" aria-labelledby="c0-t">
+        <title id="c0-t">Layers of the combined site. Engine: the Mint and the Stat Crew feed Receipts. Every stat then gets one of the Seven Forms and opens with Guess First. Three doors lead in: Today, The Line and stat pages. Crowd guesses flow back into the engine.</title>
+        <defs>
+          <marker id="arr0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="s-arrowhead"/></marker>
+        </defs>
+        <text x="20" y="51" class="s-head">ENGINE</text>
+        <rect x="140" y="20" width="330" height="54" rx="10" class="s-box"/>
+        <text x="305" y="42" text-anchor="middle" class="s-strong">I3 · The Mint</text>
+        <text x="305" y="61" text-anchor="middle" class="s-small">finds weird stats nightly</text>
+        <rect x="510" y="20" width="330" height="54" rx="10" class="s-box"/>
+        <text x="675" y="42" text-anchor="middle" class="s-strong">I7 · The Stat Crew</text>
+        <text x="675" y="61" text-anchor="middle" class="s-small">finds today's records</text>
+        <line x1="305" y1="76" x2="305" y2="102" class="s-line" marker-end="url(#arr0)"/>
+        <line x1="675" y1="76" x2="675" y2="102" class="s-line" marker-end="url(#arr0)"/>
+
+        <text x="20" y="137" class="s-head">TRUST</text>
+        <rect x="140" y="106" width="700" height="54" rx="10" class="s-box"/>
+        <text x="490" y="128" text-anchor="middle" class="s-strong">I6 · Receipts</text>
+        <text x="490" y="147" text-anchor="middle" class="s-small">every approved stat becomes a checked record, built to static files nightly</text>
+        <line x1="490" y1="162" x2="490" y2="188" class="s-line" marker-end="url(#arr0)"/>
+
+        <text x="20" y="223" class="s-head">LOOK</text>
+        <rect x="140" y="192" width="700" height="54" rx="10" class="s-box-accent"/>
+        <text x="490" y="214" text-anchor="middle" class="s-accent-text">I1 · Seven Forms</text>
+        <text x="490" y="233" text-anchor="middle" class="s-small">every stat gets a beautiful shape, a page, a share image</text>
+        <line x1="490" y1="248" x2="490" y2="274" class="s-line" marker-end="url(#arr0)"/>
+
+        <text x="20" y="309" class="s-head">VERB</text>
+        <rect x="140" y="278" width="700" height="54" rx="10" class="s-box-accent"/>
+        <text x="490" y="300" text-anchor="middle" class="s-accent-text">I2 · Guess First</text>
+        <text x="490" y="319" text-anchor="middle" class="s-small">every stat opens with a guess, everywhere on the site</text>
+        <line x1="245" y1="334" x2="245" y2="368" class="s-line" marker-end="url(#arr0)"/>
+        <line x1="490" y1="334" x2="490" y2="368" class="s-line" marker-end="url(#arr0)"/>
+        <line x1="735" y1="334" x2="735" y2="368" class="s-line" marker-end="url(#arr0)"/>
+
+        <text x="20" y="403" class="s-head">DOORS</text>
+        <rect x="140" y="372" width="210" height="54" rx="10" class="s-door"/>
+        <text x="245" y="394" text-anchor="middle" class="s-door-text">Today · I5</text>
+        <text x="245" y="413" text-anchor="middle" class="s-small">3 cards, ~3 minutes</text>
+        <rect x="385" y="372" width="210" height="54" rx="10" class="s-door"/>
+        <text x="490" y="394" text-anchor="middle" class="s-door-text">The Line · I4</text>
+        <text x="490" y="413" text-anchor="middle" class="s-small">where the hours go</text>
+        <rect x="630" y="372" width="210" height="54" rx="10" class="s-door"/>
+        <text x="735" y="394" text-anchor="middle" class="s-door-text">Stat pages</text>
+        <text x="735" y="413" text-anchor="middle" class="s-small">from shares and search</text>
+
+        <text x="490" y="458" text-anchor="middle" class="s-mono">↻ crowd guesses flow back into the engine as new stats</text>
+      </svg>
+      <figcaption>Engine and trust are invisible to visitors. The look and the guess are on every stat. The doors are the three ways in, and each fits a different length of visit.</figcaption>
+    </figure>
+
+    <h4>The rabbit hole: three exits on every stat page</h4>
+    <ul class="downsides">
+      <li><strong>Same size:</strong> its neighbors on the Number Line (I4).</li>
+      <li><strong>Same subject:</strong> everything else about the same thing, place or date. The Mint (I3) already links data by subject, so pages like "everything weird about Iceland" or "everything weird about October 4" come almost free.</li>
+      <li><strong>Same mistake:</strong> the stats people get most wrong, from the guess data (I2).</li>
+    </ul>
+    <p>Every exit leads to more stats with three more exits. That's how someone spends hours on the site, and none of the links are made by hand.</p>
+
+    <h4>What a visit looks like</h4>
+    <div class="table-wrap">
+    <table class="plain">
+      <thead><tr><th>Length</th><th>What happens</th><th>Ideas at work</th></tr></thead>
+      <tbody>
+        <tr><td>30 seconds</td><td>A friend sends an "I was off by 40×" link. You guess, see how everyone else guessed, and take one exit.</td><td>I2, I1, I6</td></tr>
+        <tr><td>3 minutes</td><td>Today's three cards and the share grid.</td><td>I5, I2</td></tr>
+        <tr><td>3 hours</td><td>The Number Line, plus the three exits on every stat page.</td><td>I4, I3</td></tr>
+        <tr><td>Tomorrow</td><td>New cards, plus a "what changed" strip.</td><td>I5, I7</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h4>Four releases, each launchable on its own</h4>
+    <div class="table-wrap">
+    <table class="plain releases">
+      <thead><tr><th>Release</th><th>What ships</th><th>Ideas</th><th>Why in this order</th></tr></thead>
+      <tbody>
+        <tr id="r1"><td>R1. The look</td><td>The Receipts record format, 3 of the 7 forms, Guess First, about 50 stats picked by hand, and stat pages with share images.</td><td>I6, I1, I2</td><td>Proves the jaw-drop and is already portfolio-worthy. Everything later plugs into the record and the forms, so they come first.</td></tr>
+        <tr id="r2"><td>R2. The habit</td><td>The Daily Spread as the home page, crowd guess data, more forms, about 200 stats.</td><td>I5, I2, I1</td><td>Gives people a reason to come back once the look works.</td></tr>
+        <tr id="r3"><td>R3. The engine</td><td>The full Mint, the approval queue on your phone, the Stat Crew, nightly builds.</td><td>I3, I7</td><td>Takes the site from hand-picked to endless. It's the hardest build, so it waits until the record format has settled.</td></tr>
+        <tr id="r4"><td>R4. The deep dive</td><td>The Number Line, the subject and date pages, a "most misjudged" list, the Forgeries Room.</td><td>I4, I3, I2, I6</td><td>The Number Line looks empty with 50 stats and spectacular with 1,000. A staged demo version could move into R1 if you want it as the opening visual.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </article>
+
+  <p class="section-intro">The seven ideas below are the components, ranked on their own merits.</p>
+
+  <ul class="jump">
+    <li><a href="#combined-site"><span class="n">★</span> The combined site <span class="ax">All seven</span></a></li>
+    <li><a href="#i1"><span class="n">I1</span> Seven Forms <span class="ax">One stat</span></a></li>
+    <li><a href="#i2"><span class="n">I2</span> Guess First <span class="ax">One stat</span></a></li>
+    <li><a href="#i3"><span class="n">I3</span> The Mint <span class="ax">The stats</span></a></li>
+    <li><a href="#i4"><span class="n">I4</span> The Number Line <span class="ax">Collection</span></a></li>
+    <li><a href="#i5"><span class="n">I5</span> The Daily Spread <span class="ax">Return &amp; share</span></a></li>
+    <li><a href="#i6"><span class="n">I6</span> Receipts on Every Stat <span class="ax">Solo upkeep</span></a></li>
+    <li><a href="#i7"><span class="n">I7</span> The Stat Crew <span class="ax">The stats</span></a></li>
+  </ul>
+
+  <!-- I1 -->
+  <article class="idea" id="i1">
+    <div class="idea-head"><span class="chip id">I1</span><h3>1. Seven Forms</h3></div>
+    <p class="tagline">Design the forms once; after that, every stat is just data.</p>
+    <dl class="meta">
+      <div><dt>Axis</dt><dd>How one stat is shown</dd></div>
+      <div><dt>Confidence</dt><dd>85%</dd></div>
+      <div><dt>Complexity</dt><dd>Medium</dd></div>
+    </dl>
+
+    <h4>Description</h4>
+    <p>Don't design each stat. Hand-build about seven premium visual forms, each a different way to make a number felt:</p>
+    <ul class="forms">
+      <li><strong>Unit Pile</strong>: one dot per thing, with exactly one lit in a million.</li>
+      <li><strong>Scale Drop</strong>: scroll to fall through orders of magnitude.</li>
+      <li><strong>Rate Clock</strong>: a counter ticking at the real per-second rate.</li>
+      <li><strong>Tale of the Tape</strong>: A against B.</li>
+      <li><strong>You-Are-Here</strong>: a distribution with your own dot on it.</li>
+      <li><strong>Rank Race</strong>: bars reshuffling over time.</li>
+      <li><strong>Map Bloom</strong>: dots piling up on a map.</li>
+    </ul>
+    <p>Each stat is then a row of data that names its shape, and the matching form draws it. The same render also produces the stat's page, its 1200×630 share image and an embed code. Each form is built in tiers:</p>
+    <ul class="forms">
+      <li>A static poster first, which doubles as the share image.</li>
+      <li>Canvas motion next.</li>
+      <li>WebGL last, only on devices that can handle it and behind a kill switch.</li>
+    </ul>
+
+    <figure class="viz">
+      <svg viewBox="0 0 860 300" role="img" aria-labelledby="i1-t">
+        <title id="i1-t">Many stat rows feed seven hand-built forms, and each render produces a page, a share card and an embed.</title>
+        <defs>
+          <marker id="arr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="s-arrowhead"/></marker>
+        </defs>
+        <text x="20" y="34" class="s-head">STAT ROWS · DATA ONLY</text>
+        <rect x="20" y="52" width="210" height="44" rx="8" class="s-box"/>
+        <text x="32" y="72" class="s-text">neurons in a brain</text><text x="32" y="88" class="s-mono">86e9 · count</text>
+        <rect x="20" y="106" width="210" height="44" rx="8" class="s-box"/>
+        <text x="32" y="126" class="s-text">meteoroid dust on Earth</text><text x="32" y="142" class="s-mono">~100 t/day · rate</text>
+        <rect x="20" y="160" width="210" height="44" rx="8" class="s-box"/>
+        <text x="32" y="180" class="s-text">US birthdays</text><text x="32" y="196" class="s-mono">366 values · calendar</text>
+        <rect x="20" y="214" width="210" height="44" rx="8" class="s-box"/>
+        <text x="32" y="234" class="s-text">… stat #400</text><text x="32" y="250" class="s-mono">a few minutes of entry</text>
+
+        <line x1="238" y1="160" x2="318" y2="160" class="s-line" marker-end="url(#arr1)"/>
+        <text x="278" y="148" text-anchor="middle" class="s-small">shape picks</text>
+
+        <text x="330" y="34" class="s-head">7 HAND-BUILT FORMS</text>
+        <rect x="330" y="48" width="200" height="28" rx="14" class="s-box-accent"/><text x="430" y="67" text-anchor="middle" class="s-accent-text">Unit Pile</text>
+        <rect x="330" y="82" width="200" height="28" rx="14" class="s-box-accent"/><text x="430" y="101" text-anchor="middle" class="s-accent-text">Scale Drop</text>
+        <rect x="330" y="116" width="200" height="28" rx="14" class="s-box-accent"/><text x="430" y="135" text-anchor="middle" class="s-accent-text">Rate Clock</text>
+        <rect x="330" y="150" width="200" height="28" rx="14" class="s-box-accent"/><text x="430" y="169" text-anchor="middle" class="s-accent-text">Tale of the Tape</text>
+        <rect x="330" y="184" width="200" height="28" rx="14" class="s-box-accent"/><text x="430" y="203" text-anchor="middle" class="s-accent-text">You-Are-Here</text>
+        <rect x="330" y="218" width="200" height="28" rx="14" class="s-box-accent"/><text x="430" y="237" text-anchor="middle" class="s-accent-text">Rank Race</text>
+        <rect x="330" y="252" width="200" height="28" rx="14" class="s-box-accent"/><text x="430" y="271" text-anchor="middle" class="s-accent-text">Map Bloom</text>
+
+        <line x1="538" y1="160" x2="622" y2="160" class="s-line" marker-end="url(#arr1)"/>
+        <text x="580" y="148" text-anchor="middle" class="s-small">one render</text>
+
+        <text x="630" y="34" class="s-head">EVERY STAT GETS</text>
+        <rect x="630" y="70" width="210" height="50" rx="8" class="s-box"/>
+        <text x="644" y="92" class="s-strong">Its own page</text><text x="644" y="109" class="s-small">deep link, SEO</text>
+        <rect x="630" y="135" width="210" height="50" rx="8" class="s-box"/>
+        <text x="644" y="157" class="s-strong">A share image</text><text x="644" y="174" class="s-small">1200×630 poster tier</text>
+        <rect x="630" y="200" width="210" height="50" rx="8" class="s-box"/>
+        <text x="644" y="222" class="s-strong">An embed</text><text x="644" y="239" class="s-small">with link-back credit</text>
+      </svg>
+      <figcaption>All the craft goes into the middle column, once. The left column grows forever at almost no design cost.</figcaption>
+    </figure>
+
+    <h4>Basis</h4>
+    <ul class="basis">
+      <li><span class="tag direct">direct</span><span>The user calls the design "the other part of this" and wants "a lot of" stats. The grounding names "lots of data + jaw-dropping craft vs one person's time" as the core tension.</span></li>
+      <li><span class="tag external">external</span><span>Spurious Correlations spread because software produced templated, reusable charts. Sports TV shows hundreds of unrelated stats through one prebuilt graphics package. neal.fun's rule is "one strong interaction" per piece.</span></li>
+      <li><span class="tag reasoned">reasoned</span><span>If the craft lives in the form rather than the stat, polish is paid for once, and stat #400 costs a few minutes of data entry.</span></li>
+    </ul>
+
+    <h4>Rationale</h4>
+    <p>Four of the five idea agents reached this independently, from different directions. It's the one decision that makes "jaw-dropping" and "a lot" compatible for one person. It also gives the whole site a single visual voice instead of a scrapbook look. Per-stat share images come free, and the research found no weird-stats site that has them.</p>
+
+    <h4>Downsides</h4>
+    <ul class="downsides">
+      <li>Seven forms with three tiers each is a lot of upfront work. Prove two or three forms first and leave WebGL for later.</li>
+      <li>A stat that fits no form gets cut or waits for a new form, which constrains content.</li>
+      <li>Mediocre forms make everything feel templated. Quality has to be very high.</li>
+    </ul>
+  </article>
+
+  <!-- I2 -->
+  <article class="idea" id="i2">
+    <div class="idea-head"><span class="chip id">I2</span><h3>2. Guess First</h3></div>
+    <p class="tagline">You commit before the number appears, and the crowd's wrongness becomes a stat of its own.</p>
+    <dl class="meta">
+      <div><dt>Axis</dt><dd>How one stat is shown</dd></div>
+      <div><dt>Confidence</dt><dd>75%</dd></div>
+      <div><dt>Complexity</dt><dd>Low–Medium</dd></div>
+    </dl>
+
+    <h4>Description</h4>
+    <p>No stat shows its number until you guess. You guess on a log-scale slider, or by shaping the amount yourself, for example pouring a jar or dragging a ruler. When you let go:</p>
+    <ul class="forms">
+      <li>The true value animates in.</li>
+      <li>Your guess stays on screen as a ghost.</li>
+      <li>Everyone else's guesses appear as a histogram.</li>
+    </ul>
+    <p>Each guess logs one anonymous number, with no accounts. Over time every stat gains a second stat, such as "most visitors guess 20 billion; it's about 117 billion". It also gains a measured surprise score that can rank the feed. A shared link's preview shows the question with the answer hidden, so people click.</p>
+    <p>A variant for stats with a distinctive pattern: show the picture with no labels and let people guess what it is. For example, a calendar that glows in September, with cold holes on Dec 24–25, Jan 1 and Jul 4, is how common each US birthday is.</p>
+
+    <figure class="viz">
+      <svg viewBox="0 0 860 190" role="img" aria-labelledby="i2-t">
+        <title id="i2-t">Three steps: you guess on a log slider, the truth appears next to your ghost guess showing you were off by 40 times, then the crowd's guesses appear as a histogram.</title>
+        <text x="20" y="26" class="s-head">1 · YOU GUESS</text>
+        <line x1="40" y1="100" x2="250" y2="100" class="s-axis"/>
+        <circle cx="110" cy="100" r="9" class="s-accent"/>
+        <text x="110" y="80" text-anchor="middle" class="s-small">your guess</text>
+        <text x="40" y="124" text-anchor="middle" class="s-mono">10³</text>
+        <text x="145" y="124" text-anchor="middle" class="s-mono">10⁶</text>
+        <text x="250" y="124" text-anchor="middle" class="s-mono">10⁹</text>
+
+        <text x="305" y="26" class="s-head">2 · TRUTH LANDS</text>
+        <line x1="325" y1="100" x2="535" y2="100" class="s-axis"/>
+        <circle cx="395" cy="100" r="9" class="s-ghost"/>
+        <text x="395" y="80" text-anchor="middle" class="s-small">you</text>
+        <line x1="500" y1="86" x2="500" y2="114" class="s-accent-stroke"/>
+        <text x="500" y="80" text-anchor="middle" class="s-accent-text">truth</text>
+        <text x="325" y="124" text-anchor="middle" class="s-mono">10³</text>
+        <text x="430" y="124" text-anchor="middle" class="s-mono">10⁶</text>
+        <text x="535" y="124" text-anchor="middle" class="s-mono">10⁹</text>
+        <line x1="395" y1="142" x2="500" y2="142" class="s-line"/>
+        <line x1="395" y1="136" x2="395" y2="148" class="s-line"/>
+        <line x1="500" y1="136" x2="500" y2="148" class="s-line"/>
+        <text x="447" y="166" text-anchor="middle" class="s-strong">off by 40×</text>
+
+        <text x="590" y="26" class="s-head">3 · EVERYONE ELSE</text>
+        <rect x="610" y="104" width="22" height="26" class="s-bar"/>
+        <rect x="636" y="80" width="22" height="50" class="s-bar"/>
+        <rect x="662" y="62" width="22" height="68" class="s-bar"/>
+        <rect x="688" y="72" width="22" height="58" class="s-bar"/>
+        <rect x="714" y="94" width="22" height="36" class="s-bar"/>
+        <rect x="740" y="108" width="22" height="22" class="s-bar"/>
+        <rect x="766" y="116" width="22" height="14" class="s-bar"/>
+        <line x1="604" y1="130" x2="836" y2="130" class="s-axis"/>
+        <line x1="818" y1="58" x2="818" y2="130" class="s-dash"/>
+        <text x="818" y="50" text-anchor="middle" class="s-accent-text">truth</text>
+        <text x="700" y="156" text-anchor="middle" class="s-small">most visitors guess far too low</text>
+      </svg>
+      <figcaption>Your error is the emotional moment. The crowd's error becomes data that only this site has.</figcaption>
+    </figure>
+
+    <h4>Basis</h4>
+    <ul class="basis">
+      <li><span class="tag external">external</span><span>Ipsos's Perils of Perception survey turned exactly this gap into a recurring press franchise. In 2017 it ran 29,133 interviews in 38 countries; Americans guessed immigrants were 33% of the population against 14% actual. Verified.</span></li>
+      <li><span class="tag direct">direct</span><span>Guess-then-reveal is one of the four recurring viral shapes in the research: Higher Lower (500M+ plays) and Wordle (~4M daily users in 2025). PostHog is already connected, so anonymous guesses can be logged.</span></li>
+      <li><span class="tag reasoned">reasoned</span><span>A bare number has no stakes, and a guess creates them. The gap between guess and truth is what "weird" actually means, so the site can measure weirdness instead of claiming it.</span></li>
+    </ul>
+
+    <h4>Rationale</h4>
+    <p>It turns reading into a gut-check collision with reality, which is the moment the user is after ("pique users' interests"). Every visit also produces a by-product: a dataset of misperceptions no other site has, and good press material ("weird.stats visitors think X; it's actually Y").</p>
+
+    <h4>Downsides</h4>
+    <ul class="downsides">
+      <li>Crowd numbers mean nothing until each stat has a few hundred guesses.</li>
+      <li>Self-selected visitors and bots are not a poll. Label the numbers honestly and filter out junk.</li>
+      <li>The slider's range anchors people's guesses.</li>
+      <li>Guessing on every stat gets tiring, so make it the default but skippable.</li>
+      <li>Link previews can show the question but not the sharer's own guess, because crawlers can't read URL fragments.</li>
+    </ul>
+  </article>
+
+  <!-- I3 -->
+  <article class="idea" id="i3">
+    <div class="idea-head"><span class="chip id">I3</span><h3>3. The Mint</h3></div>
+    <p class="tagline">A nightly machine finds the weird stats, and you just approve them.</p>
+    <dl class="meta">
+      <div><dt>Axis</dt><dd>The stats themselves</dd></div>
+      <div><dt>Confidence</dt><dd>65%</dd></div>
+      <div><dt>Complexity</dt><dd>High</dd></div>
+    </dl>
+
+    <h4>Description</h4>
+    <p>Instead of hunting for stats by hand, a nightly job joins free datasets on shared keys: the thing (its Wikidata ID), the country and the date. It then runs "surprise templates" over the joined data:</p>
+    <ul class="forms">
+      <li>Ratio extremes.</li>
+      <li>Rank flips: #1 on one measure, near last on another.</li>
+      <li>Unit coincidences: two unrelated quantities within 1% of each other.</li>
+      <li>Record-holders.</li>
+    </ul>
+    <p>That produces thousands of candidates a night. An LLM writes only the caption, and a separate step recomputes every number from the source rows. You spend about 10 minutes a day on your phone swiping approve or kill.</p>
+    <p>Useful house rule: favor stats that only exist because of a join, so nobody can find them by searching. Flagship template: <strong>the Attention Gap</strong>, which compares what people read about with what actually happens. For example, the week's biggest earthquake next to the Wikipedia pageviews for the nearest town.</p>
+
+    <figure class="viz">
+      <svg viewBox="0 0 860 180" role="img" aria-labelledby="i3-t">
+        <title id="i3-t">Pipeline: open data, joined on shared keys, run through surprise templates, rechecked, then curated by you at about ten a day.</title>
+        <defs>
+          <marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="s-arrowhead"/></marker>
+        </defs>
+        <rect x="10" y="30" width="150" height="96" rx="10" class="s-box"/>
+        <text x="22" y="56" class="s-strong">Open data</text>
+        <text x="22" y="78" class="s-small">OWID · Wikipedia</text>
+        <text x="22" y="96" class="s-small">Wikidata · USGS</text>
+
+        <line x1="162" y1="78" x2="180" y2="78" class="s-line" marker-end="url(#arr3)"/>
+
+        <rect x="182" y="30" width="150" height="96" rx="10" class="s-box"/>
+        <text x="194" y="56" class="s-strong">Join</text>
+        <text x="194" y="78" class="s-small">on shared keys:</text>
+        <text x="194" y="96" class="s-small">thing, place, date</text>
+
+        <line x1="334" y1="78" x2="352" y2="78" class="s-line" marker-end="url(#arr3)"/>
+
+        <rect x="354" y="30" width="150" height="96" rx="10" class="s-box"/>
+        <text x="366" y="56" class="s-strong">Surprise templates</text>
+        <text x="366" y="76" class="s-small">ratio extremes</text>
+        <text x="366" y="93" class="s-small">rank flips</text>
+        <text x="366" y="110" class="s-small">coincidences</text>
+
+        <line x1="506" y1="78" x2="524" y2="78" class="s-line" marker-end="url(#arr3)"/>
+
+        <rect x="526" y="30" width="150" height="96" rx="10" class="s-box"/>
+        <text x="538" y="56" class="s-strong">Recheck</text>
+        <text x="538" y="76" class="s-small">numbers recomputed</text>
+        <text x="538" y="93" class="s-small">LLM writes only</text>
+        <text x="538" y="110" class="s-small">the caption</text>
+
+        <line x1="678" y1="78" x2="696" y2="78" class="s-line" marker-end="url(#arr3)"/>
+
+        <rect x="698" y="30" width="150" height="96" rx="10" class="s-box-accent"/>
+        <text x="710" y="56" class="s-accent-text">You curate</text>
+        <text x="710" y="78" class="s-small">swipe approve / kill</text>
+        <text x="710" y="96" class="s-small">on your phone</text>
+
+        <text x="429" y="156" text-anchor="middle" class="s-mono">thousands of candidates / night</text>
+        <text x="773" y="156" text-anchor="middle" class="s-mono">~10 kept / day</text>
+      </svg>
+      <figcaption>Each new data source can pair with every source already joined, so the supply of candidates grows faster than the number of sources.</figcaption>
+    </figure>
+
+    <h4>Basis</h4>
+    <ul class="basis">
+      <li><span class="tag direct">direct</span><span>The research confirms the raw material is free and joinable. Wikipedia pageviews are CC0, hourly since 2007, and joinable to Wikidata. Our World in Data is CC BY, with every CSV on GitHub. Wikidata is "good for offline mining of weird superlatives".</span></li>
+      <li><span class="tag direct">direct</span><span>The user's open question: "I don't really know what else I want to do", plus "a lot of random weird data".</span></li>
+      <li><span class="tag external">external</span><span>Spurious Correlations was exactly this. Software merged free government datasets and auto-produced charts, which led to BBC coverage and a 2015 book.</span></li>
+      <li><span class="tag reasoned">reasoned</span><span>One person can't write 10,000 stats but can review 10 a day. That's about 3,650 curated stats a year, with no live API load.</span></li>
+    </ul>
+
+    <h4>Rationale</h4>
+    <p>It answers the biggest open question ("which stats?") with a machine instead of a list. It gives "weird" a working definition: something extreme about something familiar. And it turns the worry about data volume into a nightly batch job that visitors never touch.</p>
+
+    <h4>Downsides</h4>
+    <ul class="downsides">
+      <li>The hardest idea here to build well, and its output quality is unknown until you try it.</li>
+      <li>Wikidata is incomplete, so "the only X that…" claims can be false.</li>
+      <li>Ratios on tiny countries such as Vatican City or Tuvalu produce junk extremes that need filtering.</li>
+      <li>Data-savvy audiences like Hacker News will pounce on a wrong number, which is why the recheck step and receipts (I6) matter.</li>
+    </ul>
+  </article>
+
+  <!-- I4 -->
+  <article class="idea" id="i4">
+    <div class="idea-head"><span class="chip id">I4</span><h3>4. The Number Line</h3></div>
+    <p class="tagline">No categories: the whole collection lives on one zoomable scale.</p>
+    <dl class="meta">
+      <div><dt>Axis</dt><dd>How the collection hangs together</dd></div>
+      <div><dt>Confidence</dt><dd>65%</dd></div>
+      <div><dt>Complexity</dt><dd>Medium</dd></div>
+    </dl>
+
+    <h4>Description</h4>
+    <p>The home page is one logarithmic number line that you scroll or zoom through, like The Deep Sea but for any quantity. It has one lane per kind of quantity: counts, time, mass, length and money. Each stat sits at its value, so neighbors share nothing but size, and that produces collisions on its own. Near 10¹¹, for example, sit ~86 billion neurons in a brain, 100–400 billion stars in the Milky Way and ~117 billion humans ever born.</p>
+    <p>A shelf of a few hundred reference objects gives every stat an "≈ N of these" comparison: a blue whale, an Olympic pool, the Eiffel Tower, all mineable from Wikidata. The shelf can include "you" units, such as your height or your hometown. Type any number, like your birth year or 42, and the line flies there.</p>
+
+    <figure class="viz">
+      <svg viewBox="0 0 860 240" role="img" aria-labelledby="i4-t">
+        <title id="i4-t">A log number line from 10 to the 0 up to 10 to the 15, with three unrelated stats stacked together near 10 to the 11.</title>
+        <rect x="487" y="30" width="250" height="34" rx="8" class="s-box"/>
+        <text x="612" y="52" text-anchor="middle" class="s-text">~86 billion neurons in a brain</text>
+        <rect x="487" y="72" width="250" height="34" rx="8" class="s-box"/>
+        <text x="612" y="94" text-anchor="middle" class="s-text">100–400 billion Milky Way stars</text>
+        <rect x="487" y="114" width="250" height="34" rx="8" class="s-box-accent"/>
+        <text x="612" y="136" text-anchor="middle" class="s-accent-text">~117 billion humans ever born</text>
+        <line x1="612" y1="150" x2="612" y2="186" class="s-line"/>
+
+        <line x1="40" y1="190" x2="820" y2="190" class="s-axis"/>
+        <line x1="40" y1="184" x2="40" y2="196" class="s-axis"/>
+        <line x1="196" y1="184" x2="196" y2="196" class="s-axis"/>
+        <line x1="352" y1="184" x2="352" y2="196" class="s-axis"/>
+        <line x1="508" y1="184" x2="508" y2="196" class="s-axis"/>
+        <line x1="664" y1="184" x2="664" y2="196" class="s-axis"/>
+        <line x1="820" y1="184" x2="820" y2="196" class="s-axis"/>
+        <text x="40" y="216" text-anchor="middle" class="s-mono">10⁰</text>
+        <text x="196" y="216" text-anchor="middle" class="s-mono">10³</text>
+        <text x="352" y="216" text-anchor="middle" class="s-mono">10⁶</text>
+        <text x="508" y="216" text-anchor="middle" class="s-mono">10⁹</text>
+        <text x="664" y="216" text-anchor="middle" class="s-mono">10¹²</text>
+        <text x="820" y="216" text-anchor="middle" class="s-mono">10¹⁵</text>
+
+        <circle cx="88" cy="190" r="3.5" class="s-dot"/>
+        <circle cx="140" cy="190" r="3.5" class="s-dot"/>
+        <circle cx="236" cy="190" r="3.5" class="s-dot"/>
+        <circle cx="290" cy="190" r="3.5" class="s-dot"/>
+        <circle cx="402" cy="190" r="3.5" class="s-dot"/>
+        <circle cx="455" cy="190" r="3.5" class="s-dot"/>
+        <circle cx="560" cy="190" r="3.5" class="s-dot"/>
+        <circle cx="612" cy="190" r="6" class="s-accent"/>
+        <circle cx="712" cy="190" r="3.5" class="s-dot"/>
+        <circle cx="770" cy="190" r="3.5" class="s-dot"/>
+
+        <text x="40" y="52" class="s-head">SAME SIZE,</text>
+        <text x="40" y="70" class="s-head">UNRELATED WORLDS</text>
+        <text x="40" y="100" class="s-small">Every grey dot is another stat.</text>
+        <text x="40" y="118" class="s-small">Zoom in and the dots become cards.</text>
+      </svg>
+      <figcaption>Magnitude is the only organizing principle, and the collisions it creates are the content: the Harper's Index effect, generated automatically.</figcaption>
+    </figure>
+
+    <h4>Basis</h4>
+    <ul class="basis">
+      <li><span class="tag direct">direct</span><span>"I really don't think I do [want a category]… I just want a lot of random weird data". Also the grounding's tension between a random pile and a site people can navigate and remember.</span></li>
+      <li><span class="tag external">external</span><span>Harper's Index gets its power from juxtaposition and from the reader not knowing what comes next. neal.fun's The Deep Sea and The Size of Space turn scale into space. Wikidata stores quantities with units (verified).</span></li>
+      <li><span class="tag reasoned">reasoned</span><span>Size is a property almost every stat has, so it organizes the pile without anyone having to maintain a taxonomy.</span></li>
+    </ul>
+
+    <h4>Rationale</h4>
+    <p>It makes "no category" a deliberate design choice rather than a missing feature, and the navigation doubles as the jaw-drop hero visual. Typing a number personalizes the site without any account.</p>
+
+    <h4>Downsides</h4>
+    <ul class="downsides">
+      <li>Not every stat has a natural size. Percentages, rankings, dates and patterns need another home, such as the daily spread and the stat pages.</li>
+      <li>Most same-size pairs are meaningless, so the collisions still need curation.</li>
+      <li>Thousands of points in WebGL need careful work to run well on phones.</li>
+    </ul>
+  </article>
+
+  <!-- I5 -->
+  <article class="idea" id="i5">
+    <div class="idea-head"><span class="chip id">I5</span><h3>5. The Daily Spread</h3></div>
+    <p class="tagline">A three-card daily ritual with a spoiler-free share grid.</p>
+    <dl class="meta">
+      <div><dt>Axis</dt><dd>Why people come back and share</dd></div>
+      <div><dt>Confidence</dt><dd>60%</dd></div>
+      <div><dt>Complexity</dt><dd>Low–Medium</dd></div>
+    </dl>
+
+    <h4>Description</h4>
+    <p>Once a day you drag to cut a deck, and three stat cards land in named spots:</p>
+    <ul class="forms">
+      <li><strong>About You</strong>: worked out in your browser from your birth year and country, e.g. "you've lived through ~470 full moons".</li>
+      <li><strong>About the World</strong>.</li>
+      <li><strong>The Absurd</strong>.</li>
+    </ul>
+    <p>You guess each card before it flips (I2). The result is a Wordle-style share grid showing how far off you were on each card (1.1×, 3×, 40×) without giving away the answers. Decks come in finite, art-directed seasons of, say, 78 cards. That makes them collectible, and they can later be printed as a physical deck.</p>
+
+    <figure class="viz">
+      <svg viewBox="0 0 860 220" role="img" aria-labelledby="i5-t">
+        <title id="i5-t">Three cards in named positions — About you, About the world, The absurd — and below them a share strip showing how far off each guess was, without the answers.</title>
+        <rect x="70" y="16" width="200" height="124" rx="12" class="s-box"/>
+        <text x="86" y="42" class="s-head">ABOUT YOU</text>
+        <text x="86" y="78" class="s-text">You've lived through</text>
+        <text x="86" y="98" class="s-strong">~470 full moons</text>
+
+        <rect x="330" y="16" width="200" height="124" rx="12" class="s-box"/>
+        <text x="346" y="42" class="s-head">ABOUT THE WORLD</text>
+        <text x="346" y="78" class="s-text">~117 billion people</text>
+        <text x="346" y="98" class="s-strong">have ever been born</text>
+
+        <rect x="590" y="16" width="200" height="124" rx="12" class="s-box"/>
+        <text x="606" y="42" class="s-head">THE ABSURD</text>
+        <text x="606" y="78" class="s-text">The "8 spiders a year"</text>
+        <text x="606" y="98" class="s-strong">fact was a hoax</text>
+
+        <rect x="230" y="162" width="400" height="42" rx="21" class="s-box-accent"/>
+        <text x="256" y="188" class="s-accent-text">weird.stats · Day 142</text>
+        <rect x="420" y="176" width="14" height="14" rx="3" class="s-good"/>
+        <text x="440" y="188" class="s-text">1.1×</text>
+        <rect x="490" y="176" width="14" height="14" rx="3" class="s-warn"/>
+        <text x="510" y="188" class="s-text">3×</text>
+        <rect x="550" y="176" width="14" height="14" rx="3" class="s-bad"/>
+        <text x="570" y="188" class="s-text">40×</text>
+      </svg>
+      <figcaption>The named positions turn random draws into a small story. The share strip works like a cliffhanger: it shows your misses, never the answers.</figcaption>
+    </figure>
+
+    <h4>Basis</h4>
+    <ul class="basis">
+      <li><span class="tag external">external</span><span>Wordle (~4M daily users in 2025) proved a fixed daily ritual with one shareable, spoiler-free artifact. Spotify Wrapped proved that sharing is identity expression. Tarot shows how a draw you take part in (you cut the deck), with named positions, makes randomness feel meaningful.</span></li>
+      <li><span class="tag direct">direct</span><span>The user asked for "random weird data". The grounding names personalization without data collection (birth year and country, computed in the browser) as an unfilled gap.</span></li>
+      <li><span class="tag reasoned">reasoned</span><span>A shuffle button feels throwaway. A ritual with named positions turns the same randomness into a small story, with a daily reason to come back.</span></li>
+    </ul>
+
+    <h4>Rationale</h4>
+    <p>The user's "random" stops being a weakness and becomes the ritual. It's the one return loop that needs no accounts, notifications or live infrastructure. Seasons give one person a sustainable release rhythm, and each new deck is a fresh launch moment.</p>
+
+    <h4>Downsides</h4>
+    <ul class="downsides">
+      <li>Daily games risk "another Wordle clone" fatigue.</li>
+      <li>It needs about three good cards a day, roughly 1,100 a year, so it depends on the Mint or a deep backlog.</li>
+      <li>Crowd comparisons start out empty.</li>
+      <li>A printed deck means fulfillment work, so treat it as a later step.</li>
+    </ul>
+  </article>
+
+  <!-- I6 -->
+  <article class="idea" id="i6">
+    <div class="idea-head"><span class="chip id">I6</span><h3>6. Receipts on Every Stat</h3></div>
+    <p class="tagline">Every number shows its work, refreshes itself, and can't break a license.</p>
+    <dl class="meta">
+      <div><dt>Axis</dt><dd>Keeping it alive solo</dd></div>
+      <div><dt>Confidence</dt><dd>80%</dd></div>
+      <div><dt>Complexity</dt><dd>Low–Medium</dd></div>
+    </dl>
+
+    <h4>Description</h4>
+    <p>Each stat is a small record rather than a sentence. It holds:</p>
+    <ul class="forms">
+      <li>The value and its unit.</li>
+      <li>The source and the date it was retrieved.</li>
+      <li>The formula or query that produced it.</li>
+      <li>A license class.</li>
+      <li>A badge: measured, modeled or estimated.</li>
+      <li>How often it refreshes, and how old it is allowed to get.</li>
+    </ul>
+    <p>A nightly build re-runs everything into static files on a CDN, so visitors never hit an outside API. The build also:</p>
+    <ul class="forms">
+      <li>Raises an alarm on implausible jumps.</li>
+      <li>Relabels stale stats "as of 2025" and pulls them from rotation.</li>
+      <li>Refuses to publish any stat whose source is non-commercial or has unclear terms.</li>
+    </ul>
+    <p>On the site, flipping a card shows a designed "specimen label" with the receipt. The same machinery powers a <strong>Forgeries Room</strong>: famous fake stats, displayed the way museums display fakes. For example, "you swallow 8 spiders a year" has no source. Even the popular story that a columnist named "Lisa Birgit Holst" invented it in 1993 is fake: the name is an anagram of "this is a big troll".</p>
+
+    <h4>Basis</h4>
+    <ul class="basis">
+      <li><span class="tag direct">direct</span><span>The user's worry: "a lot of data or API requests". The research's traps: Open-Meteo's free tier is non-commercial only, OpenSky's commercial terms are unspecified, and Worldometer's "live" counters are models, not feeds.</span></li>
+      <li><span class="tag external">external</span><span>OWID notes that third-party charts carry their own licenses. Museums make a heap of unrelated objects trustworthy with labels and catalog numbers. The spider-myth hoax is documented by Snopes (verified).</span></li>
+      <li><span class="tag reasoned">reasoned</span><span>One person can't re-check thousands of stats by hand, so upkeep has to grow with the exceptions, not with the total.</span></li>
+    </ul>
+
+    <h4>Rationale</h4>
+    <p>The weird-fact genre is full of made-up numbers. In practice, "semi-useful" means you can repeat a stat at dinner without getting burned. This idea removes the API worry and the licensing risk on day one, before any stat exists. It is cheap, too: mostly a decision about what a stat record contains.</p>
+
+    <h4>Downsides</h4>
+    <ul class="downsides">
+      <li>The structure has to be built before the first fun thing ships.</li>
+      <li>The license gate rules out some tempting sources.</li>
+      <li>The Forgeries Room is a finite, hand-written wing. Write your own copy rather than lifting Snopes'.</li>
+    </ul>
+  </article>
+
+  <!-- I7 -->
+  <article class="idea" id="i7">
+    <div class="idea-head"><span class="chip id">I7</span><h3>7. The Stat Crew</h3></div>
+    <p class="tagline">A front page that writes itself by comparing today with history.</p>
+    <dl class="meta">
+      <div><dt>Axis</dt><dd>The stats themselves</dd></div>
+      <div><dt>Confidence</dt><dd>60%</dd></div>
+      <div><dt>Complexity</dt><dd>Medium</dd></div>
+    </dl>
+
+    <h4>Description</h4>
+    <p>Raw live data is dull: an earthquake count means nothing on its own. Sports broadcasts make routine moments thrilling with "first time since…" notes. An automated stat crew compares each refreshing series with its own past every night and writes record-framed sentences, such as:</p>
+    <ul class="forms">
+      <li>"Today's M6.4 near Tonga is the largest quake anywhere in 23 days."</li>
+      <li>"'Saturn' got its most English Wikipedia views since March."</li>
+      <li>"X overtook Y for the first time."</li>
+      <li>"This stat was just corrected by −12%."</li>
+    </ul>
+    <p>It also tracks seasonal pulses, such as Wikipedia views of "Daylight saving time" climbing before the clocks change. And it surfaces evergreen stats about whatever the internet is suddenly curious about.</p>
+
+    <figure class="viz">
+      <svg viewBox="0 0 860 170" role="img" aria-labelledby="i7-t">
+        <title id="i7-t">A daily series where today's value is the highest since an earlier peak in March, marked by a dashed line between the two.</title>
+        <polyline points="40,112 79,98 118,62 157,102 196,120 235,114 274,106 313,118 352,111 391,124 430,108 469,116 508,121 547,110 586,119 625,113 664,121 703,117 742,109 781,96 820,50" class="s-line"/>
+        <line x1="118" y1="62" x2="820" y2="62" class="s-dash"/>
+        <circle cx="118" cy="62" r="5" class="s-dot"/>
+        <circle cx="820" cy="50" r="6.5" class="s-accent"/>
+        <text x="126" y="50" class="s-small">previous high · 14 Mar</text>
+        <text x="806" y="32" text-anchor="end" class="s-accent-text">today: highest since 14 Mar</text>
+        <line x1="40" y1="140" x2="820" y2="140" class="s-axis"/>
+        <text x="40" y="160" class="s-mono">daily Wikipedia views · "Saturn" (illustrative)</text>
+      </svg>
+      <figcaption>The stat isn't the number. It's the number compared with its own past.</figcaption>
+    </figure>
+
+    <h4>Basis</h4>
+    <ul class="basis">
+      <li><span class="tag external">external</span><span>The Elias Sports Bureau has supplied "first since" notes to ESPN, Turner and the major leagues for decades (verified). Wikimedia's daily most-viewed endpoint exists and works, with a 1–2 day lag (verified).</span></li>
+      <li><span class="tag direct">direct</span><span>The research names staleness as a risk and advises a small live set on top of an evergreen core. It also lists USGS feeds updated every minute and hourly Wikipedia pageviews since 2007.</span></li>
+      <li><span class="tag reasoned">reasoned</span><span>A counter isn't a story; a number compared with its own past is.</span></li>
+    </ul>
+
+    <h4>Rationale</h4>
+    <p>It gives the site a pulse and a reason to look again tomorrow, without an editor. And it turns the live data the user expected to need into a nightly batch job.</p>
+
+    <h4>Downsides</h4>
+    <ul class="downsides">
+      <li>The trending list is mostly deaths, adult content and bots, and it includes Main_Page and Special:Search. It needs real filtering, not just a blocklist.</li>
+      <li>"First since" claims need clean history, and USGS revises magnitudes after the fact.</li>
+      <li>Some record sentences will be boring, so they still go through the approval queue.</li>
+    </ul>
+  </article>
+</section>
+
+<section class="doc-section" id="rejection-summary">
+  <p class="eyebrow">Considered and cut</p>
+  <h2>Rejection Summary</h2>
+  <p class="section-intro">All five axes have at least one survivor. Several ideas weren't wrong; they were folded into a stronger survivor, and those rows say where they went.</p>
+  <div class="table-wrap">
+  <table class="reject">
+    <thead><tr><th>#</th><th>Idea</th><th>Reason Rejected</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Embed by default, ad-free, sell licenses</td><td>Weak basis. Publisher licensing is speculative for a site with no traffic, and going ad-free drops the one revenue model proven for solo stat sites (neal.fun runs on ads). The embed output folded into I1; the license field folded into I6.</td></tr>
+      <tr><td>2</td><td>The Framing Dial / You Are the Unit</td><td>Duplicates a stronger idea: re-expressing a stat lives in I4's reference shelf. It only works for rates and counts. A good candidate to become one of I1's forms.</td></tr>
+      <tr><td>3</td><td>While You Were Away (what piled up since your last visit)</td><td>Below the bar. It's a small feature that rewards people who already come back rather than giving anyone a reason to.</td></tr>
+      <tr><td>4</td><td>Stat Futures (play-money predictions resolved by data)</td><td>Fails on feasibility. It's close to gambling, and it can be manipulated: pageviews can be inflated and quake magnitudes get revised. It also needs accounts.</td></tr>
+      <tr><td>5</td><td>The Descent (feed sorted by measured weirdness; the UI darkens with depth)</td><td>Depends on I2's data, starts out empty, and treats "misjudged" as the same thing as "weird". Possible later view.</td></tr>
+      <tr><td>6</td><td>One Stat, Everyone, Right Now (a 60-second broadcast channel)</td><td>Fails for a new site. Thin traffic makes "everyone" empty, and the comparison to One Million Checkboxes doesn't hold: that was participation, this is passive watching.</td></tr>
+      <tr><td>7</td><td>Monthly issues with a new art direction each</td><td>Basis contradicted. A new art direction every month adds design work instead of capping it. The launch-moment insight carried into I5's seasonal decks.</td></tr>
+      <tr><td>8</td><td>Numeral Specimen (a typeface driven by the data)</td><td>Better explored when designing the visual identity. The suggested font lacks the needed axes, and font weight is a poor way to show size that also hurts legibility.</td></tr>
+      <tr><td>9</td><td>The Tasting Wheel (browse by how a stat feels)</td><td>Every stat would need subjective tagging, and it's a category system under another name. Wine's aroma wheel is a vocabulary, not a way to browse.</td></tr>
+      <tr><td>10</td><td>Unlabeled First (guess what the picture shows)</td><td>Folded into I2 as a variant, since only some stats have a guessable shape.</td></tr>
+      <tr><td>11</td><td>Cliffhanger share card</td><td>Folded into I2.</td></tr>
+      <tr><td>12</td><td>The Almanac (366 day-pages)</td><td>Its seasonal pulses and daylight stats folded into I7. Plain "on this day" content is a commodity, and a date-based structure competes with I4.</td></tr>
+      <tr><td>13</td><td>The Attention Gap series</td><td>Folded into I3 as its flagship template. Watch the tone: "readers per death" reads as callous.</td></tr>
+      <tr><td>14</td><td>Forgeries Room</td><td>Folded into I6.</td></tr>
+      <tr><td>15</td><td>Cut the Deck</td><td>Became I5, with the guess grid added.</td></tr>
+      <tr><td>16</td><td>Combinations: Stat Factory, Ruler-as-Brand, Today</td><td>Each restated its parts without adding anything; folded into I1, I3, I4, I6 and I7.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<footer class="composition-signal">Composed 2026-10-04T20:14Z by ce-ideate from the user's prompt in this session; updated 2026-10-04T20:53Z with the combined-site synthesis.</footer>
+</main>
+</body>
+</html>

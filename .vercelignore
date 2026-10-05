@@ -1,0 +1,7 @@
+.git/
+.github/
+docs/
+node_modules/
+.vercel/
+.env*
+*.log
