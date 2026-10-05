@@ -25,7 +25,7 @@ Only then ask about presentation: “What did you enjoy or dislike about how it 
 
 ## Fixed presentation — version 2
 
-Use the current local review edition at `http://localhost:63214/#top`; do not send the source document to participants. The production edition still has the earlier wording until release is approved.
+Use the local published edition at `http://localhost:63014/#top`, which excludes review-only entries such as the Senate study; do not send the source document to participants. Verify the fixed version 2 wording below is present before running the check. If exact-revision migration restores an older released chip, prepare a local isolated version 2 fixture instead and record that build explicitly. The production edition still has the earlier wording until release is approved. Reserve a separate unexposed cohort for the [visual forms check](visual-forms-reader-check.md).
 
 - Opening: “Could your ears make a chip seem fresher?”
 - Introduction: “One recording, two sound treatments. Listen if you like, then see what happened in the experiment.”
