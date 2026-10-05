@@ -1,10 +1,10 @@
 import {createHash} from 'node:crypto';
-import {mkdir, readFile, readdir, writeFile, rm, open} from 'node:fs/promises';
+import {mkdir, readFile, readdir, rm, open} from 'node:fs/promises';
 import {resolve, join} from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
 import {root, validate} from './content.mjs';
-import {readJSON,atomicWrite} from './editorial-io.mjs';
+import {readJSON,atomicWrite,atomicCreate} from './editorial-io.mjs';
 
 export const defaultLimits={investigationsPerRun:10,promotionsPerRun:2,unfinishedPackets:5};
 const idPattern=/^[a-z][a-z0-9-]*$/;
@@ -92,13 +92,13 @@ export function createDesk({directory=fileURLToPath(root),limits:limitOverrides=
   const proposalDirectory=join(content,'revisions/proposals'),decisionDirectory=join(content,'revisions/decisions');
   const proposals=await Promise.all((await jsonFiles(proposalDirectory)).map(file=>readJSON(join(proposalDirectory,file))));
   const decisions=await Promise.all((await jsonFiles(decisionDirectory)).map(file=>readJSON(join(decisionDirectory,file))));
-  const pending=proposals.filter(p=>!decisions.some(d=>d.id===p.id&&d.digest===p.digest&&['keep','reject'].includes(d.decision)));
+  const pending=proposals.filter(p=>!p.superseded&&!p.closed&&!decisions.some(d=>d.id===p.id&&(d.packetId??d.digest)===(p.packetId??p.digest)&&['keep','reject'].includes(d.decision)));
   // An entry with a packet occupies that packet's slot; distinct correction revisions
   // each consume capacity because each requires a separate human review.
   const covered=new Set(pending.map(p=>p.id));
   const ids=new Set([...items.map(e=>e.id),...reservations.map(p=>p.entryId)].filter(id=>!covered.has(id)));
   const entryRows=[...ids].sort().map(id=>{const entry=items.find(e=>e.id===id),candidate=packets.find(c=>c.id===id);return {id,status:entry?.status??'interrupted-promotion',treatmentGaps:candidate?.treatmentGaps??[],createdAt:candidate?.createdAt??null,ageDays:candidate?.createdAt?Math.max(0,Math.floor((clock().getTime()-Date.parse(candidate.createdAt))/86400000)):null};});
-  const revisionRows=pending.map(p=>({id:p.id,digest:p.digest,status:'revision-review',createdAt:p.createdAt??null,ageDays:p.createdAt?Math.max(0,Math.floor((clock().getTime()-Date.parse(p.createdAt))/86400000)):null}));
+  const revisionRows=pending.map(p=>({id:p.id,packetId:p.packetId??p.digest,digest:p.digest,status:'revision-review',createdAt:p.createdAt??null,ageDays:p.createdAt?Math.max(0,Math.floor((clock().getTime()-Date.parse(p.createdAt))/86400000)):null}));
   return {count:entryRows.length+revisionRows.length,entries:[...entryRows,...revisionRows]};
  }
  const api={
@@ -149,7 +149,7 @@ export function createDesk({directory=fileURLToPath(root),limits:limitOverrides=
    // Recheck the proposal after asynchronous queue reads and reservation writes.
    if((await storedCandidate(id)).revision!==expectedRevision)return result('conflict',{id,reason:'Candidate changed during promotion; the reserved checkpoint remains resumable.'});
    // Exclusive create never overwrites a simultaneous manual entry or a saved proposal.
-   await mkdir(entries,{recursive:true});try{await writeFile(target,JSON.stringify(entry,null,2)+'\n',{flag:'wx'});}catch(error){if(error.code==='EEXIST')return result('conflict',{id,reason:'An entry appeared during promotion; it was not overwritten.'});throw error;}
+   await mkdir(entries,{recursive:true});try{await atomicCreate(target,()=>JSON.stringify(entry,null,2)+'\n');}catch(error){if(error.code==='EEXIST')return result('conflict',{id,reason:'An entry appeared during promotion; it was not overwritten.'});throw error;}
    const owner=prior?promotionRun:run;owner.promotions.find(p=>p.key===key).state='written';owner.events.push({at:now(),action:'promote',id,revision:expectedRevision});await atomic(runPath(owner.id),owner);
    return result('created',{id,revision:expectedRevision,path:`content/entries/${id}.json`,status:entry.status});
   });},
@@ -163,7 +163,7 @@ export function createDesk({directory=fileURLToPath(root),limits:limitOverrides=
    const caps=await limits(),rows=(await all(candidates)).map(c=>{checkCandidate(c);return revisioned(c);}),researchRuns=await all(runs),workload=await queue();
    return {outcome:'unchanged',limits:caps,queue:{...workload,limit:caps.unfinishedPackets},candidates:rows,runs:researchRuns,editorialGate:{requiredCompletedRuns:7,recordedCompletedRuns:researchRuns.filter(r=>r.status==='completed').length,assessment:'Recorded runs are not independent verification. Review actual yield, review time and backlog age before changing caps.'},asOf:now()};
   },
-  createDraft(entry) {return mutate(async()=>{assertDraftOnly(entry);assert(entry.status==='draft','Scaffolder only creates private drafts');validate(entry);if((await queue()).count>=(await limits()).unfinishedPackets)return result('deferred',{id:entry.id,reason:'Unfinished review queue is full.'});await mkdir(entries,{recursive:true});try{await writeFile(join(entries,checkId(entry.id)+'.json'),JSON.stringify(entry,null,2)+'\n',{flag:'wx'});}catch(error){if(error.code==='EEXIST')return result('conflict',{id:entry.id,reason:'Entry already exists; no overwrite.'});throw error;}return result('created',{id:entry.id,path:`content/entries/${entry.id}.json`});});}
+  createDraft(entry) {return mutate(async()=>{assertDraftOnly(entry);assert(entry.status==='draft','Scaffolder only creates private drafts');validate(entry);if((await queue()).count>=(await limits()).unfinishedPackets)return result('deferred',{id:entry.id,reason:'Unfinished review queue is full.'});await mkdir(entries,{recursive:true});try{await atomicCreate(join(entries,checkId(entry.id)+'.json'),()=>JSON.stringify(entry,null,2)+'\n');}catch(error){if(error.code==='EEXIST')return result('conflict',{id:entry.id,reason:'Entry already exists; no overwrite.'});throw error;}return result('created',{id:entry.id,path:`content/entries/${entry.id}.json`});});}
  };
  return api;
 }

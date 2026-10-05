@@ -80,3 +80,22 @@ test('an unchanged candidate consumes its new run investigation before next-day 
  assert.equal((await desk.promote('next-run',again.id,again.revision)).outcome,'created');assert.equal((await desk.report()).runs.find(r=>r.id==='next-run').investigations.length,1);
  assert.equal((await desk.startRun(undefined)).outcome,'failed');
 });
+
+test('exclusive atomic creation hides partial writes and preserves a competing final file',async t=>{
+ const {atomicCreate}=await import('../scripts/editorial-io.mjs');const {root}=await setup(t),path=join(root,'content/entries/atomic.json');
+ await assert.rejects(atomicCreate(path,()=>'{"complete":true}',{write:async(temp)=>{await writeFile(temp,'{"partial":');throw new Error('Injected interrupted write');}}),/interrupted/);
+ await assert.rejects(readFile(path),{code:'ENOENT'});
+ await atomicCreate(path,()=>'{"complete":true}');assert.deepEqual(JSON.parse(await readFile(path,'utf8')),{complete:true});
+ await assert.rejects(atomicCreate(path,()=>'{"overwrite":true}'),{code:'EEXIST'});assert.deepEqual(JSON.parse(await readFile(path,'utf8')),{complete:true});
+ const race=join(root,'content/entries/race.json');const {link}=await import('node:fs/promises');
+ await assert.rejects(atomicCreate(race,()=>'{"automation":true}',{install:async(temp,target)=>{await writeFile(target,'{"human":true}',{flag:'wx'});await link(temp,target);}}),{code:'EEXIST'});
+ assert.deepEqual(JSON.parse(await readFile(race,'utf8')),{human:true});
+});
+
+test('reserved promotion retries absent final JSON; legacy corrupt JSON fails closed',async t=>{
+ const {root,desk}=await setup(t);const c=await desk.record('fixture-run',candidate());await desk.promote('fixture-run',c.id,c.revision);
+ const path=join(root,'content/research-runs/fixture-run.json'),run=JSON.parse(await readFile(path,'utf8'));run.promotions[0].state='reserved';await writeFile(path,JSON.stringify(run));
+ const final=join(root,'content/entries',c.id+'.json');await rm(final);
+ assert.equal((await desk.promote('fixture-run',c.id,c.revision)).outcome,'created');assert.equal((await desk.report()).runs[0].promotions.length,1);assert.equal((await desk.report()).runs[0].promotions[0].state,'written');
+ await writeFile(final,'{"legacy-partial":');assert.equal((await desk.promote('fixture-run',c.id,c.revision)).outcome,'failed');assert.equal(await readFile(final,'utf8'),'{"legacy-partial":');
+});

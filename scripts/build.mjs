@@ -65,7 +65,7 @@ export async function build({drafts=false,now=new Date(),records,manifest,revisi
   const notFound=fill(discoveryShell,{metadata:metadata({title:'Discovery not found',description:'This discovery could not be found. Keep exploring the collection.',canonical:publicOrigin+'/404.html',drafts:true}),firstId:'notice',draftBanner:'',entries:noticeHTML('Discovery not found','This link does not lead to an available discovery.'),sceneHead:''});
   const packetPages=new Map();
   for(const packet of previewPackets){
-    const path=`review/${packet.id}/${packet.digest}/`,entry=packet.entry;
+    const path=`review/${packet.id}/${packet.packetId??packet.digest}/`,entry=packet.entry;
     const packetContext=createPageContext({mode:'discovery',publicOrigin,privateReview:true,fragment:packet.fragment,discoveryHref:()=>`/${path}`,dataHref:()=>`/${path}data.csv`});
     const page=fill(discoveryShell,{metadata:metadata({title:shareCopy(entry).question,description:'Private exact-revision review',canonical:`${publicOrigin}/${path}`,drafts:true}),firstId:entry.id,draftBanner,entries:heading(await renderEntry(entry,null,now,packetContext),1),sceneHead:sceneHead([entry],packetContext)});
     packetPages.set(path,{page,entry});

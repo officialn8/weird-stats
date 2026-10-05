@@ -12,7 +12,7 @@ Local implementation began October 4, 2026, from `94f2c0d` on `fix/editorial-rev
 
 - U7: exact-revision private previews and diffs, human-input decisions, separate release selection, rights declarations, and migration from the verified original deployment. Three later changes remain private proposals. Full integration passed 57 tests and both builds. The shared queue counts four of five unfinished slots, including correction proposals.
 
-U5 and U8 remain intentionally unimplemented because their reader-evidence dependencies have not passed. The final code-review receipt will be added after the review completes.
+U5 and U8 remain intentionally unimplemented because their reader-evidence dependencies have not passed. Code review completed with eight validated findings; the follow-up record below tracks their resolution.
 
 ## Simplification pass
 
@@ -35,6 +35,33 @@ Three read-only reviewers examined reuse, quality and efficiency. Applied two sh
 5. On an authorized deployment, test anonymous page/image access and an actual social preview. Existing deployment protection makes authenticated local/CLI inspection insufficient.
 
 The migrated mail and painting share titles retain their old released headings; those are not the intended question-led previews. The private proposals show the new questions. Their review and separate release authorization remain blockers for publicly rolling out the new share surfaces. Restoring the verified baseline is not approval of those older hooks as the final design.
+
+## Code review and follow-up
+
+Actual `ce-code-review mode:agent` completed against `94f2c0d`, including staged simplification and documentation. Receipt: `/tmp/compound-engineering-501/ce-code-review/20261004-234333-4b9b51aa/review.json`; run `20261004-234333-4b9b51aa`, status `complete`. Eleven local lenses and an independent validator retained eight findings. The initial verdict was not ready. No external-model review ran: automatic approval review rejected transmitting private project material to Anthropic, and the documented local adversarial fallback was used without retrying the rejected transmission.
+
+The fixes are grouped by shared edit surface: revision lifecycle, release transitions and exclusive candidate creation (#1, #3–#7, which share the queue and review files); runtime factual inputs (#2); and reduced-motion replay (#8). No finding is dismissed or silently deferred. Final results are recorded after integration.
+
+All eight findings were applied and verified. Review instances now preserve decisions across resubmission, supersession and closure; approved snapshots retain original provenance; releases preserve old routes or explicit withdrawal notices; entry creation installs complete JSON without overwriting another writer; PNG/CSV isolation is tested; runtime facts come from approved markup; and Replay follows both motion settings. No justified code-review finding remains unresolved.
+
+Final integration on October 5 passed `npm run check`, all 67 tests, `npm run build`, `npm run build:review`, and `git diff --check`. A final test run left the timestamps and sizes of all 64 generated files unchanged. The public build contains four pinned discoveries; the private build contains five. The Senate draft now has an exact private packet, so the queue contains four pending proposals, zero unpacketized drafts and four of five occupied slots. No human approval or release decision was invented. No push or deployment occurred.
+
+Final browser checks confirmed the paired reveal and Motion off disabling Replay, a 390-pixel layout with no horizontal overflow, the mail's derived 3h/5h/8h narration and eight marks, and copper's approved answer with 60 generated pennies. Browser warnings/errors were empty. A screenshot is saved locally at `artifacts/preview-paired-comparison.jpg` (ignored by Git). Native sharing stayed pending in the in-app browser during an earlier check, so actual native sharing remains unverified despite passing fallback tests. OS reduced-motion emulation, JavaScript-disabled browser reading and anonymous hosted/social checks remain explicit coverage limits.
+
+## Requirement status
+
+| Requirement | Current result |
+|---|---|
+| R1–R2 | Orange scrolling collection retained; optional guesses and closed native reveals; individual question previews generated. Existing released hooks remain subject to the pending editorial proposals. |
+| R3 | Paired comparison implemented and exercised with fictional second data. Three expressive forms and two real reviewed examples per form remain gated on U4/U5. |
+| R4 | Encounter-driven lifecycle, pause/finish behavior and static reading implemented. OS reduced-motion and JavaScript-disabled browser coverage remain unverified. |
+| R5 | Protocol and blank evidence sheet prepared; zero independent sessions. |
+| R6 | Local discovery pages, canonical links and PNGs implemented. Hosted anonymous access, actual social preview and question-copy approval remain release gates. |
+| R7 | Stable discovery routes and withdrawal notices implemented; bounded collection and legacy-hash archive routing belong to gated U8. |
+| R8, R10 | Public selection uses explicit approved revision pins; exact private packets and separate human release decisions implemented. |
+| R9, R12 | Bounded candidate desk, resume/conflict handling and reports implemented. Existing automation updated; seven real runs still required. |
+| R11 | Dated reader Spread and cadence rehearsal remain gated U8 work. |
+| R13 | Cross-treatment political requirements and declared reuse provenance checks implemented; validators do not establish truth or legal rights. |
 
 ## Release validation handoff
 
