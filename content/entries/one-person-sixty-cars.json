@@ -12,12 +12,12 @@
   "whyCare": "A street can be full of vehicles while doing surprisingly little to move people.",
   "evidence": {
     "kind": "calculation",
-    "scope": "Illustrative group of 60 travelers with 1, 2 or 4 people per car, including drivers; one bus with 60 passengers, excluding its driver. Global Street Design Guide capacity ranges for a 3-m lane or equivalent width under peak conditions with normal operations. U.S. DOE/EPA test-cycle energy estimates. Illustrative 4,000 lb car, excluding occupants. Separate traffic state: 32 solo drivers plus 60 bus passengers (92 travelers), with one additional bus operator. Original illustrative dense neighborhood model; qualitative land-use and transit relationships from EPA guidance. Original kinetic-energy thought experiment: illustrative vehicle weights 2,000–8,000 lb and speeds 10–60 mph. Equivalent ideal free fall, not actual crash outcomes.",
-    "dataAsOf": "2016 street design guide, reproduced in 2018 presentation; DOE EV summary September 16, 2024; undated DOE/EPA gasoline page; original illustrative model October 2026; EPA smart-growth guidance updated April 30, 2026; classical mechanics from OpenStax College Physics 2e; NHTSA speed-management synthesis checked October 2026",
+    "scope": "Illustrative group of 60 travelers with 1, 2 or 4 people per car, including drivers; one bus with 60 passengers, excluding its driver. Global Street Design Guide capacity ranges for a 3-m lane or equivalent width under peak conditions with normal operations. U.S. DOE/EPA test-cycle energy estimates. Illustrative 4,000 lb car, excluding occupants. Separate traffic state: 32 solo drivers plus 60 bus passengers (92 travelers), with one additional bus operator. Original illustrative dense neighborhood model; qualitative land-use and transit relationships from EPA guidance. Original kinetic-energy thought experiment: illustrative vehicle weights 2,000–8,000 lb and speeds 10–60 mph. Equivalent ideal free fall, not actual crash outcomes. Direct trip-energy illustration: gasoline energy for a 30 US mpg car with 1–4 people versus gross metabolism of a 70 kg adult cycling at 11 mph (6.8 MET). No upstream energy, emissions or extra-food estimate.",
+    "dataAsOf": "2016 street design guide, reproduced in 2018 presentation; DOE EV summary September 16, 2024; undated DOE/EPA gasoline page; original illustrative model October 2026; EPA smart-growth guidance updated April 30, 2026; classical mechanics from OpenStax College Physics 2e; NHTSA speed-management synthesis checked October 2026; 2024 Adult Compendium cycling category 01020; DOE December 16, 2024 energy conversion; original October 6, 2026 trip model",
     "checkedAt": "2026-10-06",
     "reviewDue": "2027-04-06",
-    "denominator": "People per vehicle; people per hour in a 3-m lane or equivalent width; percent of fuel energy in the gasoline vehicle; lb of illustrative vehicle per occupant. These denominators are not interchangeable. Kinetic energy displayed in foot-pounds and equivalent vertical free-fall height in feet, using specified total moving mass and speed.",
-    "methodology": "Vehicle counts: 60/n for n=1,2,4; bus illustration assumes 60 passengers. Mass allocation: 4000/n lb for n=1,2,3,4 (rounded only for display). Capacity ranges copied as factual values from Prati 2018 slide 23 (PDF page 23), with 3-m scope supplied by the Global Street Design Guide. Gasoline 18–25% energy to wheels in combined 55% city/45% highway test cycle. EV 87–91% includes net regenerative recovery; excludes lifecycle and electricity generation. No claim that 96% of energy is wasted moving vehicle mass. No causal congestion or citywide emissions estimate. Traffic scene: 32 solo cars + one bus carrying 60 passengers = 33 vehicles and 92 travelers; bus operator additional. This is a separate population from the fixed-60 comparison. Neighborhood camera views are conceptual design illustrations with no modeled travel time, capacity, density, energy or emissions output. K = 0.5*m*(mph*0.44704)^2 joules; ideal equivalent height h = (mph*0.44704)^2/(2*9.81) metres and fall time t = (mph*0.44704)/9.81 seconds. Weight in lb converted to kg with 0.45359237; energy J converted to foot-pounds by dividing by 1.3558179483314004; height m converted to feet by dividing by 0.3048. Display energy to whole foot-pounds and height to one decimal; unrounded calculations. Defaults 4000 lb and 30 mph; ranges 2000–8000 lb and 10–60 mph; fixed vertical scale 0–140 ft. Primary readout rounds height to whole feet and describes approximate stories at an explicitly illustrative 10 feet per story; actual building floors vary. A geometric building reference highlights the equivalent height. US tons = lb/2000. Foot-pound energy values remain in optional calculation details, not the primary readout. Reference energy uses the same mass at 20 mph. Doubling mass doubles energy; doubling speed quadruples energy and height. Free-fall height and time are independent of mass. Neglects air resistance and rotational energy; no impact-force, stopping-distance, casualty or injury prediction. Real collision harm depends on impact speed, vehicle shape and collision circumstances.",
+    "denominator": "People per vehicle; people per hour in a 3-m lane or equivalent width; percent of fuel energy in the gasoline vehicle; lb of illustrative vehicle per occupant. These denominators are not interchangeable. Kinetic energy displayed in foot-pounds and equivalent vertical free-fall height in feet, using specified total moving mass and speed. Direct energy input in Wh per person-mile or person-km. Fuel energy versus gross rider metabolism; excludes car occupants’ metabolism.",
+    "methodology": "Vehicle counts: 60/n for n=1,2,4; bus illustration assumes 60 passengers. Mass allocation: 4000/n lb for n=1,2,3,4 (rounded only for display). Capacity ranges copied as factual values from Prati 2018 slide 23 (PDF page 23), with 3-m scope supplied by the Global Street Design Guide. Gasoline 18–25% energy to wheels in combined 55% city/45% highway test cycle. EV 87–91% includes net regenerative recovery; excludes lifecycle and electricity generation. No claim that 96% of energy is wasted moving vehicle mass. No causal congestion or citywide emissions estimate. Traffic scene: 32 solo cars + one bus carrying 60 passengers = 33 vehicles and 92 travelers; bus operator additional. This is a separate population from the fixed-60 comparison. Neighborhood camera views are conceptual design illustrations with no modeled travel time, capacity, density, energy or emissions output. K = 0.5*m*(mph*0.44704)^2 joules; ideal equivalent height h = (mph*0.44704)^2/(2*9.81) metres and fall time t = (mph*0.44704)/9.81 seconds. Weight in lb converted to kg with 0.45359237; energy J converted to foot-pounds by dividing by 1.3558179483314004; height m converted to feet by dividing by 0.3048. Display energy to whole foot-pounds and height to one decimal; unrounded calculations. Defaults 4000 lb and 30 mph; ranges 2000–8000 lb and 10–60 mph; fixed vertical scale 0–140 ft. Primary readout rounds height to whole feet and describes approximate stories at an explicitly illustrative 10 feet per story; actual building floors vary. A geometric building reference highlights the equivalent height. US tons = lb/2000. Foot-pound energy values remain in optional calculation details, not the primary readout. Reference energy uses the same mass at 20 mph. Doubling mass doubles energy; doubling speed quadruples energy and height. Free-fall height and time are independent of mass. Neglects air resistance and rotational energy; no impact-force, stopping-distance, casualty or injury prediction. Real collision harm depends on impact speed, vehicle shape and collision circumstances. Trip comparison: car Wh/person-mile = 33700 / US mpg / occupants; bike kcal/mile = 6.8*70/11, Wh/mile = kcal/mile*4184/3600; divide either by 1.609344 for Wh/person-km. Baseline 1123.333333 and 50.292525 Wh/person-mile, ratio 22.335990. Car range 15–60 US mpg (235.214583/mpg L/100 km), occupants 1–4; fuel held fixed with occupancy. Gross bike metabolism includes rest, not extra food consumed; excludes car occupants’ metabolism. No upstream food/fuel production, manufacturing, infrastructure or emissions. Compendium adult range 19–59; standardized estimate, not individual calorie prediction. Unit display uses kg, km/h, meters, tonnes and kJ without changing canonical mass/speed, drop geometry, animation timing or ratio.",
     "sources": [
       {
         "label": "Global Street Design Guide — lane-width and operating assumptions",
@@ -63,6 +63,36 @@
         "label": "NHTSA Countermeasures That Work — speed, vehicle size and crash harm",
         "url": "https://www.nhtsa.gov/book/countermeasures-that-work/speeding-and-speed-management/understanding-problem",
         "primary": true
+      },
+      {
+        "label": "2024 Adult Compendium — cycling category 01020",
+        "url": "https://pacompendium.com/bicycling/",
+        "primary": true
+      },
+      {
+        "label": "Compendium — MET definition and commercial reuse terms",
+        "url": "https://pacompendium.com/",
+        "primary": true
+      },
+      {
+        "label": "Compendium — adult population",
+        "url": "https://pacompendium.com/adult-compendium/",
+        "primary": true
+      },
+      {
+        "label": "Compendium — limitations of standard MET estimates",
+        "url": "https://pacompendium.com/corrected-mets/",
+        "primary": true
+      },
+      {
+        "label": "DOE/EPA — 33.7 kWh per US gallon energy equivalence",
+        "url": "https://www.energy.gov/cmei/vehicles/articles/fotw-1373-december-16-2024-efficiency-evs-model-year-2024-ranges-53-140-mpge",
+        "primary": true
+      },
+      {
+        "label": "NIST — calories and joules",
+        "url": "https://www.nist.gov/glossary-term/26261",
+        "primary": true
       }
     ]
   },
@@ -80,14 +110,6 @@
       "rights": {
         "basis": "Original project code and factual-value transcription; no source artwork reproduced",
         "source": "Project source: public/assets/transport.css",
-        "attribution": "weird.stats; data sources identified in the discovery"
-      }
-    },
-    {
-      "path": "assets/transport.js",
-      "rights": {
-        "basis": "Original project code and factual-value transcription; no source artwork reproduced",
-        "source": "Project source: public/assets/transport.js",
         "attribution": "weird.stats; data sources identified in the discovery"
       }
     },
@@ -138,14 +160,65 @@
         "source": "Project source: public/assets/transport-physics.js",
         "attribution": "weird.stats; mechanics references identified in the discovery"
       }
+    },
+    {
+      "path": "assets/transport-metric.js",
+      "rights": {
+        "basis": "Original project code and illustrative calculations; factual values cited in the discovery",
+        "source": "Project source: public/assets/transport-metric.js",
+        "attribution": "weird.stats; DOE/EPA and 2024 Compendium of Physical Activities"
+      }
+    },
+    {
+      "path": "assets/transport-comparison.js",
+      "rights": {
+        "basis": "Original project code and illustrative calculations; factual values cited in the discovery",
+        "source": "Project source: public/assets/transport-comparison.js",
+        "attribution": "weird.stats; DOE/EPA and 2024 Compendium of Physical Activities"
+      }
+    },
+    {
+      "path": "assets/transport-comparison.css",
+      "rights": {
+        "basis": "Original project code and illustrative calculations; factual values cited in the discovery",
+        "source": "Project source: public/assets/transport-comparison.css",
+        "attribution": "weird.stats; DOE/EPA and 2024 Compendium of Physical Activities"
+      }
+    },
+    {
+      "path": "assets/transport-energy-comparison.csv",
+      "rights": {
+        "basis": "Original project code and illustrative calculations; factual values cited in the discovery",
+        "source": "Project source: public/assets/transport-energy-comparison.csv",
+        "attribution": "weird.stats; DOE/EPA and 2024 Compendium of Physical Activities"
+      }
+    },
+    {
+      "path": "assets/transport.js",
+      "rights": {
+        "basis": "Original project code and factual-value transcription; no source artwork reproduced",
+        "source": "Project source: public/assets/transport.js",
+        "attribution": "weird.stats; data sources identified in the discovery"
+      }
+    }
+  ],
+  "dataReuse": [
+    {
+      "source": "https://pacompendium.com/bicycling/",
+      "scope": "2024 Adult Compendium activity 01020, 6.8 MET at 10–11.9 mph; definition 1 MET = 1 kcal/kg/hour",
+      "rights": {
+        "basis": "Commercial use expressly permitted with citation on Compendium homepage; MET value unchanged",
+        "source": "https://pacompendium.com/",
+        "attribution": "Herrmann et al., 2024 Adult Compendium of Physical Activities; pacompendium.com"
+      }
     }
   ],
   "publishedAt": "2026-10-06T07:17:15.676Z",
   "approval": {
     "by": "Nate",
     "at": "2026-10-06",
-    "digest": "6238bf56eb265da255c3ace16ad7a3245e091bf55dccf269d6df0f8a97622ca1",
-    "inputReference": "Codex conversation, October 6, 2026: \"looks good, ship it\" after reviewing the compact Deep Dive preview and bolder four-way intersection.",
-    "note": "Approves the finished one-person-sixty-cars Deep Dive, including its compact collection preview, full interactive article and reviewed visuals, and authorizes its public release through the main-branch Vercel deployment. No future automated publication is authorized."
+    "digest": "660148c15a12936692d1e6a6d17cfb9af02382eef6c229eb6f2dc45f73ca3d94",
+    "inputReference": "Codex user message, October 6, 2026: “when you've completed the implementation run [$impeccable](/Users/nate/.codex/skills/impeccable/SKILL.md) Polish for a final review then commit push and merge to update the live deployment”",
+    "note": "User authorized the completed gasoline-car/bicycle, metric-unit and one-way-road revision after final Impeccable polish. Final polish passed desktop and mobile with no material fixes. Release packet retains the inherited transport.js asset rights declaration; its visual content is identical to the reviewed e73c521e packet."
   }
 }

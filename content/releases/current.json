@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "releasedAt": "2026-10-06T07:17:15.676Z",
+  "releasedAt": "2026-10-06T21:09:19.318Z",
   "authorizedBy": "Nate",
-  "inputReference": "Codex conversation, October 6, 2026: \"looks good, ship it\" after reviewing the compact Deep Dive preview and bolder four-way intersection.",
-  "note": "Approves the finished one-person-sixty-cars Deep Dive, including its compact collection preview, full interactive article and reviewed visuals, and authorizes its public release through the main-branch Vercel deployment. No future automated publication is authorized.",
+  "inputReference": "Codex user message, October 6, 2026: “when you've completed the implementation run [$impeccable](/Users/nate/.codex/skills/impeccable/SKILL.md) Polish for a final review then commit push and merge to update the live deployment”",
+  "note": "User authorized the completed gasoline-car/bicycle, metric-unit and one-way-road revision after final Impeccable polish. Final polish passed desktop and mobile with no material fixes. Release packet retains the inherited transport.js asset rights declaration; its visual content is identical to the reviewed e73c521e packet.",
   "entries": [
     {
       "id": "crunch",
@@ -35,7 +35,7 @@
     },
     {
       "id": "one-person-sixty-cars",
-      "digest": "6238bf56eb265da255c3ace16ad7a3245e091bf55dccf269d6df0f8a97622ca1"
+      "digest": "660148c15a12936692d1e6a6d17cfb9af02382eef6c229eb6f2dc45f73ca3d94"
     }
   ],
   "withdrawals": []
