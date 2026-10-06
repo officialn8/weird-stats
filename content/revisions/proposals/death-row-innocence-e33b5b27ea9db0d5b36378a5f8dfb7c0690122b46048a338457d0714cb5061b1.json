@@ -1,0 +1,115 @@
+{
+  "id": "death-row-innocence",
+  "packetId": "e33b5b27ea9db0d5b36378a5f8dfb7c0690122b46048a338457d0714cb5061b1",
+  "digest": "054f397f9ef02bea6cb4159714c9c6439b18b8eedd059e4f80b1eae998099ae9",
+  "baselineDigest": null,
+  "entry": {
+    "id": "death-row-innocence",
+    "title": "Sentenced to die",
+    "topic": "criminal-justice",
+    "status": "review",
+    "order": 70,
+    "question": "Sentenced to die. How many were innocent?",
+    "answer": "A 2014 study estimated 4.1% of U.S. defendants sentenced to death from 1973 through 2004 were wrongfully convicted.",
+    "qualification": "A historical model using exoneration as a proxy for innocence, not a count of innocent people executed. The model’s 95% confidence interval is 2.8–5.2%.",
+    "evidence": {
+      "kind": "estimate",
+      "scope": "7,482 U.S. defendants sentenced to death from January 1973 through December 2004. Exonerations from proceedings initiated before the end of 2004. Historical cohort, not today's death row or all criminal convictions.",
+      "dataAsOf": "U.S. death sentences, 1973–2004; study published April 2014",
+      "checkedAt": "2026-10-05",
+      "reviewDue": "2027-10-05",
+      "denominator": "The historical cohort of U.S. death-sentenced defendants, not executions or all prisoners.",
+      "methodology": "Kaplan–Meier cumulative exoneration estimate under continued threat of execution at 21.4 years after conviction: 4.1%, 95% CI 2.8–5.2%. Exoneration is a proxy for innocence. Censoring and misclassification assumptions were sensitivity-tested by the authors; no independent replication claimed. Their conservative/at-least interpretation is not a statistical lower bound.",
+      "sources": [
+        {
+          "label": "Gross et al. (2014), PNAS — abstract and Figure 2",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/24778209/",
+          "primary": true
+        },
+        {
+          "label": "Authors’ institutional record — same study",
+          "url": "https://repository.law.umich.edu/facarticles/1591/",
+          "primary": true
+        },
+        {
+          "label": "Full original-paper mirror — Analysis, Sensitivity analysis and Discussion",
+          "url": "https://0n.b5z.net/i/u/7000525/f/Prozess/Rate_of_false_conviction_of_criminal_defendants_who_are_sentenced_to_death.pdf",
+          "primary": true
+        }
+      ]
+    },
+    "treatment": {
+      "kind": "custom",
+      "template": "death-row-innocence"
+    },
+    "share": {
+      "question": "Sentenced to die. How many were innocent?",
+      "description": "What a study of U.S. death sentences found—and why counting exonerations cannot tell the whole story."
+    },
+    "assets": [
+      {
+        "path": "assets/death-row.css",
+        "rights": {
+          "basis": "Original styling authored for this project",
+          "source": "Project source: public/assets/death-row.css",
+          "attribution": "weird.stats"
+        }
+      },
+      {
+        "path": "assets/death-row-estimate.csv",
+        "rights": {
+          "basis": "Original transcription of three published factual statistical values; no source figure or dataset copied",
+          "source": "https://doi.org/10.1073/pnas.1306417111",
+          "attribution": "Values: Gross, O’Brien, Hu and Kennedy (2014); transcription: weird.stats"
+        }
+      },
+      {
+        "path": "assets/death-row.js",
+        "rights": {
+          "basis": "Original code authored for this project",
+          "source": "Project source: public/assets/death-row.js",
+          "attribution": "weird.stats"
+        }
+      },
+      {
+        "path": "assets/death-row-model.js",
+        "rights": {
+          "basis": "Original code authored for this project",
+          "source": "Project source: public/assets/death-row-model.js",
+          "attribution": "weird.stats"
+        }
+      },
+      {
+        "path": "assets/three/three.module.js",
+        "rights": {
+          "basis": "MIT license; Three.js 0.186.1, bundled with esbuild 0.25.12",
+          "source": "https://github.com/mrdoob/three.js/blob/r186/LICENSE",
+          "attribution": "Three.js authors; copyright notice included in LICENSE.txt"
+        }
+      },
+      {
+        "path": "assets/three/LICENSE.txt",
+        "rights": {
+          "basis": "MIT license; Three.js 0.186.1, bundled with esbuild 0.25.12",
+          "source": "https://github.com/mrdoob/three.js/blob/r186/LICENSE",
+          "attribution": "Three.js authors; copyright notice included in LICENSE.txt"
+        }
+      }
+    ]
+  },
+  "fragment": "<link rel=\"stylesheet\" href=\"/assets/death-row.css\">\n<script type=\"module\" src=\"/assets/death-row.js\"></script>\n<section class=\"death-story\" id=\"death-row-innocence\" aria-labelledby=\"death-row-title\">\n  <div class=\"death-opening\">\n    <div class=\"death-opening-inner\">\n      <h2 id=\"death-row-title\">Sentenced to die.</h2>\n      <div class=\"death-finding\">\n        <p class=\"death-number\">4.1<span>%</span></p>\n        <div class=\"death-meaning\">\n          <p class=\"death-claim\">estimated to have been <br>wrongfully convicted.</p>\n          <p class=\"death-scope\">U.S. defendants sentenced to death, 1973–2004.<br>A 2014 study’s estimate—not a count of innocent people executed.</p>\n        </div>\n      </div>\n      <p class=\"death-attribution\">Gross, O’Brien, Hu &amp; Kennedy · <cite>PNAS</cite>, 2014</p>\n      <details class=\"death-uncertainty\">\n        <summary>How certain is that number?<span class=\"death-disclosure-mark\" aria-hidden=\"true\"></span></summary>\n        <div class=\"death-interval-content\">\n          <div>\n            <h3>An estimate has edges.</h3>\n            <p>The model’s 95% confidence interval is <strong>2.8–5.2%</strong>. It does not capture every uncertainty about the assumptions or about who was innocent.</p>\n          </div>\n          <figure class=\"death-interval\">\n            <svg viewBox=\"0 0 640 190\" role=\"img\" aria-labelledby=\"death-interval-title death-interval-desc\">\n              <title id=\"death-interval-title\">Estimated exoneration rate under continued threat of execution</title>\n              <desc id=\"death-interval-desc\">On a zero to six percent scale, the estimate is 4.1 percent and the 95 percent confidence interval runs from 2.8 to 5.2 percent.</desc>\n              <path class=\"death-axis\" d=\"M20 100H620 M20 100v8 M120 100v8 M220 100v8 M320 100v8 M420 100v8 M520 100v8 M620 100v8\"/>\n              <path class=\"death-range\" d=\"M300 100H540 M300 87v26 M540 87v26\"/>\n              <circle class=\"death-point\" cx=\"430\" cy=\"100\" r=\"8\"/>\n              <g class=\"death-chart-labels\"><text x=\"430\" y=\"54\" text-anchor=\"middle\">4.1%</text><text x=\"300\" y=\"150\" text-anchor=\"middle\">2.8%</text><text x=\"540\" y=\"150\" text-anchor=\"middle\">5.2%</text><text x=\"20\" y=\"150\">0</text><text x=\"620\" y=\"150\" text-anchor=\"end\">6%</text></g>\n            </svg>\n            <figcaption>Point estimate and 95% confidence interval · scale 0–6%</figcaption>\n          </figure>\n        </div>\n      </details>\n    </div>\n  </div>\n  <figure class=\"death-graphic\" aria-labelledby=\"death-graphic-title\" aria-describedby=\"death-graphic-note\">\n    <div class=\"death-graphic-heading\">\n      <h3 id=\"death-graphic-title\">Innocence doesn’t <br>unlock the door.</h3>\n      <div class=\"death-graphic-reading\">\n        <p class=\"death-marker-ratio\"><strong data-marker-count>41</strong> <span>of <span data-marker-total>1,000</span></span></p>\n        <p data-marker-label>sentences illustrated in pale light · 4.1% estimate</p>\n      </div>\n    </div>\n    <div class=\"death-scene-switch\" hidden role=\"group\" aria-label=\"Explore the illustration\"><button type=\"button\" data-scene=\"cell\" aria-pressed=\"true\">Inside one cell</button><button type=\"button\" data-scene=\"all\" aria-pressed=\"false\">See all 1,000</button></div>\n    <div class=\"death-field\" aria-hidden=\"true\">\n      <div class=\"death-field-fallback\"><span class=\"death-fallback-line\"><i></i></span><p>4.1% = 41 in every 1,000.</p></div>\n      <canvas class=\"death-canvas\" hidden></canvas>\n      <p class=\"death-scene-caption\" hidden>One imagined cell. One life behind the number.</p>\n    </div>\n    <div class=\"death-graphic-tools\" hidden>\n      <fieldset class=\"death-rate-controls\"><legend>Illustrate the estimate or either end of its 95% confidence interval</legend>\n        <button type=\"button\" data-marker-rate aria-pressed=\"false\">Lower end <strong>2.8%</strong></button>\n        <button type=\"button\" data-marker-rate aria-pressed=\"true\">Estimate <strong>4.1%</strong></button>\n        <button type=\"button\" data-marker-rate aria-pressed=\"false\">Upper end <strong>5.2%</strong></button>\n      </fieldset>\n      <label class=\"death-view-control\">Turn the view<input type=\"range\" min=\"-25\" max=\"25\" value=\"0\" step=\"1\" aria-label=\"Turn the 3D view\" aria-valuetext=\"Starting view\"></label>\n    </div>\n    <figcaption id=\"death-graphic-note\">An imagined prison cell, then 1,000 illustrated death sentences. At the study’s estimate, 41 represent wrongful convictions. Pale light shows that proportion—not identified people. Unlit cells do not establish guilt. These are not actual cells or a count of executions.</figcaption>\n    <p class=\"death-graphic-status\" role=\"status\"></p>\n  </figure>\n  <div class=\"death-context\">\n    <h3>Off death row.<br>Still not free.</h3>\n    <div class=\"death-explanation\">\n      <p>A reduced sentence can end the threat of execution without clearing someone’s name. The researchers found that exoneration became much less likely after that threat ended.</p>\n      <p>They modeled what might be uncovered if everyone remained under the intense scrutiny associated with a death sentence. That is how they reached 4.1%—which they considered a conservative estimate of wrongful convictions.</p>\n      <p class=\"death-consequence\">Escaping execution can still mean <br>spending your life in prison.</p>\n    </div>\n  </div>\n  <div class=\"death-evidence\">\n    <details class=\"death-receipts\">\n      <summary>The study, the assumptions, the numbers<span class=\"death-disclosure-mark\" aria-hidden=\"true\"></span></summary>\n      <div class=\"death-methods\">\n        <p>The study followed 7,482 defendants. Its Kaplan–Meier model estimated exoneration under continued execution threat at 21.4 years after conviction. It accounts for different observation times and departures from death row.</p>\n        <p>Exoneration is an imperfect proxy for innocence. Departures may be related to innocence, too. The authors examined those assumptions in sensitivity analyses. Their “at least” interpretation is not a statistical lower bound. This result does not describe today’s death row or all criminal convictions.</p>\n        <table>\n          <caption>Values in the graphic · U.S. death sentences, 1973–2004</caption>\n          <thead><tr><th scope=\"col\">Measure</th><th scope=\"col\">Percent</th></tr></thead>\n          <tbody><tr><th scope=\"row\">Model estimate</th><td>4.1</td></tr><tr><th scope=\"row\">95% interval, lower end</th><td>2.8</td></tr><tr><th scope=\"row\">95% interval, upper end</th><td>5.2</td></tr></tbody>\n        </table>\n        <a class=\"death-data-link\" href=\"/assets/death-row-estimate.csv\" download>Download the numbers (CSV)</a>\n        <p class=\"death-source-links\"><a href=\"https://pubmed.ncbi.nlm.nih.gov/24778209/\" target=\"_blank\" rel=\"noopener\">Read the paper’s abstract</a><br><a href=\"https://repository.law.umich.edu/facarticles/1591/\" target=\"_blank\" rel=\"noopener\">Authors’ institutional record &amp; paper</a><br><a href=\"https://0n.b5z.net/i/u/7000525/f/Prozess/Rate_of_false_conviction_of_criminal_defendants_who_are_sentenced_to_death.pdf\" target=\"_blank\" rel=\"noopener\">Full-text mirror (PDF)</a></p>\n        <p>Source: Gross et al., <cite>Rate of false conviction of criminal defendants who are sentenced to death</cite>. <cite>PNAS</cite> 111(20), 7230–7235 (2014). Figure 2; Analysis, Sensitivity analysis, and Discussion. These links refer to the same study.</p>\n      </div>\n    </details>\n    <p class=\"death-check\">Historical research · Sources checked October 5, 2026</p>\n  </div>\n</section>\n",
+  "assetDigests": {
+    "assets/death-row.css": "cd3229639f490488c9eeae17b64d04e64b289c78bf2ef54426e4188581a8ff8e",
+    "assets/death-row-estimate.csv": "921694d087a83847dd3c5016aef30f1c4bf954639adb81a99c355145fdaeaf99",
+    "assets/death-row.js": "49ba1791068b15d88e3b34d43f15e5b416d900924480f000f525024a2ef89c59",
+    "assets/death-row-model.js": "e24fdad7d62bc763a7e3090e8841644de271a5c1aaf13dff9fb979d668832ebb",
+    "assets/three/three.module.js": "1c5931a54b06ef6f20cf2ed10a7ff1c3ae257d941f965894470b5cd02075e7cf",
+    "assets/three/LICENSE.txt": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+  },
+  "state": "pending",
+  "createdAt": "2026-10-06T05:20:15.020Z",
+  "workingRecordHash": "dba7f050219f6d581d32372fde39778a95dbc0d64da7c3d064c5f09abc07c329",
+  "supersedes": [
+    "bc5283342f7c85a7fd5b47b0d0b2dad3a9629198571109c1db69cd0d92674317"
+  ]
+}

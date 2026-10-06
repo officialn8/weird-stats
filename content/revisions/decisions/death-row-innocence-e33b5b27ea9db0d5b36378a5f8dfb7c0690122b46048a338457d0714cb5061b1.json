@@ -1,0 +1,12 @@
+{
+  "id": "death-row-innocence",
+  "packetId": "e33b5b27ea9db0d5b36378a5f8dfb7c0690122b46048a338457d0714cb5061b1",
+  "digest": "054f397f9ef02bea6cb4159714c9c6439b18b8eedd059e4f80b1eae998099ae9",
+  "decision": "keep",
+  "human": {
+    "by": "Nate",
+    "at": "2026-10-06T05:21:38.974Z",
+    "inputReference": "Codex conversation, October 6, 2026: \"commit, push and merge\" after the polished death-row-innocence packet e33b5b27ea9db0d5b36378a5f8dfb7c0690122b46048a338457d0714cb5061b1 was presented.",
+    "note": "Explicit instruction to commit, push and merge the reviewed death-sentence innocence discovery. Authorizes this exact content and its public release through the main-branch Vercel deployment; no future automated release authorized."
+  }
+}
