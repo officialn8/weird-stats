@@ -5,7 +5,7 @@ import { getTreatment } from '../src/treatments/registry.mjs';
 import { checkAssets, copyAssets, sceneHead, assetDigests } from './assets.mjs';
 import {shareCopy,validatePublicOrigin} from './share-copy.mjs';
 import {loadReleaseState,createReviewDesk,reviewIndex,verifyWorkingRevision,releaseReadiness} from './review-packets.mjs';
-import {renderShareImage,renderCollectionShareImage} from './share-images.mjs';
+import {renderShareImage,renderCollectionShareImage,shareImagePath} from './share-images.mjs';
 import {collectionCopy,collectionImagePath,approvedCollectionPreview} from './collection-copy.mjs';
 import {analyticsHead,loadAnalyticsConfig,copyAnalyticsSDK} from './analytics.mjs';
 function metadata({title,description,canonical,image,alt,drafts=false,tab=`${title} | weird.stats`,summary=description}) {
@@ -73,8 +73,11 @@ export async function build({drafts=false,now=new Date(),records,manifest,revisi
   const individualContext=createPageContext({mode:'discovery',publicOrigin});
   for(const entry of entries) {
     const {question,description}=shareCopy(entry),canonical=publicOrigin+context.discoveryHref(entry.id);
-    pages.set(entry.id,fill(discoveryShell,{metadata:metadata({title:question,description,canonical,image:`${publicOrigin}/share/${entry.id}.png`,alt:question,drafts}),firstId:entry.id,draftBanner,entries:heading(await renderEntry(entry,null,now,entryContext(entry,individualContext)),1),sceneHead:sceneHead([entry],individualContext)}));
-    images.set(entry.id,await renderShareImage(entry));
+    pages.set(entry.id,fill(discoveryShell,{metadata:metadata({title:question,description,canonical,image:`${publicOrigin}/${shareImagePath(entry)}`,alt:question,drafts}),firstId:entry.id,draftBanner,entries:heading(await renderEntry(entry,null,now,entryContext(entry,individualContext)),1),sceneHead:sceneHead([entry],individualContext)}));
+    const png=await renderShareImage(entry);
+    images.set(shareImagePath(entry),png);
+    // Keep previously shared image URLs valid when a card gains a versioned path.
+    images.set(`share/${entry.id}.png`,png);
   }
   for(const withdrawal of withdrawals) pages.set(withdrawal.id,fill(discoveryShell,{metadata:metadata({title:'Discovery withdrawn',description:'This discovery is no longer available. Keep exploring the collection.',canonical:publicOrigin+context.discoveryHref(withdrawal.id),drafts}),firstId:'notice',draftBanner,entries:noticeHTML('Discovery withdrawn',withdrawal.reason),sceneHead:''}));
   const notFound=fill(discoveryShell,{metadata:metadata({title:'Discovery not found',description:'This discovery could not be found. Keep exploring the collection.',canonical:publicOrigin+'/404.html',drafts:true}),firstId:'notice',draftBanner:'',entries:noticeHTML('Discovery not found','This link does not lead to an available discovery.'),sceneHead:''});
@@ -100,7 +103,7 @@ export async function build({drafts=false,now=new Date(),records,manifest,revisi
   const collectionCard=new URL(collectionImage.path,output);await mkdir(new URL('./',collectionCard),{recursive:true});await writeFile(collectionCard,collectionImage.png);
   for(const [id,page] of pages) {const directory=new URL(`discoveries/${id}/`,output);await mkdir(directory,{recursive:true});await writeFile(new URL('index.html',directory),page);}
   for(const [path,{page,entry,image}] of packetPages){await mkdir(new URL(path,output),{recursive:true});await writeFile(new URL(path+'index.html',output),page);await writeFile(new URL(path+'share.png',output),image);if(getTreatment(entry.treatment.kind).exportsData)await writeFile(new URL(path+'data.csv',output),csv(entry));}
-  for(const [id,png] of images)await writeFile(new URL(`share/${id}.png`,output),png);
+  for(const [path,png] of images)await writeFile(new URL(path,output),png);
   for(const e of entries.filter(e=>getTreatment(e.treatment.kind).exportsData)) await writeFile(new URL(`data/${e.id}.csv`,output),csv(e));
   await writeFile(new URL('feed.json',output),JSON.stringify({builtAt:now.toISOString(),entries:entries.map(e=>({id:e.id,title:shareCopy(e).question,topic:e.topic,format:e.format??'discovery',publishedAt:e.publishedAt ?? null,dataAsOf:e.evidence.dataAsOf,checkedAt:e.evidence.checkedAt,reviewDue:e.evidence.reviewDue,url:publicOrigin+context.discoveryHref(e.id)}))},null,2));
   console.log(`Built ${entries.length} discoveries → ${output.pathname}`);
