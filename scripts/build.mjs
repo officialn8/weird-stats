@@ -7,7 +7,7 @@ import {shareCopy,validatePublicOrigin} from './share-copy.mjs';
 import {loadReleaseState,createReviewDesk,reviewIndex,verifyWorkingRevision,releaseReadiness} from './review-packets.mjs';
 import {renderShareImage,renderCollectionShareImage,shareImagePath} from './share-images.mjs';
 import {collectionCopy,collectionImagePath,approvedCollectionPreview} from './collection-copy.mjs';
-import {analyticsHead,loadAnalyticsConfig,copyAnalyticsSDK} from './analytics.mjs';
+import {analyticsHead,loadAnalyticsConfig,copyAnalyticsSDK,analyticsBuildId} from './analytics.mjs';
 function metadata({title,description,canonical,image,alt,drafts=false,tab=`${title} | weird.stats`,summary=description}) {
   return `<title>${esc(tab)}</title><meta name="description" content="${esc(summary)}"><link rel="canonical" href="${esc(canonical)}"><meta property="og:type" content="website"><meta property="og:site_name" content="weird.stats"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${esc(canonical)}">${image?`<meta property="og:image" content="${esc(image)}"><meta property="og:image:type" content="image/png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${esc(alt)}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${esc(image)}"><meta name="twitter:image:alt" content="${esc(alt)}">`:''}${drafts?'<meta name="robots" content="noindex,nofollow">':''}`;
 }
@@ -45,7 +45,8 @@ export async function build({drafts=false,now=new Date(),records,manifest,revisi
   selection.entries=newestFirst(selection.entries,{revisions,packets:review?.packets});
   const {entries,withdrawals}=selection;
   const analyticsConfig=analytics??(production?await loadAnalyticsConfig():null);
-  const tracking=eligible=>analyticsHead(analyticsConfig,{drafts,entries:eligible,publicOrigin});
+  const buildId=await analyticsBuildId(manifest);
+  const tracking=eligible=>analyticsHead(analyticsConfig,{drafts,entries:eligible,publicOrigin,catalog:entries,releaseId:manifest?.releasedAt??'unversioned',buildId,revisions:selection.revisions});
   if(!entries.length && !withdrawals.length) throw new Error('No publishable entries');
   const context=createPageContext({publicOrigin});
   const releasedFragments=new Map();

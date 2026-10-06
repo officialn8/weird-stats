@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 import { getTreatment } from '../src/treatments/registry.mjs';
 import { root } from './content.mjs';
-const shared=['app.js','discoveries.js','share.js','analytics.js','styles.css','assets/favicon.svg','assets/outfit.ttf','assets/OFL-Outfit.txt'];
+const shared=['app.js','discoveries.js','share.js','analytics.js','analytics-context.js','analytics-dom.js','analytics-health.js','styles.css','assets/favicon.svg','assets/outfit.ttf','assets/OFL-Outfit.txt'];
 const resolve = (value,entry) => typeof value==='function' ? value(entry) : value;
 export function entryAssets(entry) {
   const definition=getTreatment(entry.treatment.kind);
