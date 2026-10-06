@@ -6,7 +6,7 @@ The [launch decision](editorial/2026-10-05-launch-decision.md) fixes the product
 
 PostHog is configured with `persistence: 'memory'`, `disable_persistence: true`, `person_profiles: 'never'`, and `ip: false`. There are no analytics cookies or persistent local/session-storage identifiers. We deliberately measure a single loaded page rather than identifying a person across visits. This uses the SDK's [memory persistence](https://posthog.com/docs/libraries/js/persistence), not its separate server-hash identity mode.
 
-Autocapture, pageview/pageleave capture, recordings, surveys, performance capture, exceptions, rage/dead clicks, and feature-flag requests are disabled. The pinned SDK is served from our own build; external SDK extensions cannot load. An allowlist drops unrequested events and properties, including URL queries, referrers, browser metadata, and person updates. The dedicated project discards IP addresses and has its GeoIP transformation disabled. Both settings matter: [IP deletion alone does not prevent location enrichment](https://posthog.com/docs/privacy/data-storage). No `identify` calls or email collection.
+Autocapture, pageview/pageleave capture, recordings, surveys, automatic PostHog performance/exception capture, rage/dead clicks, and feature-flag requests are disabled. The October 6 extension adds explicitly filtered web vitals and fixed technical-error categories; it never captures exception messages, stacks or resource URLs. The pinned SDK is served from our own build; external SDK extensions cannot load. An allowlist drops unrequested events and properties, including raw URL queries, referrers, user agents, browser metadata, and person updates. Locally derived source categories, a finite campaign-code list and coarse viewport buckets are explicitly allowed. The dedicated project discards IP addresses and has its GeoIP transformation disabled. Both settings matter: [IP deletion alone does not prevent location enrichment](https://posthog.com/docs/privacy/data-storage). No `identify` calls or email collection.
 
 Tracking runs only at the configured production origin, on the collection and released discovery pages. It does not initialize on localhost, previews, review pages, 404s, or withdrawn pages. Do Not Track, Global Privacy Control, and the browser automation flag (`navigator.webdriver`) disable it. Default Playwright, Puppeteer and Selenium runs set that flag and send nothing; the Claude in-app browser, extension-driven Chrome and Playwright attached to an ordinary Chrome do not set it and are tracked like readers unless the visit is marked (see [QA procedure](#qa-procedure)). A blocked or failed analytics request never blocks a reveal or share.
 
@@ -83,3 +83,34 @@ For people and agents checking the site.
 - **Do not open production unmarked** to confirm a fix, follow a deployment "Visit" link, or test a shared link. Use an unflagged browser on production only with `?qa=1`.
 
 QA marking follows in-site navigation from the first production deployment that includes it; its date is recorded in the [hosting record](hosting.md) when it ships.
+
+
+## Editorial instrumentation extension — October 6
+
+Nate authorized implementing, verifying and shipping the audit fixes. `schema_version` stays **1** so the six-event launch contract and two-distinct-reveals calculation remain compatible. `instrumentation_version: 2` identifies the added measurement. Its dashboard must distinguish exposure, reading milestones, interactions and explicit reveals.
+
+Every event now includes `page_entry_id` (`collection` on the home page), `release_id` (manifest release time), `build_id` (deterministic instrumentation/build-source hash), `source_category`, `campaign_code` and `viewport_bucket`. Entry events also include their collection `entry_position`, `treatment_kind`, `entry_format`, and approved `content_revision`. Individual pages retain the entry's collection position, not position 1. `build_id` identifies this instrumentation build, not every styling-only release.
+
+Source categories are finite: `search`, `social`, `email`, `feed`, `internal`, `referral`, `other_campaign`, `unknown`, `direct_or_unknown`. Recognized `utm_source` labels take precedence; otherwise the browser derives a coarse category from its referrer. Missing referrer is not proof of a direct visit. The only accepted `utm_campaign` codes are `launch`, `social`, `newsletter`, `community`, `feed`; other values become `none`. Example promotion link: `https://weirdstats.dev/?utm_source=reddit&utm_campaign=community`. These values persist only for that loaded page. Internal navigation starts a fresh identity/context, so cross-page acquisition conversion and returning readership remain unavailable.
+
+Viewport buckets are `narrow` (<768 CSS px), `medium` (768–1199), and `wide` (1200+), sampled at page start. Exact dimensions are not sent. Error and performance data have the same production-only, DNT, GPC and automation gates as engagement data.
+
+| Added event | Meaning | Extra properties |
+| --- | --- | --- |
+| `discovery_explored` | A different heading meets the existing one-second exposure rule after a prior heading; either direction, once per pair | `entry_id`, `from_entry_id` |
+| `discovery_interacted` | A known control is used; once per entry/control/value | `entry_id`, `control_id`, `control_value` |
+| `deep_dive_opened` | The collection's Read the Deep Dive link is clicked; once per entry/page visit | `entry_id` |
+| `reading_milestone` | A named article-section heading is at least half visible for two continuous seconds in a visible tab; once per section | `entry_id`, `section_id` |
+| `evidence_opened` | Native evidence or uncertainty disclosure opened; once per kind | `entry_id`, `evidence_kind` |
+| `source_clicked` | External citation or CSV link clicked, including middle click; once per source/type | `entry_id`, `source_id`, `source_type` |
+| `visualization_status` | Renderer ready, context lost, or static fallback still showing after ten continuous visible seconds near the figure | `entry_id`, `visualization_id`, `status` |
+| `technical_error` | An error while the page is visible; once per category | `error_kind`: `script`, `resource`, `promise` |
+| `web_vital` | Numeric LCP, INP or CLS reported by the bundled web-vitals library | `metric_name`, `metric_id`, `metric_value`, `metric_rating` |
+
+Control values are fixed options or ordinal buckets. Sliders report committed `change` events in five buckets, not continuous pointer positions. Audio events record a play-button action, not successful listening. Source IDs are numbered by first distinct destination within an entry (queries/fragments omitted locally); repeated links share an ID. Resolve source IDs against the entry's content revision. CSV clicks do not prove successful downloads. A milestone means section exposure, not reading comprehension or full completion.
+
+`fallback_after_10s` includes slow renderer loading as well as unsupported WebGL; do not label it a definitive crash. Later readiness may occur in the same visit. Technical errors are coarse health signals, with no stack-level debugging. Vital values use milliseconds for LCP/INP and a unitless score for CLS. A metric can update on later visibility changes; use the **latest value per visit and metric ID**, then aggregate. BFCache restoration can create another metric ID within the same page visit. Browsers that lack the underlying performance API do not report that metric; missing is not zero.
+
+SDK capture sends events immediately using sendBeacon so outgoing navigation and hidden-page lifecycle reports do not wait for a batch. Native share/clipboard outcomes may be recorded while hidden after a visible user's action; they still indicate only browser completion, not delivery to another person.
+
+The operational editorial dashboard uses `qa = false` and `instrumentation_version = 2`, so the documented October 5 unmarked tests (all version 1) do not enter it. The original rolling-seven-day launch insight is retained separately and labeled as historical/contaminated until the known test traffic ages out. No bot property filter is applied: raw user-agent/IP withholding still makes PostHog's automation classification unsuitable. No persistent identity, location enrichment or replay was enabled.
