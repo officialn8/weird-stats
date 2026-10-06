@@ -22,27 +22,21 @@ const pile=$('#penny-pile');
 // Facts and owned imagery come from the approved fragment, not runtime constants.
 const ratio=Number.parseInt($('.giant-ratio').textContent,10);
 const coinSource=$('.hero-penny img').getAttribute('src');
-const answerLead=$('#coin-feedback').textContent;
 for(let i=0;i<ratio;i++){
   const img=document.createElement('img');img.src=coinSource;img.alt='';img.width=500;img.height=500;
   img.style.setProperty('--i',i);img.style.setProperty('--launch-x',(-85-(i%6)*24)+'px');img.style.setProperty('--launch-y',(120-Math.floor(i/6)*25)+'px');img.style.setProperty('--turn',((i*37)%50-25)+'deg');pile.append(img);
 }
-let lastChoice = $('#reveal'), pickedCoin = null;
+let lastChoice = $('#reveal');
 const guessStatus=document.createElement('p');
 guessStatus.className='coin-guess-status';guessStatus.setAttribute('role','status');
 question.querySelector('.question-copy').append(guessStatus);
 function chooseCoin(button) {
-  pickedCoin=button;
   $$('.coin-choice').forEach(coin=>coin.setAttribute('aria-pressed',String(coin===button)));
-  guessStatus.textContent=button ? 'You chose '+button.textContent.trim()+'. Reveal when you’re ready.' : '';
+  guessStatus.textContent=button ? 'You chose the '+button.textContent.trim().toLowerCase()+'. Reveal when you’re ready.' : '';
 }
 chooseCoin(null);
 function reveal(value, trigger) {
   if (trigger) lastChoice = trigger;
-  if (value) {
-    const picked = pickedCoin?.textContent.trim();
-    $('#coin-feedback').textContent = picked ? `You picked ${picked}. ${answerLead}` : answerLead;
-  }
   question.hidden = value;
   answer.hidden = !value;
   story.classList.toggle('revealed', value);

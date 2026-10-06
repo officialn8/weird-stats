@@ -78,7 +78,7 @@ test('copper pile and reveal use the pinned fragment ratio, image and answer for
     assert.equal(button.attrs['aria-pressed'],'true');
     story.nodes['#reveal'].dispatchEvent(new Event('click'));
     assert.equal(story.nodes['.copper-answer'].hidden,false);
-    assert.equal(feedback.textContent, 'You picked Fictional coin. The approved fictional answer.');
+    assert.equal(feedback.textContent, 'The approved fictional answer.', 'a guess must not prepend an awkward sentence to the approved answer');
     story.nodes['#again'].dispatchEvent(new Event('click'));
     story.nodes['#reveal'].dispatchEvent(new Event('click'));
     assert.equal(feedback.textContent, 'The approved fictional answer.');
