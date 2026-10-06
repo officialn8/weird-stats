@@ -6,6 +6,8 @@ New discoveries go at the top of the continuous-scroll collection automatically.
 
 ## Cadence
 
+Apply the latest [editorial direction](2026-10-05-editorial-edge.md) when selecting candidates: the creator finds the current facts too lukewarm and wants more honesty and consequence. Research uncomfortable findings when warranted, retain variety, and let evidence determine the conclusion. This selection update does not authorize publication or relax the sourcing standard.
+
 Current priority from the [October 5 launch decision](2026-10-05-launch-decision.md): prepare a strong sixth discovery before audience promotion. Five entries are approved for the public edition, and all four earlier packets received explicit keep decisions. Research can continue before independent reader testing; do not treat this as evidence that the opener or visual treatments are validated. Preserve human review for every new draft.
 
 The Codex heartbeat `daily-weird-stats-editorial-desk` is active for 9 a.m. America/Chicago each day in this chat. It prepares work in this local repository and reports substantive new review packets or actionable corrections. It is an app automation, not a server-side Vercel cron job or a guarantee of unattended cloud availability. Check the automation card for run status if a batch is missed.

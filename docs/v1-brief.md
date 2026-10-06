@@ -54,6 +54,8 @@ Content is prepared ahead of visits and generated at build time. Dated public-da
 
 ## Editorial standard
 
+**October 5 direction update:** after reviewing the copper design study, Nate said the facts themselves feel too rigid and lukewarm, and asked for an unabashedly honest publication. Give discoveries with consequences and uncomfortable implications more room in selection. Warmth and delight remain available tones, not a requirement to soften every finding. See the [editorial direction note](editorial/2026-10-05-editorial-edge.md) for the feedback and its working interpretation; no new claim or release is approved by this update.
+
 An entry earns its place when its question is understandable, its answer changes an expectation, and its visual helps the discovery land. Original calculations are welcome when their inputs and assumptions are visible. Familiarity is a selection criterion before visual design begins: a beautiful treatment cannot make a known answer into a new discovery.
 
 An unfamiliar answer also needs a reason to care. For the next selection, favor recognizable objects with an unexpected mechanism or consequence that readers can retell in one sentence. Everyday relevance is the current research direction, not a requirement that every future entry be useful. Ask who they would tell and what they would say; a polite “yes” alone is weak evidence.
