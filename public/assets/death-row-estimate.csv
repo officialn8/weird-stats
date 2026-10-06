@@ -1,0 +1,4 @@
+measure,value,unit,population,period,source,locator
+Model estimate,4.1,percent,US defendants sentenced to death,1973-2004,https://doi.org/10.1073/pnas.1306417111,Analysis and Figure 2
+95% confidence interval lower end,2.8,percent,US defendants sentenced to death,1973-2004,https://doi.org/10.1073/pnas.1306417111,Analysis and Figure 2
+95% confidence interval upper end,5.2,percent,US defendants sentenced to death,1973-2004,https://doi.org/10.1073/pnas.1306417111,Analysis and Figure 2

@@ -34,7 +34,8 @@ export function validateChart(entry) {
 export const customAssets = Object.freeze({
   crunch:['assets/chip.webp','assets/chip-small.webp','assets/chip-a.mp3','assets/chip-b.mp3'],
   copper:['assets/penny.webp','assets/nickel.webp'],
-  mail:['assets/mule.webp'], painting:['assets/nightwatch.webp']
+  mail:['assets/mule.webp'], painting:['assets/nightwatch.webp'],
+  'death-row-innocence':['assets/death-row.css','assets/death-row-estimate.csv','assets/death-row.js','assets/death-row-model.js','assets/three/three.module.js','assets/three/LICENSE.txt']
 });
 const number = v=>new Intl.NumberFormat('en-US',{maximumFractionDigits:2}).format(v);
 export function linePoints(values, max) {

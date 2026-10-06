@@ -1,0 +1,88 @@
+<link rel="stylesheet" href="/assets/death-row.css">
+<script type="module" src="/assets/death-row.js"></script>
+<section class="death-story" id="death-row-innocence" aria-labelledby="death-row-title">
+  <div class="death-opening">
+    <div class="death-opening-inner">
+      <h2 id="death-row-title">Sentenced to die.</h2>
+      <div class="death-finding">
+        <p class="death-number">4.1<span>%</span></p>
+        <div class="death-meaning">
+          <p class="death-claim">estimated to have been <br>wrongfully convicted.</p>
+          <p class="death-scope">U.S. defendants sentenced to death, 1973–2004.<br>A 2014 study’s estimate—not a count of innocent people executed.</p>
+        </div>
+      </div>
+      <p class="death-attribution">Gross, O’Brien, Hu &amp; Kennedy · <cite>PNAS</cite>, 2014</p>
+      <details class="death-uncertainty">
+        <summary>How certain is that number?<span class="death-disclosure-mark" aria-hidden="true"></span></summary>
+        <div class="death-interval-content">
+          <div>
+            <h3>An estimate has edges.</h3>
+            <p>The model’s 95% confidence interval is <strong>2.8–5.2%</strong>. It does not capture every uncertainty about the assumptions or about who was innocent.</p>
+          </div>
+          <figure class="death-interval">
+            <svg viewBox="0 0 640 190" role="img" aria-labelledby="death-interval-title death-interval-desc">
+              <title id="death-interval-title">Estimated exoneration rate under continued threat of execution</title>
+              <desc id="death-interval-desc">On a zero to six percent scale, the estimate is 4.1 percent and the 95 percent confidence interval runs from 2.8 to 5.2 percent.</desc>
+              <path class="death-axis" d="M20 100H620 M20 100v8 M120 100v8 M220 100v8 M320 100v8 M420 100v8 M520 100v8 M620 100v8"/>
+              <path class="death-range" d="M300 100H540 M300 87v26 M540 87v26"/>
+              <circle class="death-point" cx="430" cy="100" r="8"/>
+              <g class="death-chart-labels"><text x="430" y="54" text-anchor="middle">4.1%</text><text x="300" y="150" text-anchor="middle">2.8%</text><text x="540" y="150" text-anchor="middle">5.2%</text><text x="20" y="150">0</text><text x="620" y="150" text-anchor="end">6%</text></g>
+            </svg>
+            <figcaption>Point estimate and 95% confidence interval · scale 0–6%</figcaption>
+          </figure>
+        </div>
+      </details>
+    </div>
+  </div>
+  <figure class="death-graphic" aria-labelledby="death-graphic-title" aria-describedby="death-graphic-note">
+    <div class="death-graphic-heading">
+      <h3 id="death-graphic-title">Innocence doesn’t <br>unlock the door.</h3>
+      <div class="death-graphic-reading">
+        <p class="death-marker-ratio"><strong data-marker-count>41</strong> <span>of <span data-marker-total>1,000</span></span></p>
+        <p data-marker-label>sentences illustrated in pale light · 4.1% estimate</p>
+      </div>
+    </div>
+    <div class="death-scene-switch" hidden role="group" aria-label="Explore the illustration"><button type="button" data-scene="cell" aria-pressed="true">Inside one cell</button><button type="button" data-scene="all" aria-pressed="false">See all 1,000</button></div>
+    <div class="death-field" aria-hidden="true">
+      <div class="death-field-fallback"><span class="death-fallback-line"><i></i></span><p>4.1% = 41 in every 1,000.</p></div>
+      <canvas class="death-canvas" hidden></canvas>
+      <p class="death-scene-caption" hidden>One imagined cell. One life behind the number.</p>
+    </div>
+    <div class="death-graphic-tools" hidden>
+      <fieldset class="death-rate-controls"><legend>Illustrate the estimate or either end of its 95% confidence interval</legend>
+        <button type="button" data-marker-rate aria-pressed="false">Lower end <strong>2.8%</strong></button>
+        <button type="button" data-marker-rate aria-pressed="true">Estimate <strong>4.1%</strong></button>
+        <button type="button" data-marker-rate aria-pressed="false">Upper end <strong>5.2%</strong></button>
+      </fieldset>
+      <label class="death-view-control">Turn the view<input type="range" min="-25" max="25" value="0" step="1" aria-label="Turn the 3D view" aria-valuetext="Starting view"></label>
+    </div>
+    <figcaption id="death-graphic-note">An imagined prison cell, then 1,000 illustrated death sentences. At the study’s estimate, 41 represent wrongful convictions. Pale light shows that proportion—not identified people. Unlit cells do not establish guilt. These are not actual cells or a count of executions.</figcaption>
+    <p class="death-graphic-status" role="status"></p>
+  </figure>
+  <div class="death-context">
+    <h3>Off death row.<br>Still not free.</h3>
+    <div class="death-explanation">
+      <p>A reduced sentence can end the threat of execution without clearing someone’s name. The researchers found that exoneration became much less likely after that threat ended.</p>
+      <p>They modeled what might be uncovered if everyone remained under the intense scrutiny associated with a death sentence. That is how they reached 4.1%—which they considered a conservative estimate of wrongful convictions.</p>
+      <p class="death-consequence">Escaping execution can still mean <br>spending your life in prison.</p>
+    </div>
+  </div>
+  <div class="death-evidence">
+    <details class="death-receipts">
+      <summary>The study, the assumptions, the numbers<span class="death-disclosure-mark" aria-hidden="true"></span></summary>
+      <div class="death-methods">
+        <p>The study followed 7,482 defendants. Its Kaplan–Meier model estimated exoneration under continued execution threat at 21.4 years after conviction. It accounts for different observation times and departures from death row.</p>
+        <p>Exoneration is an imperfect proxy for innocence. Departures may be related to innocence, too. The authors examined those assumptions in sensitivity analyses. Their “at least” interpretation is not a statistical lower bound. This result does not describe today’s death row or all criminal convictions.</p>
+        <table>
+          <caption>Values in the graphic · U.S. death sentences, 1973–2004</caption>
+          <thead><tr><th scope="col">Measure</th><th scope="col">Percent</th></tr></thead>
+          <tbody><tr><th scope="row">Model estimate</th><td>4.1</td></tr><tr><th scope="row">95% interval, lower end</th><td>2.8</td></tr><tr><th scope="row">95% interval, upper end</th><td>5.2</td></tr></tbody>
+        </table>
+        <a class="death-data-link" href="/assets/death-row-estimate.csv" download>Download the numbers (CSV)</a>
+        <p class="death-source-links"><a href="https://pubmed.ncbi.nlm.nih.gov/24778209/" target="_blank" rel="noopener">Read the paper’s abstract</a><br><a href="https://repository.law.umich.edu/facarticles/1591/" target="_blank" rel="noopener">Authors’ institutional record &amp; paper</a><br><a href="https://0n.b5z.net/i/u/7000525/f/Prozess/Rate_of_false_conviction_of_criminal_defendants_who_are_sentenced_to_death.pdf" target="_blank" rel="noopener">Full-text mirror (PDF)</a></p>
+        <p>Source: Gross et al., <cite>Rate of false conviction of criminal defendants who are sentenced to death</cite>. <cite>PNAS</cite> 111(20), 7230–7235 (2014). Figure 2; Analysis, Sensitivity analysis, and Discussion. These links refer to the same study.</p>
+      </div>
+    </details>
+    <p class="death-check">Historical research · Sources checked October 5, 2026</p>
+  </div>
+</section>
