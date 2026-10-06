@@ -11,6 +11,7 @@ export function validate(entry) {
   const {id,status,treatment:t,evidence:e} = entry;
   assert(typeof id==='string' && /^[a-z][a-z0-9-]*$/.test(id), 'Invalid entry id');
   text(entry.title,'title'); text(entry.topic,'topic');
+  if(entry.format!==undefined) assert(['discovery','deep-dive'].includes(entry.format), `${id}: invalid editorial format`);
   assert(['draft','review','published','retired'].includes(status), `${id}: invalid status`);
   assert(Number.isFinite(entry.order), `${id}: order must be a number`);
   assert(t, `${id}: treatment required`);
@@ -111,7 +112,7 @@ export function fragmentEditorialContent(fragment='') {
   return {text:decodeHTML(text),labels,sources};
 }
 export function contentDigest(entry,{fragment='',assetDigests={}}={}) {
-  const fields=['id','title','topic','question','answer','explanation','qualification','whyCare','evidence','treatment','guess','assets','dataReuse'];
+  const fields=['id','title','topic','format','question','answer','explanation','qualification','whyCare','evidence','treatment','guess','assets','dataReuse'];
   const subject=Object.fromEntries(fields.filter(k=>entry[k]!==undefined).map(k=>[k,entry[k]]));
   subject.share=shareCopy(entry);
   if(entry.treatment.kind==='custom') subject.fragment=fragmentEditorialContent(fragment);

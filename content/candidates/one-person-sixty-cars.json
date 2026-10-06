@@ -1,0 +1,259 @@
+{
+  "id": "one-person-sixty-cars",
+  "claim": "Single-occupancy travel uses one vehicle per person; sharing vehicles reduces the vehicle count and vehicle mass allocated to each traveler, while efficient street modes can carry more people in the same width.",
+  "sources": [
+    {
+      "url": "https://globaldesigningcities.org/publication/global-street-design-guide/defining-streets/multimodal-streets-serve-people/",
+      "locator": "Global Street Design Guide — lane-width and operating assumptions",
+      "status": "verified",
+      "checkedAt": "2026-10-06",
+      "normalizedUrl": "https://globaldesigningcities.org/publication/global-street-design-guide/defining-streets/multimodal-streets-serve-people"
+    },
+    {
+      "url": "https://nacto.org/wp-content/uploads/Fabrizio_Prati_Safe_Speeds_NACTO18.pdf",
+      "locator": "NACTO/GDCI, Prati (2018), PDF page 23 — capacity ranges",
+      "status": "verified",
+      "checkedAt": "2026-10-06",
+      "normalizedUrl": "https://nacto.org/wp-content/uploads/Fabrizio_Prati_Safe_Speeds_NACTO18.pdf"
+    },
+    {
+      "url": "https://www.fueleconomy.gov/feg/atv.shtml",
+      "locator": "U.S. DOE/EPA — gasoline, combined cycle",
+      "status": "verified",
+      "checkedAt": "2026-10-06",
+      "normalizedUrl": "https://www.fueleconomy.gov/feg/atv.shtml"
+    },
+    {
+      "url": "https://www.energy.gov/cmei/vehicles/articles/fotw-1360-sept-16-2024-typical-ev-87-91-efficient-compared-30-conventional",
+      "locator": "U.S. DOE, September 16, 2024 — EV efficiency and regeneration",
+      "status": "verified",
+      "checkedAt": "2026-10-06",
+      "normalizedUrl": "https://www.energy.gov/cmei/vehicles/articles/fotw-1360-sept-16-2024-typical-ev-87-91-efficient-compared-30-conventional"
+    },
+    {
+      "url": "https://www.billnye.com/the-science-guy/human-transportation",
+      "locator": "Bill Nye — official Human Transportation episode page (inspiration)",
+      "status": "verified",
+      "checkedAt": "2026-10-06",
+      "normalizedUrl": "https://www.billnye.com/the-science-guy/human-transportation"
+    }
+  ],
+  "evidenceGaps": [],
+  "treatmentGaps": [],
+  "entry": {
+    "id": "one-person-sixty-cars",
+    "title": "One person. An entire car.",
+    "topic": "transportation",
+    "format": "deep-dive",
+    "status": "review",
+    "order": 80,
+    "question": "How much vehicle does it take to move one person?",
+    "answer": "Sharing a vehicle spreads its space and mass across more people. Sixty solo drivers need sixty cars; four per car need fifteen.",
+    "explanation": "An interactive essay separating vehicle occupancy, street capacity, fuel-energy conversion and illustrative vehicle mass per traveler.",
+    "qualification": "Vehicle counts are an illustrative model, not measured road area or real-world occupancy. Capacity ranges describe peak conditions; energy estimates describe specified test cycles. Mass per person is not energy efficiency or a lifecycle footprint.",
+    "whyCare": "A street can be full of vehicles while doing surprisingly little to move people.",
+    "evidence": {
+      "kind": "calculation",
+      "scope": "Illustrative group of 60 travelers with 1, 2 or 4 people per car, including drivers; one bus with 60 passengers, excluding its driver. Global Street Design Guide capacity ranges for a 3-m lane or equivalent width under peak conditions with normal operations. U.S. DOE/EPA test-cycle energy estimates. Illustrative 2,000 kg car, excluding occupants.",
+      "dataAsOf": "2016 street design guide, reproduced in 2018 presentation; DOE EV summary September 16, 2024; undated DOE/EPA gasoline page; original illustrative model October 2026",
+      "checkedAt": "2026-10-06",
+      "reviewDue": "2027-04-06",
+      "denominator": "People per vehicle; people per hour in a 3-m lane or equivalent width; percent of fuel energy in the gasoline vehicle; kg of illustrative vehicle per occupant. These denominators are not interchangeable.",
+      "methodology": "Vehicle counts: 60/n for n=1,2,4; bus illustration assumes 60 passengers. Mass allocation: 2000/n kg for n=1,2,3,4 (rounded only for display). Capacity ranges copied as factual values from Prati 2018 slide 23 (PDF page 23), with 3-m scope supplied by the Global Street Design Guide. Gasoline 18–25% energy to wheels in combined 55% city/45% highway test cycle. EV 87–91% includes net regenerative recovery; excludes lifecycle and electricity generation. No claim that 96% of energy is wasted moving vehicle mass. No causal congestion or citywide emissions estimate.",
+      "sources": [
+        {
+          "label": "Global Street Design Guide — lane-width and operating assumptions",
+          "url": "https://globaldesigningcities.org/publication/global-street-design-guide/defining-streets/multimodal-streets-serve-people/",
+          "primary": true
+        },
+        {
+          "label": "NACTO/GDCI, Prati (2018), PDF page 23 — capacity ranges",
+          "url": "https://nacto.org/wp-content/uploads/Fabrizio_Prati_Safe_Speeds_NACTO18.pdf",
+          "primary": true
+        },
+        {
+          "label": "U.S. DOE/EPA — gasoline, combined cycle",
+          "url": "https://www.fueleconomy.gov/feg/atv.shtml",
+          "primary": true
+        },
+        {
+          "label": "U.S. DOE, September 16, 2024 — EV efficiency and regeneration",
+          "url": "https://www.energy.gov/cmei/vehicles/articles/fotw-1360-sept-16-2024-typical-ev-87-91-efficient-compared-30-conventional",
+          "primary": true
+        },
+        {
+          "label": "Bill Nye — official Human Transportation episode page (inspiration)",
+          "url": "https://www.billnye.com/the-science-guy/human-transportation",
+          "primary": true
+        }
+      ]
+    },
+    "treatment": {
+      "kind": "custom",
+      "template": "one-person-sixty-cars"
+    },
+    "share": {
+      "question": "One person. An entire car.",
+      "description": "A weird.stats Deep Dive into the space, energy and material we use to move ourselves."
+    },
+    "assets": [
+      {
+        "path": "assets/transport.css",
+        "rights": {
+          "basis": "Original project code and factual-value transcription; no source artwork reproduced",
+          "source": "Project source: public/assets/transport.css",
+          "attribution": "weird.stats; data sources identified in the discovery"
+        }
+      },
+      {
+        "path": "assets/transport.js",
+        "rights": {
+          "basis": "Original project code and factual-value transcription; no source artwork reproduced",
+          "source": "Project source: public/assets/transport.js",
+          "attribution": "weird.stats; data sources identified in the discovery"
+        }
+      },
+      {
+        "path": "assets/transport-data.csv",
+        "rights": {
+          "basis": "Original project code and factual-value transcription; no source artwork reproduced",
+          "source": "Project source: public/assets/transport-data.csv",
+          "attribution": "weird.stats; data sources identified in the discovery"
+        }
+      }
+    ]
+  },
+  "notes": "Requested by Nate as first Deep Dive. Familiar topic made tangible through fixed traveler count. Research started before candidate reservation; this record does not imply that source reads occurred after reservation. Sources opened and capacity slide visually inspected. No reader test or editorial approval. EPA 4354 lb weight was investigated but excluded because it uses inertia-weight classes, not a direct curb-mass average.",
+  "input": {
+    "id": "one-person-sixty-cars",
+    "claim": "Single-occupancy travel uses one vehicle per person; sharing vehicles reduces the vehicle count and vehicle mass allocated to each traveler, while efficient street modes can carry more people in the same width.",
+    "sources": [
+      {
+        "url": "https://globaldesigningcities.org/publication/global-street-design-guide/defining-streets/multimodal-streets-serve-people/",
+        "locator": "Global Street Design Guide — lane-width and operating assumptions",
+        "status": "verified",
+        "checkedAt": "2026-10-06"
+      },
+      {
+        "url": "https://nacto.org/wp-content/uploads/Fabrizio_Prati_Safe_Speeds_NACTO18.pdf",
+        "locator": "NACTO/GDCI, Prati (2018), PDF page 23 — capacity ranges",
+        "status": "verified",
+        "checkedAt": "2026-10-06"
+      },
+      {
+        "url": "https://www.fueleconomy.gov/feg/atv.shtml",
+        "locator": "U.S. DOE/EPA — gasoline, combined cycle",
+        "status": "verified",
+        "checkedAt": "2026-10-06"
+      },
+      {
+        "url": "https://www.energy.gov/cmei/vehicles/articles/fotw-1360-sept-16-2024-typical-ev-87-91-efficient-compared-30-conventional",
+        "locator": "U.S. DOE, September 16, 2024 — EV efficiency and regeneration",
+        "status": "verified",
+        "checkedAt": "2026-10-06"
+      },
+      {
+        "url": "https://www.billnye.com/the-science-guy/human-transportation",
+        "locator": "Bill Nye — official Human Transportation episode page (inspiration)",
+        "status": "verified",
+        "checkedAt": "2026-10-06"
+      }
+    ],
+    "evidenceGaps": [],
+    "treatmentGaps": [],
+    "entry": {
+      "id": "one-person-sixty-cars",
+      "title": "One person. An entire car.",
+      "topic": "transportation",
+      "format": "deep-dive",
+      "status": "review",
+      "order": 80,
+      "question": "How much vehicle does it take to move one person?",
+      "answer": "Sharing a vehicle spreads its space and mass across more people. Sixty solo drivers need sixty cars; four per car need fifteen.",
+      "explanation": "An interactive essay separating vehicle occupancy, street capacity, fuel-energy conversion and illustrative vehicle mass per traveler.",
+      "qualification": "Vehicle counts are an illustrative model, not measured road area or real-world occupancy. Capacity ranges describe peak conditions; energy estimates describe specified test cycles. Mass per person is not energy efficiency or a lifecycle footprint.",
+      "whyCare": "A street can be full of vehicles while doing surprisingly little to move people.",
+      "evidence": {
+        "kind": "calculation",
+        "scope": "Illustrative group of 60 travelers with 1, 2 or 4 people per car, including drivers; one bus with 60 passengers, excluding its driver. Global Street Design Guide capacity ranges for a 3-m lane or equivalent width under peak conditions with normal operations. U.S. DOE/EPA test-cycle energy estimates. Illustrative 2,000 kg car, excluding occupants.",
+        "dataAsOf": "2016 street design guide, reproduced in 2018 presentation; DOE EV summary September 16, 2024; undated DOE/EPA gasoline page; original illustrative model October 2026",
+        "checkedAt": "2026-10-06",
+        "reviewDue": "2027-04-06",
+        "denominator": "People per vehicle; people per hour in a 3-m lane or equivalent width; percent of fuel energy in the gasoline vehicle; kg of illustrative vehicle per occupant. These denominators are not interchangeable.",
+        "methodology": "Vehicle counts: 60/n for n=1,2,4; bus illustration assumes 60 passengers. Mass allocation: 2000/n kg for n=1,2,3,4 (rounded only for display). Capacity ranges copied as factual values from Prati 2018 slide 23 (PDF page 23), with 3-m scope supplied by the Global Street Design Guide. Gasoline 18–25% energy to wheels in combined 55% city/45% highway test cycle. EV 87–91% includes net regenerative recovery; excludes lifecycle and electricity generation. No claim that 96% of energy is wasted moving vehicle mass. No causal congestion or citywide emissions estimate.",
+        "sources": [
+          {
+            "label": "Global Street Design Guide — lane-width and operating assumptions",
+            "url": "https://globaldesigningcities.org/publication/global-street-design-guide/defining-streets/multimodal-streets-serve-people/",
+            "primary": true
+          },
+          {
+            "label": "NACTO/GDCI, Prati (2018), PDF page 23 — capacity ranges",
+            "url": "https://nacto.org/wp-content/uploads/Fabrizio_Prati_Safe_Speeds_NACTO18.pdf",
+            "primary": true
+          },
+          {
+            "label": "U.S. DOE/EPA — gasoline, combined cycle",
+            "url": "https://www.fueleconomy.gov/feg/atv.shtml",
+            "primary": true
+          },
+          {
+            "label": "U.S. DOE, September 16, 2024 — EV efficiency and regeneration",
+            "url": "https://www.energy.gov/cmei/vehicles/articles/fotw-1360-sept-16-2024-typical-ev-87-91-efficient-compared-30-conventional",
+            "primary": true
+          },
+          {
+            "label": "Bill Nye — official Human Transportation episode page (inspiration)",
+            "url": "https://www.billnye.com/the-science-guy/human-transportation",
+            "primary": true
+          }
+        ]
+      },
+      "treatment": {
+        "kind": "custom",
+        "template": "one-person-sixty-cars"
+      },
+      "share": {
+        "question": "One person. An entire car.",
+        "description": "A weird.stats Deep Dive into the space, energy and material we use to move ourselves."
+      },
+      "assets": [
+        {
+          "path": "assets/transport.css",
+          "rights": {
+            "basis": "Original project code and factual-value transcription; no source artwork reproduced",
+            "source": "Project source: public/assets/transport.css",
+            "attribution": "weird.stats; data sources identified in the discovery"
+          }
+        },
+        {
+          "path": "assets/transport.js",
+          "rights": {
+            "basis": "Original project code and factual-value transcription; no source artwork reproduced",
+            "source": "Project source: public/assets/transport.js",
+            "attribution": "weird.stats; data sources identified in the discovery"
+          }
+        },
+        {
+          "path": "assets/transport-data.csv",
+          "rights": {
+            "basis": "Original project code and factual-value transcription; no source artwork reproduced",
+            "source": "Project source: public/assets/transport-data.csv",
+            "attribution": "weird.stats; data sources identified in the discovery"
+          }
+        }
+      ]
+    },
+    "notes": "Requested by Nate as first Deep Dive. Familiar topic made tangible through fixed traveler count. Research started before candidate reservation; this record does not imply that source reads occurred after reservation. Sources opened and capacity slide visually inspected. No reader test or editorial approval. EPA 4354 lb weight was investigated but excluded because it uses inertia-weight classes, not a direct curb-mass average."
+  },
+  "claimFingerprint": "9a5580f08b1c00227db05d00d07438340265de9166a8780ad582a714798e4bb0",
+  "duplicates": [],
+  "disposition": "open",
+  "dispositionReason": "",
+  "createdAt": "2026-10-06T05:37:03.681Z",
+  "updatedAt": "2026-10-06T05:41:56.566Z",
+  "runIds": [
+    "research-2026-10-06-transport"
+  ],
+  "revision": "1272c0a5d05b53ec261c43283a4152a17d568e74e9e71ba18c560e82e4a09ac6"
+}

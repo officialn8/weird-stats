@@ -1,0 +1,36 @@
+{
+  "id": "research-2026-10-06-transport",
+  "startedAt": "2026-10-06T05:37:03.601Z",
+  "status": "completed",
+  "investigations": [
+    "one-person-sixty-cars"
+  ],
+  "promotions": [
+    {
+      "key": "one-person-sixty-cars:1272c0a5d05b53ec261c43283a4152a17d568e74e9e71ba18c560e82e4a09ac6",
+      "entryId": "one-person-sixty-cars",
+      "candidateRevision": "1272c0a5d05b53ec261c43283a4152a17d568e74e9e71ba18c560e82e4a09ac6",
+      "entryDigest": "ed0738407047116180480a647df24867bf8c3428b3a7e936c44ad25a4bab128a",
+      "state": "written",
+      "at": "2026-10-06T05:42:13.734Z"
+    }
+  ],
+  "events": [
+    {
+      "at": "2026-10-06T05:37:03.674Z",
+      "action": "investigate",
+      "id": "one-person-sixty-cars"
+    },
+    {
+      "at": "2026-10-06T05:42:13.736Z",
+      "action": "promote",
+      "id": "one-person-sixty-cars",
+      "revision": "1272c0a5d05b53ec261c43283a4152a17d568e74e9e71ba18c560e82e4a09ac6"
+    }
+  ],
+  "finishedAt": "2026-10-06T06:01:31.896Z",
+  "summary": {
+    "outcome": "completed",
+    "note": "Created one private Transportation Deep Dive review draft with primary-source notes, occupancy and bus-traffic diagrams, energy and mass explanations, and an illustrative mixed-use neighborhood model. Latest exact packet supersedes the earlier sign treatment. Sources checked; automated checks and desktop/mobile interactions passed. No editorial approval or release was recorded."
+  }
+}

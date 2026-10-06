@@ -102,7 +102,7 @@ export async function build({drafts=false,now=new Date(),records,manifest,revisi
   for(const [path,{page,entry,image}] of packetPages){await mkdir(new URL(path,output),{recursive:true});await writeFile(new URL(path+'index.html',output),page);await writeFile(new URL(path+'share.png',output),image);if(getTreatment(entry.treatment.kind).exportsData)await writeFile(new URL(path+'data.csv',output),csv(entry));}
   for(const [id,png] of images)await writeFile(new URL(`share/${id}.png`,output),png);
   for(const e of entries.filter(e=>getTreatment(e.treatment.kind).exportsData)) await writeFile(new URL(`data/${e.id}.csv`,output),csv(e));
-  await writeFile(new URL('feed.json',output),JSON.stringify({builtAt:now.toISOString(),entries:entries.map(e=>({id:e.id,title:shareCopy(e).question,topic:e.topic,publishedAt:e.publishedAt ?? null,dataAsOf:e.evidence.dataAsOf,checkedAt:e.evidence.checkedAt,reviewDue:e.evidence.reviewDue,url:publicOrigin+context.discoveryHref(e.id)}))},null,2));
+  await writeFile(new URL('feed.json',output),JSON.stringify({builtAt:now.toISOString(),entries:entries.map(e=>({id:e.id,title:shareCopy(e).question,topic:e.topic,format:e.format??'discovery',publishedAt:e.publishedAt ?? null,dataAsOf:e.evidence.dataAsOf,checkedAt:e.evidence.checkedAt,reviewDue:e.evidence.reviewDue,url:publicOrigin+context.discoveryHref(e.id)}))},null,2));
   console.log(`Built ${entries.length} discoveries → ${output.pathname}`);
   return {entries,withdrawals,selection,output,html,assets,pages};
 }

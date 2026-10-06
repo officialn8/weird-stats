@@ -1,0 +1,151 @@
+{
+  "id": "one-person-sixty-cars",
+  "title": "One person. An entire car.",
+  "topic": "transportation",
+  "format": "deep-dive",
+  "status": "published",
+  "order": 80,
+  "question": "How much vehicle does it take to move one person?",
+  "answer": "Sharing a vehicle spreads its space and mass across more people. Sixty solo drivers need sixty cars; four per car need fifteen.",
+  "explanation": "An interactive essay separating vehicle occupancy, street capacity, fuel-energy conversion, moving vehicle mass and the case for compact communities with useful public transit.",
+  "qualification": "Vehicle counts are an illustrative model, not measured road area or real-world occupancy. Capacity ranges describe peak conditions; energy estimates describe specified test cycles. Mass per person is not energy efficiency or a lifecycle footprint. The mass-and-speed model calculates kinetic energy and an ideal equivalent drop height, not collision force, stopping distance or injury risk.",
+  "whyCare": "A street can be full of vehicles while doing surprisingly little to move people.",
+  "evidence": {
+    "kind": "calculation",
+    "scope": "Illustrative group of 60 travelers with 1, 2 or 4 people per car, including drivers; one bus with 60 passengers, excluding its driver. Global Street Design Guide capacity ranges for a 3-m lane or equivalent width under peak conditions with normal operations. U.S. DOE/EPA test-cycle energy estimates. Illustrative 4,000 lb car, excluding occupants. Separate traffic state: 32 solo drivers plus 60 bus passengers (92 travelers), with one additional bus operator. Original illustrative dense neighborhood model; qualitative land-use and transit relationships from EPA guidance. Original kinetic-energy thought experiment: illustrative vehicle weights 2,000–8,000 lb and speeds 10–60 mph. Equivalent ideal free fall, not actual crash outcomes.",
+    "dataAsOf": "2016 street design guide, reproduced in 2018 presentation; DOE EV summary September 16, 2024; undated DOE/EPA gasoline page; original illustrative model October 2026; EPA smart-growth guidance updated April 30, 2026; classical mechanics from OpenStax College Physics 2e; NHTSA speed-management synthesis checked October 2026",
+    "checkedAt": "2026-10-06",
+    "reviewDue": "2027-04-06",
+    "denominator": "People per vehicle; people per hour in a 3-m lane or equivalent width; percent of fuel energy in the gasoline vehicle; lb of illustrative vehicle per occupant. These denominators are not interchangeable. Kinetic energy displayed in foot-pounds and equivalent vertical free-fall height in feet, using specified total moving mass and speed.",
+    "methodology": "Vehicle counts: 60/n for n=1,2,4; bus illustration assumes 60 passengers. Mass allocation: 4000/n lb for n=1,2,3,4 (rounded only for display). Capacity ranges copied as factual values from Prati 2018 slide 23 (PDF page 23), with 3-m scope supplied by the Global Street Design Guide. Gasoline 18–25% energy to wheels in combined 55% city/45% highway test cycle. EV 87–91% includes net regenerative recovery; excludes lifecycle and electricity generation. No claim that 96% of energy is wasted moving vehicle mass. No causal congestion or citywide emissions estimate. Traffic scene: 32 solo cars + one bus carrying 60 passengers = 33 vehicles and 92 travelers; bus operator additional. This is a separate population from the fixed-60 comparison. Neighborhood camera views are conceptual design illustrations with no modeled travel time, capacity, density, energy or emissions output. K = 0.5*m*(mph*0.44704)^2 joules; ideal equivalent height h = (mph*0.44704)^2/(2*9.81) metres and fall time t = (mph*0.44704)/9.81 seconds. Weight in lb converted to kg with 0.45359237; energy J converted to foot-pounds by dividing by 1.3558179483314004; height m converted to feet by dividing by 0.3048. Display energy to whole foot-pounds and height to one decimal; unrounded calculations. Defaults 4000 lb and 30 mph; ranges 2000–8000 lb and 10–60 mph; fixed vertical scale 0–140 ft. Primary readout rounds height to whole feet and describes approximate stories at an explicitly illustrative 10 feet per story; actual building floors vary. A geometric building reference highlights the equivalent height. US tons = lb/2000. Foot-pound energy values remain in optional calculation details, not the primary readout. Reference energy uses the same mass at 20 mph. Doubling mass doubles energy; doubling speed quadruples energy and height. Free-fall height and time are independent of mass. Neglects air resistance and rotational energy; no impact-force, stopping-distance, casualty or injury prediction. Real collision harm depends on impact speed, vehicle shape and collision circumstances.",
+    "sources": [
+      {
+        "label": "Global Street Design Guide — lane-width and operating assumptions",
+        "url": "https://globaldesigningcities.org/publication/global-street-design-guide/defining-streets/multimodal-streets-serve-people/",
+        "primary": true
+      },
+      {
+        "label": "NACTO/GDCI, Prati (2018), PDF page 23 — capacity ranges",
+        "url": "https://nacto.org/wp-content/uploads/Fabrizio_Prati_Safe_Speeds_NACTO18.pdf",
+        "primary": true
+      },
+      {
+        "label": "U.S. DOE/EPA — gasoline, combined cycle",
+        "url": "https://www.fueleconomy.gov/feg/atv.shtml",
+        "primary": true
+      },
+      {
+        "label": "U.S. DOE, September 16, 2024 — EV efficiency and regeneration",
+        "url": "https://www.energy.gov/cmei/vehicles/articles/fotw-1360-sept-16-2024-typical-ev-87-91-efficient-compared-30-conventional",
+        "primary": true
+      },
+      {
+        "label": "Bill Nye — official Human Transportation episode page (inspiration)",
+        "url": "https://www.billnye.com/the-science-guy/human-transportation",
+        "primary": true
+      },
+      {
+        "label": "EPA — Smart Growth and Transportation (updated April 30, 2026)",
+        "url": "https://www.epa.gov/smartgrowth/smart-growth-and-transportation",
+        "primary": true
+      },
+      {
+        "label": "OpenStax College Physics 2e — kinetic energy and work-energy theorem",
+        "url": "https://openstax.org/books/college-physics-2e/pages/7-2-kinetic-energy-and-the-work-energy-theorem",
+        "primary": true
+      },
+      {
+        "label": "OpenStax College Physics 2e — gravitational potential energy",
+        "url": "https://openstax.org/books/college-physics-2e/pages/7-3-gravitational-potential-energy",
+        "primary": true
+      },
+      {
+        "label": "NHTSA Countermeasures That Work — speed, vehicle size and crash harm",
+        "url": "https://www.nhtsa.gov/book/countermeasures-that-work/speeding-and-speed-management/understanding-problem",
+        "primary": true
+      }
+    ]
+  },
+  "treatment": {
+    "kind": "custom",
+    "template": "one-person-sixty-cars"
+  },
+  "share": {
+    "question": "One person. An entire car.",
+    "description": "A weird.stats Deep Dive into the space, energy and material we use to move ourselves."
+  },
+  "assets": [
+    {
+      "path": "assets/transport.css",
+      "rights": {
+        "basis": "Original project code and factual-value transcription; no source artwork reproduced",
+        "source": "Project source: public/assets/transport.css",
+        "attribution": "weird.stats; data sources identified in the discovery"
+      }
+    },
+    {
+      "path": "assets/transport.js",
+      "rights": {
+        "basis": "Original project code and factual-value transcription; no source artwork reproduced",
+        "source": "Project source: public/assets/transport.js",
+        "attribution": "weird.stats; data sources identified in the discovery"
+      }
+    },
+    {
+      "path": "assets/transport-data.csv",
+      "rights": {
+        "basis": "Original project code and factual-value transcription; no source artwork reproduced",
+        "source": "Project source: public/assets/transport-data.csv",
+        "attribution": "weird.stats; data sources identified in the discovery"
+      }
+    },
+    {
+      "path": "assets/transport-neighborhood.js",
+      "rights": {
+        "basis": "Original Three.js architectural model and rendering code",
+        "source": "Project source: public/assets/transport-neighborhood.js",
+        "attribution": "weird.stats"
+      }
+    },
+    {
+      "path": "assets/three/three.module.js",
+      "rights": {
+        "basis": "MIT license; Three.js 0.186.1, bundled with esbuild 0.25.12",
+        "source": "https://github.com/mrdoob/three.js/blob/r186/LICENSE",
+        "attribution": "Three.js authors; copyright notice included in LICENSE.txt"
+      }
+    },
+    {
+      "path": "assets/three/LICENSE.txt",
+      "rights": {
+        "basis": "MIT license; Three.js 0.186.1, bundled with esbuild 0.25.12",
+        "source": "https://github.com/mrdoob/three.js/blob/r186/LICENSE",
+        "attribution": "Three.js authors; copyright notice included in LICENSE.txt"
+      }
+    },
+    {
+      "path": "assets/trader-joes-logo.svg",
+      "rights": {
+        "basis": "User-requested editorial identification of a real brand in a private conceptual neighborhood illustration; no affiliation or endorsement asserted. Source remains the trademark owner; no license grant claimed.",
+        "source": "https://llp-assets.meetsoci.com/live/assets/traderjoes/local/Base_files/original_004.svg",
+        "attribution": "Trader Joe’s logo, sourced from its official store-location site https://locations.traderjoes.com/ca/ on October 6, 2026."
+      }
+    },
+    {
+      "path": "assets/transport-physics.js",
+      "rights": {
+        "basis": "Original idealized physics calculations and interaction code; no source artwork reproduced",
+        "source": "Project source: public/assets/transport-physics.js",
+        "attribution": "weird.stats; mechanics references identified in the discovery"
+      }
+    }
+  ],
+  "publishedAt": "2026-10-06T07:17:15.676Z",
+  "approval": {
+    "by": "Nate",
+    "at": "2026-10-06",
+    "digest": "6238bf56eb265da255c3ace16ad7a3245e091bf55dccf269d6df0f8a97622ca1",
+    "inputReference": "Codex conversation, October 6, 2026: \"looks good, ship it\" after reviewing the compact Deep Dive preview and bolder four-way intersection.",
+    "note": "Approves the finished one-person-sixty-cars Deep Dive, including its compact collection preview, full interactive article and reviewed visuals, and authorizes its public release through the main-branch Vercel deployment. No future automated publication is authorized."
+  }
+}

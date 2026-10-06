@@ -35,7 +35,8 @@ export const customAssets = Object.freeze({
   crunch:['assets/chip.webp','assets/chip-small.webp','assets/chip-a.mp3','assets/chip-b.mp3'],
   copper:['assets/penny.webp','assets/nickel.webp'],
   mail:['assets/mule.webp'], painting:['assets/nightwatch.webp'],
-  'death-row-innocence':['assets/death-row.css','assets/death-row-estimate.csv','assets/death-row.js','assets/death-row-model.js','assets/three/three.module.js','assets/three/LICENSE.txt']
+  'death-row-innocence':['assets/death-row.css','assets/death-row-estimate.csv','assets/death-row.js','assets/death-row-model.js','assets/three/three.module.js','assets/three/LICENSE.txt'],
+  'one-person-sixty-cars':['assets/transport.css','assets/transport.js','assets/transport-physics.js','assets/transport-data.csv','assets/transport-neighborhood.js','assets/trader-joes-logo.svg','assets/three/three.module.js','assets/three/LICENSE.txt']
 });
 const number = v=>new Intl.NumberFormat('en-US',{maximumFractionDigits:2}).format(v);
 export function linePoints(values, max) {
@@ -69,7 +70,15 @@ registerTreatment('custom', {
   scripts: entry => entry.treatment.template==='crunch' ? ['crunch.js'] : [],
   async render(entry,context) {
     const fragment=context.fragment ?? await readFile(new URL(`src/exhibits/${entry.treatment.template}.html`,root),'utf8');
-    return fragment.replaceAll('{{nextHref}}',context.nextHref);
+    // Authored, balanced page blocks keep long essays out of the collection DOM.
+    const page = fragment.replace(/<!-- page:(collection|discovery) -->([\s\S]*?)<!-- \/page:\1 -->/g,
+      (_, mode, content) => {
+        assert(!/<!-- \/?page:/.test(content), `${entry.id}: page blocks cannot nest`);
+        return mode === context.mode ? content : '';
+      });
+    assert(!/<!-- \/?page:/.test(page), `${entry.id}: page blocks must be paired and cannot nest`);
+    return page.replaceAll('{{nextHref}}',esc(context.nextHref))
+      .replaceAll('{{discoveryHref}}',esc(context.discoveryHref(entry.id)));
   }
 });
 
