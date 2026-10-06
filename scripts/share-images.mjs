@@ -7,6 +7,7 @@ import {esc} from '../src/treatments/registry.mjs';
 import {shareCopy} from './share-copy.mjs';
 import {collectionCopy,validateCollectionCopy} from './collection-copy.mjs';
 import {entryAssets} from './assets.mjs';
+import {transportShareArt} from './share-transport.mjs';
 const font=fileURLToPath(new URL('../public/assets/outfit-bold.ttf',import.meta.url));
 const options={font:{fontFiles:[font],loadSystemFonts:false,defaultFontFamily:'Outfit'}};
 const type='font-family="Outfit" font-weight="700"';
@@ -59,7 +60,15 @@ function card(art,body,footer) {
 function headline({size,lines},start) {
  return lines.map((line,i)=>'<text x="58" y="'+(start+i*(size+4))+'" font-size="'+size+'" letter-spacing="-1.5">'+esc(line)+'</text>').join('');
 }
+const isTransport = entry => entry.treatment.kind==='custom' && entry.treatment.template==='one-person-sixty-cars';
+// New image URL keeps social crawlers from reusing the generic question-mark artwork.
+export const shareImagePath = entry => `share/${entry.id}${isTransport(entry)?'-intersection-v1':''}.png`;
+function transportShareSVG(entry) {
+ const layout=shareLayout(shareCopy(entry).question,{measure:500});
+ return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="${orange}"/>${transportShareArt()}<g fill="${ink}" ${type}><text x="58" y="77" font-size="39" letter-spacing="-1.8">weird.stats</text>${headline(layout,centered(layout.lines.length*(layout.size+4),layout.size)-15)}<text x="58" y="576" font-size="26">Read the Deep Dive</text></g><path d="M522 570h26m-12-12 12 12-12 12" fill="none" stroke="${ink}" stroke-width="3"/><text x="1168" y="606" text-anchor="end" ${type} font-size="18" fill="${ink}">Illustrative traffic</text></svg>`;
+}
 export async function shareSVG(entry) {
+ if(isTransport(entry))return transportShareSVG(entry);
  const {question}=shareCopy(entry),layout=shareLayout(question),{size,lines}=layout;
  const objects=await Promise.all(shareArtwork(entry).map(async([path,x,y,w,h,angle])=>{
   const bytes=await readFile(new URL('../public/'+path,import.meta.url));

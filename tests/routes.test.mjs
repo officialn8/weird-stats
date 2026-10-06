@@ -174,3 +174,15 @@ test('both page shells expose the existing copper explanation when scripts are d
   assert(fallback.includes('.copper-question'),`${file}: question must not overlay the static answer`);
  }
 });
+
+test('transport metadata uses its new card URL while the previous image URL remains available',async t=>{
+ const entry=JSON.parse(await readFile(new URL('../content/entries/one-person-sixty-cars.json',import.meta.url),'utf8'));
+ const out=await output(t);
+ await build({records:[entry],output:out,now:new Date(entry.publishedAt),publicOrigin:'https://example.org'});
+ const head=(await page(out,entry.id)).split('</head>')[0];
+ const path='share/one-person-sixty-cars-intersection-v1.png';
+ assert.equal(meta(head,'property','og:image'),'https://example.org/'+path);
+ assert.equal(meta(head,'name','twitter:image'),'https://example.org/'+path);
+ const [current,legacy]=await Promise.all([path,'share/one-person-sixty-cars.png'].map(p=>readFile(new URL(p,out))));
+ assert(current.equals(legacy),'old cached metadata still resolves to the replacement card');
+});

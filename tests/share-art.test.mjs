@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {shareSVG,shareLayout,renderShareImage,shareArtwork,collectionShareSVG,renderCollectionShareImage} from '../scripts/share-images.mjs';
+import {shareSVG,shareLayout,renderShareImage,shareArtwork,collectionShareSVG,renderCollectionShareImage,shareImagePath} from '../scripts/share-images.mjs';
 import {collectionCopy,collectionImagePath,approvedCollectionImageSha256,approvedCollectionCopySha256,serializeCollectionCopy,collectionCopySha256,approvedCollectionPreview} from '../scripts/collection-copy.mjs';
 import {shareCopy} from '../scripts/share-copy.mjs';
 import {loadEntries,esc} from '../scripts/content.mjs';
@@ -143,4 +143,23 @@ test('collection copy that would overflow the card throws instead of clipping',(
  assert.throws(()=>collectionShareSVG({...collectionCopy,footer:'Open the whole wonderfully unnecessary collection.'}),/Collection footer does not fit/);
  assert.throws(()=>collectionShareSVG({...collectionCopy,headline:''}),/collection copy/);
  assert.throws(()=>collectionShareSVG({...collectionCopy,version:0}),/collection copy/);
+});
+
+test('transport preview carries the traffic scene and Deep Dive action without changing other cards',async()=>{
+ const transport=entry('one-person-sixty-cars');
+ transport.share.question='One person. An entire car.';
+ const svg=await shareSVG(transport),text=textOf(svg).join(' ');
+ assert(text.includes(transport.share.question),'the approved headline is complete');
+ assert(text.includes('Read the Deep Dive'));assert(text.includes('Illustrative traffic'));
+ assert(!text.includes('Open the question.'));assert(!text.includes('?'));
+ assert.equal((svg.match(/data-share-car=/g)||[]).length,32);
+ assert.equal((svg.match(/data-share-bus=/g)||[]).length,1);
+ assert.equal((svg.match(/data-share-passenger=/g)||[]).length,60);
+ const png=await renderShareImage(transport);
+ assert.equal(png.readUInt32BE(16),1200);assert.equal(png.readUInt32BE(20),630);
+ assert(png.equals(await renderShareImage(transport)));
+ assert.equal(shareImagePath(transport),'share/one-person-sixty-cars-intersection-v1.png');
+ assert.equal(shareImagePath(entry('crunch')),'share/crunch.png');
+ const generic=await shareSVG({...transport,treatment:{kind:'reveal'}});
+ assert(!generic.includes('data-share-car='),'only the matching custom treatment receives this art');
 });
