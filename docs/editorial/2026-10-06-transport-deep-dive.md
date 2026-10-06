@@ -104,3 +104,12 @@ The latest private proposal recorded when this note was written has packet ID `f
 After reviewing the compact collection preview and bolder crossroads, Nate said, “looks good, ship it.” This records approval and authorization to publish the finished Deep Dive through the main-branch Vercel deployment. The exact kept packet is `f29c71d84f9c580141ca28385bc8852fa764ed901015cf30524ce4a794e96bf9`, with content digest `6238bf56eb265da255c3ace16ad7a3245e091bf55dccf269d6df0f8a97622ca1`. The decision and approved snapshot retain the actual human input; the release manifest adds this revision while preserving all seven existing pins. The new discovery leads the collection and feed by its first release date. This authorization applies to this release only.
 
 The final local validation passed 121 tests and desktop/phone interaction checks. The public release build must include eight discoveries, the compact intersection preview, and the full standalone essay; private review routes remain excluded. Production deployment is verified after the release merge.
+
+
+## Centering correction — October 6
+
+The closing prose, source disclosure and return link now share a centered column with a 730 px maximum width. The energy caption is centered beneath its diagram. Existing paired layouts retain left-aligned text inside centered containers. These are local template refinements; claims, illustration assets and approved release identity are unchanged.
+
+Playwright inspected every chapter on desktop and phone and measured the main containers at 390, 800, 1,024, 1,440 and 1,760 px: zero centering offset and zero horizontal overflow. The open source disclosure also fits its column. Evidence lives under `output/playwright/transport-centering/`. Content checks and public/review builds passed. The fresh scoped finish review returned **ship**, with no material fixes. The documentation helper reached its session limit; the lead completed this bounded update from the fallback role. No global design drift was repaired or canonized.
+
+The initial release shipped through PR #10 (merge `ae9b4f56f847c5026f21a3d052027c47716bcdca`); Vercel production deployment `dpl_7kR5tjkNTpRp43X1ZZ6ofC1ECtsS` reached Ready. Production QA on October 6, 07:20:42–07:22:02 UTC used `?qa=1` and confirmed the QA marker, eight discoveries with the new entry first, the compact preview, the full article, and QA propagation through its link. Stored analytics ingestion was not checked. Nate separately authorized this centering correction with “looks good to me ship it.”
