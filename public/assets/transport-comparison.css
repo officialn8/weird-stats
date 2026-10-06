@@ -1,0 +1,33 @@
+/* Local extension: retain the publication's existing palette and controls. */
+.trip-unit-controls { display:flex; align-items:center; gap:8px; margin-bottom:24px; font-size:15px; }
+.trip-unit-controls>span { margin-right:8px; }
+.trip-unit-controls button { min-height:44px; padding:8px 18px; border:1px solid currentColor; border-radius:24px; background:transparent; }
+.trip-unit-controls button[aria-pressed=true] { color:var(--paper); background:var(--ink); }
+.trip-unit-controls button:hover { background:var(--trip-orange); color:var(--trip-ink); }
+.trip-comparison { border-bottom:1px solid var(--line); }
+.trip-comparison-axis { display:flex; justify-content:space-between; gap:16px; font-size:14px; color:var(--muted); margin-bottom:24px; }
+.trip-energy-row+.trip-energy-row { margin-top:30px; }
+.trip-energy-label { display:flex; justify-content:space-between; align-items:baseline; gap:24px; margin-bottom:14px; font-size:26px; }
+.trip-energy-label small { display:block; font-size:14px; line-height:1.5; color:var(--muted); font-weight:400; letter-spacing:0; }
+.trip-energy-label strong { font-size:38px; line-height:1.15; text-align:right; font-weight:550; font-variant-numeric:tabular-nums; }
+.trip-energy-track { height:32px; background:var(--soft); }
+.trip-energy-track span { display:block; height:100%; background:var(--ink); }
+.trip-energy-track [data-bike-energy-bar] { background:var(--trip-orange); }
+.trip-energy-comparison figcaption { margin-top:26px; font-size:clamp(24px,3vw,36px); line-height:1.3; max-width:35ch; }
+.trip-energy-comparison figcaption strong { font-weight:550; }
+.trip-comparison-controls { display:grid; grid-template-columns:1fr 1fr; gap:7vw; margin-top:42px; }
+.trip-comparison-controls .trip-note { margin-top:10px; }
+.trip-comparison-assumption { margin-top:30px; font-size:17px; line-height:1.6; max-width:75ch; }
+.trip-comparison .trip-physics-details { max-width:78ch; margin-top:24px; }
+.trip-comparison-table { border-collapse:collapse; width:100%; margin-top:24px; font-size:14px; font-variant-numeric:tabular-nums; }
+.trip-comparison-table caption { text-align:left; margin-bottom:12px; }
+.trip-comparison-table :is(th,td) { padding:12px 12px 12px 0; border-bottom:1px solid var(--line); text-align:left; }
+@media(max-width:800px) {
+ .trip-comparison-controls { grid-template-columns:1fr; gap:26px; }
+ .trip-energy-label { font-size:22px; gap:14px; }
+ .trip-energy-label strong { font-size:30px; }
+ .trip-energy-label small { font-size:12px; max-width:17ch; }
+ .trip-comparison-axis { font-size:12px; }
+ .trip-comparison-assumption { font-size:16px; }
+ .trip-comparison-table { font-size:12px; }
+}

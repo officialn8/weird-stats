@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="/assets/transport.css?v=intersection-bold-1">
-<script type="module" src="/assets/transport.js?v=intersection-bold-1"></script>
+<link rel="stylesheet" href="/assets/transport-comparison.css?v=metric-energy-1">
+<script type="module" src="/assets/transport-metric.js?v=metric-energy-1"></script>
 <!-- page:discovery --><script type="module" src="/assets/transport-neighborhood.js"></script><!-- /page:discovery -->
 <section class="transport-story" id="one-person-sixty-cars" aria-labelledby="trip-title">
   <div class="trip-opening"><div class="trip-intro">
@@ -7,11 +8,11 @@
       <p class="trip-deck">A seat for you. A machine around you. Now multiply that bargain by everyone trying to get somewhere.</p>
       <p class="trip-format"><strong>Deep Dive</strong> · Space, energy &amp; the cost of empty seats</p>
       <!-- page:collection --><a class="trip-open" href="{{discoveryHref}}">Read the Deep Dive<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg></a><!-- /page:collection -->
-      <!-- page:discovery --><nav class="trip-contents" aria-label="Inside this Deep Dive"><a href="#trip-space">Space</a><a href="#trip-energy">Energy</a><a href="#trip-resources">Mass &amp; speed</a><a href="#trip-neighborhood">A better way</a><a href="#trip-sources">Sources</a></nav><!-- /page:discovery -->
+      <!-- page:discovery --><nav class="trip-contents" aria-label="Inside this Deep Dive"><a href="#trip-space">Space</a><a href="#trip-energy">Energy</a><a href="#trip-bike">Car vs. bike</a><a href="#trip-resources">Mass &amp; speed</a><a href="#trip-neighborhood">A better way</a><a href="#trip-sources">Sources</a></nav><!-- /page:discovery -->
     </div>
     <figure class="trip-figure"><div class="trip-count"><span><strong data-trip-people>60</strong> people</span><strong data-trip-count>60 cars</strong></div>
       <div class="trip-controls" role="group" aria-label="Explore occupancy and the bus in traffic" hidden><button type="button" data-trip-load="1" aria-pressed="true">Drive alone</button><button type="button" data-trip-load="2" aria-pressed="false">2 per car</button><button type="button" data-trip-load="4" aria-pressed="false">4 per car</button><button type="button" data-trip-load="60" aria-pressed="false">One bus</button><button type="button" data-trip-load="traffic" aria-pressed="false">Bus in traffic</button></div>
-      <svg class="trip-field" viewBox="0 0 1000 900" role="img" aria-label="60 single-occupancy cars queue on all four approaches to a signalized intersection. Pale dots show travelers. Illustrative traffic, not a measured road or flow simulation.">
+      <svg class="trip-field" viewBox="0 0 1000 480" role="img" aria-label="60 single-occupancy cars queue in four lanes on one road, all facing right. Pale dots show travelers. Illustrative traffic, not a measured road or flow simulation.">
         <defs><g id="trip-car-shape">
           <path class="trip-tire" d="M-23-18h12v5h-12z M12-18h12v5H12z M-23 13h12v5h-12z M12 13h12v5H12z"/>
           <path class="trip-car-body" d="M-25-15H20Q30-14 32-8V8Q30 14 20 15H-25Q-32 13-32 7V-7Q-32-13-25-15Z"/>
@@ -24,211 +25,149 @@
           <path class="trip-brakelamp" d="M-31-10h3v5h-3z M-31 5h3v5h-3z"/>
         </g><path id="trip-lane-arrow" d="M-19-3H8V-10L21 0 8 10V3H-19Z"/></defs>
         <g class="trip-road-scene"><g class="trip-road" aria-hidden="true">
-          <path fill="#bda88a" d="M0 0H1000V900H0Z"/>
+          <path fill="#bda88a" d="M0 0H1000V480H0Z"/>
           <g fill="#d8c9ad" stroke="#eadfc7" stroke-width="4">
-            <path d="M66 65H302V158H249V254H66Z"/>
-            <path d="M681 69H924V257H813V202H681Z"/>
-            <path d="M68 641H191V690H307V834H68Z"/>
-            <path d="M689 649H927V835H747V771H689Z"/>
+            <path d="M30-10H260V85H30Z M290-10H520V85H290Z M550-10H760V85H550Z M790-10H970V85H790Z"/>
+            <path d="M30 395H210V490H30Z M240 395H500V490H240Z M530 395H750V490H530Z M780 395H970V490H780Z"/>
           </g>
           <g fill="none" stroke="#bda88a" stroke-width="3">
-            <path d="M80 79H288V144H235V240H80Z M695 83H910V243H827V188H695Z M82 655H177V704H293V820H82Z M703 663H913V821H761V757H703Z"/>
-            <path d="M101 100h45v26h-45z M171 100h45v26h-45z M103 167h91v47h-91z M720 108h80v45h-80z M851 108h35v26h-35z M851 164h35v26h-35z M106 741h61v47h-61z M207 743h61v45h-61z M781 687h96v46h-96z M792 778h32v24h-32z M842 778h32v24h-32z"/>
+            <path d="M46 0V69H244V0 M306 0V69H504V0 M566 0V69H744V0 M806 0V69H954V0 M46 480V411H194V480 M256 480V411H484V480 M546 480V411H734V480 M796 480V411H954V480"/>
           </g>
-          <path fill="#291b10" stroke="#eadfc7" stroke-width="14" d="M-20 359H409V-20H591V359H1020V541H591V920H409V541H-20Z"/>
-          <g fill="none" stroke="#bda88a" stroke-width="2" stroke-dasharray="14 18">
-            <path d="M0 403H376 M0 497H376 M624 403H1000 M624 497H1000 M454 0V323 M546 0V323 M454 577V900 M546 577V900"/>
+          <path fill="#291b10" d="M0 145H1000V355H0Z"/>
+          <path fill="none" stroke="#eadfc7" stroke-width="10" d="M0 140H1000 M0 360H1000"/>
+          <path fill="none" stroke="#bda88a" stroke-width="2" stroke-dasharray="14 18" d="M0 200H1000 M0 250H1000 M0 300H1000"/>
+          <g fill="#eadfc7">
+            <use href="#trip-lane-arrow" transform="translate(160 115)"/><use href="#trip-lane-arrow" transform="translate(500 115)"/><use href="#trip-lane-arrow" transform="translate(840 115)"/>
+            <use href="#trip-lane-arrow" transform="translate(160 385)"/><use href="#trip-lane-arrow" transform="translate(500 385)"/><use href="#trip-lane-arrow" transform="translate(840 385)"/>
           </g>
-          <g fill="none" stroke="#f29a4a" stroke-width="2"><path d="M0 447H376 M0 453H376 M624 447H1000 M624 453H1000 M497 0V323 M503 0V323 M497 577V900 M503 577V900"/></g>
-          <g fill="#ddd8c7" opacity=".7">
-            <use href="#trip-lane-arrow" transform="translate(220 381) rotate(180)"/><use href="#trip-lane-arrow" transform="translate(270 426) rotate(180)"/>
-            <use href="#trip-lane-arrow" transform="translate(730 474)"/><use href="#trip-lane-arrow" transform="translate(780 519)"/>
-            <use href="#trip-lane-arrow" transform="translate(524 225) rotate(-90)"/><use href="#trip-lane-arrow" transform="translate(569 175) rotate(-90)"/>
-            <use href="#trip-lane-arrow" transform="translate(431 725) rotate(90)"/><use href="#trip-lane-arrow" transform="translate(476 675) rotate(90)"/>
-          </g>
-          <path fill="none" stroke="#fff4da" stroke-width="6" d="M375 457V535 M625 365V443 M415 323H493 M507 577H585"/>
-          <rect x="384" y="368" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="596" y="368" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="384" y="382" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="596" y="382" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="384" y="396" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="596" y="396" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="384" y="410" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="596" y="410" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="384" y="424" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="596" y="424" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="384" y="438" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="596" y="438" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="384" y="452" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="596" y="452" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="384" y="466" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="596" y="466" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="384" y="480" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="596" y="480" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="384" y="494" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="596" y="494" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="384" y="508" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="596" y="508" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="384" y="522" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="596" y="522" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="384" y="536" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="596" y="536" width="20" height="7" fill="#ddd8c7"/>
-          <rect x="418" y="334" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="418" y="546" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="432" y="334" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="432" y="546" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="446" y="334" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="446" y="546" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="460" y="334" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="460" y="546" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="474" y="334" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="474" y="546" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="488" y="334" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="488" y="546" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="502" y="334" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="502" y="546" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="516" y="334" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="516" y="546" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="530" y="334" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="530" y="546" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="544" y="334" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="544" y="546" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="558" y="334" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="558" y="546" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="572" y="334" width="7" height="20" fill="#ddd8c7"/>
-          <rect x="572" y="546" width="7" height="20" fill="#ddd8c7"/>
-          <g transform="translate(370 560)"><rect x="-7" y="-17" width="14" height="34" rx="4" fill="#273730"/><circle cy="-9" r="3.6" fill="#ef7351"/><circle r="3" fill="#697265"/><circle cy="9" r="3" fill="#697265"/></g>
-          <g transform="translate(630 337)"><rect x="-7" y="-17" width="14" height="34" rx="4" fill="#273730"/><circle cy="-9" r="3.6" fill="#ef7351"/><circle r="3" fill="#697265"/><circle cy="9" r="3" fill="#697265"/></g>
-          <g transform="translate(391 318)"><rect x="-7" y="-17" width="14" height="34" rx="4" fill="#273730"/><circle cy="-9" r="3.6" fill="#ef7351"/><circle r="3" fill="#697265"/><circle cy="9" r="3" fill="#697265"/></g>
-          <g transform="translate(609 582)"><rect x="-7" y="-17" width="14" height="34" rx="4" fill="#273730"/><circle cy="-9" r="3.6" fill="#ef7351"/><circle r="3" fill="#697265"/><circle cy="9" r="3" fill="#697265"/></g>
         </g>
         <g data-trip-vehicles>
-          <g class="trip-vehicle" data-trip-car transform="translate(355 474) rotate(0) scale(.62)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(645 426) rotate(180) scale(.62)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(476 305) rotate(90) scale(.62)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(524 595) rotate(-90) scale(.62)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(355 519) rotate(0) scale(.62)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(645 381) rotate(180) scale(.62)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(431 305) rotate(90) scale(.62)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(569 595) rotate(-90) scale(.62)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(309 474) rotate(0) scale(.62)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(691 426) rotate(180) scale(.62)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(476 265) rotate(90) scale(.62)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(524 635) rotate(-90) scale(.62)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(309 519) rotate(0) scale(.62)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(691 381) rotate(180) scale(.62)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(431 265) rotate(90) scale(.62)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(569 635) rotate(-90) scale(.62)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(263 474) rotate(0) scale(.62)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(737 426) rotate(180) scale(.62)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(476 225) rotate(90) scale(.62)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(524 675) rotate(-90) scale(.62)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(263 519) rotate(0) scale(.62)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(737 381) rotate(180) scale(.62)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(431 225) rotate(90) scale(.62)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(569 675) rotate(-90) scale(.62)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(217 474) rotate(0) scale(.62)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(783 426) rotate(180) scale(.62)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(476 185) rotate(90) scale(.62)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(524 715) rotate(-90) scale(.62)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(217 519) rotate(0) scale(.62)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(783 381) rotate(180) scale(.62)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(431 185) rotate(90) scale(.62)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(569 715) rotate(-90) scale(.62)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(171 474) rotate(0) scale(.62)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(829 426) rotate(180) scale(.62)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(476 145) rotate(90) scale(.62)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(524 755) rotate(-90) scale(.62)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(171 519) rotate(0) scale(.62)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(829 381) rotate(180) scale(.62)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(431 145) rotate(90) scale(.62)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(569 755) rotate(-90) scale(.62)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(125 474) rotate(0) scale(.62)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(875 426) rotate(180) scale(.62)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(476 105) rotate(90) scale(.62)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(524 795) rotate(-90) scale(.62)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(125 519) rotate(0) scale(.62)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(875 381) rotate(180) scale(.62)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(431 105) rotate(90) scale(.62)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(569 795) rotate(-90) scale(.62)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(79 474) rotate(0) scale(.62)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(921 426) rotate(180) scale(.62)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(476 65) rotate(90) scale(.62)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(524 835) rotate(-90) scale(.62)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(79 519) rotate(0) scale(.62)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(921 381) rotate(180) scale(.62)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(431 65) rotate(90) scale(.62)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(569 835) rotate(-90) scale(.62)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(33 474) rotate(0) scale(.62)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(967 426) rotate(180) scale(.62)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(476 25) rotate(90) scale(.62)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
-          <g class="trip-vehicle" data-trip-car transform="translate(524 875) rotate(-90) scale(.62)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(950 175) scale(.9)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(950 225) scale(.9)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(950 275) scale(.9)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(950 325) scale(.9)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(886 175) scale(.9)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(886 225) scale(.9)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(886 275) scale(.9)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(886 325) scale(.9)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(822 175) scale(.9)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(822 225) scale(.9)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(822 275) scale(.9)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(822 325) scale(.9)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(758 175) scale(.9)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(758 225) scale(.9)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(758 275) scale(.9)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(758 325) scale(.9)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(694 175) scale(.9)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(694 225) scale(.9)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(694 275) scale(.9)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(694 325) scale(.9)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(630 175) scale(.9)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(630 225) scale(.9)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(630 275) scale(.9)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(630 325) scale(.9)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(566 175) scale(.9)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(566 225) scale(.9)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(566 275) scale(.9)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(566 325) scale(.9)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(502 175) scale(.9)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(502 225) scale(.9)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(502 275) scale(.9)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(502 325) scale(.9)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(438 175) scale(.9)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(438 225) scale(.9)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(438 275) scale(.9)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(438 325) scale(.9)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(374 175) scale(.9)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(374 225) scale(.9)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(374 275) scale(.9)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(374 325) scale(.9)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(310 175) scale(.9)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(310 225) scale(.9)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(310 275) scale(.9)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(310 325) scale(.9)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(246 175) scale(.9)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(246 225) scale(.9)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(246 275) scale(.9)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(246 325) scale(.9)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(182 175) scale(.9)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(182 225) scale(.9)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(182 275) scale(.9)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(182 325) scale(.9)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(118 175) scale(.9)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(118 225) scale(.9)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(118 275) scale(.9)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(118 325) scale(.9)" style="color:#ded4c2"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(54 175) scale(.9)" style="color:#8faaa5"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(54 225) scale(.9)" style="color:#bfa184"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(54 275) scale(.9)" style="color:#7d929b"><use href="#trip-car-shape"/></g>
+          <g class="trip-vehicle" data-trip-car transform="translate(54 325) scale(.9)" style="color:#c9c4b4"><use href="#trip-car-shape"/></g>
         </g>
         <g data-trip-travelers>
-          <circle class="trip-passenger" cx="357.48" cy="470.90" r="2.7"/>
-          <circle class="trip-passenger" cx="642.52" cy="429.10" r="2.7"/>
-          <circle class="trip-passenger" cx="479.10" cy="307.48" r="2.7"/>
-          <circle class="trip-passenger" cx="520.90" cy="592.52" r="2.7"/>
-          <circle class="trip-passenger" cx="357.48" cy="515.90" r="2.7"/>
-          <circle class="trip-passenger" cx="642.52" cy="384.10" r="2.7"/>
-          <circle class="trip-passenger" cx="434.10" cy="307.48" r="2.7"/>
-          <circle class="trip-passenger" cx="565.90" cy="592.52" r="2.7"/>
-          <circle class="trip-passenger" cx="311.48" cy="470.90" r="2.7"/>
-          <circle class="trip-passenger" cx="688.52" cy="429.10" r="2.7"/>
-          <circle class="trip-passenger" cx="479.10" cy="267.48" r="2.7"/>
-          <circle class="trip-passenger" cx="520.90" cy="632.52" r="2.7"/>
-          <circle class="trip-passenger" cx="311.48" cy="515.90" r="2.7"/>
-          <circle class="trip-passenger" cx="688.52" cy="384.10" r="2.7"/>
-          <circle class="trip-passenger" cx="434.10" cy="267.48" r="2.7"/>
-          <circle class="trip-passenger" cx="565.90" cy="632.52" r="2.7"/>
-          <circle class="trip-passenger" cx="265.48" cy="470.90" r="2.7"/>
-          <circle class="trip-passenger" cx="734.52" cy="429.10" r="2.7"/>
-          <circle class="trip-passenger" cx="479.10" cy="227.48" r="2.7"/>
-          <circle class="trip-passenger" cx="520.90" cy="672.52" r="2.7"/>
-          <circle class="trip-passenger" cx="265.48" cy="515.90" r="2.7"/>
-          <circle class="trip-passenger" cx="734.52" cy="384.10" r="2.7"/>
-          <circle class="trip-passenger" cx="434.10" cy="227.48" r="2.7"/>
-          <circle class="trip-passenger" cx="565.90" cy="672.52" r="2.7"/>
-          <circle class="trip-passenger" cx="219.48" cy="470.90" r="2.7"/>
-          <circle class="trip-passenger" cx="780.52" cy="429.10" r="2.7"/>
-          <circle class="trip-passenger" cx="479.10" cy="187.48" r="2.7"/>
-          <circle class="trip-passenger" cx="520.90" cy="712.52" r="2.7"/>
-          <circle class="trip-passenger" cx="219.48" cy="515.90" r="2.7"/>
-          <circle class="trip-passenger" cx="780.52" cy="384.10" r="2.7"/>
-          <circle class="trip-passenger" cx="434.10" cy="187.48" r="2.7"/>
-          <circle class="trip-passenger" cx="565.90" cy="712.52" r="2.7"/>
-          <circle class="trip-passenger" cx="173.48" cy="470.90" r="2.7"/>
-          <circle class="trip-passenger" cx="826.52" cy="429.10" r="2.7"/>
-          <circle class="trip-passenger" cx="479.10" cy="147.48" r="2.7"/>
-          <circle class="trip-passenger" cx="520.90" cy="752.52" r="2.7"/>
-          <circle class="trip-passenger" cx="173.48" cy="515.90" r="2.7"/>
-          <circle class="trip-passenger" cx="826.52" cy="384.10" r="2.7"/>
-          <circle class="trip-passenger" cx="434.10" cy="147.48" r="2.7"/>
-          <circle class="trip-passenger" cx="565.90" cy="752.52" r="2.7"/>
-          <circle class="trip-passenger" cx="127.48" cy="470.90" r="2.7"/>
-          <circle class="trip-passenger" cx="872.52" cy="429.10" r="2.7"/>
-          <circle class="trip-passenger" cx="479.10" cy="107.48" r="2.7"/>
-          <circle class="trip-passenger" cx="520.90" cy="792.52" r="2.7"/>
-          <circle class="trip-passenger" cx="127.48" cy="515.90" r="2.7"/>
-          <circle class="trip-passenger" cx="872.52" cy="384.10" r="2.7"/>
-          <circle class="trip-passenger" cx="434.10" cy="107.48" r="2.7"/>
-          <circle class="trip-passenger" cx="565.90" cy="792.52" r="2.7"/>
-          <circle class="trip-passenger" cx="81.48" cy="470.90" r="2.7"/>
-          <circle class="trip-passenger" cx="918.52" cy="429.10" r="2.7"/>
-          <circle class="trip-passenger" cx="479.10" cy="67.48" r="2.7"/>
-          <circle class="trip-passenger" cx="520.90" cy="832.52" r="2.7"/>
-          <circle class="trip-passenger" cx="81.48" cy="515.90" r="2.7"/>
-          <circle class="trip-passenger" cx="918.52" cy="384.10" r="2.7"/>
-          <circle class="trip-passenger" cx="434.10" cy="67.48" r="2.7"/>
-          <circle class="trip-passenger" cx="565.90" cy="832.52" r="2.7"/>
-          <circle class="trip-passenger" cx="35.48" cy="470.90" r="2.7"/>
-          <circle class="trip-passenger" cx="964.52" cy="429.10" r="2.7"/>
-          <circle class="trip-passenger" cx="479.10" cy="27.48" r="2.7"/>
-          <circle class="trip-passenger" cx="520.90" cy="872.52" r="2.7"/>
+          <circle class="trip-passenger" cx="953.60" cy="170.50" r="3.9"/>
+          <circle class="trip-passenger" cx="953.60" cy="220.50" r="3.9"/>
+          <circle class="trip-passenger" cx="953.60" cy="270.50" r="3.9"/>
+          <circle class="trip-passenger" cx="953.60" cy="320.50" r="3.9"/>
+          <circle class="trip-passenger" cx="889.60" cy="170.50" r="3.9"/>
+          <circle class="trip-passenger" cx="889.60" cy="220.50" r="3.9"/>
+          <circle class="trip-passenger" cx="889.60" cy="270.50" r="3.9"/>
+          <circle class="trip-passenger" cx="889.60" cy="320.50" r="3.9"/>
+          <circle class="trip-passenger" cx="825.60" cy="170.50" r="3.9"/>
+          <circle class="trip-passenger" cx="825.60" cy="220.50" r="3.9"/>
+          <circle class="trip-passenger" cx="825.60" cy="270.50" r="3.9"/>
+          <circle class="trip-passenger" cx="825.60" cy="320.50" r="3.9"/>
+          <circle class="trip-passenger" cx="761.60" cy="170.50" r="3.9"/>
+          <circle class="trip-passenger" cx="761.60" cy="220.50" r="3.9"/>
+          <circle class="trip-passenger" cx="761.60" cy="270.50" r="3.9"/>
+          <circle class="trip-passenger" cx="761.60" cy="320.50" r="3.9"/>
+          <circle class="trip-passenger" cx="697.60" cy="170.50" r="3.9"/>
+          <circle class="trip-passenger" cx="697.60" cy="220.50" r="3.9"/>
+          <circle class="trip-passenger" cx="697.60" cy="270.50" r="3.9"/>
+          <circle class="trip-passenger" cx="697.60" cy="320.50" r="3.9"/>
+          <circle class="trip-passenger" cx="633.60" cy="170.50" r="3.9"/>
+          <circle class="trip-passenger" cx="633.60" cy="220.50" r="3.9"/>
+          <circle class="trip-passenger" cx="633.60" cy="270.50" r="3.9"/>
+          <circle class="trip-passenger" cx="633.60" cy="320.50" r="3.9"/>
+          <circle class="trip-passenger" cx="569.60" cy="170.50" r="3.9"/>
+          <circle class="trip-passenger" cx="569.60" cy="220.50" r="3.9"/>
+          <circle class="trip-passenger" cx="569.60" cy="270.50" r="3.9"/>
+          <circle class="trip-passenger" cx="569.60" cy="320.50" r="3.9"/>
+          <circle class="trip-passenger" cx="505.60" cy="170.50" r="3.9"/>
+          <circle class="trip-passenger" cx="505.60" cy="220.50" r="3.9"/>
+          <circle class="trip-passenger" cx="505.60" cy="270.50" r="3.9"/>
+          <circle class="trip-passenger" cx="505.60" cy="320.50" r="3.9"/>
+          <circle class="trip-passenger" cx="441.60" cy="170.50" r="3.9"/>
+          <circle class="trip-passenger" cx="441.60" cy="220.50" r="3.9"/>
+          <circle class="trip-passenger" cx="441.60" cy="270.50" r="3.9"/>
+          <circle class="trip-passenger" cx="441.60" cy="320.50" r="3.9"/>
+          <circle class="trip-passenger" cx="377.60" cy="170.50" r="3.9"/>
+          <circle class="trip-passenger" cx="377.60" cy="220.50" r="3.9"/>
+          <circle class="trip-passenger" cx="377.60" cy="270.50" r="3.9"/>
+          <circle class="trip-passenger" cx="377.60" cy="320.50" r="3.9"/>
+          <circle class="trip-passenger" cx="313.60" cy="170.50" r="3.9"/>
+          <circle class="trip-passenger" cx="313.60" cy="220.50" r="3.9"/>
+          <circle class="trip-passenger" cx="313.60" cy="270.50" r="3.9"/>
+          <circle class="trip-passenger" cx="313.60" cy="320.50" r="3.9"/>
+          <circle class="trip-passenger" cx="249.60" cy="170.50" r="3.9"/>
+          <circle class="trip-passenger" cx="249.60" cy="220.50" r="3.9"/>
+          <circle class="trip-passenger" cx="249.60" cy="270.50" r="3.9"/>
+          <circle class="trip-passenger" cx="249.60" cy="320.50" r="3.9"/>
+          <circle class="trip-passenger" cx="185.60" cy="170.50" r="3.9"/>
+          <circle class="trip-passenger" cx="185.60" cy="220.50" r="3.9"/>
+          <circle class="trip-passenger" cx="185.60" cy="270.50" r="3.9"/>
+          <circle class="trip-passenger" cx="185.60" cy="320.50" r="3.9"/>
+          <circle class="trip-passenger" cx="121.60" cy="170.50" r="3.9"/>
+          <circle class="trip-passenger" cx="121.60" cy="220.50" r="3.9"/>
+          <circle class="trip-passenger" cx="121.60" cy="270.50" r="3.9"/>
+          <circle class="trip-passenger" cx="121.60" cy="320.50" r="3.9"/>
+          <circle class="trip-passenger" cx="57.60" cy="170.50" r="3.9"/>
+          <circle class="trip-passenger" cx="57.60" cy="220.50" r="3.9"/>
+          <circle class="trip-passenger" cx="57.60" cy="270.50" r="3.9"/>
+          <circle class="trip-passenger" cx="57.60" cy="320.50" r="3.9"/>
 </g></g>
       </svg>
 
-      <p class="trip-traffic-reading" data-trip-traffic-reading hidden><strong>60 bus passengers.</strong><br>32 people in all those cars.</p><figcaption>Roof cutaways reveal the people inside. Every pale dot is a traveler. Cars include drivers; the bus adds an operator. An illustrative snapshot of queues at a four-way junction, not a measured road or traffic-flow simulation.</figcaption>
+      <p class="trip-traffic-reading" data-trip-traffic-reading hidden><strong>60 bus passengers.</strong><br>32 people in all those cars.</p><figcaption>Roof cutaways reveal the people inside. Every pale dot is a traveler. Cars include drivers; the bus adds an operator. An illustrative snapshot of a queue on a one-way road, not a measured road or traffic-flow simulation.</figcaption>
       <p class="trip-sr" role="status" data-trip-status></p>
     </figure>
   </div></div>
@@ -265,27 +204,53 @@
     <p class="trip-note">Band widths show the 25%-to-wheels case; the remaining 75% is 100% minus 25%. Estimated combined cycle: 55% city, 45% highway. A range across vehicles, not a measurement of your trip. <a href="https://www.fueleconomy.gov/feg/atv.shtml">DOE/EPA: where the energy goes</a>.</p>
     <div class="trip-energy-bottom"><p><strong>Electric cars change this part of the story.</strong> DOE reports 87–91% efficiency including energy recovered through regenerative braking. That vehicle-level figure does not include electricity generation or manufacturing. Electrifying a car still leaves a car to accommodate.</p><p><strong>Occupancy changes the denominator.</strong> Energy per passenger-distance is vehicle energy divided by the people carried. A well-used bus can spread its energy use over many riders; a nearly empty one may not. Vehicle technology, route and occupancy decide the comparison. <a href="https://www.energy.gov/cmei/vehicles/articles/fotw-1360-sept-16-2024-typical-ev-87-91-efficient-compared-30-conventional">DOE’s EV explanation</a>.</p></div>
   </div></div>
+  <div class="trip-chapter trip-comparison" id="trip-bike" data-trip-comparison>
+    <div class="trip-chapter-head"><h3>One person.<br>A much smaller appetite.</h3><div><p>For the same distance, how much energy goes in? Here’s an illustrative gasoline car beside a conventional bicycle, measured <strong>per person carried.</strong></p><p>Fuel energy for the car. The rider’s estimated total metabolic energy for the bike. Both expressed in watt-hours.</p></div></div>
+    <div class="trip-unit-controls" data-unit-controls role="group" aria-label="Measurement units" hidden><span>Units</span><button type="button" data-trip-unit="us" aria-pressed="true">US</button><button type="button" data-trip-unit="metric" aria-pressed="false">Metric</button></div>
+    <figure class="trip-energy-comparison" data-energy-chart role="group" aria-label="Illustrative direct energy inputs per person-mile: gasoline car 1,123 watt-hours; bicycle 50 watt-hours.">
+      <div class="trip-comparison-axis"><span>0</span><span data-energy-scale-max>2,250 Wh per person-mile</span></div>
+      <div class="trip-energy-row"><div class="trip-energy-label"><span>Gasoline car <small>Energy in the gasoline</small></span><strong><span data-car-energy>1,123</span> <small data-trip-energy-unit>Wh per person-mile</small></strong></div><div class="trip-energy-track" aria-hidden="true"><span data-car-energy-bar style="width:49.9259%"></span></div></div>
+      <div class="trip-energy-row"><div class="trip-energy-label"><span>Bicycle <small>Rider’s total metabolic energy</small></span><strong><span data-bike-energy>50</span> <small data-trip-energy-unit>Wh per person-mile</small></strong></div><div class="trip-energy-track" aria-hidden="true"><span data-bike-energy-bar style="width:2.2352%"></span></div></div>
+      <figcaption>About <strong><span data-trip-energy-ratio>22.3</span>×</strong> as much direct energy for the car in this example.</figcaption>
+    </figure>
+    <div class="trip-comparison-controls" data-comparison-controls hidden>
+      <div><label class="trip-kinetic-label">Car efficiency <strong data-car-economy-value>30 US mpg</strong><input type="range" data-car-economy min="15" max="60" step="5" value="30" aria-label="Illustrative car fuel efficiency"></label><div class="trip-kinetic-ends"><span data-economy-min>15 US mpg</span><span data-economy-max>60 US mpg</span></div><p class="trip-note">Move right for a more efficient car.</p></div>
+      <div><label class="trip-kinetic-label">People in the car <strong data-car-occupancy-value>1 person</strong><input type="range" data-car-occupancy min="1" max="4" step="1" value="1" aria-label="People in the car including its driver"></label><div class="trip-kinetic-ends"><span>1 person</span><span>4 people</span></div><p class="trip-note">Includes the driver. Fuel use is held fixed as occupancy changes.</p></div>
+    </div>
+    <p class="trip-comparison-assumption"><strong>Bike held fixed:</strong> <span data-bike-assumption>154 lb rider at 11 mph</span>, using the 2024 Compendium’s 6.8-MET cycling category. About <span data-bike-calories>43.3</span> dietary Calories per <span data-distance-name>mile</span>.</p>
+    <p class="trip-note">A model, not a measured trip or an individual calorie prediction. The bike value includes resting metabolism while riding; the car value excludes occupants’ metabolism. Neither includes producing the food or gasoline, building the vehicles or roads, or any emissions estimate. Wind, hills, riding style, the rider and driving conditions change the result. This is not a measure of energy reaching the wheels.</p>
+    <details class="trip-physics-details"><summary>The assumptions and calculations</summary>
+      <p>The baseline car gets an assumed 30 miles per US gallon (7.84 L/100 km) with one person aboard. Using DOE/EPA’s 33.7 kWh per US gallon: 33,700 ÷ 30 = 1,123.3 Wh per vehicle-mile. Divide by occupancy for energy per person-mile.</p>
+      <p>The bike model uses a 70 kg adult at an assumed 11 mph (17.702784 km/h), within Compendium activity 01020’s 10–11.9 mph category, rated at 6.8 METs. Using 1 MET ≈ 1 kcal/kg/hour: 6.8 × 70 ÷ 11 = 43.27 kcal/mile. With 1 kcal = 4,184 joules and 1 Wh = 3,600 joules, that is 50.29 Wh/mile. This is gross metabolism, not a prediction of extra food eaten. The Compendium is standardized for adults aged 19–59 and does not predict an individual’s precise expenditure.</p>
+      <p>Divide both per-mile values by 1.609344 for per-kilometer values: 698.01 Wh for the solo car and 31.25 Wh for the bike. Their ratio is about 22.34 before display rounding. Both bars begin at zero and use the same fixed scale. Changing units does not change their lengths or ratio.</p>
+      <table class="trip-comparison-table"><caption>Baseline model · one person in each mode</caption><thead><tr><th scope="col">Direct energy input</th><th scope="col">Wh/person-mile</th><th scope="col">Wh/person-km</th></tr></thead><tbody><tr><th scope="row">Gasoline car · 30 US mpg</th><td>1,123.33</td><td>698.01</td></tr><tr><th scope="row">Bicycle · 70 kg, 11 mph</th><td>50.29</td><td>31.25</td></tr></tbody></table>
+      <p><a href="/assets/transport-energy-comparison.csv" download>Download the baseline calculation (CSV)</a></p>
+      <p>Sources checked October 6, 2026: <a href="https://pacompendium.com/bicycling/">2024 Compendium: cycling category 01020</a>; <a href="https://pacompendium.com/">MET definition and reuse terms</a>; <a href="https://pacompendium.com/corrected-mets/">limits of individual estimates</a>; <a href="https://www.energy.gov/cmei/vehicles/articles/fotw-1373-december-16-2024-efficiency-evs-model-year-2024-ranges-53-140-mpge">DOE/EPA energy equivalence</a>; <a href="https://www.nist.gov/glossary-term/26261">NIST: calories and joules</a>.</p>
+    </details>
+    <p class="trip-sr" role="status" data-trip-comparison-status></p><p class="trip-sr" role="status" data-unit-status></p>
+  </div>
   <div class="trip-chapter" id="trip-resources">
     <div class="trip-chapter-head"><h3>Heavy metal.<br>Fragile people.</h3><p>A moving car carries energy that has to go somewhere when it stops. A vehicle twice as heavy carries twice the energy at the same speed. <strong>Double the speed and that energy quadruples.</strong> People outside the vehicle do not have a steel cabin around them.</p></div>
     <div class="trip-kinetic" data-kinetic-demo>
       <div class="trip-kinetic-console">
+        <div class="trip-unit-controls" data-unit-controls role="group" aria-label="Measurement units" hidden><span>Units</span><button type="button" data-trip-unit="us" aria-pressed="true">US</button><button type="button" data-trip-unit="metric" aria-pressed="false">Metric</button></div>
         <div data-kinetic-controls hidden>
-          <label class="trip-kinetic-label">Vehicle weight <strong><span data-kinetic-mass-value>4,000</span> <small>lb</small></strong><input type="range" data-kinetic-mass style="--range-progress:33.3333%" min="2000" max="8000" step="500" value="4000" aria-label="Illustrative vehicle weight in pounds"></label>
-          <div class="trip-kinetic-ends"><span>2,000 lb</span><span>8,000 lb</span></div>
-          <label class="trip-kinetic-label">Travel speed <strong><span data-kinetic-speed-value>30</span> <small>mph</small></strong><input type="range" data-kinetic-speed style="--range-progress:40%" min="10" max="60" step="5" value="30" aria-label="Vehicle speed in miles per hour"></label>
-          <div class="trip-kinetic-ends"><span>10 mph</span><span>60 mph</span></div>
+          <label class="trip-kinetic-label">Vehicle weight <strong><span data-kinetic-mass-value>4,000</span> <small data-mass-unit>lb</small></strong><input type="range" data-kinetic-mass style="--range-progress:33.3333%" min="2000" max="8000" step="500" value="4000" aria-label="Illustrative vehicle weight in pounds"></label>
+          <div class="trip-kinetic-ends"><span data-mass-min>2,000 lb</span><span data-mass-max>8,000 lb</span></div>
+          <label class="trip-kinetic-label">Travel speed <strong><span data-kinetic-speed-value>30</span> <small data-speed-unit>mph</small></strong><input type="range" data-kinetic-speed style="--range-progress:40%" min="10" max="60" step="5" value="30" aria-label="Vehicle speed in miles per hour"></label>
+          <div class="trip-kinetic-ends"><span data-speed-min>10 mph</span><span data-speed-max>60 mph</span></div>
           <div class="trip-speed-presets" role="group" aria-label="Compare double the speed"><span>Try doubling it</span><button type="button" data-speed-preset="20" aria-pressed="false">20 mph</button><button type="button" data-speed-preset="40" aria-pressed="false">40 mph</button></div>
         </div>
-        <div class="trip-kinetic-result"><span>Like dropping this car from</span><strong><span data-kinetic-height-rounded>30</span> feet.</strong><p data-kinetic-stories>Roughly 3 stories high.</p></div>
+        <div class="trip-kinetic-result"><span>Like dropping this car from</span><strong><span data-kinetic-height-rounded>30</span> <span data-height-unit>feet</span>.</strong><p data-kinetic-stories>Roughly 3 stories high.</p></div>
         <p class="trip-note">That’s <span data-kinetic-tons>2 US tons</span> falling. More weight means more energy at the same height.</p>
-        <details class="trip-physics-details"><summary>How the comparison works</summary><p>The selected vehicle carries <strong><span data-kinetic-energy>120,345</span> foot-pounds of kinetic energy</strong>—<span data-kinetic-ratio>2.25</span> times its energy at 20 mph. An ideal <span data-kinetic-height>30.1</span>-foot fall gives the same mass the same energy.</p><p>For the visual height reference, each story is 10 feet. Actual floor heights vary. Vehicle weight is illustrative, not a fleet average.</p></details>
+        <details class="trip-physics-details"><summary>How the comparison works</summary><p>The selected vehicle carries <strong><span data-kinetic-energy>120,345</span> <span data-energy-unit>foot-pounds</span> of kinetic energy</strong>—<span data-kinetic-ratio>2.25</span> times its energy at <span data-reference-speed>20 mph</span>. An ideal fall of <span data-kinetic-height>30.1</span> <span data-height-unit>feet</span> gives the same mass the same energy.</p><p>For the visual height reference, each story is <span data-story-height>10 feet</span>. Actual floor heights vary. Vehicle weight is illustrative, not a fleet average.</p></details>
         <p class="trip-sr" role="status" data-physics-status></p>
       </div>
       <figure class="trip-drop-figure" aria-labelledby="trip-drop-caption">
         <svg class="trip-drop-field" viewBox="0 -30 580 530" aria-hidden="true">
-          <text x="30" y="25" class="trip-drop-axis-title">Height in feet</text>
+          <text x="30" y="25" class="trip-drop-axis-title" data-drop-axis-title>Height in feet</text>
           <g class="trip-drop-grid" fill="none"><path d="M95 50H550 M95 150H550 M95 250H550 M95 350H550 M95 450H550"/></g>
-          <g class="trip-drop-ticks"><text x="65" y="56">140</text><text x="65" y="156">105</text><text x="65" y="256">70</text><text x="65" y="356">35</text><text x="65" y="456">0</text></g>
+          <g class="trip-drop-ticks"><text x="65" y="56" data-drop-tick="140">140</text><text x="65" y="156" data-drop-tick="105">105</text><text x="65" y="256" data-drop-tick="70">70</text><text x="65" y="356" data-drop-tick="35">35</text><text x="65" y="456" data-drop-tick="0">0</text></g>
           <g class="trip-height-building"><rect x="105" y="50" width="110" height="400"/><rect data-drop-building-fill x="105" y="364.0683" width="110" height="85.9317" class="trip-height-selected"/><path d="M105 421.4286H215"/><path d="M123 430.4286h18v11h-18z M179 430.4286h18v11h-18z" class="trip-height-windows"/><path d="M105 392.8571H215"/><path d="M123 401.8571h18v11h-18z M179 401.8571h18v11h-18z" class="trip-height-windows"/><path d="M105 364.2857H215"/><path d="M123 373.2857h18v11h-18z M179 373.2857h18v11h-18z" class="trip-height-windows"/><path d="M105 335.7143H215"/><path d="M123 344.7143h18v11h-18z M179 344.7143h18v11h-18z" class="trip-height-windows"/><path d="M105 307.1429H215"/><path d="M123 316.1429h18v11h-18z M179 316.1429h18v11h-18z" class="trip-height-windows"/><path d="M105 278.5714H215"/><path d="M123 287.5714h18v11h-18z M179 287.5714h18v11h-18z" class="trip-height-windows"/><path d="M105 250.0000H215"/><path d="M123 259.0000h18v11h-18z M179 259.0000h18v11h-18z" class="trip-height-windows"/><path d="M105 221.4286H215"/><path d="M123 230.4286h18v11h-18z M179 230.4286h18v11h-18z" class="trip-height-windows"/><path d="M105 192.8571H215"/><path d="M123 201.8571h18v11h-18z M179 201.8571h18v11h-18z" class="trip-height-windows"/><path d="M105 164.2857H215"/><path d="M123 173.2857h18v11h-18z M179 173.2857h18v11h-18z" class="trip-height-windows"/><path d="M105 135.7143H215"/><path d="M123 144.7143h18v11h-18z M179 144.7143h18v11h-18z" class="trip-height-windows"/><path d="M105 107.1429H215"/><path d="M123 116.1429h18v11h-18z M179 116.1429h18v11h-18z" class="trip-height-windows"/><path d="M105 78.5714H215"/><path d="M123 87.5714h18v11h-18z M179 87.5714h18v11h-18z" class="trip-height-windows"/><path d="M105 50.0000H215"/><path d="M123 59.0000h18v11h-18z M179 59.0000h18v11h-18z" class="trip-height-windows"/></g>
           <path data-drop-level d="M105 364.0683H450" class="trip-drop-level"/>
           <path d="M95 450H550" class="trip-drop-ground"/>
@@ -298,15 +263,15 @@
             <circle cx="-43" cy="-12" r="5" class="trip-drop-hub"/><circle cx="58" cy="-12" r="5" class="trip-drop-hub"/>
             <text data-drop-mass x="5" y="-77" class="trip-drop-mass">4,000 lb</text>
           </g></g></g>
-          <text x="105" y="485" class="trip-building-key">10 feet per story · illustrative</text>
+          <text x="105" y="485" class="trip-building-key"><tspan data-story-height>10 feet</tspan> per story · illustrative</text>
         </svg>
-        <figcaption id="trip-drop-caption">Imagine this <strong><span data-kinetic-mass-value>4,000</span>-pound car</strong> falling from that height. It reaches <strong><span data-kinetic-speed-value>30</span> mph</strong> just before the ground.</figcaption>
+        <figcaption id="trip-drop-caption">Imagine this <strong><span data-kinetic-mass-value>4,000</span> <span data-mass-unit>lb</span> car</strong> falling from that height. It reaches <strong><span data-kinetic-speed-value>30</span> <span data-speed-unit>mph</span></strong> just before the ground.</figcaption>
         <button type="button" class="trip-drop-play" data-drop-play hidden>See the equivalent drop</button>
         <p class="trip-note">An energy equivalence, not a crash or injury simulation. Ideal free fall from rest; air resistance ignored. Vehicle drawing is a symbol, not a scale model.</p>
       </figure>
     </div>
     <div class="trip-impact-copy"><div><h4>The energy is real.<br>The harm is not inevitable.</h4><p>In a collision, energy can go into deformation, movement and heat. What happens to a person also depends on impact speed, vehicle shape, contact and how the collision unfolds. An energy calculation cannot predict someone’s injuries.</p><p><a href="https://www.nhtsa.gov/book/countermeasures-that-work/speeding-and-speed-management/understanding-problem">NHTSA links higher speeds and larger vehicles to greater dangers in crashes.</a> Lower speeds, safer vehicles and streets designed around people matter alongside better alternatives to driving.</p></div><div><h4>And before it moves,<br>it has to be made.</h4><p>A vehicle also represents materials and manufacturing. Sharing an existing car uses the same machine for more travelers; it does not erase its production footprint. Replacing solo trips with fewer vehicles creates an opportunity to need fewer machines and less space to store them. Actual savings depend on what is built, how long it lasts and whether shared travel replaces ownership and driving.</p></div></div>
-    <p class="trip-note">Energy = ½ × mass × speed². Equivalent drop height = speed² ÷ (2 × gravity), using gravity ≈ 32.2 ft/s². The model calculates in SI units, then converts the results to pounds, feet and foot-pounds. <a href="https://openstax.org/books/college-physics-2e/pages/7-2-kinetic-energy-and-the-work-energy-theorem">OpenStax: kinetic energy</a> · <a href="https://openstax.org/books/college-physics-2e/pages/7-3-gravitational-potential-energy">Gravitational energy</a>. These are idealized calculations, not a stopping-distance, collision-force or injury model.</p>
+    <p class="trip-note">Energy = ½ × mass × speed². Equivalent drop height = speed² ÷ (2 × gravity), using gravity ≈ <span data-gravity>32.2 ft/s²</span>. Switch units to see kilograms, km/h, meters and kilojoules; the underlying scenario stays the same. <a href="https://openstax.org/books/college-physics-2e/pages/7-2-kinetic-energy-and-the-work-energy-theorem">OpenStax: kinetic energy</a> · <a href="https://openstax.org/books/college-physics-2e/pages/7-3-gravitational-potential-energy">Gravitational energy</a>. These are idealized calculations, not a stopping-distance, collision-force or injury model.</p>
   </div>
   <div class="trip-city-section" id="trip-neighborhood">
     <div class="trip-city-heading"><h3>Bring life<br>closer.</h3><p>More homes near the places we need.<br>Public transit that makes the connection.<br>A neighborhood built around living.</p></div>
@@ -322,8 +287,8 @@
     <div class="trip-prose"><h3>The goal is a place<br>you can live in.</h3><p>Make room for more neighbors, different housing needs, and the people already there. Keep access for disabled people, deliveries and trips that still need a car. Give people a real alternative for the trips that do not.</p><p class="trip-pull">A home near daily life.<br>A bus worth waiting for.<br>A street worth walking down.</p><p>Inspired by Bill Nye’s <a href="https://www.billnye.com/the-science-guy/human-transportation"><cite>Human Transportation</cite></a>. The next step is a question of design: how do we make it easier to get where life happens?</p></div>
     <details class="trip-receipts" id="trip-sources"><summary>The sources, the assumptions, the numbers</summary><div class="trip-methods">
       <p><strong>Different questions, different measures.</strong> The opening counts vehicles. The lane chart compares people per hour. The energy graphic compares fuel energy reaching the wheels. The mass-and-speed demonstration calculates translational kinetic energy and an equivalent ideal free-fall height. The source table separately allocates illustrative vehicle mass per occupant. None is a complete environmental score.</p>
-      <table><caption>Illustrative group of 60 travelers</caption><thead><tr><th scope="col">Occupancy</th><th scope="col">Vehicles</th><th scope="col">Vehicle lb/person</th></tr></thead><tbody><tr><th scope="row">1 per car</th><td>60</td><td>4,000</td></tr><tr><th scope="row">2 per car</th><td>30</td><td>2,000</td></tr><tr><th scope="row">3 per car</th><td>20</td><td>1,333.33</td></tr><tr><th scope="row">4 per car</th><td>15</td><td>1,000</td></tr><tr><th scope="row">60 bus passengers</th><td>1 bus</td><td>Not modeled</td></tr></tbody></table>
-      <p>Car calculations: 60 ÷ occupants; 4,000 lb ÷ occupants. Mass allocations in the table are rounded to two decimals. The mass-and-speed controls instead use kinetic energy = ½mv², with mph × 0.44704 to convert to m/s; equivalent free-fall height = v²/(2 × 9.81). Pounds are converted to kilograms with lb × 0.45359237; joules to foot-pounds with J ÷ 1.3558179483314004; meters to feet with m ÷ 0.3048. Energy is displayed to whole foot-pounds and height to one decimal place; calculations use unrounded values. A 4,000 lb vehicle at 20 mph carries 53,487 foot-pounds, at 40 mph 213,947 foot-pounds: exactly four times the energy before display rounding. Ideal drop time = v/9.81. These calculations omit wheel rotation and air resistance, and predict neither collision force nor injury. The bus adds an operator; it does not claim every bus has this capacity or occupancy. Vehicle silhouettes are schematic, with no distance, area or traffic-gap scale.</p>
+      <table><caption>Illustrative group of 60 travelers</caption><thead><tr><th scope="col">Occupancy</th><th scope="col">Vehicles</th><th scope="col">Vehicle lb/person</th><th scope="col">Vehicle kg/person</th></tr></thead><tbody><tr><th scope="row">1 per car</th><td>60</td><td>4,000</td><td>1,814.37</td></tr><tr><th scope="row">2 per car</th><td>30</td><td>2,000</td><td>907.18</td></tr><tr><th scope="row">3 per car</th><td>20</td><td>1,333.33</td><td>604.79</td></tr><tr><th scope="row">4 per car</th><td>15</td><td>1,000</td><td>453.59</td></tr><tr><th scope="row">60 bus passengers</th><td>1 bus</td><td>Not modeled</td><td>Not modeled</td></tr></tbody></table>
+      <p>Car calculations: 60 ÷ occupants; 4,000 lb (1,814.36948 kg) ÷ occupants. Mass allocations in the table are rounded to two decimals. The mass-and-speed controls instead use kinetic energy = ½mv², with mph × 0.44704 to convert to m/s; equivalent free-fall height = v²/(2 × 9.81). Pounds are converted to kilograms with lb × 0.45359237; joules to foot-pounds with J ÷ 1.3558179483314004; meters to feet with m ÷ 0.3048. US mode displays whole foot-pounds and metric mode displays kilojoules to one decimal; detailed height is shown to one decimal in either feet or meters; calculations use unrounded values. A 4,000 lb vehicle at 20 mph carries 53,487 foot-pounds, at 40 mph 213,947 foot-pounds: exactly four times the energy before display rounding. Ideal drop time = v/9.81. These calculations omit wheel rotation and air resistance, and predict neither collision force nor injury. The bus adds an operator; it does not claim every bus has this capacity or occupancy. Vehicle silhouettes are schematic, with no distance, area or traffic-gap scale.</p>
       <table><caption>Design-guide capacity · people/hour per roughly 10-foot lane or equivalent width (3 m in source)</caption><thead><tr><th scope="col">Mode/facility</th><th scope="col">Range</th></tr></thead><tbody><tr><th scope="row">Private motor vehicles</th><td>600–1,600</td></tr><tr><th scope="row">Two-way protected bikeway</th><td>6,500–7,500</td></tr><tr><th scope="row">Dedicated transit lanes</th><td>4,000–8,000</td></tr><tr><th scope="row">Sidewalk</th><td>8,000–9,000</td></tr><tr><th scope="row">On-street transitway, bus or rail</th><td>10,000–25,000</td></tr></tbody></table>
       <p>Ranges are planning guidance from the 2016 <cite>Global Street Design Guide</cite>, reproduced in Fabrizio Prati’s 2018 NACTO/GDCI presentation, PDF page 23. They are not measured 2026 flows or confidence intervals. Facility types and directions differ as labeled; the two-way bikeway includes both directions. No minimum/maximum ratio is presented as a guaranteed improvement.</p>
       <p>Gasoline: DOE/EPA’s combined-cycle diagram estimates 18–25% to the wheels; the page’s broader 12–30% headline spans different drive cycles. EV: DOE’s September 16, 2024 summary reports 65–69% to wheels plus about 22% net regenerative recovery, yielding 87–91%. Do not multiply a passenger’s fraction of vehicle mass by either efficiency figure: drag, rolling resistance and other loads make that an invalid allocation of useful energy.</p>
