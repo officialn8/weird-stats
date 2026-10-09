@@ -25,7 +25,7 @@ Every event includes a random memory-only `visit_id`, `page_kind` (`collection` 
 | `discovery_share` | Share-button intent, native cancellation/completion, clipboard completion, or manual fallback | `entry_id`, `method`, `outcome` |
 | `collection_opened` | Individual discovery's “Keep wandering” link clicked | none |
 
-Chips, copper, and generic disclosure treatments can emit reveals. Mail and painting are immediately visible/scroll-led discoveries: viewing them is **not** manufactured into a reveal. Selecting a guess, opening receipts, automatic animation, replaying, and copying the manually offered fallback do not fabricate new discovery reveals or successful shares. A native promise resolving or a clipboard write succeeds only as a browser action; it does not prove delivery to a friend.
+Chips, copper, bath wrinkles, and generic disclosure treatments can emit reveals. The bath-wrinkle answer disclosure emits a reveal; its drawing game and study receipts do not. Mail and painting are immediately visible/scroll-led discoveries: viewing them is **not** manufactured into a reveal. Selecting a guess, opening receipts, automatic animation, replaying, and copying the manually offered fallback do not fabricate new discovery reveals or successful shares. A native promise resolving or a clipboard write succeeds only as a browser action; it does not prove delivery to a friend.
 
 ## Readout
 

@@ -1,0 +1,92 @@
+{
+  "id": "bath-wrinkle-pattern",
+  "packetId": "6f40037c9f9c2ea7ce967f3d602df7ff4527ba28e425bad49fe15a69103dfa70",
+  "digest": "13a20a47f85c43df1dc804eb9246ba30ae5a47d4fd3a888556c329816d1bfdaa",
+  "baselineDigest": null,
+  "entry": {
+    "id": "bath-wrinkle-pattern",
+    "title": "The wrinkles come back",
+    "topic": "everyday-life",
+    "status": "review",
+    "format": "discovery",
+    "order": 100,
+    "treatment": {
+      "kind": "custom",
+      "template": "bath-wrinkle-pattern"
+    },
+    "assets": [
+      {
+        "path": "assets/bath-wrinkle.css",
+        "rights": {
+          "basis": "Original project code",
+          "source": "Local project authorship",
+          "attribution": "weird.stats"
+        }
+      },
+      {
+        "path": "assets/bath-wrinkle.js",
+        "rights": {
+          "basis": "Original project code",
+          "source": "Local project authorship",
+          "attribution": "weird.stats"
+        }
+      },
+      {
+        "path": "assets/bath-wrinkle/storybook-bath.webp",
+        "rights": {
+          "basis": "AI-generated original illustration",
+          "source": "OpenAI image generation; exact prompt in public/assets/bath-wrinkle/storybook-prompt.txt",
+          "attribution": "weird.stats"
+        }
+      }
+    ],
+    "dataReuse": [],
+    "question": "Do your bath wrinkles make a new pattern every time?",
+    "answer": "Some of the same lines return.",
+    "explanation": "Researchers photographed the same fingertips after two soaks at least a day apart. The skin had smoothed out between soaks, but major wrinkles returned in similar places and directions.",
+    "qualification": "This preliminary 2025 study involved three adults. Some wrinkles differed between soaks.",
+    "whyCare": "You’ve seen your fingers prune. Have you ever looked closely at the lines?",
+    "share": {
+      "question": "Do your bath wrinkles make a new pattern every time?",
+      "description": "What happens to your fingertip wrinkles when you soak your hands again?"
+    },
+    "evidence": {
+      "kind": "measurement",
+      "scope": "Three adults, ages 19–22; five right-hand fingers each.",
+      "dataAsOf": "Study published February 13, 2025",
+      "checkedAt": "2026-10-08",
+      "reviewDue": "2027-04-08",
+      "denominator": "Three people observed at two time points; repeated wrinkle measurements are not independent participants.",
+      "methodology": "Laytin and German, §§2–3.3 and Figure 3. Two 30-minute immersions at 40°C, at least 24 hours apart. Researchers paired wrinkles and compared orientations. Exact calendar dates unspecified. Small sample and manual pairing limit generalization. No calculation; blood-vessel mapping remains a hypothesis.",
+      "sources": [
+        {
+          "label": "Laytin and German (2025): methods, limitations and Figure 3",
+          "url": "https://doi.org/10.1016/j.jmbbm.2025.106935",
+          "primary": true
+        },
+        {
+          "label": "Primary paper, publisher-layout PDF hosted by Newswise",
+          "url": "https://www.newswise.com/pdf_docs/174679871746409_1-s2.0-S1751616125000517-main.pdf",
+          "primary": true
+        }
+      ]
+    },
+    "editorial": {
+      "reviewFormat": "Selected memory drawing exercise in a hand-painted animated bath: inspect invented creases on an illustrated fingertip, drain the water, draw from memory, and uncover the original. Reduced-motion and skip-drawing alternatives. No score or claim that the exercise measures wrinkle recurrence.",
+      "selection": "Nate explicitly named shortlist options 1, 2 and 8 as strongest picks on October 8, 2026. This records interest, not approval of this copy or a release. Nate then selected bath wrinkles for visual development: “Bath wrinkles is the pick today.” Requested Impeccable bolder after the initial design pass. Nate selected concept 1, Draw it again, from three distinct interaction concepts on October 8, 2026. This approves the interaction direction, not a public release.",
+      "familiarity": "Previously reported findings; creator interest established by selection. Independent reader familiarity and interest untested."
+    }
+  },
+  "fragment": "<link rel=\"stylesheet\" href=\"/assets/bath-wrinkle.css\">\n<script type=\"module\" src=\"/assets/bath-wrinkle.js\"></script>\n<section class=\"bw-story\" id=\"bath-wrinkle-pattern\" aria-labelledby=\"bath-wrinkle-pattern-title\">\n  <div class=\"bw-stage\">\n    <div class=\"bw-intro\">\n      <h1 id=\"bath-wrinkle-pattern-title\">Do your <span>bath wrinkles</span> make a new pattern every time?</h1>\n      <p>You’ve seen your fingers prune. Have you ever looked closely at the lines?</p>\n    </div>\n    <details class=\"bw-reveal\">\n      <summary>Reveal the discovery <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\"/></svg></summary>\n      <div class=\"bw-answer\">\n        <h3>Some of the same lines return.</h3>\n        <p>Researchers photographed the same fingertips after two soaks at least a day apart. The skin had smoothed out between soaks, but major wrinkles returned in similar places and directions.</p>\n        <p class=\"bw-limit\">This preliminary 2025 study involved three adults. Some wrinkles differed between soaks.</p>\n      </div>\n    </details>\n    <figure class=\"bw-figure ux-memory\" data-phase=\"look\">\n      <h2 class=\"ux-title\">Could you draw it again?</h2>\n      <p class=\"ux-intro\">Look closely at the lines. You’ll draw them from memory after the bath drains.</p>\n      <div class=\"bath-scene\">\n        <img src=\"/assets/bath-wrinkle/storybook-bath.webp\" width=\"1024\" height=\"1536\" alt=\"A painted fingertip in a tiny porcelain bathtub, with a rubber duck, warm tiles and a sunlit window.\" decoding=\"async\">\n        <canvas class=\"bath-water\" width=\"768\" height=\"1152\" aria-hidden=\"true\"></canvas>\n        <div class=\"bath-pad\">\n          <canvas class=\"bath-drawing\" width=\"600\" height=\"600\" tabindex=\"-1\" aria-label=\"Draw the lines you remember on the fingertip. Use a finger or pointer, or choose Skip drawing below.\"></canvas>\n          <svg class=\"ux-original\" viewBox=\"0 0 600 600\" preserveAspectRatio=\"none\" aria-hidden=\"true\"><path d=\"M175 115C132 167 184 181 161 219S178 257 193 278M306 107C345 156 278 189 319 234M119 310C165 263 211 340 260 309S340 281 376 320 439 302 474 328M250 373C280 419 218 442 268 492M397 381C359 411 427 449 392 481\"/></svg>\n        </div>\n        <span class=\"bath-label\">Remember these lines</span>\n      </div>\n      <div class=\"ux-actions\" hidden>\n        <span class=\"ux-start\"><button type=\"button\" class=\"ux-btn\">Drain the bath</button></span>\n        <span class=\"ux-compare\"><button type=\"button\" class=\"ux-btn\">Bring back the original</button></span>\n        <button type=\"button\" class=\"ux-btn ux-plain\">Start over</button>\n      </div>\n      <button class=\"ux-skip\" type=\"button\" hidden>Skip drawing</button>\n      <p class=\"ux-note\" role=\"status\">Drain the bath when you’re ready.</p>\n      <figcaption>We made up the wrinkle pattern for this illustrated memory game. It can’t tell you whether your own wrinkles repeat.</figcaption>\n    </figure>\n  </div>\n  <div class=\"bw-bottom\">\n    <details class=\"bw-receipts\">\n      <summary>The study behind the wrinkles</summary>\n      <p>Three adults, ages 19–22, took part. Researchers photographed all five fingers on each person’s right hand after two 30-minute soaks in 40°C water, at least 24 hours apart. They matched visible wrinkles and compared their directions.</p>\n      <p>Some lines did not match. Matching wrinkles by hand leaves room for bias. The study did not establish a permanent, unique wrinkle pattern or prove the proposed blood-vessel explanation. Measuring several wrinkles on each hand does not increase the number of participants.</p>\n      <p><a href=\"https://doi.org/10.1016/j.jmbbm.2025.106935\" target=\"_blank\" rel=\"noopener\">Laytin &amp; German (2025): read the paper</a><br><a href=\"https://www.newswise.com/pdf_docs/174679871746409_1-s2.0-S1751616125000517-main.pdf\" target=\"_blank\" rel=\"noopener\">Full paper (PDF)</a></p>\n      <p>See §§2–3.3 and Figure 3 for the methods and results. The paper was published on February 13, 2025. It does not report the exact dates of data collection.</p>\n    </details>\n    <div class=\"bw-meta\"><p>2025 research · Checked October 8, 2026</p><a href=\"{{nextHref}}\">Keep wandering</a></div>\n  </div>\n</section>\n",
+  "assetDigests": {
+    "assets/bath-wrinkle.css": "32dacc280d8e8bf982a270a0acd304fb347c81021f8bc0f1c7690eb477f4cc9d",
+    "assets/bath-wrinkle.js": "7d60d2fc01c21324c3c8b4e5f72f29b356d364c59932c9166bc35f7f5d5604a8",
+    "assets/bath-wrinkle/storybook-bath.webp": "169ebffef157089e009b755305febe46e3ba62dea657197047a605f00fcea752"
+  },
+  "state": "pending",
+  "createdAt": "2026-10-09T01:22:53.160Z",
+  "workingRecordHash": "5f862a261756967efb0305449e993ef4fc4dea2133d2ded277ead4ee5ac61469",
+  "supersedes": [
+    "e8174fe34cdffdf9ab610d09e5b5a51931df1bf9904efddbabd154b1d28d6482"
+  ]
+}

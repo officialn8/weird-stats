@@ -1,0 +1,65 @@
+{
+  "id": "bath-wrinkle-pattern",
+  "packetId": "0ba6513eb1b771700d6436dffb49c641447217ef9482b601e56c3889f0823f39",
+  "digest": "7b9746fcbc0db72e79d1c24e0903658168f2b843c5c2cbaf20e6f374acb30077",
+  "baselineDigest": null,
+  "entry": {
+    "id": "bath-wrinkle-pattern",
+    "title": "The wrinkles come back",
+    "topic": "everyday-life",
+    "status": "review",
+    "format": "discovery",
+    "order": 100,
+    "treatment": {
+      "kind": "reveal"
+    },
+    "assets": [],
+    "dataReuse": [],
+    "question": "Do your bath wrinkles make a new pattern every time?",
+    "answer": "Some of the same lines return.",
+    "explanation": "Researchers photographed fingertips after two water soaks, at least a day apart. Major wrinkles reappeared in similar places and directions, even though the skin had returned to normal between sessions.",
+    "qualification": "A preliminary 2025 study of just three adults. Some wrinkles differed. It supports recurring patterns, not a perfectly identical map every time.",
+    "whyCare": "Something familiar on your own hands has a pattern you may never have noticed.",
+    "share": {
+      "question": "Do your bath wrinkles make a new pattern every time?",
+      "description": "A small study found a recurring detail in water-wrinkled fingers."
+    },
+    "evidence": {
+      "kind": "measurement",
+      "scope": "Three adults, ages 19–22; five right-hand fingers each.",
+      "dataAsOf": "Study published February 13, 2025",
+      "checkedAt": "2026-10-08",
+      "reviewDue": "2027-04-08",
+      "denominator": "Three people observed at two time points; repeated wrinkle measurements are not independent participants.",
+      "methodology": "Laytin and German, §§2–3.3 and Figure 3. Two 30-minute immersions at 40°C, at least 24 hours apart. Researchers paired wrinkles and compared orientations. Exact calendar dates unspecified. Small sample and manual pairing limit generalization. No calculation; blood-vessel mapping remains a hypothesis.",
+      "sources": [
+        {
+          "label": "Laytin and German (2025): methods, limitations and Figure 3",
+          "url": "https://doi.org/10.1016/j.jmbbm.2025.106935",
+          "primary": true
+        },
+        {
+          "label": "Primary paper, publisher-layout PDF hosted by Newswise",
+          "url": "https://www.newswise.com/pdf_docs/174679871746409_1-s2.0-S1751616125000517-main.pdf",
+          "primary": true
+        }
+      ]
+    },
+    "editorial": {
+      "reviewFormat": "Native text reveal for private copy/evidence review. Bespoke visual treatment remains a later design step.",
+      "selection": "Nate explicitly named shortlist options 1, 2 and 8 as strongest picks on October 8, 2026. This records interest, not approval of this copy or a release.",
+      "familiarity": "Previously reported findings; creator interest established by selection. Independent reader familiarity and interest untested."
+    }
+  },
+  "fragment": "",
+  "assetDigests": {},
+  "state": "pending",
+  "createdAt": "2026-10-08T22:02:55.182Z",
+  "workingRecordHash": "19e07cae62fd8d259deacce74d0b8eadf5899575ef1b8c7beafa44506d9dfb83",
+  "supersedes": [],
+  "superseded": {
+    "by": "842ee8fe6698f29db4b89d07c3229658a8d81f0b149d2888000a5ead24134fd9",
+    "reason": "Replacement packet reconciles the requested revision or changed working baseline.",
+    "at": "2026-10-08T22:03:46.334Z"
+  }
+}

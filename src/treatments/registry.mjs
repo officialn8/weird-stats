@@ -32,6 +32,7 @@ export function validateChart(entry) {
   }
 }
 export const customAssets = Object.freeze({
+  'bath-wrinkle-pattern':['assets/bath-wrinkle.css','assets/bath-wrinkle.js','assets/bath-wrinkle/storybook-bath.webp'],
   crunch:['assets/chip.webp','assets/chip-small.webp','assets/chip-a.mp3','assets/chip-b.mp3'],
   copper:['assets/penny.webp','assets/nickel.webp'],
   mail:['assets/mule.webp'], painting:['assets/nightwatch.webp'],
