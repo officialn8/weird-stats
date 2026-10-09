@@ -1,0 +1,82 @@
+{
+  "id": "bath-wrinkle-pattern",
+  "title": "The wrinkles come back",
+  "topic": "everyday-life",
+  "status": "published",
+  "format": "discovery",
+  "order": 100,
+  "treatment": {
+    "kind": "custom",
+    "template": "bath-wrinkle-pattern"
+  },
+  "assets": [
+    {
+      "path": "assets/bath-wrinkle.css",
+      "rights": {
+        "basis": "Original project code",
+        "source": "Local project authorship",
+        "attribution": "weird.stats"
+      }
+    },
+    {
+      "path": "assets/bath-wrinkle.js",
+      "rights": {
+        "basis": "Original project code",
+        "source": "Local project authorship",
+        "attribution": "weird.stats"
+      }
+    },
+    {
+      "path": "assets/bath-wrinkle/storybook-bath.webp",
+      "rights": {
+        "basis": "AI-generated original illustration",
+        "source": "OpenAI image generation; exact prompt in public/assets/bath-wrinkle/storybook-prompt.txt",
+        "attribution": "weird.stats"
+      }
+    }
+  ],
+  "dataReuse": [],
+  "question": "Do your bath wrinkles make a new pattern every time?",
+  "answer": "Some of the same lines return.",
+  "explanation": "Researchers photographed the same fingertips after two soaks at least a day apart. The skin had smoothed out between soaks, but major wrinkles returned in similar places and directions.",
+  "qualification": "This preliminary 2025 study involved three adults. Some wrinkles differed between soaks.",
+  "whyCare": "You’ve seen your fingers prune. Have you ever looked closely at the lines?",
+  "share": {
+    "question": "Do your bath wrinkles make a new pattern every time?",
+    "description": "What happens to your fingertip wrinkles when you soak your hands again?"
+  },
+  "evidence": {
+    "kind": "measurement",
+    "scope": "Three adults, ages 19–22; five right-hand fingers each.",
+    "dataAsOf": "Study published February 13, 2025",
+    "checkedAt": "2026-10-08",
+    "reviewDue": "2027-04-08",
+    "denominator": "Three people observed at two time points; repeated wrinkle measurements are not independent participants.",
+    "methodology": "Laytin and German, §§2–3.3 and Figure 3. Two 30-minute immersions at 40°C, at least 24 hours apart. Researchers paired wrinkles and compared orientations. Exact calendar dates unspecified. Small sample and manual pairing limit generalization. No calculation; blood-vessel mapping remains a hypothesis.",
+    "sources": [
+      {
+        "label": "Laytin and German (2025): methods, limitations and Figure 3",
+        "url": "https://doi.org/10.1016/j.jmbbm.2025.106935",
+        "primary": true
+      },
+      {
+        "label": "Primary paper, publisher-layout PDF hosted by Newswise",
+        "url": "https://www.newswise.com/pdf_docs/174679871746409_1-s2.0-S1751616125000517-main.pdf",
+        "primary": true
+      }
+    ]
+  },
+  "editorial": {
+    "reviewFormat": "Selected memory drawing exercise in a hand-painted animated bath: inspect invented creases on an illustrated fingertip, drain the water, draw from memory, and uncover the original. Reduced-motion and skip-drawing alternatives. No score or claim that the exercise measures wrinkle recurrence.",
+    "selection": "Nate explicitly named shortlist options 1, 2 and 8 as strongest picks on October 8, 2026. This records interest, not approval of this copy or a release. Nate then selected bath wrinkles for visual development: “Bath wrinkles is the pick today.” Requested Impeccable bolder after the initial design pass. Nate selected concept 1, Draw it again, from three distinct interaction concepts on October 8, 2026. This approves the interaction direction, not a public release.",
+    "familiarity": "Previously reported findings; creator interest established by selection. Independent reader familiarity and interest untested."
+  },
+  "publishedAt": "2026-10-09T01:26:32.749Z",
+  "approval": {
+    "by": "Nate",
+    "at": "2026-10-09",
+    "digest": "d99b18a6cd66776d65fd919b40808120c9b88d2f8e78bb4f8ffdc6abd481cccb",
+    "inputReference": "Current conversation: “Implement the fixes. Commit & merge.” following approval of bath-wrinkle packet 6f40037c9f9c2ea7ce967f3d602df7ff4527ba28e425bad49fe15a69103dfa70 and its two-item code review.",
+    "note": "Authorizes the answer-reveal analytics fix, interaction regression tests, commit, merge, and production release. Approved editorial claims and visual treatment remain unchanged."
+  }
+}

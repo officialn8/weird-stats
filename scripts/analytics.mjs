@@ -7,7 +7,7 @@ export function analyticsHead(config,{drafts=false,entries=[],publicOrigin,catal
   if(!/^phc_[A-Za-z0-9]+$/.test(config.projectToken))throw new Error('Invalid public PostHog project token');
   if(!['https://us.i.posthog.com','https://eu.i.posthog.com'].includes(config.apiHost))throw new Error('Unsupported PostHog ingestion host');
   if(config.publicOrigin!==publicOrigin)throw new Error('Analytics origin must match the public site origin');
-  const payload={...config,releaseId,buildId,entries:entries.map(e=>({id:e.id,position:catalog.findIndex(item=>item.id===e.id)+1,kind:e.treatment.kind,format:e.format??'discovery',revision:revisions.get(e.id)?.digest??'unversioned',revealable:e.treatment.kind!=='custom'||['crunch','copper'].includes(e.id)}))};
+  const payload={...config,releaseId,buildId,entries:entries.map(e=>({id:e.id,position:catalog.findIndex(item=>item.id===e.id)+1,kind:e.treatment.kind,format:e.format??'discovery',revision:revisions.get(e.id)?.digest??'unversioned',revealable:e.treatment.kind!=='custom'||['crunch','copper','bath-wrinkle-pattern'].includes(e.id)}))};
   const json=JSON.stringify(payload).replaceAll('<','\\u003c');
   return `<script type="application/json" id="analytics-config">${json}</script><script type="module" src="/analytics.js"></script>`;
 }

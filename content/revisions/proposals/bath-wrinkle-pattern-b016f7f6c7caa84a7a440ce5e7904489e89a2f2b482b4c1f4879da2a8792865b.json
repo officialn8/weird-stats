@@ -1,0 +1,97 @@
+{
+  "id": "bath-wrinkle-pattern",
+  "packetId": "b016f7f6c7caa84a7a440ce5e7904489e89a2f2b482b4c1f4879da2a8792865b",
+  "digest": "a9e3d85c925620908c3280a3b24a76342091d32bbc1934000e8fc51f02779b6c",
+  "baselineDigest": null,
+  "entry": {
+    "id": "bath-wrinkle-pattern",
+    "title": "The wrinkles come back",
+    "topic": "everyday-life",
+    "status": "review",
+    "format": "discovery",
+    "order": 100,
+    "treatment": {
+      "kind": "custom",
+      "template": "bath-wrinkle-pattern"
+    },
+    "assets": [
+      {
+        "path": "assets/bath-wrinkle.css",
+        "rights": {
+          "basis": "Original project code",
+          "source": "Local project authorship",
+          "attribution": "weird.stats"
+        }
+      },
+      {
+        "path": "assets/bath-wrinkle.js",
+        "rights": {
+          "basis": "Original project code",
+          "source": "Local project authorship",
+          "attribution": "weird.stats"
+        }
+      },
+      {
+        "path": "assets/bath-wrinkle/finger.png",
+        "rights": {
+          "basis": "AI-generated original illustration",
+          "source": "OpenAI image generation; exact prompt embedded in PNG metadata",
+          "attribution": "Generated for weird.stats; not a study photograph"
+        }
+      }
+    ],
+    "dataReuse": [],
+    "question": "Do your bath wrinkles make a new pattern every time?",
+    "answer": "Some of the same lines return.",
+    "explanation": "Researchers photographed fingertips after two water soaks, at least a day apart. Major wrinkles reappeared in similar places and directions, even though the skin had returned to normal between sessions.",
+    "qualification": "A preliminary 2025 study of just three adults. Some wrinkles differed. It supports recurring patterns, not a perfectly identical map every time.",
+    "whyCare": "You’ve seen your fingers prune. Have you ever looked closely at the lines?",
+    "share": {
+      "question": "Do your bath wrinkles make a new pattern every time?",
+      "description": "A small study found a recurring detail in water-wrinkled fingers."
+    },
+    "evidence": {
+      "kind": "measurement",
+      "scope": "Three adults, ages 19–22; five right-hand fingers each.",
+      "dataAsOf": "Study published February 13, 2025",
+      "checkedAt": "2026-10-08",
+      "reviewDue": "2027-04-08",
+      "denominator": "Three people observed at two time points; repeated wrinkle measurements are not independent participants.",
+      "methodology": "Laytin and German, §§2–3.3 and Figure 3. Two 30-minute immersions at 40°C, at least 24 hours apart. Researchers paired wrinkles and compared orientations. Exact calendar dates unspecified. Small sample and manual pairing limit generalization. No calculation; blood-vessel mapping remains a hypothesis.",
+      "sources": [
+        {
+          "label": "Laytin and German (2025): methods, limitations and Figure 3",
+          "url": "https://doi.org/10.1016/j.jmbbm.2025.106935",
+          "primary": true
+        },
+        {
+          "label": "Primary paper, publisher-layout PDF hosted by Newswise",
+          "url": "https://www.newswise.com/pdf_docs/174679871746409_1-s2.0-S1751616125000517-main.pdf",
+          "primary": true
+        }
+      ]
+    },
+    "editorial": {
+      "reviewFormat": "Custom macro fingertip, native answer reveal, and keyboard/touch alignment of illustrative crease maps. Generated image and original diagrams explicitly distinguished from participant data.",
+      "selection": "Nate explicitly named shortlist options 1, 2 and 8 as strongest picks on October 8, 2026. This records interest, not approval of this copy or a release. Nate then selected bath wrinkles for visual development: “Bath wrinkles is the pick today.” Requested Impeccable bolder after the initial design pass.",
+      "familiarity": "Previously reported findings; creator interest established by selection. Independent reader familiarity and interest untested."
+    }
+  },
+  "fragment": "<link rel=\"stylesheet\" href=\"/assets/bath-wrinkle.css\">\n<script type=\"module\" src=\"/assets/bath-wrinkle.js\"></script>\n<section class=\"bw-story\" id=\"bath-wrinkle-pattern\" aria-labelledby=\"bath-wrinkle-pattern-title\">\n  <div class=\"bw-stage\">\n    <div class=\"bw-intro\">\n      <h1 id=\"bath-wrinkle-pattern-title\">Do your <span>bath wrinkles</span> make a new pattern every time?</h1>\n      <p>You’ve seen your fingers prune. Have you ever looked closely at the lines?</p>\n    </div>\n    <details class=\"bw-reveal\">\n      <summary>Reveal the discovery <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\"/></svg></summary>\n      <div class=\"bw-answer\">\n        <h3>Some of the same lines return.</h3>\n        <p>Researchers photographed fingertips after two water soaks, at least a day apart. Major wrinkles reappeared in similar places and directions, even though the skin had returned to normal between sessions.</p>\n        <p class=\"bw-limit\">A preliminary 2025 study of just three adults. Some wrinkles differed. It supports recurring patterns, not a perfectly identical map every time.</p>\n      </div>\n    </details>\n    <figure class=\"bw-figure\">\n      <div class=\"bw-object\">\n        <img class=\"bw-finger\" src=\"/assets/bath-wrinkle/finger.png\" alt=\"Illustrative close-up of a wet fingertip\" width=\"1024\" height=\"1536\" decoding=\"async\">\n        <svg class=\"bw-map\" viewBox=\"0 0 600 600\" aria-hidden=\"true\">\n          <g transform=\"translate(-120 -120) scale(1.4)\">\n          <g class=\"bw-lines bw-first\">\n            <path d=\"M247 133C230 155 244 176 229 196S226 226 242 240\"/>\n            <path d=\"M304 118C315 143 298 158 309 182S298 215 302 240\"/>\n            <path d=\"M359 151C377 169 358 190 370 208S362 236 371 251\"/>\n            <path d=\"M202 275C227 258 246 284 263 274S291 262 307 279 341 287 359 275 382 280 400 272\"/>\n            <path d=\"M243 320C257 341 238 360 254 381S252 411 264 430\"/>\n            <path d=\"M331 324C345 347 327 363 343 388S335 414 343 438\"/>\n            <path d=\"M225 473C252 457 273 478 292 465S327 457 342 471 368 469 386 481\"/>\n          </g>\n          <g class=\"bw-lines bw-second\">\n            <path d=\"M252 130C232 153 249 176 233 194S230 226 247 237\"/>\n            <path d=\"M308 123C318 143 302 163 313 184S302 213 307 243\"/>\n            <path d=\"M357 155C371 171 354 191 365 208S357 232 366 250\"/>\n            <path d=\"M206 280C230 263 248 288 266 280S291 265 307 283 343 292 360 280 385 285 399 279\"/>\n            <path d=\"M248 320C263 344 244 362 260 382S259 410 270 426\"/>\n            <path d=\"M335 329C347 349 333 365 348 391S341 416 349 443\"/>\n            <path d=\"M220 443C241 441 243 459 256 467\"/>\n            <path d=\"M304 475C323 488 342 478 353 493\"/>\n          </g>\n          </g>\n        </svg>\n        <div class=\"bw-legend\" aria-hidden=\"true\"><span><i></i>First soak</span><span><i></i>Next soak</span></div>\n      </div>\n      <figcaption>Generated fingertip and illustrative line maps. Not study photographs.</figcaption>\n      <div class=\"bw-tools\" hidden>\n        <div class=\"bw-tool-heading\"><label for=\"bw-align\">Align the two soaks</label><button class=\"bw-reset\" type=\"button\">Separate again</button></div>\n        <input class=\"bw-align\" id=\"bw-align\" type=\"range\" min=\"0\" max=\"100\" value=\"100\" aria-describedby=\"bw-compare-note\">\n        <div class=\"bw-scale\" aria-hidden=\"true\"><span>Apart</span><span>Together</span></div>\n        <output class=\"bw-alignment\" for=\"bw-align\">Similar. Not identical.</output>\n        <p id=\"bw-compare-note\" class=\"bw-status\">Illustrated solid and dashed lines overlap, with some differences. This slider moves drawings; it does not show measured similarity.</p>\n      </div>\n      <p class=\"bw-status\" role=\"status\" aria-live=\"polite\"></p>\n    </figure>\n  </div>\n  <div class=\"bw-bottom\">\n    <details class=\"bw-receipts\">\n      <summary>The study behind the wrinkles</summary>\n      <p>Three adults, ages 19–22. Five fingers on each person’s right hand were photographed after two 30-minute water immersions, at least 24 hours apart. Water was held at 40°C. Researchers paired the visible wrinkles and compared their directions.</p>\n      <p>This was preliminary research. Some lines did not match, and manual pairing can introduce bias. The study did not establish a permanent, unique wrinkle identity or prove the proposed blood-vessel mechanism. Wrinkle measurements are not additional participants.</p>\n      <p><a href=\"https://doi.org/10.1016/j.jmbbm.2025.106935\" target=\"_blank\" rel=\"noopener\">Laytin &amp; German (2025): read the paper</a><br><a href=\"https://www.newswise.com/pdf_docs/174679871746409_1-s2.0-S1751616125000517-main.pdf\" target=\"_blank\" rel=\"noopener\">Full paper (PDF)</a></p>\n      <p>Methods §§2–3.3 and Figure 3. Published February 13, 2025; exact collection dates unspecified. No derived statistics are displayed. The fingertip is generated imagery and the comparison lines are original illustrative drawings, not participant data.</p>\n    </details>\n    <div class=\"bw-meta\"><p>2025 research · Checked October 8, 2026</p><a href=\"{{nextHref}}\">Keep wandering</a></div>\n  </div>\n</section>\n",
+  "assetDigests": {
+    "assets/bath-wrinkle.css": "6cee6f92cdba764a51be952d50af39b39bdba7b85d64eb74bcb18e183e6bb724",
+    "assets/bath-wrinkle.js": "e2351c89014d99a600cb5c12ed410554a5d54467b01d4955df630e0b45c90724",
+    "assets/bath-wrinkle/finger.png": "3227e33322ae84e9d5fa2570ae35e121102db534cddadc767ac4de65f5226281"
+  },
+  "state": "pending",
+  "createdAt": "2026-10-08T23:06:18.461Z",
+  "workingRecordHash": "6ed9fd5b4911bf673d3fe649866ffd1a45d2164b50e032ca56da7b4b4c558143",
+  "supersedes": [
+    "80033cc660e4b4498df446739b63fda36b02f54569c1d0568275d013982ac331"
+  ],
+  "superseded": {
+    "by": "4fdfdc97328728f040f3f0fa9f035df7ad3c9845a6ca595abc5a4f3e328a0ca8",
+    "reason": "Replacement packet reconciles the requested revision or changed working baseline.",
+    "at": "2026-10-09T00:08:34.653Z"
+  }
+}

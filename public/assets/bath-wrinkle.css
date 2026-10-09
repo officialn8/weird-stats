@@ -1,0 +1,60 @@
+.bw-story{--bw-shift:0px;--bw-turn:0deg;max-width:1500px;margin:0 auto;padding:70px 5vw 42px;color:var(--ink)}
+.bw-story ::selection{background:var(--accent);color:var(--accent-ink)}
+.bw-stage{display:grid;grid-template-columns:1.1fr 1fr;column-gap:6%;grid-template-rows:min-content 1fr;align-items:start}
+.bw-intro{grid-column:1;grid-row:1;padding-top:24px}
+.bw-intro :is(h1,h2){font-size:clamp(48px,6.1vw,92px);line-height:1.02;letter-spacing:-.04em;text-wrap:balance;max-width:12ch}
+.bw-intro h1 span,.bw-intro h2 span{color:var(--display)}
+.bw-intro p{font-size:19px;max-width:31ch;margin-top:26px;color:var(--muted)}
+.bw-reveal{grid-column:1;grid-row:2;align-self:start;margin:30px 0 0}
+.bw-reveal>summary{display:flex;align-items:center;justify-content:space-between;gap:24px;width:fit-content;min-height:52px;padding:15px 24px;border-radius:40px;background:var(--accent);color:var(--accent-ink);font-size:17px;font-weight:550;cursor:pointer;list-style:none}
+.bw-reveal>summary::-webkit-details-marker{display:none}
+.bw-reveal>summary svg{width:20px;height:20px;flex-shrink:0;transition:transform .3s}
+.bw-reveal>summary:hover{background:var(--ink);color:var(--paper)}
+.bw-reveal[open]>summary svg{transform:rotate(90deg)}
+.bw-answer{padding:38px 0 20px}
+.bw-answer h3{font-size:clamp(36px,4vw,58px);line-height:1.02;letter-spacing:-.035em;max-width:13ch;color:var(--display);text-wrap:balance}
+.bw-answer>p{font-size:18px;line-height:1.5;margin-top:22px;max-width:43ch}
+.bw-answer .bw-limit{font-size:15px;color:var(--muted);margin-top:18px}
+.bw-figure{grid-column:2;grid-row:1/span 2;min-width:0;position:relative}
+.bw-figure figcaption{font-size:12px;color:var(--muted);margin-top:12px;text-align:center;line-height:1.4}
+.bw-bottom{margin-top:50px;border-top:1px solid var(--line);padding-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.bw-receipts{font-size:15px;line-height:1.5;max-width:65ch}
+.bw-receipts summary{cursor:pointer;font-size:17px;text-underline-offset:5px;min-height:44px}
+.bw-receipts p{margin-top:16px}
+.bw-receipts a{text-underline-offset:4px}
+.bw-meta{font-size:13px;color:var(--muted);text-align:right}
+.bw-meta a{display:inline-block;margin-top:20px;font-size:17px;color:var(--ink);text-underline-offset:5px}
+@media(min-width:1500px){.bw-story{padding-inline:75px}}
+@media(max-width:900px){.bw-story{padding:44px 28px 32px}.bw-stage{gap:0 32px;grid-template-columns:1.05fr 1fr}.bw-intro{padding-top:16px}.bw-intro :is(h1,h2){font-size:clamp(43px,6.4vw,60px)}.bw-intro p{font-size:17px}.bw-reveal>summary{font-size:15px;padding:14px 18px}.bw-answer h3{font-size:38px}.bw-answer>p{font-size:16px}.bw-answer .bw-limit{font-size:14px}}
+@media(max-width:600px){.bw-story{padding:32px 22px}.bw-stage{display:flex;flex-direction:column;gap:0}.bw-intro{padding:0}.bw-intro :is(h1,h2){font-size:clamp(44px,11.8vw,62px);max-width:13ch}.bw-intro p{font-size:16px;margin-top:18px;max-width:32ch}.bw-figure{order:2;width:100%;margin-top:28px}.bw-reveal{order:3;margin-top:24px;width:100%}.bw-reveal>summary{width:100%}.bw-answer{padding-top:28px}.bw-answer h3{font-size:42px;max-width:14ch}.bw-figure figcaption{font-size:11px}.bw-legend{bottom:16px;font-size:12px}.bw-bottom{grid-template-columns:1fr;gap:26px;margin-top:28px}.bw-meta{text-align:left}}
+@media(prefers-reduced-motion:reduce){.bw-story *{transition:none!important}}
+body.reduce-motion .bw-story *{transition:none!important}
+
+.bw-story .ux-title{font-size:clamp(30px,3.1vw,44px);line-height:1.05;letter-spacing:-.035em;margin:0 0 12px;max-width:17ch}
+.bw-story .ux-intro{font-size:17px;line-height:1.4;margin:0 0 20px;color:var(--muted)}
+.bath-scene{position:relative;isolation:isolate;width:100%;max-width:360px;aspect-ratio:2/3;overflow:hidden;border-radius:46% 46% 8px 8px / 20% 20% 8px 8px;background:#b76d37}
+.bath-scene>img{display:block;width:100%;height:100%;object-fit:contain}
+.bath-water{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.bath-pad{position:absolute;left:27%;top:24%;width:46%;height:40%}
+.bath-drawing,.ux-original{position:absolute;inset:0;width:100%;height:100%}
+.bath-drawing{pointer-events:none}
+.ux-original{pointer-events:none;fill:none;stroke:#62361f;stroke-width:5;stroke-linecap:round;filter:drop-shadow(0 1px 1px #f5c78c);transition:opacity .45s}
+.bath-label{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);white-space:nowrap;padding:7px 14px;border-radius:3px;background:#fff4dd;color:#58321c;font-size:13px;font-weight:600;pointer-events:none}
+.bw-story .ux-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.bw-story .ux-btn{min-height:48px;padding:12px 18px;border:1px solid var(--ink);border-radius:28px;background:var(--ink);color:var(--paper);font:inherit;font-size:15px;cursor:pointer}
+.bw-story .ux-btn:hover{background:var(--display);color:var(--paper);border-color:var(--display)}
+.bw-story .ux-btn:disabled{cursor:wait;opacity:.6}
+.bw-story .ux-plain{background:none;color:var(--ink)}
+.bw-story button:focus-visible,.bw-story summary:focus-visible{outline:3px solid var(--display);outline-offset:4px}
+.bw-story .ux-note{font-size:15px;line-height:1.5;margin-top:12px;min-height:45px;max-width:43ch}
+.bw-story figcaption{margin-top:16px;text-align:left;font-size:12px;line-height:1.5;color:var(--muted);max-width:53ch}
+.bw-story [hidden]{display:none!important}
+.ux-compare{display:none}
+.ux-memory[data-phase="draw"] .bath-drawing{touch-action:none;cursor:crosshair;pointer-events:auto}
+.ux-memory:is([data-phase="draw"],[data-phase="draining"]) .ux-original{opacity:0}
+.ux-memory:is([data-phase="draw"],[data-phase="compare"]) .ux-start{display:none}
+.ux-memory[data-phase="draw"] .ux-compare{display:block}
+.ux-memory[data-phase="compare"] .ux-skip,.ux-memory[data-phase="draining"] .ux-skip{visibility:hidden}
+.bw-story .ux-skip{min-height:44px;padding:10px 0;background:none;color:var(--muted);text-decoration:underline;text-underline-offset:4px;font:inherit;font-size:13px;cursor:pointer}
+.bath-drawing:focus-visible{outline:2px dashed #fff4dd;outline-offset:6px;border-radius:40%}
+@media(max-width:600px){.bw-story .ux-title{font-size:33px}.bw-story .ux-intro{font-size:16px}.bw-story .ux-btn{padding:12px 14px}.bath-scene{max-width:none}}
