@@ -17,6 +17,9 @@ test('source attribution has finite output and never copies raw campaigns, refer
   assert.equal(pageContext(new URL('https://weirdstats.dev/'),'https://google.com.evil.example/',900).source_category,'referral');
   assert.equal(pageContext(location,'',390).campaign_code,'community');
   assert.equal(pageContext(new URL('https://weirdstats.dev/'),'https://weirdstats.dev/discoveries/essay/',900).source_category,'internal');
+  for(const label of ['instagram','tiktok','youtube','threads'])assert.deepEqual(pageContext(new URL(`https://weirdstats.dev/discoveries/copper/?utm_source=${label}&utm_campaign=social`),'',390),{source_category:'social',campaign_code:'social',viewport_bucket:'narrow'});
+  for(const ref of ['https://www.tiktok.com/','https://m.youtube.com/','https://youtu.be/','https://l.instagram.com/','https://www.threads.net/'])assert.equal(pageContext(new URL('https://weirdstats.dev/'),ref,390).source_category,'social');
+  assert.equal(pageContext(new URL('https://weirdstats.dev/'),'https://tiktok.com.evil.example/',390).source_category,'referral');
 });
 test('immediate findings support continuation without inventing reveals or changing legacy measurement',()=>{
   const {visit,events}=setup();visit.view('essay');visit.view('finding');visit.view('essay');visit.view('finding');
