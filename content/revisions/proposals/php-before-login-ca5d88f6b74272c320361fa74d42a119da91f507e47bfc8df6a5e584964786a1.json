@@ -1,0 +1,104 @@
+{
+  "id": "php-before-login",
+  "packetId": "ca5d88f6b74272c320361fa74d42a119da91f507e47bfc8df6a5e584964786a1",
+  "digest": "5f585c725b94676e676cef43a901796835e15929463b5b0ae7b5d77d87e078f5",
+  "baselineDigest": null,
+  "entry": {
+    "id": "php-before-login",
+    "status": "review",
+    "format": "discovery",
+    "order": 100,
+    "topic": "technology",
+    "title": "Before the login",
+    "question": "How early could an attacker get control of a website?",
+    "answer": "Before the website’s own login code started.",
+    "explanation": "PHP is software that builds web pages on a server, the computer that sends pages to your browser. In an attack demonstrated against Apache using mod_php, researchers made PHP run their instructions before the website checked a password. Running out of memory could interrupt setup. During cleanup, PHP could use unfinished data to decide which instructions ran next; researchers exploited that mistake to run their own. PHP released fixes on October 21, 2026. Email-alias service addy.io paused its website and web app while patching; email delivery continued.",
+    "qualification": "The demonstration used Apache with mod_php, one way to run PHP. The attacker had the same permissions as the server program handling the request. That did not automatically give them control of the whole computer. Other PHP setups have different attack conditions. A demonstrated attack does not mean every affected website was hacked.",
+    "whyCare": "Your login is one piece of a much larger system.",
+    "share": {
+      "question": "How early could an attacker get control of a website?",
+      "description": "A PHP security disclosure shows what can happen beneath a website’s login."
+    },
+    "treatment": {
+      "kind": "custom",
+      "template": "php-before-login"
+    },
+    "assets": [
+      {
+        "path": "assets/php-before-login.css",
+        "rights": {
+          "basis": "Original project code",
+          "source": "Local weird.stats authorship",
+          "attribution": "weird.stats"
+        }
+      },
+      {
+        "path": "assets/php-before-login.js",
+        "rights": {
+          "basis": "Original project code",
+          "source": "Local weird.stats authorship",
+          "attribution": "weird.stats"
+        }
+      },
+      {
+        "path": "assets/php-before-login/engine.webp",
+        "rights": {
+          "basis": "AI-generated original illustration",
+          "source": "Built-in OpenAI image generation; exact prompt: public/assets/php-before-login/engine-prompt.txt",
+          "attribution": "weird.stats"
+        }
+      }
+    ],
+    "dataReuse": [],
+    "evidence": {
+      "kind": "reported",
+      "scope": "October 21, 2026 PHP2Shell disclosure: CVE-2026-109618 and CVE-2026-109619. Narrow before-application-code example: Apache with mod_php. Separate operator example: addy.io web outage while email continued.",
+      "dataAsOf": "October 21, 2026 security disclosure and operator report",
+      "checkedAt": "2026-10-21",
+      "reviewDue": "2026-10-22",
+      "denominator": "No prevalence estimate or derived statistic. Server setup matters; a severity score is not a probability. No counts of hacked sites inferred.",
+      "methodology": "PHP’s maintainers report a demonstrated attack against Apache with mod_php before website code runs. The out-of-memory advisory says failed allocation can leave partly initialized memory reachable and that shutdown can read or branch on it. The plain-language explanation describes that branching as using unfinished data to decide which instructions run next; the advisory separately confirms attacker-selected code running with the web worker account’s permissions. No specific pointer overwrite or claim that raw data becomes instructions is inferred. The separate stale-state flaw is not part of this illustration. Addy.io’s operator reports pausing its web services while patching, with email delivery continuing. Astra rechecked the PHP announcement, both advisories and Foundation account on October 21; the existing Foundation/GHSA disagreement about the OOM FPM demonstration remains outside the narrow mod_php claim. No exploit was run. Recheck current advisories before release.",
+      "sources": [
+        {
+          "label": "PHP maintainer advisory and October 21 fixed releases",
+          "url": "https://www.php.net/archive/2026.php#2026-10-21-1",
+          "primary": true
+        },
+        {
+          "label": "PHP maintainer advisory: out-of-memory corruption and mod_php timing",
+          "url": "https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w",
+          "primary": true
+        },
+        {
+          "label": "PHP maintainer advisory: stale state and different server conditions",
+          "url": "https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp",
+          "primary": true
+        },
+        {
+          "label": "Addy.io operator: why its web services went offline",
+          "url": "https://addy.io/blog/addy-io-went-offline-for-the-php2shell-vulnerability/",
+          "primary": true
+        }
+      ]
+    },
+    "editorial": {
+      "reviewFormat": "Complete custom cutaway with the answer upfront, an always-visible three-step explanation, optional step selection and native source disclosure.",
+      "treatmentBrief": "Nate selected Cutaway website and requested a readable flow, then primary-source verification and all four Astra content fixes. The direct answer, plain PHP/request definitions, three visible causal steps and optional cutaway remain. Cleanup is explained as using unfinished data to decide which instructions run next, scoped to the demonstrated mod_php/OOM case. The permission limit sits beside the opening claim. Receipts distinguish the second flaw without repeating the inference in jargon. The cabinet and temporary-data paper are schematic, not actual memory or attack instructions.",
+      "familiarity": "Extensively covered current event, explicitly selected by Nate.8/9interest judgment, not audience novelty evidence.",
+      "recheckBeforeRelease": "Fast-moving disclosure: re-open current PHP/GHSA guidance and operator correction status before release. No publication authorized.",
+      "causalVerification": "Astra primary-source verification: docs/editorial/batches/2026-10-21-php-causal-verification.md, checked 2026-10-21T19:15:28Z. User authorized application of all four review findings. No publication authorized."
+    }
+  },
+  "fragment": "<link rel=\"stylesheet\" href=\"/assets/php-before-login.css\">\n<script type=\"module\" src=\"/assets/php-before-login.js\"></script>\n<section class=\"php-exhibit\" id=\"php-before-login\" aria-labelledby=\"php-before-login-title\" data-step=\"0\">\n  <header class=\"php-heading\">\n    <h1 id=\"php-before-login-title\">How early could an attacker get control of a website?</h1>\n    <p class=\"php-lead\">Your login is one piece of a much larger system.</p>\n  </header>\n  <details class=\"php-reveal\">\n    <summary><span>Reveal the discovery</span> <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></summary>\n    <div class=\"php-answer-block\">\n      <h2 class=\"php-answer\">Before the website’s own login code started.</h2>\n      <p class=\"php-intro\">PHP is software that builds web pages on a server, the computer that sends pages to your browser. In the demonstrated attack, researchers made PHP run their own instructions before the website checked a password.</p>\n      <p class=\"php-limit\">The demonstration used Apache with mod_php, one way to run PHP. The attacker had the same permissions as the server program handling the request. That did not automatically give them control of the whole computer.</p>\n    </div>\n    <div class=\"php-layout\">\n      <figure class=\"php-visual\">\n        <div class=\"php-object\" aria-hidden=\"true\">\n          <img class=\"php-engine\" src=\"/assets/php-before-login/engine.webp\" width=\"1760\" height=\"1174\" alt=\"\" decoding=\"async\">\n          <div class=\"php-interior\">\n            <span class=\"php-engine-name\">PHP engine</span>\n            <span class=\"php-login-status\">Login code <strong>not started</strong></span>\n            <div class=\"php-request\"><svg viewBox=\"0 0 72 50\"><rect x=\"2\" y=\"2\" width=\"68\" height=\"46\" rx=\"5\"/><path d=\"m3 5 33 25L69 5M3 46l22-18m44 18L47 28\"/></svg><span>request</span></div>\n            <div class=\"php-data\"><span class=\"php-data-title\">Temporary data</span><i></i><i></i><i class=\"php-unfinished\"></i><b>NOT READY</b></div>\n            <svg class=\"php-route\" viewBox=\"0 0 600 400\" preserveAspectRatio=\"none\"><path class=\"php-path-in\" d=\"M45 235H230\"/><path class=\"php-path-cleanup\" d=\"M440 200v72h-82m12-9-12 9 12 9\"/></svg>\n            <span class=\"php-cleanup\">cleanup</span>\n            <span class=\"php-used\">Cleanup uses it</span><span class=\"php-memory\">Workspace full · setup stopped</span>\n          </div>\n          <div class=\"php-front\">\n            <div class=\"php-browser-bar\"><span></span><span></span><span></span><b>example.site</b></div>\n            <div class=\"php-login-face\"><svg viewBox=\"0 0 28 32\"><path d=\"M7 13V8a7 7 0 0 1 14 0v5M4 13h20v17H4z\"/><path d=\"M14 20v4\"/></svg><strong>Welcome back.</strong><div>Email address</div><div class=\"php-password\">••••••••••</div><span>Sign in</span></div>\n            <span class=\"php-facade-note\">The part you see</span>\n          </div>\n        </div>\n        <figcaption>A simplified illustration, not a real server or memory layout.</figcaption>\n      </figure>\n      <div class=\"php-reading\">\n        <details class=\"php-open\">\n          <summary><span>Look beneath the login</span> <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></summary>\n          <p class=\"php-open-note\">The login is the part you see. PHP handles the request underneath it.</p>\n        </details>\n        <h2 class=\"php-walk-title\">The flaw, in three steps.</h2>\n        <p class=\"php-step-hint\">Read straight through, or select a step to see it inside.</p>\n        <p class=\"php-sr php-live\" aria-live=\"polite\" aria-atomic=\"true\"></p>\n        <ol class=\"php-steps\">\n          <li data-stage=\"1\"><h3 id=\"php-stage-1\">1. A request reaches PHP.</h3><p id=\"php-stage-1-text\">A request is a message sent to a server. The attacker sends a specially made one, and PHP starts setting up the data to handle it.</p></li>\n          <li data-stage=\"2\"><h3 id=\"php-stage-2\">2. PHP runs out of working room.</h3><p id=\"php-stage-2-text\">Memory is PHP’s temporary workspace. If it fills up at the wrong moment, setup can stop halfway through, leaving data unfinished.</p></li>\n          <li data-stage=\"3\"><h3 id=\"php-stage-3\">3. Cleanup can run the wrong instructions.</h3><p id=\"php-stage-3-text\">PHP tried to clean up after the failure. It could use the unfinished data to decide which instructions to run next. Researchers exploited that mistake to make PHP run their instructions.</p></li>\n        </ol>\n        <p class=\"php-scope\">This illustrates the out-of-memory flaw demonstrated against Apache with mod_php. Other server setups have different attack conditions.</p>\n      </div>\n    </div>\n    <div class=\"php-story\">\n      <div><h2>Why the login couldn’t help.</h2><p>The attack happened while PHP was preparing the request. The website’s own code, including its login check, hadn’t started yet.</p><p>The PHP project released fixes on October 21, 2026. Email-alias service addy.io chose to take its website and web app offline while patching; its email delivery kept working.</p></div>\n      <p class=\"php-qualification\">A demonstrated attack does not mean every affected website was hacked. Other ways of running PHP have different attack conditions.</p>\n    </div>\n  </details>\n  <footer class=\"php-footer\">\n    <details class=\"php-evidence\"><summary>The receipts <span aria-hidden=\"true\">+</span></summary><div>\n      <p>PHP disclosed two vulnerabilities on October 21, 2026. This illustration covers the out-of-memory flaw, CVE-2026-109618, demonstrated against Apache with mod_php. The second flaw, CVE-2026-109619, involves data left over from earlier requests handled by the same server program.</p>\n      <p>The linked maintainer advisories explain the two flaws. The addy.io account describes that service’s decision to pause its website and web app during patching while email delivery continued.</p>\n      <p>The cabinet and paper are a visual explanation. They do not show real memory, attack instructions, timing or success rates. We did not reproduce the attack.</p>\n      <ul><li><a href=\"https://www.php.net/archive/2026.php#2026-10-21-1\" target=\"_blank\" rel=\"noopener\">PHP’s October 21 advisory and fixed releases<span class=\"php-sr\"> (opens in a new tab)</span></a></li><li><a href=\"https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w\" target=\"_blank\" rel=\"noopener\">Maintainer advisory: out-of-memory corruption<span class=\"php-sr\"> (opens in a new tab)</span></a></li><li><a href=\"https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp\" target=\"_blank\" rel=\"noopener\">Maintainer advisory: stale global state<span class=\"php-sr\"> (opens in a new tab)</span></a></li><li><a href=\"https://addy.io/blog/addy-io-went-offline-for-the-php2shell-vulnerability/\" target=\"_blank\" rel=\"noopener\">Addy.io: why its web services went offline<span class=\"php-sr\"> (opens in a new tab)</span></a></li></ul>\n    </div></details>\n    <p>October 21, 2026 disclosure · Checked October 21, 2026</p><a href=\"{{nextHref}}\">Keep wandering <svg viewBox=\"0 0 20 20\" aria-hidden=\"true\"><path d=\"M5 15 15 5M5 5h10v10\"/></svg></a>\n  </footer>\n</section>\n",
+  "assetDigests": {
+    "assets/php-before-login.css": "cf7cbaf3e18553dc3a7d153ce655ce4ec1a9e1c0cbffe715b2ee1f25b308f3aa",
+    "assets/php-before-login.js": "9f041e6569acc3b49af6a37eb8939186ce94c54900aa3041638f812085ff6c10",
+    "assets/php-before-login/engine.webp": "d575f553f187594c9e32349ce38859afd7b342c6d48edafb056a781ccb1e024c"
+  },
+  "state": "pending",
+  "createdAt": "2026-10-21T20:54:01.097Z",
+  "workingRecordHash": "1168868512f5bc5ceb18b30f58460c33b50748a3bffaa506dbcbe14f138f4b24",
+  "supersedes": [
+    "9c95735e2b9d505a8677fdf696a8e9ec4408c8da1f9a9b32290e940e1becdd84"
+  ]
+}

@@ -66,3 +66,16 @@ test('individual tracking metadata keeps the collection order and approved conte
   assert.deepEqual(config.entries,[{id:'older',position:2,kind:'custom',format:'deep-dive',revision:'abc',revealable:false}]);
   assert.equal(config.releaseId,'released');assert.equal(config.buildId,'build');
 });
+test('PHP joins the existing reveal catalog and repeat opens count once',()=>{
+  const catalog=['php-before-login','bath-wrinkle-pattern','one-person-sixty-cars'].map(id=>({id,treatment:{kind:'custom'}}));
+  const html=analyticsHead({enabled:true,projectToken:'phc_Test',apiHost:'https://us.i.posthog.com',publicOrigin:'https://example.com'},{entries:catalog,publicOrigin:'https://example.com'});
+  const config=JSON.parse(html.match(/id="analytics-config">(.*?)<\/script>/)[1]);
+  assert.deepEqual(config.entries.map(entry=>entry.revealable),[true,true,false]);
+  const events=[];
+  const visit=createVisit({entries:config.entries,capture:(event,properties)=>events.push({event,properties}),visitId:'php-test',pageKind:'collection'});
+  visit.reveal('php-before-login');visit.reveal('php-before-login');
+  visit.reveal('one-person-sixty-cars');visit.reveal('bath-wrinkle-pattern');
+  const reveals=events.filter(event=>event.event==='discovery_revealed');
+  assert.deepEqual(reveals.map(event=>event.properties.entry_id),['php-before-login','bath-wrinkle-pattern']);
+  assert.equal(reveals[1].properties.revealed_count,2);
+});
