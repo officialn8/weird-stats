@@ -47,7 +47,7 @@ export function observeEditorial({document,window,entries,visit}) {
         if(Number.isFinite(fraction))record('discovery_interacted',entry.id,{control_id,control_value:String(Math.max(0,Math.min(4,Math.floor(fraction*5))))});
       });
     }
-    for(const details of root.querySelectorAll('details:not(.discovery-reveal)'))listen(details,'toggle',()=>{
+    for(const details of root.querySelectorAll('details:not(.discovery-reveal,.php-reveal,.php-open)'))listen(details,'toggle',()=>{
       if(details.open)record('evidence_opened',entry.id,{evidence_kind:details.matches('.death-uncertainty')?'uncertainty':'sources'});
     });
     for(const link of root.querySelectorAll('.trip-open'))listen(link,'click',()=>record('deep_dive_opened',entry.id,{}));

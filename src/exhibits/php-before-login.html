@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="/assets/php-before-login.css">
+<script type="module" src="/assets/php-before-login.js"></script>
+<section class="php-exhibit" id="php-before-login" aria-labelledby="php-before-login-title" data-step="0">
+  <header class="php-heading">
+    <h1 id="php-before-login-title">How early could an attacker get control of a website?</h1>
+    <p class="php-lead">Your login is one piece of a much larger system.</p>
+  </header>
+  <details class="php-reveal">
+    <summary><span>Reveal the discovery</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></summary>
+    <div class="php-answer-block">
+      <h2 class="php-answer">Before the website’s own login code started.</h2>
+      <p class="php-intro">PHP is software that builds web pages on a server, the computer that sends pages to your browser. In the demonstrated attack, researchers made PHP run their own instructions before the website checked a password.</p>
+      <p class="php-limit">The demonstration used Apache with mod_php, one way to run PHP. The attacker had the same permissions as the server program handling the request. That did not automatically give them control of the whole computer.</p>
+    </div>
+    <div class="php-layout">
+      <figure class="php-visual">
+        <div class="php-object" aria-hidden="true">
+          <img class="php-engine" src="/assets/php-before-login/engine.webp" width="1760" height="1174" alt="" decoding="async">
+          <div class="php-interior">
+            <span class="php-engine-name">PHP engine</span>
+            <span class="php-login-status">Login code <strong>not started</strong></span>
+            <div class="php-request"><svg viewBox="0 0 72 50"><rect x="2" y="2" width="68" height="46" rx="5"/><path d="m3 5 33 25L69 5M3 46l22-18m44 18L47 28"/></svg><span>request</span></div>
+            <div class="php-data"><span class="php-data-title">Temporary data</span><i></i><i></i><i class="php-unfinished"></i><b>NOT READY</b></div>
+            <svg class="php-route" viewBox="0 0 600 400" preserveAspectRatio="none"><path class="php-path-in" d="M45 235H230"/><path class="php-path-cleanup" d="M440 200v72h-82m12-9-12 9 12 9"/></svg>
+            <span class="php-cleanup">cleanup</span>
+            <span class="php-used">Cleanup uses it</span><span class="php-memory">Workspace full · setup stopped</span>
+          </div>
+          <div class="php-front">
+            <div class="php-browser-bar"><span></span><span></span><span></span><b>example.site</b></div>
+            <div class="php-login-face"><svg viewBox="0 0 28 32"><path d="M7 13V8a7 7 0 0 1 14 0v5M4 13h20v17H4z"/><path d="M14 20v4"/></svg><strong>Welcome back.</strong><div>Email address</div><div class="php-password">••••••••••</div><span>Sign in</span></div>
+            <span class="php-facade-note">The part you see</span>
+          </div>
+        </div>
+        <figcaption>A simplified illustration, not a real server or memory layout.</figcaption>
+      </figure>
+      <div class="php-reading">
+        <details class="php-open">
+          <summary><span>Look beneath the login</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></summary>
+          <p class="php-open-note">The login is the part you see. PHP handles the request underneath it.</p>
+        </details>
+        <h2 class="php-walk-title">The flaw, in three steps.</h2>
+        <p class="php-step-hint">Read straight through, or select a step to see it inside.</p>
+        <p class="php-sr php-live" aria-live="polite" aria-atomic="true"></p>
+        <ol class="php-steps">
+          <li data-stage="1"><h3 id="php-stage-1">1. A request reaches PHP.</h3><p id="php-stage-1-text">A request is a message sent to a server. The attacker sends a specially made one, and PHP starts setting up the data to handle it.</p></li>
+          <li data-stage="2"><h3 id="php-stage-2">2. PHP runs out of working room.</h3><p id="php-stage-2-text">Memory is PHP’s temporary workspace. If it fills up at the wrong moment, setup can stop halfway through, leaving data unfinished.</p></li>
+          <li data-stage="3"><h3 id="php-stage-3">3. Cleanup can run the wrong instructions.</h3><p id="php-stage-3-text">PHP tried to clean up after the failure. It could use the unfinished data to decide which instructions to run next. Researchers exploited that mistake to make PHP run their instructions.</p></li>
+        </ol>
+        <p class="php-scope">This illustrates the out-of-memory flaw demonstrated against Apache with mod_php. Other server setups have different attack conditions.</p>
+      </div>
+    </div>
+    <div class="php-story">
+      <div><h2>Why the login couldn’t help.</h2><p>The attack happened while PHP was preparing the request. The website’s own code, including its login check, hadn’t started yet.</p><p>The PHP project released fixes on October 21, 2026. Email-alias service addy.io chose to take its website and web app offline while patching; its email delivery kept working.</p></div>
+      <p class="php-qualification">A demonstrated attack does not mean every affected website was hacked. Other ways of running PHP have different attack conditions.</p>
+    </div>
+  </details>
+  <footer class="php-footer">
+    <details class="php-evidence"><summary>The receipts <span aria-hidden="true">+</span></summary><div>
+      <p>PHP disclosed two vulnerabilities on October 21, 2026. This illustration covers the out-of-memory flaw, CVE-2026-109618, demonstrated against Apache with mod_php. The second flaw, CVE-2026-109619, involves data left over from earlier requests handled by the same server program.</p>
+      <p>The linked maintainer advisories explain the two flaws. The addy.io account describes that service’s decision to pause its website and web app during patching while email delivery continued.</p>
+      <p>The cabinet and paper are a visual explanation. They do not show real memory, attack instructions, timing or success rates. We did not reproduce the attack.</p>
+      <ul><li><a href="https://www.php.net/archive/2026.php#2026-10-21-1" target="_blank" rel="noopener">PHP’s October 21 advisory and fixed releases<span class="php-sr"> (opens in a new tab)</span></a></li><li><a href="https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w" target="_blank" rel="noopener">Maintainer advisory: out-of-memory corruption<span class="php-sr"> (opens in a new tab)</span></a></li><li><a href="https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp" target="_blank" rel="noopener">Maintainer advisory: stale global state<span class="php-sr"> (opens in a new tab)</span></a></li><li><a href="https://addy.io/blog/addy-io-went-offline-for-the-php2shell-vulnerability/" target="_blank" rel="noopener">Addy.io: why its web services went offline<span class="php-sr"> (opens in a new tab)</span></a></li></ul>
+    </div></details>
+    <p>October 21, 2026 disclosure · Checked October 21, 2026</p><a href="{{nextHref}}">Keep wandering <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></a>
+  </footer>
+</section>

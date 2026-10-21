@@ -1,0 +1,94 @@
+{
+  "id": "php-before-login",
+  "status": "published",
+  "format": "discovery",
+  "order": 100,
+  "topic": "technology",
+  "title": "Before the login",
+  "question": "How early could an attacker get control of a website?",
+  "answer": "Before the website’s own login code started.",
+  "explanation": "PHP is software that builds web pages on a server, the computer that sends pages to your browser. In an attack demonstrated against Apache using mod_php, researchers made PHP run their instructions before the website checked a password. Running out of memory could interrupt setup. During cleanup, PHP could use unfinished data to decide which instructions ran next; researchers exploited that mistake to run their own. PHP released fixes on October 21, 2026. Email-alias service addy.io paused its website and web app while patching; email delivery continued.",
+  "qualification": "The demonstration used Apache with mod_php, one way to run PHP. The attacker had the same permissions as the server program handling the request. That did not automatically give them control of the whole computer. Other PHP setups have different attack conditions. A demonstrated attack does not mean every affected website was hacked.",
+  "whyCare": "Your login is one piece of a much larger system.",
+  "share": {
+    "question": "How early could an attacker get control of a website?",
+    "description": "A PHP security disclosure shows what can happen beneath a website’s login."
+  },
+  "treatment": {
+    "kind": "custom",
+    "template": "php-before-login"
+  },
+  "assets": [
+    {
+      "path": "assets/php-before-login.css",
+      "rights": {
+        "basis": "Original project code",
+        "source": "Local weird.stats authorship",
+        "attribution": "weird.stats"
+      }
+    },
+    {
+      "path": "assets/php-before-login.js",
+      "rights": {
+        "basis": "Original project code",
+        "source": "Local weird.stats authorship",
+        "attribution": "weird.stats"
+      }
+    },
+    {
+      "path": "assets/php-before-login/engine.webp",
+      "rights": {
+        "basis": "AI-generated original illustration",
+        "source": "Built-in OpenAI image generation; exact prompt: public/assets/php-before-login/engine-prompt.txt",
+        "attribution": "weird.stats"
+      }
+    }
+  ],
+  "dataReuse": [],
+  "evidence": {
+    "kind": "reported",
+    "scope": "October 21, 2026 PHP2Shell disclosure: CVE-2026-109618 and CVE-2026-109619. Narrow before-application-code example: Apache with mod_php. Separate operator example: addy.io web outage while email continued.",
+    "dataAsOf": "October 21, 2026 security disclosure and operator report",
+    "checkedAt": "2026-10-21",
+    "reviewDue": "2026-10-22",
+    "denominator": "No prevalence estimate or derived statistic. Server setup matters; a severity score is not a probability. No counts of hacked sites inferred.",
+    "methodology": "PHP’s maintainers report a demonstrated attack against Apache with mod_php before website code runs. The out-of-memory advisory says failed allocation can leave partly initialized memory reachable and that shutdown can read or branch on it. The plain-language explanation describes that branching as using unfinished data to decide which instructions run next; the advisory separately confirms attacker-selected code running with the web worker account’s permissions. No specific pointer overwrite or claim that raw data becomes instructions is inferred. The separate stale-state flaw is not part of this illustration. Addy.io’s operator reports pausing its web services while patching, with email delivery continuing. Astra rechecked the PHP announcement, both advisories and Foundation account on October 21; the existing Foundation/GHSA disagreement about the OOM FPM demonstration remains outside the narrow mod_php claim. No exploit was run. Recheck current advisories before release.",
+    "sources": [
+      {
+        "label": "PHP maintainer advisory and October 21 fixed releases",
+        "url": "https://www.php.net/archive/2026.php#2026-10-21-1",
+        "primary": true
+      },
+      {
+        "label": "PHP maintainer advisory: out-of-memory corruption and mod_php timing",
+        "url": "https://github.com/php/php-src/security/advisories/GHSA-w8hw-w9fx-j79w",
+        "primary": true
+      },
+      {
+        "label": "PHP maintainer advisory: stale state and different server conditions",
+        "url": "https://github.com/php/php-src/security/advisories/GHSA-6wmf-4rv5-p3rp",
+        "primary": true
+      },
+      {
+        "label": "Addy.io operator: why its web services went offline",
+        "url": "https://addy.io/blog/addy-io-went-offline-for-the-php2shell-vulnerability/",
+        "primary": true
+      }
+    ]
+  },
+  "editorial": {
+    "reviewFormat": "Complete custom cutaway with the answer upfront, an always-visible three-step explanation, optional step selection and native source disclosure.",
+    "treatmentBrief": "Nate selected Cutaway website and requested a readable flow, then primary-source verification and all four Astra content fixes. The direct answer, plain PHP/request definitions, three visible causal steps and optional cutaway remain. Cleanup is explained as using unfinished data to decide which instructions run next, scoped to the demonstrated mod_php/OOM case. The permission limit sits beside the opening claim. Receipts distinguish the second flaw without repeating the inference in jargon. The cabinet and temporary-data paper are schematic, not actual memory or attack instructions.",
+    "familiarity": "Extensively covered current event, explicitly selected by Nate.8/9interest judgment, not audience novelty evidence.",
+    "recheckBeforeRelease": "Fast-moving disclosure: re-open current PHP/GHSA guidance and operator correction status before release. No publication authorized.",
+    "causalVerification": "Astra primary-source verification: docs/editorial/batches/2026-10-21-php-causal-verification.md, checked 2026-10-21T19:15:28Z. User authorized application of all four review findings. No publication authorized."
+  },
+  "publishedAt": "2026-10-21T21:04:20.869188+00:00",
+  "approval": {
+    "by": "Nate",
+    "at": "2026-10-21",
+    "digest": "5f585c725b94676e676cef43a901796835e15929463b5b0ae7b5d77d87e078f5",
+    "inputReference": "Current Codex conversation, October 21, 2026: “Cool lets get it live” after reviewing private packet ca5d88f6b74272c320361fa74d42a119da91f507e47bfc8df6a5e584964786a1.",
+    "note": "Approves the exact reviewed PHP discovery and authorizes its commit, merge and production deployment through the existing Git integration."
+  }
+}
